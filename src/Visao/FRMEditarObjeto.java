@@ -8,7 +8,6 @@ package Visao;
 import Controle.ControleObjeto;
 import Modelo.BEAN.ObjetoBEAN;
 import Modelo.BEAN.ClasseObjetoBEAN;
-import Modelo.MysqlDAO.ClasseObjetoMysqlDAO;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -18,7 +17,7 @@ import javax.swing.JOptionPane;
  */
 public class FRMEditarObjeto extends javax.swing.JFrame {
 
-    ClasseObjetoMysqlDAO tipoDAO = new ClasseObjetoMysqlDAO();
+    //ClasseObjetoMysqlDAO tipoDAO = new ClasseObjetoMysqlDAO();
     ArrayList<ClasseObjetoBEAN> tipoAL;
     ControleObjeto pControle = new ControleObjeto();
     ObjetoBEAN objetobean = new ObjetoBEAN();
@@ -932,11 +931,11 @@ public class FRMEditarObjeto extends javax.swing.JFrame {
 
     private void preencheComboBoxTipo() {
 
-        tipoAL = tipoDAO.listarTodos();
-
-        for (ClasseObjetoBEAN tipo : tipoAL) {
-            cbClasse.addItem(tipo.getNome());
-        }
+//        tipoAL = tipoDAO.listarTodos();
+//
+//        for (ClasseObjetoBEAN tipo : tipoAL) {
+//            cbClasse.addItem(tipo.getNome());
+//        }
     }
     
     public void pegaObjeto(ObjetoBEAN obj) {
