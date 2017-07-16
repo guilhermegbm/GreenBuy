@@ -6,7 +6,7 @@
 package Visao;
 
 import Controle.ControleCliente;
-import Modelo.BEAN.ClienteBEAN;
+import Modelo.BEAN.Cliente;
 import javax.swing.JOptionPane;
 
 /**
@@ -213,7 +213,7 @@ public class FRMCadastrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_tfTelKeyTyped
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        ClienteBEAN cadC = new ClienteBEAN();
+        Cliente cadC = new Cliente();
         
          if (tfSenha.getText().equals(tfConfSenha.getText())) {
            if ((tfNome.getText().equals(""))||(tfUsuario.getText().equals(""))||(tfSenha.getText().equals(""))||tfConfSenha.getText().equals("")||(tfTel.getText().equals(""))) {

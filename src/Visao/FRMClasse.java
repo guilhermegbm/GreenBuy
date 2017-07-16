@@ -6,7 +6,7 @@
 package Visao;
 
 import Controle.ControleObjeto;
-import Modelo.BEAN.ObjetoBEAN;
+import Modelo.BEAN.Objeto;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
 public class FRMClasse extends javax.swing.JFrame {
 
     private DefaultTableModel dTable;
-    ArrayList<ObjetoBEAN> dados;
+    ArrayList<Objeto> dados;
     ControleObjeto controleO = new ControleObjeto();
 
     /**
@@ -300,7 +300,7 @@ public class FRMClasse extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         FRMEditarObjeto edtObj = new FRMEditarObjeto();
         int qnt = tableObjeto.getSelectedRowCount();
-        ObjetoBEAN obj = new ObjetoBEAN();
+        Objeto obj = new Objeto();
 
         if (qnt < 1) {
             JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para editar.");
@@ -316,7 +316,7 @@ public class FRMClasse extends javax.swing.JFrame {
             obj.setUnidade(dados.get(linha).getUnidade());
             obj.setQtdeEstoque(dados.get(linha).getQtdeEstoque());
             obj.setTipoObj(dados.get(linha).getTipoObj());
-            obj.setClasse(dados.get(linha).getClasse());
+            obj.setSubClasse(dados.get(linha).getClasse());
 
             edtObj.pegaObjeto(obj);
 
@@ -423,7 +423,7 @@ public class FRMClasse extends javax.swing.JFrame {
         dTable.addColumn("Classe");
         dTable.addColumn("Unidade");
 
-        for (ObjetoBEAN dado : dados) {
+        for (Objeto dado : dados) {
             
             String tipo = "";
             

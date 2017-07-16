@@ -6,8 +6,8 @@
 package Visao;
 
 import Controle.ControleObjeto;
-import Modelo.BEAN.ObjetoBEAN;
-import Modelo.BEAN.ClasseObjetoBEAN;
+import Modelo.BEAN.Objeto;
+import Modelo.BEAN.Classe;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 public class FRMCadastrarObjeto extends javax.swing.JFrame {
 
     //ClasseObjetoMysqlDAO tipoDAO = new ClasseObjetoMysqlDAO();
-    ArrayList<ClasseObjetoBEAN> tipoAL;
+    ArrayList<Classe> tipoAL;
     ControleObjeto pControle = new ControleObjeto();
 
     /**
@@ -277,7 +277,7 @@ public class FRMCadastrarObjeto extends javax.swing.JFrame {
     }//GEN-LAST:event_tfPVendaKeyTyped
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        ObjetoBEAN objeto = new ObjetoBEAN();
+        Objeto objeto = new Objeto();
 
         if ((tfNome.getText().equals("")) || (tfPVenda.getText().equals("")) || ((rbMercadoria.isSelected()) && (tfPCompra.getText().equals("")))) {
             JOptionPane.showMessageDialog(null, "Com exceção do campo de descrição, todos os campos devem estar preenchidos");
@@ -315,7 +315,7 @@ public class FRMCadastrarObjeto extends javax.swing.JFrame {
 
             objeto.setUnidade(cbUn.getSelectedItem() + "");
 
-            for (ClasseObjetoBEAN classe : tipoAL) {
+            for (Classe classe : tipoAL) {
                 if (classe.getNome().equals(cbClasse.getSelectedItem() + "")) {
                     objeto.setClasse(classe);
                 }
@@ -557,7 +557,7 @@ public class FRMCadastrarObjeto extends javax.swing.JFrame {
 
 //        tipoAL = tipoDAO.listarTodos();
 //
-//        for (ClasseObjetoBEAN tipo : tipoAL) {
+//        for (Classe tipo : tipoAL) {
 //            cbClasse.addItem(tipo.getNome());
 //        }
     }

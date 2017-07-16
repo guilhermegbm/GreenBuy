@@ -6,7 +6,7 @@
 package Visao;
 
 import Controle.ControleFornecedor;
-import Modelo.BEAN.FornecedorBEAN;
+import Modelo.BEAN.Fornecedor;
 import javax.swing.JOptionPane;
 
 /**
@@ -225,7 +225,7 @@ public class FRMCadastrarFornecedor extends javax.swing.JFrame {
         if (((rbEmpresa.isSelected() == true) && (tfCNPJ.getText().equals("  .   .   /    -  "))) || ((rbPessoa.isSelected() == true) && (tfCPF.getText().equals("   .   .   -  "))) || (tfNome.getText().equals(""))|| (tfTelefone.getText().equals("(  )     -    "))){
             JOptionPane.showMessageDialog(null, "Todos os dados devem estar preenchidos");
         } else {
-            FornecedorBEAN forn = new FornecedorBEAN();
+            Fornecedor forn = new Fornecedor();
             
             forn.setNome(tfNome.getText());
             forn.setTelefone(tfTelefone.getText());

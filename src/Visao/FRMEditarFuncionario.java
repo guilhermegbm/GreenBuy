@@ -7,8 +7,8 @@ package Visao;
 
 import Controle.ControleCargo;
 import Controle.ControleFuncionario;
-import Modelo.BEAN.CargoBEAN;
-import Modelo.BEAN.FuncionarioBEAN;
+import Modelo.BEAN.Cargo;
+import Modelo.BEAN.Funcionario;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -18,8 +18,8 @@ import javax.swing.JOptionPane;
  */
 public class FRMEditarFuncionario extends javax.swing.JFrame {
 
-    FuncionarioBEAN f = new FuncionarioBEAN();
-    ArrayList<CargoBEAN> cargoAL = new ArrayList<CargoBEAN>();
+    Funcionario f = new Funcionario();
+    ArrayList<Cargo> cargoAL = new ArrayList<Cargo>();
     ControleCargo conC = new ControleCargo();
     ControleFuncionario conF = new ControleFuncionario();
 
@@ -258,7 +258,7 @@ public class FRMEditarFuncionario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        FuncionarioBEAN fun = new FuncionarioBEAN();
+        Funcionario fun = new Funcionario();
 
         if (tfSenha.getText().equals(tfConfSenha.getText())) {
             if ((tfNome.getText().equals(""))|| (tfCPF.getText().equals("")) || (tfUsuario.getText().equals("")) || (tfSenha.getText().equals("")) || (tfConfSenha.getText().equals("")) || (tfSal.getText().equals("")) || (tfTel.getText().equals(""))) {
@@ -272,7 +272,7 @@ public class FRMEditarFuncionario extends javax.swing.JFrame {
                 fun.setSalario(Float.parseFloat(tfSal.getText()));
                 fun.setTelefone(tfTel.getText());
 
-                for (CargoBEAN c : cargoAL) {
+                for (Cargo c : cargoAL) {
                     if (c.getNome().equals(cbCargo.getSelectedItem() + "")) {
                         fun.setCargo(c);
                     }
@@ -370,7 +370,7 @@ public class FRMEditarFuncionario extends javax.swing.JFrame {
     private javax.swing.JTextField tfUsuario;
     // End of variables declaration//GEN-END:variables
 
-    void pegaObjeto(FuncionarioBEAN funcio) {
+    void pegaObjeto(Funcionario funcio) {
         f = funcio;
         this.preencheDados();
     }
@@ -388,7 +388,7 @@ public class FRMEditarFuncionario extends javax.swing.JFrame {
     }
 
     private void preencheCB() {
-        for (CargoBEAN c : cargoAL) {
+        for (Cargo c : cargoAL) {
             cbCargo.addItem(c.getNome());
         }
     }

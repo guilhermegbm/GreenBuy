@@ -6,7 +6,7 @@
 package Visao;
 
 import Controle.ControleFornecedor;
-import Modelo.BEAN.FornecedorBEAN;
+import Modelo.BEAN.Fornecedor;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
 public class FRMFornecedor extends javax.swing.JFrame {
 
     private DefaultTableModel dTable;
-    private ArrayList<FornecedorBEAN> dados;
+    private ArrayList<Fornecedor> dados;
     private ControleFornecedor controleForn = new ControleFornecedor();
 
     /**
@@ -261,7 +261,7 @@ public class FRMFornecedor extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         FRMEditarFornecedor edtFornecedor = new FRMEditarFornecedor();
         int qtd = tableFornecedor.getSelectedRowCount();
-        FornecedorBEAN forn = new FornecedorBEAN();
+        Fornecedor forn = new Fornecedor();
 
         if (qtd < 1) {
             JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para deletar.");
@@ -397,7 +397,7 @@ public class FRMFornecedor extends javax.swing.JFrame {
         dTable.addColumn("CNPJ/CPF");
         dTable.addColumn("Telefone");
 
-        for (FornecedorBEAN dado : dados) {
+        for (Fornecedor dado : dados) {
             
             String tipo = "";
             String cpfOuCnpj = "";

@@ -5,7 +5,7 @@
  */
 package Controle;
 
-import Modelo.BEAN.FornecedorBEAN;
+import Modelo.BEAN.Fornecedor;
 import Modelo.MysqlDAO.FornecedorMysqlDAO;
 import java.util.ArrayList;
 import javax.swing.JTextField;
@@ -16,32 +16,32 @@ import javax.swing.JTextField;
  */
 public class ControleFornecedor {
     
-    ArrayList<FornecedorBEAN> auxAL = new ArrayList<FornecedorBEAN>();
+    ArrayList<Fornecedor> auxAL = new ArrayList<Fornecedor>();
     
     FornecedorMysqlDAO fornDao = new FornecedorMysqlDAO();
 
-    public ArrayList<FornecedorBEAN> listarTodos() {
+    public ArrayList<Fornecedor> listarTodos() {
         auxAL = fornDao.listarTodos();
         return auxAL;
     }
     
-    public void cadastrar (FornecedorBEAN forn){
+    public void cadastrar (Fornecedor forn){
         fornDao.cadastrar(forn);
     }
 
-    public ArrayList<FornecedorBEAN> listarPorCodigo(int codigo) {
+    public ArrayList<Fornecedor> listarPorCodigo(int codigo) {
         return fornDao.listarPorCodigo(codigo);
     }
 
-    public ArrayList<FornecedorBEAN> listarPorNome(String nome) {
+    public ArrayList<Fornecedor> listarPorNome(String nome) {
         return fornDao.listarPorNome(nome);
     }
 
-    public ArrayList<FornecedorBEAN> listarPorCNPJ(String cnpj) {
+    public ArrayList<Fornecedor> listarPorCNPJ(String cnpj) {
         return fornDao.listarPorCNPJ(cnpj);
     }
 
-    public void editar(FornecedorBEAN forn) {
+    public void editar(Fornecedor forn) {
         fornDao.editar(forn);
     }
 

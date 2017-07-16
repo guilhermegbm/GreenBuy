@@ -6,7 +6,7 @@
 package Visao;
 
 import Controle.ControleCliente;
-import Modelo.BEAN.ClienteBEAN;
+import Modelo.BEAN.Cliente;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -20,7 +20,7 @@ public class FRMCliente extends javax.swing.JFrame {
     
     private DefaultTableModel dTable;
     private ControleCliente cliCont;
-    private ArrayList<ClienteBEAN> dados;
+    private ArrayList<Cliente> dados;
     
 
     /**
@@ -273,7 +273,7 @@ public class FRMCliente extends javax.swing.JFrame {
     private void btnAttClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAttClienteActionPerformed
         FRMEditarCliente edtCliente = new FRMEditarCliente();
         int qtd = tableCliente.getSelectedRowCount();
-        ClienteBEAN c = new ClienteBEAN();
+        Cliente c = new Cliente();
         
         if (qtd < 1) {
             JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para deletar.");
@@ -375,7 +375,7 @@ public class FRMCliente extends javax.swing.JFrame {
         dTable.addColumn("Login");
         dTable.addColumn("Telefone");
         
-        for (ClienteBEAN dado : dados) {
+        for (Cliente dado : dados) {
             dTable.addRow(new Object[]{dado.getCodigo(), dado.getNome(), dado.getLogin(), dado.getTelefone()});
         }
         

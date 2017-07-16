@@ -6,7 +6,7 @@
 package Visao;
 
 import Controle.ControleFuncionario;
-import Modelo.BEAN.FuncionarioBEAN;
+import Modelo.BEAN.Funcionario;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
 public class FRMFuncionario extends javax.swing.JFrame {
     
     private DefaultTableModel dTable;
-    private ArrayList<FuncionarioBEAN> dados;
+    private ArrayList<Funcionario> dados;
     private ControleFuncionario contFun = new ControleFuncionario();
 
     /**
@@ -275,7 +275,7 @@ public class FRMFuncionario extends javax.swing.JFrame {
         FRMEditarFuncionario edtFun = new FRMEditarFuncionario();
         
         int qtd = tableFuncionario.getSelectedRowCount();
-        FuncionarioBEAN funcio = new FuncionarioBEAN();
+        Funcionario funcio = new Funcionario();
 
         if (qtd < 1) {
             JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para deletar.");
@@ -412,7 +412,7 @@ public class FRMFuncionario extends javax.swing.JFrame {
         dTable.addColumn("Cargo");
         dTable.addColumn("Telefone");
 
-        for (FuncionarioBEAN dado : dados) {
+        for (Funcionario dado : dados) {
             dTable.addRow(new Object[] {dado.getCodigo(), dado.getNome(),dado.getCpf(), dado.getCargo().getNome(), dado.getTelefone()});
         }
         

@@ -6,7 +6,7 @@
 package Visao;
 
 import Controle.ControleCliente;
-import Modelo.BEAN.ClienteBEAN;
+import Modelo.BEAN.Cliente;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  */
 public class FRMEditarCliente extends javax.swing.JFrame {
 
-    ClienteBEAN cliente = new ClienteBEAN();
+    Cliente cliente = new Cliente();
     ControleCliente contCli = new ControleCliente();
 
     /**
@@ -208,7 +208,7 @@ public class FRMEditarCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        ClienteBEAN cli = new ClienteBEAN();
+        Cliente cli = new Cliente();
 
         if (tfSenha.getText().equals(tfConfSenha.getText())) {
             if ((tfNome.getText().equals("")) || (tfUsuario.getText().equals("")) || (tfSenha.getText().equals("")) || (tfEmail.getText().equals("")) || (tfTel.getText().equals(""))) {
@@ -298,7 +298,7 @@ public class FRMEditarCliente extends javax.swing.JFrame {
     private javax.swing.JTextField tfUsuario;
     // End of variables declaration//GEN-END:variables
 
-    void pegaObjeto(ClienteBEAN c) {
+    void pegaObjeto(Cliente c) {
         cliente = c;
         this.preencheCampos();
     }

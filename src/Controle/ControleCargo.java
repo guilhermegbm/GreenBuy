@@ -5,7 +5,7 @@
  */
 package Controle;
 
-import Modelo.BEAN.CargoBEAN;
+import Modelo.BEAN.Cargo;
 import Modelo.MysqlDAO.CargoMysqlDAO;
 import java.util.ArrayList;
 
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class ControleCargo {
     CargoMysqlDAO cargo = new CargoMysqlDAO();
     
-    public ArrayList<CargoBEAN> listarTodos (){
+    public ArrayList<Cargo> listarTodos (){
         return cargo.listarTodos();
     }
 }

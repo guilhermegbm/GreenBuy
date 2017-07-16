@@ -7,8 +7,8 @@ package Visao;
 
 import Controle.ControleCargo;
 import Controle.ControleFuncionario;
-import Modelo.BEAN.CargoBEAN;
-import Modelo.BEAN.FuncionarioBEAN;
+import Modelo.BEAN.Cargo;
+import Modelo.BEAN.Funcionario;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -20,7 +20,7 @@ public class FRMCadastrarFuncionario extends javax.swing.JFrame {
 
     ControleCargo contCargo = new ControleCargo();
     ControleFuncionario contFun = new ControleFuncionario();
-    ArrayList<CargoBEAN> auxAL = new ArrayList<CargoBEAN>();
+    ArrayList<Cargo> auxAL = new ArrayList<Cargo>();
 
     /**
      * Creates new form FRMCadastrarFuncionario
@@ -275,7 +275,7 @@ public class FRMCadastrarFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_tfSalarioKeyTyped
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        FuncionarioBEAN fun = new FuncionarioBEAN();
+        Funcionario fun = new Funcionario();
         if (tfSenha.getText().equals(tfConfSenha.getText())) {
             if ((tfNome.getText().equals("")) || (tfCPF.getText().equals("")) || (tfUsuario.getText().equals("")) || (tfSenha.getText().equals("")) || (tfConfSenha.getText().equals("")) || (tfSalario.getText().equals(""))) {
                 JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos.");
@@ -299,7 +299,7 @@ public class FRMCadastrarFuncionario extends javax.swing.JFrame {
                 
                 fun.setTelefone(tfTel.getText());
                 
-                for (CargoBEAN c : auxAL) {
+                for (Cargo c : auxAL) {
                     if (c.getNome().equals(cbCargo.getSelectedItem() + "")) {
                         fun.setCargo(c);
                     }
@@ -396,7 +396,7 @@ public class FRMCadastrarFuncionario extends javax.swing.JFrame {
     private void preencheCB() {
         auxAL = contCargo.listarTodos();
 
-        for (CargoBEAN cargo : auxAL) {
+        for (Cargo cargo : auxAL) {
             cbCargo.addItem(cargo.getNome());
         }
     }

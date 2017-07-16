@@ -5,7 +5,7 @@
  */
 package Controle;
 
-import Modelo.BEAN.ClienteBEAN;
+import Modelo.BEAN.Cliente;
 import Modelo.MysqlDAO.ClienteMysqlDAO;
 import java.util.ArrayList;
 
@@ -18,25 +18,25 @@ public class ControleCliente {
     /*pra chamar o metodo cadatrar que está em modlo:
     
     */
-    public void cadastrar(ClienteBEAN cliente) {                
+    public void cadastrar(Cliente cliente) {                
         objClienteDAO.cadastrar(cliente);
     }
-    public ArrayList<ClienteBEAN> listarALL () {
+    public ArrayList<Cliente> listarALL () {
         return objClienteDAO.listarTodos();
     }
     public void remover (int cliCodigo) {
         objClienteDAO.remover(cliCodigo);
     }
 
-    public ArrayList<ClienteBEAN> listarPorCodigo(int cod) {
+    public ArrayList<Cliente> listarPorCodigo(int cod) {
         return objClienteDAO.localizarCodigo(cod);
     }
     
-    public ArrayList<ClienteBEAN> listarPorNome(String nome) {
+    public ArrayList<Cliente> listarPorNome(String nome) {
         return objClienteDAO.localizarNome(nome);
     }
 
-    public void editar(ClienteBEAN cli) {
+    public void editar(Cliente cli) {
         objClienteDAO.editar(cli);
     }
 }

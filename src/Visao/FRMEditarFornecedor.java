@@ -6,7 +6,7 @@
 package Visao;
 
 import Controle.ControleFornecedor;
-import Modelo.BEAN.FornecedorBEAN;
+import Modelo.BEAN.Fornecedor;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 public class FRMEditarFornecedor extends javax.swing.JFrame {
 
     ControleFornecedor fornControle = new ControleFornecedor();
-    FornecedorBEAN fornecedorbean = new FornecedorBEAN();
+    Fornecedor fornecedorbean = new Fornecedor();
 
     /**
      * Creates new form CadastrarFornecedor
@@ -217,7 +217,7 @@ public class FRMEditarFornecedor extends javax.swing.JFrame {
     }//GEN-LAST:event_rbPessoaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        FornecedorBEAN forn = new FornecedorBEAN();
+        Fornecedor forn = new Fornecedor();
         
         if (((rbEmpresa.isSelected() == true) && (tfCNPJ.getText().equals("  .   .   /    -  "))) || ((rbPessoa.isSelected() == true) && (tfCPF.getText().equals("   .   .   -  "))) || (tfNome.getText().equals(""))|| (tfTelefone.getText().equals("(  )     -    "))){
             JOptionPane.showMessageDialog(null, "Todos os dados devem estar preenchidos");
@@ -364,7 +364,7 @@ public class FRMEditarFornecedor extends javax.swing.JFrame {
     private javax.swing.JTextField tfNome;
     private javax.swing.JTextField tfTelefone;
     // End of variables declaration//GEN-END:variables
-    void pegaObjeto(FornecedorBEAN forn) {
+    void pegaObjeto(Fornecedor forn) {
         fornecedorbean = forn;
         this.preencheDados();
     }

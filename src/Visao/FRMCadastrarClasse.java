@@ -6,7 +6,7 @@
 package Visao;
 
 import Controle.ControleClasseObjeto;
-import Modelo.BEAN.ClasseObjetoBEAN;
+import Modelo.BEAN.Classe;
 import javax.swing.JOptionPane;
 
 /**

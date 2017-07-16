@@ -5,7 +5,7 @@
  */
 package Controle;
 
-import Modelo.BEAN.ObjetoBEAN;
+import Modelo.BEAN.Objeto;
 import Modelo.MysqlDAO.ObjetoMysqlDAO;
 import java.util.ArrayList;
 
@@ -17,9 +17,9 @@ public class ControleObjeto {
     ObjetoMysqlDAO Objeto = new ObjetoMysqlDAO();
     
     public boolean verifCodigo(int codigo){
-        ArrayList<ObjetoBEAN> auxAL = Objeto.listarTodos();
+        ArrayList<Objeto> auxAL = Objeto.listarTodos();
         
-        for (ObjetoBEAN produto : auxAL) {
+        for (Objeto produto : auxAL) {
             if (codigo == produto.getCodigo()){
                 return true;
             }
@@ -27,16 +27,16 @@ public class ControleObjeto {
         return false;
     }
     
-    public ArrayList<ObjetoBEAN> listarTodos(){
-        ArrayList<ObjetoBEAN> auxAL = Objeto.listarTodos();
+    public ArrayList<Objeto> listarTodos(){
+        ArrayList<Objeto> auxAL = Objeto.listarTodos();
         return auxAL;
     }
 
-    public ArrayList<ObjetoBEAN> listarPorCodigo(int codigo) {
+    public ArrayList<Objeto> listarPorCodigo(int codigo) {
         return Objeto.listarPorCodigo(codigo);
     }
 
-    public void cadastrar(ObjetoBEAN prod) {
+    public void cadastrar(Objeto prod) {
         Objeto.cadastrar(prod);
     }
 
@@ -44,28 +44,28 @@ public class ControleObjeto {
         Objeto.deletar(codigo);
     }
 
-    public void editar(ObjetoBEAN prod) {
+    public void editar(Objeto prod) {
         Objeto.editar(prod);
     }
 
-    public ArrayList<ObjetoBEAN> listarPorNome(String prodN) {
+    public ArrayList<Objeto> listarPorNome(String prodN) {
         return Objeto.listarPorNome(prodN);
     }
 
-    public ArrayList<ObjetoBEAN> listarPorValorMenor(float menValor) {
-        ArrayList<ObjetoBEAN> auxAL = Objeto.listarPorMenorValor(menValor);
+    public ArrayList<Objeto> listarPorValorMenor(float menValor) {
+        ArrayList<Objeto> auxAL = Objeto.listarPorMenorValor(menValor);
         return auxAL;
     }
 
-    public ArrayList<ObjetoBEAN> listarPorValorMaior(float maiValor) {
-        ArrayList<ObjetoBEAN> auxAL = Objeto.listarPorMaiorValor(maiValor);
+    public ArrayList<Objeto> listarPorValorMaior(float maiValor) {
+        ArrayList<Objeto> auxAL = Objeto.listarPorMaiorValor(maiValor);
         return auxAL;
     }
 
     public boolean verifNome(String nomeP) {
-        ArrayList<ObjetoBEAN> auxAL = Objeto.listarTodos();
+        ArrayList<Objeto> auxAL = Objeto.listarTodos();
         
-        for (ObjetoBEAN prod : auxAL) {
+        for (Objeto prod : auxAL) {
             if (prod.getNome().equals(nomeP)){
                 return true;
             }

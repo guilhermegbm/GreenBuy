@@ -5,8 +5,8 @@
  */
 package Controle;
 
-import Modelo.BEAN.CargoBEAN;
-import Modelo.BEAN.FuncionarioBEAN;
+import Modelo.BEAN.Cargo;
+import Modelo.BEAN.Funcionario;
 import Modelo.MysqlDAO.FuncionarioMysqlDAO;
 import java.util.ArrayList;
 
@@ -20,22 +20,22 @@ public class ControleFuncionario {
     /*pra chamar o metodo cadatrar que está em modlo:
     
     */
-    public void cadastrar(FuncionarioBEAN f) {                
+    public void cadastrar(Funcionario f) {                
         funcionario.cadastrar(f);
     }
-    public ArrayList<FuncionarioBEAN> listarTodos () {
+    public ArrayList<Funcionario> listarTodos () {
         return funcionario.listarTodos();
     }
     
-    public void editar (FuncionarioBEAN f){
+    public void editar (Funcionario f){
         funcionario.editar(f);
     }
     
-    public ArrayList<FuncionarioBEAN> listarPorCodigo (int codigo) {
+    public ArrayList<Funcionario> listarPorCodigo (int codigo) {
         return funcionario.listarPorCodigo(codigo);
     }
     
-    public ArrayList<FuncionarioBEAN> listarPorNome (String nome) {
+    public ArrayList<Funcionario> listarPorNome (String nome) {
         return funcionario.listarPorNome(nome);
     }
 

@@ -5,7 +5,7 @@
  */
 package Controle;
 
-import Modelo.BEAN.ClasseObjetoBEAN;
+import Modelo.BEAN.Classe;
 import Modelo.MysqlDAO.ClasseObjetoMysqlDAO;
 import java.util.ArrayList;
 
@@ -17,11 +17,11 @@ public class ControleClasseObjeto {
     ClasseObjetoMysqlDAO classe = new ClasseObjetoMysqlDAO();
     
     public boolean verifNome (String nome){
-        ArrayList<ClasseObjetoBEAN> auxAL = new ArrayList<ClasseObjetoBEAN>();
+        ArrayList<Classe> auxAL = new ArrayList<Classe>();
         
         auxAL = classe.listarTodos();
         
-        for (ClasseObjetoBEAN c : auxAL) {
+        for (Classe c : auxAL) {
             if (nome.equals(c.getNome())){
                 return true;
             }
