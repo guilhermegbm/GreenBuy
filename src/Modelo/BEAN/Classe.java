@@ -5,14 +5,29 @@
  */
 package Modelo.BEAN;
 
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  *
  * @author Guilherme
  */
-public class Classe {
+@Entity
+@Table(name = "classe")
+public class Classe implements Serializable {
     private int codigo;
     private String nome;
+    private Set<SubClasse> subClasses = new HashSet<>();
 
+    @Id
+    @GeneratedValue
+    @Column(name = "claCodigo")
     public int getCodigo() {
         return codigo;
     }
@@ -21,12 +36,21 @@ public class Classe {
         this.codigo = codigo;
     }
 
+    @Column(name = "claNome", length = 40, nullable = false)
     public String getNome() {
         return nome;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public Set<SubClasse> getSubClasses() {
+        return subClasses;
+    }
+
+    public void setSubClasses(Set<SubClasse> subClasses) {
+        this.subClasses = subClasses;
     }
 
 }

@@ -5,16 +5,32 @@
  */
 package Modelo.BEAN;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author Guilherme
  */
-public class Saida {
+@Entity
+@Table(name = "saida")
+public class Saida implements Serializable {
     private int codigo;
     private Date dataHora;
+    private Set<SaidaObjeto> objetos = new HashSet<>();
 
+    @Id
+    @GeneratedValue
+    @Column(name = "saiCodigo")
     public int getCodigo() {
         return codigo;
     }
@@ -23,6 +39,8 @@ public class Saida {
         this.codigo = codigo;
     }
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "saiDataHora", nullable = false)
     public Date getDataHora() {
         return dataHora;
     }
@@ -30,5 +48,12 @@ public class Saida {
     public void setDataHora(Date dataHora) {
         this.dataHora = dataHora;
     }
-    
+    // EagerLoading
+    public Set<SaidaObjeto> getObjetos() {
+        return objetos;
+    }
+
+    public void setObjetos(Set<SaidaObjeto> objetos) {
+        this.objetos = objetos;
+    }
 }

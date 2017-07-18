@@ -5,24 +5,42 @@
  */
 package Modelo.BEAN;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author Guilherme
  */
-public class Venda {
+@Entity
+@Table(name = "venda")
+public class Venda implements Serializable {
     private int codigo;
     private Date dataHora;
     private Date dataPagamento;
     private float desconto;
     private float acrescimo;
-    private boolean situacao;
+    private Situacao situacao;
     private Cliente cliente;
     private Funcionario funcionario;
     private FormaPagamento formaPagamento;
+    private Set<ObjetoVenda> itensDaVenda = new HashSet<>();
 
+    @Id
+    @GeneratedValue
+    @Column(name = "venCodigo")
     public int getCodigo() {
         return codigo;
     }
@@ -31,6 +49,8 @@ public class Venda {
         this.codigo = codigo;
     }
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "venDataHora", nullable = false)
     public Date getDataHora() {
         return dataHora;
     }
@@ -39,6 +59,8 @@ public class Venda {
         this.dataHora = dataHora;
     }
 
+    @Temporal(TemporalType.DATE)
+    @Column(name = "venDataPagamento", nullable = true)
     public Date getDataPagamento() {
         return dataPagamento;
     }
@@ -47,6 +69,7 @@ public class Venda {
         this.dataPagamento = dataPagamento;
     }
 
+    @Column(name = "venDesconto", nullable = true)
     public float getDesconto() {
         return desconto;
     }
@@ -55,12 +78,23 @@ public class Venda {
         this.desconto = desconto;
     }
 
+    @Column(name = "venAcrescimo", nullable = true)
     public float getAcrescimo() {
         return acrescimo;
     }
 
     public void setAcrescimo(float acrescimo) {
         this.acrescimo = acrescimo;
+    }
+
+    @Column(name = "venSituacao", nullable = false)
+    @Enumerated(EnumType.ORDINAL)
+    public Situacao getSituacao() {
+        return situacao;
+    }
+
+    public void setSituacao(Situacao situacao) {
+        this.situacao = situacao;
     }
 
     public Cliente getCliente() {
@@ -87,14 +121,17 @@ public class Venda {
         this.formaPagamento = formaPagamento;
     }
 
-    public boolean isSituacao() {
-        return situacao;
+    public Set<ObjetoVenda> getItensDaVenda() {
+        return itensDaVenda;
     }
 
-    public void setSituacao(boolean situacao) {
-        this.situacao = situacao;
+    public void setItensDaVenda(Set<ObjetoVenda> itensDaVenda) {
+        this.itensDaVenda = itensDaVenda;
     }
     
-    
+    public enum Situacao {
+        NAOPAGO,
+        PAGO
+    }
     
 }

@@ -5,20 +5,38 @@
  */
 package Modelo.BEAN;
 
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  *
  * @author Guilherme
  */
-public class Funcionario {
+@Entity
+@Table(name = "funcionario")
+public class Funcionario implements Serializable {
     private int codigo;
     private String nome;
     private String cpf;
+    private Situacao situacao;
     private float salario;
     private String login;
     private String senha;
     private String telefone;
     private Cargo cargo;
+    private Set<Venda> vendas = new HashSet<>();
 
+    @Id
+    @GeneratedValue
+    @Column(name = "funCodigo")
     public int getCodigo() {
         return codigo;
     }
@@ -27,6 +45,7 @@ public class Funcionario {
         this.codigo = codigo;
     }
 
+    @Column(name = "funNome", length = 80, nullable = false)
     public String getNome() {
         return nome;
     }
@@ -35,6 +54,7 @@ public class Funcionario {
         this.nome = nome;
     }
 
+    @Column(name = "funCPF", length = 30, nullable = false)
     public String getCpf() {
         return cpf;
     }
@@ -42,9 +62,18 @@ public class Funcionario {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-    
-    
 
+    @Column(name = "funSituacao", nullable = false)
+    @Enumerated(EnumType.ORDINAL)
+    public Situacao getSituacao() {
+        return situacao;
+    }
+
+    public void setSituacao(Situacao situacao) {
+        this.situacao = situacao;
+    }
+
+    @Column(name = "funSalario", nullable = true)
     public float getSalario() {
         return salario;
     }
@@ -53,6 +82,7 @@ public class Funcionario {
         this.salario = salario;
     }
 
+    @Column(name = "funLogin", length = 50, nullable = false)
     public String getLogin() {
         return login;
     }
@@ -61,6 +91,7 @@ public class Funcionario {
         this.login = login;
     }
 
+    @Column(name = "funSenha", length = 20, nullable = false)
     public String getSenha() {
         return senha;
     }
@@ -69,6 +100,7 @@ public class Funcionario {
         this.senha = senha;
     }
 
+    @Column(name = "funTelefone", length = 20, nullable = true)
     public String getTelefone() {
         return telefone;
     }
@@ -84,6 +116,17 @@ public class Funcionario {
     public void setCargo(Cargo cargo) {
         this.cargo = cargo;
     }
+
+    public Set<Venda> getVendas() {
+        return vendas;
+    }
+
+    public void setVendas(Set<Venda> vendas) {
+        this.vendas = vendas;
+    }
     
-    
+    public enum Situacao {
+        DESPEDIDO,
+        ATIVO
+    }
 }

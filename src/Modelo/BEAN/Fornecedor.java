@@ -5,18 +5,35 @@
  */
 package Modelo.BEAN;
 
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  *
  * @author Guilherme
  */
-public class Fornecedor {
+@Entity
+@Table(name = "fornecedor")
+public class Fornecedor implements Serializable {
     private int codigo;
     private String nome;
     private TipoFornecedor tipoFornecedor;
     private String cpf;
     private String cnpj;
     private String telefone;
+    private Set<Fornecimento> fornecimentos = new HashSet<>();
 
+    @Id
+    @GeneratedValue
+    @Column(name = "forCodigo")
     public int getCodigo() {
         return codigo;
     }
@@ -25,6 +42,7 @@ public class Fornecedor {
         this.codigo = codigo;
     }
 
+    @Column(name = "forNome", length = 80, nullable = false)
     public String getNome() {
         return nome;
     }
@@ -33,6 +51,8 @@ public class Fornecedor {
         this.nome = nome;
     }
 
+    @Column(name = "forTipo", nullable = false)
+    @Enumerated(EnumType.ORDINAL)
     public TipoFornecedor getTipoFornecedor() {
         return tipoFornecedor;
     }
@@ -41,6 +61,7 @@ public class Fornecedor {
         this.tipoFornecedor = tipoFornecedor;
     }
 
+    @Column(name = "forCNPJ", length = 40, nullable = true)
     public String getCnpj() {
         return cnpj;
     }
@@ -49,6 +70,16 @@ public class Fornecedor {
         this.cnpj = cnpj;
     }
 
+    @Column(name = "forCPF", length = 40, nullable = true)
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+    
+    @Column(name = "forTelefone", length = 20, nullable = true)
     public String getTelefone() {
         return telefone;
     }
@@ -56,13 +87,13 @@ public class Fornecedor {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-
-    public String getCpf() {
-        return cpf;
+    // LazyLoading
+    public Set<Fornecimento> getFornecimentos() {
+        return fornecimentos;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setFornecimentos(Set<Fornecimento> fornecimentos) {
+        this.fornecimentos = fornecimentos;
     }
     
     public enum TipoFornecedor {

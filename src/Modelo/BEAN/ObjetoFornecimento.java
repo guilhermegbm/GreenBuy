@@ -56,5 +56,4 @@ public class ObjetoFornecimento {
         this.precoPraticadoCompra = precoPraticadoCompra;
     }
     
-    
 }

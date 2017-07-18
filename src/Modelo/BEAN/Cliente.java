@@ -5,11 +5,22 @@
  */
 package Modelo.BEAN;
 
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  *
  * @author Guilherme
  */
-public class Cliente {
+@Entity
+@Table(name = "cliente")
+public class Cliente implements Serializable {
     private int codigo;
     private String nome;
     private String login;
@@ -17,7 +28,11 @@ public class Cliente {
     private String email;
     private String telefone;
     private String cpf;
+    private Set<Venda> vendas = new HashSet<>();
 
+    @Id
+    @GeneratedValue
+    @Column(name = "cliCodigo")
     public int getCodigo() {
         return codigo;
     }
@@ -26,6 +41,7 @@ public class Cliente {
         this.codigo = codigo;
     }
 
+    @Column(name = "cliNome", length = 80, nullable = false)
     public String getNome() {
         return nome;
     }
@@ -34,6 +50,7 @@ public class Cliente {
         this.nome = nome;
     }
 
+    @Column(name = "cliLogin", length = 50, nullable = false)
     public String getLogin() {
         return login;
     }
@@ -42,6 +59,7 @@ public class Cliente {
         this.login = login;
     }
 
+    @Column(name = "cliSenha", length = 20, nullable = false)
     public String getSenha() {
         return senha;
     }
@@ -50,6 +68,7 @@ public class Cliente {
         this.senha = senha;
     }
 
+    @Column(name = "cliEmail", length = 80, nullable = true)
     public String getEmail() {
         return email;
     }
@@ -58,6 +77,7 @@ public class Cliente {
         this.email = email;
     }
 
+    @Column(name = "cliTelefone", length = 20, nullable = true)
     public String getTelefone() {
         return telefone;
     }
@@ -66,6 +86,7 @@ public class Cliente {
         this.telefone = telefone;
     }
 
+    @Column(name = "cliCPF", length = 30, nullable = false)
     public String getCpf() {
         return cpf;
     }
@@ -73,7 +94,14 @@ public class Cliente {
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-    
+
+    public Set<Venda> getVendas() {
+        return vendas;
+    }
+
+    public void setVendas(Set<Venda> vendas) {
+        this.vendas = vendas;
+    }
     
     
 }

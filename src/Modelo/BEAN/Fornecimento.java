@@ -5,20 +5,36 @@
  */
 package Modelo.BEAN;
 
+import java.io.Serializable;
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author Guilherme
  */
-public class Fornecimento {
+@Entity
+@Table(name = "fornecimento")
+public class Fornecimento implements Serializable {
     private int codigo;
     private Date data;
     private String nNotaFiscal;
     private float acrescimo;
     private float desconto;
     private Fornecedor fornecedor;
+    private Set<ObjetoFornecimento> objetosNoFornecimento = new HashSet<>();
 
+    @Id
+    @GeneratedValue
+    @Column(name = "frnCodigo")
     public int getCodigo() {
         return codigo;
     }
@@ -27,6 +43,8 @@ public class Fornecimento {
         this.codigo = codigo;
     }
 
+    @Temporal(TemporalType.DATE)
+    @Column(name = "frnData", nullable = false)
     public Date getData() {
         return data;
     }
@@ -35,12 +53,31 @@ public class Fornecimento {
         this.data = data;
     }
 
+    @Column(name = "frnNNotaFiscal", length = 40, nullable = false)
     public String getnNotaFiscal() {
         return nNotaFiscal;
     }
 
     public void setnNotaFiscal(String nNotaFiscal) {
         this.nNotaFiscal = nNotaFiscal;
+    }
+    
+    @Column(name = "frnAcrescimo", nullable = true)
+    public float getAcrescimo() {
+        return acrescimo;
+    }
+
+    public void setAcrescimo(float acrescimo) {
+        this.acrescimo = acrescimo;
+    }
+
+    @Column(name = "frnDesconto", nullable = true)
+    public float getDesconto() {
+        return desconto;
+    }
+
+    public void setDesconto(float desconto) {
+        this.desconto = desconto;
     }
 
     public Fornecedor getFornecedor() {
@@ -51,19 +88,12 @@ public class Fornecimento {
         this.fornecedor = fornecedor;
     }
 
-    public float getAcrescimo() {
-        return acrescimo;
+    public Set<ObjetoFornecimento> getObjetosNoFornecimento() {
+        return objetosNoFornecimento;
     }
 
-    public void setAcrescimo(float acrescimo) {
-        this.acrescimo = acrescimo;
+    public void setObjetosNoFornecimento(Set<ObjetoFornecimento> objetosNoFornecimento) {
+        this.objetosNoFornecimento = objetosNoFornecimento;
     }
-
-    public float getDesconto() {
-        return desconto;
-    }
-
-    public void setDesconto(float desconto) {
-        this.desconto = desconto;
-    }
+    
 }
