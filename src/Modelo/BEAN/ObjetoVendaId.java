@@ -17,7 +17,7 @@ public class ObjetoVendaId {
     private Venda venda;
     private Objeto objeto;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     public Venda getVenda() {
         return venda;
     }
@@ -26,7 +26,7 @@ public class ObjetoVendaId {
         this.venda = venda;
     }
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     public Objeto getObjeto() {
         return objeto;
     }

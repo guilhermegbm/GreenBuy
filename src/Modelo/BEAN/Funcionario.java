@@ -8,10 +8,12 @@ package Modelo.BEAN;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -29,7 +31,7 @@ public class Funcionario implements Serializable {
     private int codigo;
     private String nome;
     private String cpf;
-    private Situacao situacao;
+    private SituacaoFun situacaoFun;
     private float salario;
     private String login;
     private String senha;
@@ -68,12 +70,12 @@ public class Funcionario implements Serializable {
 
     @Column(name = "funSituacao", nullable = false)
     @Enumerated(EnumType.ORDINAL)
-    public Situacao getSituacao() {
-        return situacao;
+    public SituacaoFun getSituacaoFun() {
+        return situacaoFun;
     }
 
-    public void setSituacao(Situacao situacao) {
-        this.situacao = situacao;
+    public void setSituacaoFun(SituacaoFun situacaoFun) {
+        this.situacaoFun = situacaoFun;
     }
 
     @Column(name = "funSalario", nullable = true)
@@ -122,8 +124,7 @@ public class Funcionario implements Serializable {
         this.cargo = cargo;
     }
     
-    //Eager Loading
-    @OneToMany(mappedBy = "cargo")
+    @OneToMany(mappedBy = "funcionario", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     public Set<Venda> getVendas() {
         return vendas;
     }
@@ -132,7 +133,7 @@ public class Funcionario implements Serializable {
         this.vendas = vendas;
     }
     
-    public enum Situacao {
+    public enum SituacaoFun {
         DESPEDIDO,
         ATIVO
     }

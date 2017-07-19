@@ -8,10 +8,12 @@ package Modelo.BEAN;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -49,7 +51,7 @@ public class FormaPagamento implements Serializable {
         this.nome = nome;
     }
 
-    @OneToMany(mappedBy = "formaPagamento")
+    @OneToMany(mappedBy = "formaPagamento", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     public Set<Venda> getVendas() {
         return vendas;
     }

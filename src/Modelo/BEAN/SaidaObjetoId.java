@@ -17,7 +17,7 @@ public class SaidaObjetoId {
     private Saida saida;
     private Objeto objeto;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     public Saida getSaida() {
         return saida;
     }
@@ -26,7 +26,7 @@ public class SaidaObjetoId {
         this.saida = saida;
     }
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     public Objeto getObjeto() {
         return objeto;
     }

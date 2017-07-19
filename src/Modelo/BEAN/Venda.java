@@ -5,23 +5,36 @@
  */
 package Modelo.BEAN;
 
+import Jpa.JpaUtil;
+import Modelo.BEAN.Objeto.TipoObjeto;
 import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PostLoad;
+import javax.persistence.PostPersist;
+import javax.persistence.PostUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -40,6 +53,7 @@ public class Venda implements Serializable {
     private Funcionario funcionario;
     private FormaPagamento formaPagamento;
     private Set<ObjetoVenda> itensDaVenda = new HashSet<>();
+    private float valorTotal;
 
     @Id
     @GeneratedValue
@@ -130,7 +144,7 @@ public class Venda implements Serializable {
         this.formaPagamento = formaPagamento;
     }
 
-    @OneToMany(mappedBy = "objVen.venda")
+    @OneToMany(mappedBy = "objVen.venda", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public Set<ObjetoVenda> getItensDaVenda() {
         return itensDaVenda;
     }
@@ -143,5 +157,27 @@ public class Venda implements Serializable {
         NAOPAGO,
         PAGO
     }
+
+    @Transient
+    public float getValorTotal() {
+        return valorTotal;
+    }
     
+    @PostPersist
+    @PostLoad
+    @PostUpdate
+    public void setValorTotal(){
+        System.out.println("Passou1");
+        //1ª Função: Calcular o valor total.
+    }
+    
+    @PostPersist
+    public void registraSaidaPelaVenda(){
+        //2ª Função: Verificar os ítens da venda e, se for uma mercadoria, registrar a saída.
+        for (ObjetoVenda objetoVenda : this.getItensDaVenda()) {
+            if (objetoVenda.getObjeto().getTipoObj().equals(TipoObjeto.MERCADORIA)){
+                System.out.println("Passou 2");
+            }
+        }
+    }
 }

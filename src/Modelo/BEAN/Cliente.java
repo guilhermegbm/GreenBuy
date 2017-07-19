@@ -9,8 +9,12 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -30,6 +34,7 @@ public class Cliente implements Serializable {
     private String email;
     private String telefone;
     private String cpf;
+    private SituacaoCli situacaoCli;
     private Set<Venda> vendas = new HashSet<>();
 
     @Id
@@ -97,13 +102,28 @@ public class Cliente implements Serializable {
         this.cpf = cpf;
     }
 
-    @OneToMany(mappedBy = "cliente")
+    @Column(name = "cliSituacao", nullable = false)
+    @Enumerated(EnumType.STRING)
+    public SituacaoCli getSituacaoCli() {
+        return situacaoCli;
+    }
+
+    public void setSituacaoCli(SituacaoCli situacaoCli) {
+        this.situacaoCli = situacaoCli;
+    }
+
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     public Set<Venda> getVendas() {
         return vendas;
     }
 
     public void setVendas(Set<Venda> vendas) {
         this.vendas = vendas;
+    }
+    
+    public enum SituacaoCli {
+        DESLIGADO,
+        ATIVO
     }
     
 }

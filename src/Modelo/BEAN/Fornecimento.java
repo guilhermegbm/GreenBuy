@@ -9,16 +9,22 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PostLoad;
+import javax.persistence.PostPersist;
+import javax.persistence.PostUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 /**
  *
@@ -34,6 +40,7 @@ public class Fornecimento implements Serializable {
     private float desconto;
     private Fornecedor fornecedor;
     private Set<ObjetoFornecimento> objetosNoFornecimento = new HashSet<>();
+    private float valorTotal;
 
     @Id
     @GeneratedValue
@@ -83,7 +90,7 @@ public class Fornecimento implements Serializable {
         this.desconto = desconto;
     }
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "frn_forCodigo")
     public Fornecedor getFornecedor() {
         return fornecedor;
@@ -93,13 +100,25 @@ public class Fornecimento implements Serializable {
         this.fornecedor = fornecedor;
     }
 
-    @OneToMany(mappedBy = "objFor.fornecimento")
+    @OneToMany(mappedBy = "objFor.fornecimento", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public Set<ObjetoFornecimento> getObjetosNoFornecimento() {
         return objetosNoFornecimento;
     }
 
     public void setObjetosNoFornecimento(Set<ObjetoFornecimento> objetosNoFornecimento) {
         this.objetosNoFornecimento = objetosNoFornecimento;
+    }
+
+    @Transient
+    public float getValorTotal() {
+        return valorTotal;
+    }
+    
+    @PostPersist
+    @PostLoad
+    @PostUpdate
+    public void setValorTotal (){
+        
     }
     
 }

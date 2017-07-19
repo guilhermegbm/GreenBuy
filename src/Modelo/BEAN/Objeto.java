@@ -9,10 +9,12 @@ import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -35,6 +37,7 @@ public class Objeto implements Serializable {
     private Unidade unidade;
     private float qtdeEstoque;
     private TipoObjeto tipoObj;
+    private SituacaoObj situacaoObj;
     private SubClasse subClasse;
     private Set<ObjetoVenda> itensNaVenda = new HashSet<>();
     private Set<ObjetoFornecimento> fornecimentos = new HashSet<>();
@@ -106,7 +109,7 @@ public class Objeto implements Serializable {
         this.qtdeEstoque = qtdeEstoque;
     }
 
-    @Column(name = "objTipoObjeto")
+    @Column(name = "objTipoObjeto", nullable = false)
     @Enumerated(EnumType.ORDINAL)
     public TipoObjeto getTipoObj() {
         return tipoObj;
@@ -115,8 +118,18 @@ public class Objeto implements Serializable {
     public void setTipoObj(TipoObjeto tipoObj) {
         this.tipoObj = tipoObj;
     }
+
+    @Column(name = "objSituacao", nullable = false)
+    @Enumerated(EnumType.STRING)
+    public SituacaoObj getSituacaoObj() {
+        return situacaoObj;
+    }
+
+    public void setSituacaoObj(SituacaoObj situacaoObj) {
+        this.situacaoObj = situacaoObj;
+    }
     
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "obj_subCodigo")
     public SubClasse getSubClasse() {
         return subClasse;
@@ -126,7 +139,7 @@ public class Objeto implements Serializable {
         this.subClasse = subClasse;
     }
 
-    @OneToMany(mappedBy = "objVen.objeto")
+    @OneToMany(mappedBy = "objVen.objeto", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     public Set<ObjetoVenda> getItensNaVenda() {
         return itensNaVenda;
     }
@@ -135,7 +148,7 @@ public class Objeto implements Serializable {
         this.itensNaVenda = itensNaVenda;
     }
 
-    @OneToMany(mappedBy = "objFor.objeto")
+    @OneToMany(mappedBy = "objFor.objeto", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     public Set<ObjetoFornecimento> getFornecimentos() {
         return fornecimentos;
     }
@@ -143,8 +156,8 @@ public class Objeto implements Serializable {
     public void setFornecimentos(Set<ObjetoFornecimento> fornecimentos) {
         this.fornecimentos = fornecimentos;
     }
-    // LazyLoading
-    @OneToMany(mappedBy = "objSai.objeto")
+    
+    @OneToMany(mappedBy = "objSai.objeto", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     public Set<SaidaObjeto> getSaidas() {
         return saidas;
     }
@@ -164,6 +177,11 @@ public class Objeto implements Serializable {
         GRAMA,
         LITRO,
         MILILITRO
+    }
+    
+    public enum SituacaoObj {
+        VENDENDO,
+        NAOVENDENDO
     }
     
 }

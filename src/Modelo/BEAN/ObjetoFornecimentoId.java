@@ -17,7 +17,7 @@ public class ObjetoFornecimentoId {
     private Fornecimento fornecimento;
     private Objeto objeto;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     public Fornecimento getFornecimento() {
         return fornecimento;
     }
@@ -26,7 +26,7 @@ public class ObjetoFornecimentoId {
         this.fornecimento = fornecimento;
     }
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     public Objeto getObjeto() {
         return objeto;
     }

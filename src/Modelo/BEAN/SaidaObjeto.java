@@ -29,6 +29,7 @@ import javax.persistence.Transient;
 public class SaidaObjeto {
     private SaidaObjetoId objSai;
     private float qtdeRetirada;
+    private float precoNaSaida;
 
     @EmbeddedId
     public SaidaObjetoId getObjSai() {
@@ -65,6 +66,14 @@ public class SaidaObjeto {
     public void setQtdeRetirada(float qtdeRetirada) {
         this.qtdeRetirada = qtdeRetirada;
     }
-    
+
+    @Column(name = "saoPrecoNaSaida", nullable = false)
+    public float getPrecoNaSaida() {
+        return precoNaSaida;
+    }
+
+    public void setPrecoNaSaida(float precoNaSaida) {
+        this.precoNaSaida = precoNaSaida;
+    }
     
 }

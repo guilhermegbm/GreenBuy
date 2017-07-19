@@ -8,10 +8,12 @@ package Modelo.BEAN;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -30,6 +32,7 @@ public class Fornecedor implements Serializable {
     private String cpf;
     private String cnpj;
     private String telefone;
+    private SituacaoFor situacaoFor;
     private Set<Fornecimento> fornecimentos = new HashSet<>();
 
     @Id
@@ -88,8 +91,18 @@ public class Fornecedor implements Serializable {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-    // LazyLoading
-    @OneToMany(mappedBy = "fornecedor")
+
+    @Column(name = "forSituacao", nullable = false)
+    @Enumerated(EnumType.STRING)
+    public SituacaoFor getSituacaoFor() {
+        return situacaoFor;
+    }
+
+    public void setSituacaoFor(SituacaoFor situacaoFor) {
+        this.situacaoFor = situacaoFor;
+    }
+    
+    @OneToMany(mappedBy = "fornecedor", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     public Set<Fornecimento> getFornecimentos() {
         return fornecimentos;
     }
@@ -101,6 +114,11 @@ public class Fornecedor implements Serializable {
     public enum TipoFornecedor {
         EMPRESA,
         PESSOA
+    }
+    
+    public enum SituacaoFor {
+        INATIVO,
+        ATIVO
     }
     
 }
