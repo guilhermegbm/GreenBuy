@@ -15,6 +15,9 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -113,6 +116,8 @@ public class Objeto implements Serializable {
         this.tipoObj = tipoObj;
     }
     
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "obj_subCodigo")
     public SubClasse getSubClasse() {
         return subClasse;
     }
@@ -121,6 +126,7 @@ public class Objeto implements Serializable {
         this.subClasse = subClasse;
     }
 
+    @OneToMany(mappedBy = "objVen.objeto")
     public Set<ObjetoVenda> getItensNaVenda() {
         return itensNaVenda;
     }
@@ -129,6 +135,7 @@ public class Objeto implements Serializable {
         this.itensNaVenda = itensNaVenda;
     }
 
+    @OneToMany(mappedBy = "objFor.objeto")
     public Set<ObjetoFornecimento> getFornecimentos() {
         return fornecimentos;
     }
@@ -137,6 +144,7 @@ public class Objeto implements Serializable {
         this.fornecimentos = fornecimentos;
     }
     // LazyLoading
+    @OneToMany(mappedBy = "objSai.objeto")
     public Set<SaidaObjeto> getSaidas() {
         return saidas;
     }

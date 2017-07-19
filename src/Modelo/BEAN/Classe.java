@@ -12,6 +12,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -45,6 +46,7 @@ public class Classe implements Serializable {
         this.nome = nome;
     }
 
+    @OneToMany(mappedBy = "classe")
     public Set<SubClasse> getSubClasses() {
         return subClasses;
     }

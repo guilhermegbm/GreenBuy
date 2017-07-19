@@ -16,6 +16,9 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -97,6 +100,8 @@ public class Venda implements Serializable {
         this.situacao = situacao;
     }
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "ven_cliCodigo")
     public Cliente getCliente() {
         return cliente;
     }
@@ -105,6 +110,8 @@ public class Venda implements Serializable {
         this.cliente = cliente;
     }
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "ven_funCodigo")
     public Funcionario getFuncionario() {
         return funcionario;
     }
@@ -113,6 +120,8 @@ public class Venda implements Serializable {
         this.funcionario = funcionario;
     }
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "ven_fpaCodigo")
     public FormaPagamento getFormaPagamento() {
         return formaPagamento;
     }
@@ -121,6 +130,7 @@ public class Venda implements Serializable {
         this.formaPagamento = formaPagamento;
     }
 
+    @OneToMany(mappedBy = "objVen.venda")
     public Set<ObjetoVenda> getItensDaVenda() {
         return itensDaVenda;
     }

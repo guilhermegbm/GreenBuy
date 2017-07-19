@@ -14,6 +14,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -88,6 +89,7 @@ public class Fornecedor implements Serializable {
         this.telefone = telefone;
     }
     // LazyLoading
+    @OneToMany(mappedBy = "fornecedor")
     public Set<Fornecimento> getFornecimentos() {
         return fornecimentos;
     }

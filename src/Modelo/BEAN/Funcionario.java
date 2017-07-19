@@ -14,6 +14,9 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -109,6 +112,8 @@ public class Funcionario implements Serializable {
         this.telefone = telefone;
     }
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "fun_carCodigo")
     public Cargo getCargo() {
         return cargo;
     }
@@ -116,7 +121,9 @@ public class Funcionario implements Serializable {
     public void setCargo(Cargo cargo) {
         this.cargo = cargo;
     }
-
+    
+    //Eager Loading
+    @OneToMany(mappedBy = "cargo")
     public Set<Venda> getVendas() {
         return vendas;
     }

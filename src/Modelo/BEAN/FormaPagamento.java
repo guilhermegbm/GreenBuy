@@ -14,6 +14,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -48,6 +49,7 @@ public class FormaPagamento implements Serializable {
         this.nome = nome;
     }
 
+    @OneToMany(mappedBy = "formaPagamento")
     public Set<Venda> getVendas() {
         return vendas;
     }

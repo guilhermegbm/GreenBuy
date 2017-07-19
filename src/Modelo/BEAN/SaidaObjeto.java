@@ -5,31 +5,59 @@
  */
 package Modelo.BEAN;
 
+import javax.persistence.AssociationOverride;
+import javax.persistence.AssociationOverrides;
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 /**
  *
  * @author Guilherme
  */
+@Entity
+@Table(name = "saida_objeto")
+@AssociationOverrides({
+    @AssociationOverride(name = "objSai.saida",
+            joinColumns = @JoinColumn(name = "sao_saiCodigo")),
+    @AssociationOverride(name = "objSai.objeto",
+            joinColumns = @JoinColumn(name = "sao_objCodigo"))
+})
 public class SaidaObjeto {
-    private Saida saida;
-    private Objeto objeto;
+    private SaidaObjetoId objSai;
     private float qtdeRetirada;
 
-    public Saida getSaida() {
-        return saida;
+    @EmbeddedId
+    public SaidaObjetoId getObjSai() {
+        return objSai;
     }
 
-    public void setSaida(Saida saida) {
-        this.saida = saida;
+    public void setObjSai(SaidaObjetoId objSai) {
+        this.objSai = objSai;
+    }
+    
+    @Transient
+    public Saida getSaida (){
+        return getObjSai().getSaida();
+    }
+    
+    public void setSaida (Saida saida){
+        getObjSai().setSaida(saida);
+    }
+    
+    @Transient
+    public Objeto getObjeto (){
+        return getObjSai().getObjeto();
+    }
+    
+    public void setObjeto (Objeto objeto){
+        getObjSai().setObjeto(objeto);
     }
 
-    public Objeto getObjeto() {
-        return objeto;
-    }
-
-    public void setObjeto(Objeto objeto) {
-        this.objeto = objeto;
-    }
-
+    @Column(name = "saoQtdeRetirada", nullable = false)
     public float getQtdeRetirada() {
         return qtdeRetirada;
     }

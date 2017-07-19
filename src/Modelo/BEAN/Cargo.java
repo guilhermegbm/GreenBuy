@@ -12,6 +12,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -46,6 +47,7 @@ public class Cargo implements Serializable {
         this.nome = nome;
     }
 
+    @OneToMany(mappedBy = "cargo")
     public Set<Funcionario> getFuncionarios() {
         return funcionarios;
     }

@@ -7,11 +7,13 @@ package Modelo.BEAN;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -95,6 +97,7 @@ public class Cliente implements Serializable {
         this.cpf = cpf;
     }
 
+    @OneToMany(mappedBy = "cliente")
     public Set<Venda> getVendas() {
         return vendas;
     }
@@ -102,6 +105,5 @@ public class Cliente implements Serializable {
     public void setVendas(Set<Venda> vendas) {
         this.vendas = vendas;
     }
-    
     
 }
