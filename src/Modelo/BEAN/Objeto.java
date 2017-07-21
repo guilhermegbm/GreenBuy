@@ -41,7 +41,7 @@ public class Objeto implements Serializable {
     private SubGrupo subGrupo;
     private Set<ObjetoVenda> itensNaVenda = new HashSet<>();
     private Set<ObjetoFornecimento> fornecimentos = new HashSet<>();
-    private Set<SaidaObjeto> saidas = new HashSet<>();
+    private Set<ObjetoSaida> saidas = new HashSet<>();
 
     @Id
     @GeneratedValue
@@ -158,11 +158,11 @@ public class Objeto implements Serializable {
     }
     
     @OneToMany(mappedBy = "objSai.objeto", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    public Set<SaidaObjeto> getSaidas() {
+    public Set<ObjetoSaida> getSaidas() {
         return saidas;
     }
 
-    public void setSaidas(Set<SaidaObjeto> saidas) {
+    public void setSaidas(Set<ObjetoSaida> saidas) {
         this.saidas = saidas;
     }
     

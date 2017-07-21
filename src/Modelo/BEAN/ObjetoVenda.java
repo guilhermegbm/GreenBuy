@@ -28,7 +28,7 @@ import javax.persistence.UniqueConstraint;
             joinColumns = @JoinColumn(name = "obv_objCodigo"))
 })
 public class ObjetoVenda {
-    private ObjetoVendaId objVen;
+    private ObjetoVendaId objVen = new ObjetoVendaId();
     private float qtdeVendida;
     private float precoVendaPraticadoUnidade;
 

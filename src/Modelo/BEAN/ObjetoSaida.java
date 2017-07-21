@@ -19,24 +19,24 @@ import javax.persistence.Transient;
  * @author Guilherme
  */
 @Entity
-@Table(name = "saida_objeto")
+@Table(name = "objeto_saida")
 @AssociationOverrides({
     @AssociationOverride(name = "objSai.saida",
             joinColumns = @JoinColumn(name = "sao_saiCodigo")),
     @AssociationOverride(name = "objSai.objeto",
             joinColumns = @JoinColumn(name = "sao_objCodigo"))
 })
-public class SaidaObjeto {
-    private SaidaObjetoId objSai;
+public class ObjetoSaida {
+    private ObjetoSaidaId objSai = new ObjetoSaidaId();
     private float qtdeRetirada;
     private float precoNaSaida;
 
     @EmbeddedId
-    public SaidaObjetoId getObjSai() {
+    public ObjetoSaidaId getObjSai() {
         return objSai;
     }
 
-    public void setObjSai(SaidaObjetoId objSai) {
+    public void setObjSai(ObjetoSaidaId objSai) {
         this.objSai = objSai;
     }
     

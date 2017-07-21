@@ -38,7 +38,7 @@ public class Saida implements Serializable {
     private float acrescimoAdicional;
     private float debitoAdicional;
     private TipoSaida tipoSaida;
-    private Set<SaidaObjeto> objetos = new HashSet<>();
+    private Set<ObjetoSaida> objetos = new HashSet<>();
     private float valorTotal;
 
     @Id
@@ -91,11 +91,11 @@ public class Saida implements Serializable {
     }
     
     @OneToMany(mappedBy = "objSai.saida", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    public Set<SaidaObjeto> getObjetos() {
+    public Set<ObjetoSaida> getObjetos() {
         return objetos;
     }
 
-    public void setObjetos(Set<SaidaObjeto> objetos) {
+    public void setObjetos(Set<ObjetoSaida> objetos) {
         this.objetos = objetos;
     }
     

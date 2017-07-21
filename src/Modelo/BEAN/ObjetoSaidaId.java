@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
  * @author Guilherme
  */
 @Embeddable
-public class SaidaObjetoId implements Serializable {
+public class ObjetoSaidaId implements Serializable {
     private Saida saida;
     private Objeto objeto;
 

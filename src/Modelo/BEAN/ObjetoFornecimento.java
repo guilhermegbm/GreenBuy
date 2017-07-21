@@ -27,7 +27,7 @@ import javax.persistence.Transient;
             joinColumns = @JoinColumn(name = "obf_objCodigo"))
 })
 public class ObjetoFornecimento {
-    private ObjetoFornecimentoId objFor;
+    private ObjetoFornecimentoId objFor = new ObjetoFornecimentoId();
     private float qtdeFornecida;
     private String lote;
     private float precoPraticadoCompra;
