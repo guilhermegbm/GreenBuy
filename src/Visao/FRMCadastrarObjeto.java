@@ -7,7 +7,7 @@ package Visao;
 
 import Controle.ControleObjeto;
 import Modelo.BEAN.Objeto;
-import Modelo.BEAN.Classe;
+import Modelo.BEAN.Grupo;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -16,9 +16,8 @@ import javax.swing.JOptionPane;
  * @author Alunos
  */
 public class FRMCadastrarObjeto extends javax.swing.JFrame {
-
-    //ClasseObjetoMysqlDAO tipoDAO = new ClasseObjetoMysqlDAO();
-    ArrayList<Classe> tipoAL;
+    
+    ArrayList<Grupo> tipoAL;
     ControleObjeto pControle = new ControleObjeto();
 
     /**
@@ -27,7 +26,7 @@ public class FRMCadastrarObjeto extends javax.swing.JFrame {
     public FRMCadastrarObjeto() {
         initComponents();
 
-        this.preencheComboBoxTipo();
+//        this.preencheComboBoxTipo();
 
         lblPC.setVisible(false);
         tfPCompra.setVisible(false);
@@ -277,7 +276,7 @@ public class FRMCadastrarObjeto extends javax.swing.JFrame {
     }//GEN-LAST:event_tfPVendaKeyTyped
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        Objeto objeto = new Objeto();
+        /*Objeto objeto = new Objeto();
 
         if ((tfNome.getText().equals("")) || (tfPVenda.getText().equals("")) || ((rbMercadoria.isSelected()) && (tfPCompra.getText().equals("")))) {
             JOptionPane.showMessageDialog(null, "Com exceção do campo de descrição, todos os campos devem estar preenchidos");
@@ -315,7 +314,7 @@ public class FRMCadastrarObjeto extends javax.swing.JFrame {
 
             objeto.setUnidade(cbUn.getSelectedItem() + "");
 
-            for (Classe classe : tipoAL) {
+            for (Grupo classe : tipoAL) {
                 if (classe.getNome().equals(cbClasse.getSelectedItem() + "")) {
                     objeto.setClasse(classe);
                 }
@@ -331,7 +330,7 @@ public class FRMCadastrarObjeto extends javax.swing.JFrame {
             cbClasse.setSelectedIndex(0);
             cbUn.setSelectedIndex(0);
 
-        }
+        }*/
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
@@ -557,7 +556,7 @@ public class FRMCadastrarObjeto extends javax.swing.JFrame {
 
 //        tipoAL = tipoDAO.listarTodos();
 //
-//        for (Classe tipo : tipoAL) {
+//        for (Grupo tipo : tipoAL) {
 //            cbClasse.addItem(tipo.getNome());
 //        }
     }

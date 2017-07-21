@@ -5,6 +5,7 @@
  */
 package Modelo.BEAN;
 
+import java.io.Serializable;
 import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
 
@@ -13,7 +14,7 @@ import javax.persistence.ManyToOne;
  * @author Guilherme
  */
 @Embeddable
-public class ObjetoVendaId {
+public class ObjetoVendaId implements Serializable {
     private Venda venda;
     private Objeto objeto;
 

@@ -261,7 +261,7 @@ public class FRMCadastrarFuncionario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tfTelKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfTelKeyTyped
-        String caracteres = "0987654321.,";
+        String caracteres = "0987654321";
         if (!caracteres.contains(evt.getKeyChar() + "")) {
             evt.consume();
         }
@@ -280,7 +280,7 @@ public class FRMCadastrarFuncionario extends javax.swing.JFrame {
             if ((tfNome.getText().equals("")) || (tfCPF.getText().equals("")) || (tfUsuario.getText().equals("")) || (tfSenha.getText().equals("")) || (tfConfSenha.getText().equals("")) || (tfSalario.getText().equals(""))) {
                 JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos.");
             } else {
-                fun.setNome(tfNome.getText());
+                /*fun.setNome(tfNome.getText());
                 fun.setCpf(tfCPF.getText());
                 fun.setLogin(tfUsuario.getText());
                 fun.setSenha(tfSenha.getText());
@@ -315,7 +315,7 @@ public class FRMCadastrarFuncionario extends javax.swing.JFrame {
                 tfSenha.setText("");
                 tfTel.setText("");
                 tfUsuario.setText("");
-                cbCargo.setSelectedIndex(0);
+                cbCargo.setSelectedIndex(0);*/
             }
 
         } else {
@@ -394,10 +394,10 @@ public class FRMCadastrarFuncionario extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void preencheCB() {
-        auxAL = contCargo.listarTodos();
+        /*auxAL = contCargo.listarTodos();
 
         for (Cargo cargo : auxAL) {
             cbCargo.addItem(cargo.getNome());
-        }
+        }*/
     }
 }

@@ -14,6 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -22,15 +24,16 @@ import javax.persistence.Table;
  * @author Guilherme
  */
 @Entity
-@Table(name = "classe")
-public class Classe implements Serializable {
+@Table(name = "subGrupo")
+public class SubGrupo implements Serializable {
     private int codigo;
     private String nome;
-    private Set<SubClasse> subClasses = new HashSet<>();
+    private Grupo grupo;
+    private Set<Objeto> objetos = new HashSet<>();
 
     @Id
     @GeneratedValue
-    @Column(name = "claCodigo")
+    @Column(name = "subCodigo")
     public int getCodigo() {
         return codigo;
     }
@@ -39,7 +42,7 @@ public class Classe implements Serializable {
         this.codigo = codigo;
     }
 
-    @Column(name = "claNome", length = 40, nullable = false)
+    @Column(name = "subNome", length = 60, nullable = false)
     public String getNome() {
         return nome;
     }
@@ -48,13 +51,24 @@ public class Classe implements Serializable {
         this.nome = nome;
     }
 
-    @OneToMany(mappedBy = "classe", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    public Set<SubClasse> getSubClasses() {
-        return subClasses;
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "sub_gruCodigo")
+    public Grupo getGrupo() {
+        return grupo;
     }
 
-    public void setSubClasses(Set<SubClasse> subClasses) {
-        this.subClasses = subClasses;
+    public void setGrupo(Grupo grupo) {
+        this.grupo = grupo;
     }
 
+    @OneToMany(mappedBy = "subGrupo", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    public Set<Objeto> getObjetos() {
+        return objetos;
+    }
+
+    public void setObjetos(Set<Objeto> objetos) {
+        this.objetos = objetos;
+    }
+    
+    
 }

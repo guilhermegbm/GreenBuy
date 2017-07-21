@@ -213,7 +213,7 @@ public class FRMCadastrarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_tfTelKeyTyped
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        Cliente cadC = new Cliente();
+        /*Cliente cadC = new Cliente();
         
          if (tfSenha.getText().equals(tfConfSenha.getText())) {
            if ((tfNome.getText().equals(""))||(tfUsuario.getText().equals(""))||(tfSenha.getText().equals(""))||tfConfSenha.getText().equals("")||(tfTel.getText().equals(""))) {
@@ -239,7 +239,7 @@ public class FRMCadastrarCliente extends javax.swing.JFrame {
            
         } else {
             JOptionPane.showMessageDialog(null, "Senha de confirmação incorreta.");
-        }
+        }*/
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

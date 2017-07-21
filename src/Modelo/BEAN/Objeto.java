@@ -38,7 +38,7 @@ public class Objeto implements Serializable {
     private float qtdeEstoque;
     private TipoObjeto tipoObj;
     private SituacaoObj situacaoObj;
-    private SubClasse subClasse;
+    private SubGrupo subGrupo;
     private Set<ObjetoVenda> itensNaVenda = new HashSet<>();
     private Set<ObjetoFornecimento> fornecimentos = new HashSet<>();
     private Set<SaidaObjeto> saidas = new HashSet<>();
@@ -131,12 +131,12 @@ public class Objeto implements Serializable {
     
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "obj_subCodigo")
-    public SubClasse getSubClasse() {
-        return subClasse;
+    public SubGrupo getSubGrupo() {
+        return subGrupo;
     }
 
-    public void setSubClasse(SubClasse subClasse) {
-        this.subClasse = subClasse;
+    public void setSubGrupo(SubGrupo subGrupo) {
+        this.subGrupo = subGrupo;
     }
 
     @OneToMany(mappedBy = "objVen.objeto", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)

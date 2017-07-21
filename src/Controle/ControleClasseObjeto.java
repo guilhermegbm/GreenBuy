@@ -5,8 +5,8 @@
  */
 package Controle;
 
-import Modelo.BEAN.Classe;
-import Modelo.MysqlDAO.ClasseObjetoMysqlDAO;
+import Modelo.BEAN.Grupo;
+//import Modelo.MysqlDAO.ClasseObjetoMysqlDAO;
 import java.util.ArrayList;
 
 /**
@@ -14,22 +14,22 @@ import java.util.ArrayList;
  * @author Guilherme
  */
 public class ControleClasseObjeto {
-    ClasseObjetoMysqlDAO classe = new ClasseObjetoMysqlDAO();
-    
-    public boolean verifNome (String nome){
-        ArrayList<Classe> auxAL = new ArrayList<Classe>();
-        
-        auxAL = classe.listarTodos();
-        
-        for (Classe c : auxAL) {
-            if (nome.equals(c.getNome())){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public void cadastrar(String nome) {
-        classe.cadastrar(nome);
-    }
+//    ClasseObjetoMysqlDAO classe = new ClasseObjetoMysqlDAO();
+//    
+//    public boolean verifNome (String nome){
+//        ArrayList<Classe> auxAL = new ArrayList<Classe>();
+//        
+//        auxAL = classe.listarTodos();
+//        
+//        for (Grupo c : auxAL) {
+//            if (nome.equals(c.getNome())){
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+//
+//    public void cadastrar(String nome) {
+//        classe.cadastrar(nome);
+//    }
 }

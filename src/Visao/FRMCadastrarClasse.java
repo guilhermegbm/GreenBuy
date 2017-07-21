@@ -6,7 +6,7 @@
 package Visao;
 
 import Controle.ControleClasseObjeto;
-import Modelo.BEAN.Classe;
+import Modelo.BEAN.Grupo;
 import javax.swing.JOptionPane;
 
 /**
@@ -130,9 +130,9 @@ public class FRMCadastrarClasse extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ControleClasseObjeto cco = new ControleClasseObjeto();
+        /*ControleClasseObjeto cco = new ControleClasseObjeto();
         if (tfNome.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Insira o nome da Classe.");
+            JOptionPane.showMessageDialog(null, "Insira o nome da Grupo.");
         } else {
             boolean confirm = cco.verifNome(tfNome.getText());
             int opc = 1;
@@ -143,9 +143,9 @@ public class FRMCadastrarClasse extends javax.swing.JFrame {
 
             if ((confirm == false) || (opc == 0)) {
                 cco.cadastrar(tfNome.getText());
-                JOptionPane.showMessageDialog(null, "Classe cadastrada com sucesso!");
+                JOptionPane.showMessageDialog(null, "Grupo cadastrada com sucesso!");
             }
-        }
+        }*/
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

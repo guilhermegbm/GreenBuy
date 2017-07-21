@@ -28,7 +28,7 @@ public class FRMFornecedor extends javax.swing.JFrame {
     public FRMFornecedor() {
         initComponents();
 
-        dados = controleForn.listarTodos();
+        //dados = controleForn.listarTodos();
         this.preencheTabela();
     }
 
@@ -259,7 +259,7 @@ public class FRMFornecedor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        FRMEditarFornecedor edtFornecedor = new FRMEditarFornecedor();
+        /*FRMEditarFornecedor edtFornecedor = new FRMEditarFornecedor();
         int qtd = tableFornecedor.getSelectedRowCount();
         Fornecedor forn = new Fornecedor();
 
@@ -281,7 +281,7 @@ public class FRMFornecedor extends javax.swing.JFrame {
             edtFornecedor.setVisible(true);
 
             this.dispose();
-        }
+        }*/
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -297,9 +297,9 @@ public class FRMFornecedor extends javax.swing.JFrame {
             int opc = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o fornecedor " + dados.get(linha).getNome() + "?");
 
             if (opc == 0) {
-                controleForn.deletar(codigo);
+                //controleForn.deletar(codigo);
             }
-            dados = controleForn.listarTodos();
+            //dados = controleForn.listarTodos();
             this.preencheTabela();
         }
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -389,7 +389,7 @@ public class FRMFornecedor extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void preencheTabela() {
-        dTable = criaTabela();
+        /*dTable = criaTabela();
 
         dTable.addColumn("Código");
         dTable.addColumn("Nome");
@@ -414,7 +414,7 @@ public class FRMFornecedor extends javax.swing.JFrame {
         }
 
         tableFornecedor.setModel(dTable);
-
+*/
     }
 
     private DefaultTableModel criaTabela() {
@@ -444,7 +444,7 @@ public class FRMFornecedor extends javax.swing.JFrame {
     }
 
     private void localizar() {
-        if ((tfDado.getText().equals("")) || (tfDado.getText().equals("Insira o dado para pesquisa..."))) {
+        /*if ((tfDado.getText().equals("")) || (tfDado.getText().equals("Insira o dado para pesquisa..."))) {
             JOptionPane.showMessageDialog(null, "Insira algum dado para pesquisa");
         } else {
             if (cbOpc.getSelectedIndex() == 0) {
@@ -462,6 +462,6 @@ public class FRMFornecedor extends javax.swing.JFrame {
                 dados = controleForn.listarPorCNPJ(tfDado.getText());
                 this.preencheTabela();
             }
-        }
+        }*/
     }
 }

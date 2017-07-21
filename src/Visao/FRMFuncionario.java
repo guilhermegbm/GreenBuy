@@ -28,7 +28,7 @@ public class FRMFuncionario extends javax.swing.JFrame {
     public FRMFuncionario() {
         initComponents();
         
-        dados = contFun.listarTodos();
+        //dados = contFun.listarTodos();
         
         this.preencheTabela();
     }
@@ -313,9 +313,9 @@ public class FRMFuncionario extends javax.swing.JFrame {
             int opc = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o(a) funcionario(a) " + dados.get(linha).getNome() + "?");
 
             if (opc == 0) {
-                contFun.deletar(codigo);
+               // contFun.deletar(codigo);
             }
-            dados = contFun.listarTodos();
+            //dados = contFun.listarTodos();
             this.preencheTabela();
         }
     }//GEN-LAST:event_btnExcluirFuncionarioActionPerformed
@@ -385,7 +385,7 @@ public class FRMFuncionario extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void localizar() {
-        if ((tfDado.getText().equals("")) || (tfDado.getText().equals("Insira o dado para pesquisa..."))) {
+        /*if ((tfDado.getText().equals("")) || (tfDado.getText().equals("Insira o dado para pesquisa..."))) {
             JOptionPane.showMessageDialog(null, "Insira algum dado para pesquisa");
         } else {
             if (cbOpc.getSelectedIndex() == 0) {
@@ -400,7 +400,7 @@ public class FRMFuncionario extends javax.swing.JFrame {
                 dados = contFun.listarPorNome(tfDado.getText());
                 this.preencheTabela();
             }
-        }
+        }*/
     }
 
     private void preencheTabela() {

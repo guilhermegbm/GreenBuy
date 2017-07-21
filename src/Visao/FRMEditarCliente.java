@@ -221,7 +221,7 @@ public class FRMEditarCliente extends javax.swing.JFrame {
                 cli.setEmail(tfEmail.getText());
                 cli.setTelefone(tfTel.getText());
 
-                contCli.editar(cli);
+                //contCli.editar(cli);
 
                 JOptionPane.showMessageDialog(null, "Cliente editado com sucesso.");
 

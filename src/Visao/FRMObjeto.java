@@ -28,7 +28,7 @@ public class FRMObjeto extends javax.swing.JFrame {
     public FRMObjeto() {
         initComponents();
 
-        dados = controleO.listarTodos();
+        //dados = controleO.listarTodos();
 
         this.preencheTabela();
     }
@@ -277,54 +277,54 @@ public class FRMObjeto extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        int qnt = tableObjeto.getSelectedColumnCount();
-        
-        if (qnt < 1) {
-            JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para deletar.");
-        } else if (qnt > 1) {
-            JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez;");
-        } else {
-
-            int linha = tableObjeto.getSelectedRow();
-            int codigo = dados.get(linha).getCodigo();
-
-            int opc = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o objeto " + dados.get(linha).getNome() + " ?");
-
-            if (opc == 0) {
-                controleO.deletar(codigo);
-                dados = controleO.listarTodos();
-                this.preencheTabela();
-            }
-        }
+//        int qnt = tableObjeto.getSelectedColumnCount();
+//        
+//        if (qnt < 1) {
+//            JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para deletar.");
+//        } else if (qnt > 1) {
+//            JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez;");
+//        } else {
+//
+//            int linha = tableObjeto.getSelectedRow();
+//            int codigo = dados.get(linha).getCodigo();
+//
+//            int opc = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o objeto " + dados.get(linha).getNome() + " ?");
+//
+//            if (opc == 0) {
+//                //controleO.deletar(codigo);
+//                //dados = controleO.listarTodos();
+//                this.preencheTabela();
+//            }
+//        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        FRMEditarObjeto edtObj = new FRMEditarObjeto();
-        int qnt = tableObjeto.getSelectedRowCount();
-        Objeto obj = new Objeto();
-
-        if (qnt < 1) {
-            JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para editar.");
-        } else if (qnt > 1) {
-            JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez.");
-        } else {
-            int linha = tableObjeto.getSelectedRow();
-            obj.setCodigo(dados.get(linha).getCodigo());
-            obj.setNome(dados.get(linha).getNome());
-            obj.setDescricao(dados.get(linha).getDescricao());
-            obj.setPrecoVendaBase(dados.get(linha).getPrecoVendaBase());
-            obj.setPrecoCompraBase(dados.get(linha).getPrecoCompraBase());
-            obj.setUnidade(dados.get(linha).getUnidade());
-            obj.setQtdeEstoque(dados.get(linha).getQtdeEstoque());
-            obj.setTipoObj(dados.get(linha).getTipoObj());
-            obj.setSubClasse(dados.get(linha).getClasse());
-
-            edtObj.pegaObjeto(obj);
-
-            edtObj.setVisible(true);
-
-            this.setVisible(false);
-        }
+//        FRMEditarObjeto edtObj = new FRMEditarObjeto();
+//        int qnt = tableObjeto.getSelectedRowCount();
+//        Objeto obj = new Objeto();
+//
+//        if (qnt < 1) {
+//            JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para editar.");
+//        } else if (qnt > 1) {
+//            JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez.");
+//        } else {
+//            int linha = tableObjeto.getSelectedRow();
+//            obj.setCodigo(dados.get(linha).getCodigo());
+//            obj.setNome(dados.get(linha).getNome());
+//            obj.setDescricao(dados.get(linha).getDescricao());
+//            obj.setPrecoVendaBase(dados.get(linha).getPrecoVendaBase());
+//            obj.setPrecoCompraBase(dados.get(linha).getPrecoCompraBase());
+//            obj.setUnidade(dados.get(linha).getUnidade());
+//            obj.setQtdeEstoque(dados.get(linha).getQtdeEstoque());
+//            obj.setTipoObj(dados.get(linha).getTipoObj());
+//            //obj.setSubClasse(dados.get(linha).getClasse());
+//
+//            edtObj.pegaObjeto(obj);
+//
+//            edtObj.setVisible(true);
+//
+//            this.setVisible(false);
+//        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void tfDadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfDadoKeyTyped
@@ -398,7 +398,7 @@ public class FRMObjeto extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void preencheTabela() {
-        dTable = criaTabela();
+        /*dTable = criaTabela();
 
         dTable.addColumn("Código");
         dTable.addColumn("Nome");
@@ -423,10 +423,10 @@ public class FRMObjeto extends javax.swing.JFrame {
                 dado.getClasse().getNome(), dado.getUnidade()});
         }
 
-        tableObjeto.setModel(dTable);
+        tableObjeto.setModel(dTable);*/
     }
 
-    private DefaultTableModel criaTabela() {
+    /*private DefaultTableModel criaTabela() {
 
         DefaultTableModel dTable = new DefaultTableModel() {
             //Define o tipo dos campos (coluna) na mesma ordem que as colunas foram criadas
@@ -454,10 +454,10 @@ public class FRMObjeto extends javax.swing.JFrame {
         };
         //retorna o DefaultTableModel
     return dTable;
-    }
+    }*/
 
     private void localizar() {
-        if ((tfDado.getText().equals("")) || (tfDado.getText().equals("Insira o dado para pesquisa..."))) {
+        /*if ((tfDado.getText().equals("")) || (tfDado.getText().equals("Insira o dado para pesquisa..."))) {
             JOptionPane.showMessageDialog(null, "Insira algum dado para pesquisa.");
         } else {
             if (cbOpc.getSelectedIndex() == 0) {
@@ -502,6 +502,6 @@ public class FRMObjeto extends javax.swing.JFrame {
                 //    JOptionPane.showMessageDialog(null, "Para pesquisar por valor, apenas números, vírgula ou ponto devem ser inseridos");
                 //}
             }
-        }
+        }*/
     }
 }

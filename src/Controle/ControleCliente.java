@@ -6,7 +6,7 @@
 package Controle;
 
 import Modelo.BEAN.Cliente;
-import Modelo.MysqlDAO.ClienteMysqlDAO;
+//import Modelo.MysqlDAO.ClienteMysqlDAO;
 import java.util.ArrayList;
 
 /**
@@ -14,29 +14,29 @@ import java.util.ArrayList;
  * @author Isabella
  */
 public class ControleCliente {
-    ClienteMysqlDAO objClienteDAO = new ClienteMysqlDAO();
-    /*pra chamar o metodo cadatrar que está em modlo:
-    
-    */
-    public void cadastrar(Cliente cliente) {                
-        objClienteDAO.cadastrar(cliente);
-    }
-    public ArrayList<Cliente> listarALL () {
-        return objClienteDAO.listarTodos();
-    }
-    public void remover (int cliCodigo) {
-        objClienteDAO.remover(cliCodigo);
-    }
-
-    public ArrayList<Cliente> listarPorCodigo(int cod) {
-        return objClienteDAO.localizarCodigo(cod);
-    }
-    
-    public ArrayList<Cliente> listarPorNome(String nome) {
-        return objClienteDAO.localizarNome(nome);
-    }
-
-    public void editar(Cliente cli) {
-        objClienteDAO.editar(cli);
-    }
+//    ClienteMysqlDAO objClienteDAO = new ClienteMysqlDAO();
+//    /*pra chamar o metodo cadatrar que está em modlo:
+//    
+//    */
+//    public void cadastrar(Cliente cliente) {                
+//        objClienteDAO.cadastrar(cliente);
+//    }
+//    public ArrayList<Cliente> listarALL () {
+//        return objClienteDAO.listarTodos();
+//    }
+//    public void remover (int cliCodigo) {
+//        objClienteDAO.remover(cliCodigo);
+//    }
+//
+//    public ArrayList<Cliente> listarPorCodigo(int cod) {
+//        return objClienteDAO.localizarCodigo(cod);
+//    }
+//    
+//    public ArrayList<Cliente> listarPorNome(String nome) {
+//        return objClienteDAO.localizarNome(nome);
+//    }
+//
+//    public void editar(Cliente cli) {
+//        objClienteDAO.editar(cli);
+//    }
 }

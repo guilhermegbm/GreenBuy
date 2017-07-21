@@ -24,7 +24,7 @@ import javax.persistence.Transient;
     @AssociationOverride(name = "objFor.fornecimento",
             joinColumns = @JoinColumn(name = "obf_frnCodigo")),
     @AssociationOverride(name = "objFor.objeto",
-            joinColumns = @JoinColumn(name = "obf_frnCodigo"))
+            joinColumns = @JoinColumn(name = "obf_objCodigo"))
 })
 public class ObjetoFornecimento {
     private ObjetoFornecimentoId objFor;

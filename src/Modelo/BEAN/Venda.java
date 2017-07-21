@@ -5,17 +5,14 @@
  */
 package Modelo.BEAN;
 
-import Jpa.JpaUtil;
 import Modelo.BEAN.Objeto.TipoObjeto;
 import java.io.Serializable;
-import java.sql.Time;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityManager;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
@@ -31,10 +28,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.Root;
 
 /**
  *
@@ -51,7 +44,7 @@ public class Venda implements Serializable {
     private Situacao situacao;
     private Cliente cliente;
     private Funcionario funcionario;
-    private FormaPagamento formaPagamento;
+    private FormasDePagamento formaPagamento;
     private Set<ObjetoVenda> itensDaVenda = new HashSet<>();
     private float valorTotal;
 
@@ -114,6 +107,16 @@ public class Venda implements Serializable {
         this.situacao = situacao;
     }
 
+    @Column(name = "venFormaPagamento")
+    @Enumerated(EnumType.STRING)
+    public FormasDePagamento getFormaPagamento() {
+        return formaPagamento;
+    }
+
+    public void setFormaPagamento(FormasDePagamento formaPagamento) {
+        this.formaPagamento = formaPagamento;
+    }
+    
     @ManyToOne(optional = false)
     @JoinColumn(name = "ven_cliCodigo")
     public Cliente getCliente() {
@@ -134,16 +137,6 @@ public class Venda implements Serializable {
         this.funcionario = funcionario;
     }
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "ven_fpaCodigo")
-    public FormaPagamento getFormaPagamento() {
-        return formaPagamento;
-    }
-
-    public void setFormaPagamento(FormaPagamento formaPagamento) {
-        this.formaPagamento = formaPagamento;
-    }
-
     @OneToMany(mappedBy = "objVen.venda", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public Set<ObjetoVenda> getItensDaVenda() {
         return itensDaVenda;
@@ -157,13 +150,19 @@ public class Venda implements Serializable {
         NAOPAGO,
         PAGO
     }
+    
+    public enum FormasDePagamento {
+        DINHEIRO,
+        CARTAO,
+        CHEQUE,
+        NAOPAGO
+    }
 
     @Transient
     public float getValorTotal() {
         return valorTotal;
     }
     
-    @PostPersist
     @PostLoad
     @PostUpdate
     public void setValorTotal(){

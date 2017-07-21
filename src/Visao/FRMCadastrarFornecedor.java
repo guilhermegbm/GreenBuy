@@ -225,7 +225,7 @@ public class FRMCadastrarFornecedor extends javax.swing.JFrame {
         if (((rbEmpresa.isSelected() == true) && (tfCNPJ.getText().equals("  .   .   /    -  "))) || ((rbPessoa.isSelected() == true) && (tfCPF.getText().equals("   .   .   -  "))) || (tfNome.getText().equals(""))|| (tfTelefone.getText().equals("(  )     -    "))){
             JOptionPane.showMessageDialog(null, "Todos os dados devem estar preenchidos");
         } else {
-            Fornecedor forn = new Fornecedor();
+            /*Fornecedor forn = new Fornecedor();
             
             forn.setNome(tfNome.getText());
             forn.setTelefone(tfTelefone.getText());
@@ -245,7 +245,7 @@ public class FRMCadastrarFornecedor extends javax.swing.JFrame {
             tfCNPJ.setText("");
             tfCPF.setText("");
             tfNome.setText("");
-            tfTelefone.setText("");
+            tfTelefone.setText("");*/
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

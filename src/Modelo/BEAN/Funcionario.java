@@ -36,6 +36,7 @@ public class Funcionario implements Serializable {
     private String login;
     private String senha;
     private String telefone;
+    private boolean administrador;
     private Cargo cargo;
     private Set<Venda> vendas = new HashSet<>();
 
@@ -112,6 +113,15 @@ public class Funcionario implements Serializable {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    @Column(name = "funAdministrador", nullable = false)
+    public boolean isAdministrador() {
+        return administrador;
+    }
+
+    public void setAdministrador(boolean administrador) {
+        this.administrador = administrador;
     }
 
     @ManyToOne(optional = false)

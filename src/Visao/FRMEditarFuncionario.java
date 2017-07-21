@@ -28,7 +28,7 @@ public class FRMEditarFuncionario extends javax.swing.JFrame {
      */
     public FRMEditarFuncionario() {
         initComponents();
-        cargoAL = conC.listarTodos();
+        //cargoAL = conC.listarTodos();
         this.preencheCB();
     }
 
@@ -278,7 +278,7 @@ public class FRMEditarFuncionario extends javax.swing.JFrame {
                     }
                 }
 
-                conF.editar(fun);
+                //conF.editar(fun);
 
                 JOptionPane.showMessageDialog(null, "Fornecedor editado com sucesso.");
 

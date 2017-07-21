@@ -11,11 +11,11 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -24,15 +24,15 @@ import javax.persistence.Table;
  * @author Guilherme
  */
 @Entity
-@Table(name = "formaPagamento")
-public class FormaPagamento implements Serializable {
+@Table(name = "grupo")
+public class Grupo implements Serializable {
     private int codigo;
-    private FormasDePagamento nome;
-    private Set<Venda> vendas = new HashSet<>();
+    private String nome;
+    private Set<SubGrupo> subClasses = new HashSet<>();
 
     @Id
     @GeneratedValue
-    @Column(name = "fpaCodigo")
+    @Column(name = "gruCodigo")
     public int getCodigo() {
         return codigo;
     }
@@ -40,31 +40,23 @@ public class FormaPagamento implements Serializable {
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
-    
-    @Column(name = "fpaNome", length = 20, nullable = false)
-    @Enumerated(EnumType.STRING)
-    public FormasDePagamento getNome() {
+
+    @Column(name = "gruNome", length = 40, nullable = false)
+    public String getNome() {
         return nome;
     }
 
-    public void setNome(FormasDePagamento nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
-    @OneToMany(mappedBy = "formaPagamento", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    public Set<Venda> getVendas() {
-        return vendas;
+    @OneToMany(mappedBy = "grupo", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    public Set<SubGrupo> getSubClasses() {
+        return subClasses;
     }
 
-    public void setVendas(Set<Venda> vendas) {
-        this.vendas = vendas;
+    public void setSubClasses(Set<SubGrupo> subClasses) {
+        this.subClasses = subClasses;
     }
-    
-    public enum FormasDePagamento {
-        DINHEIRO,
-        CARTAO,
-        CHEQUE,
-        NAOPAGO
-    }
-    
+
 }

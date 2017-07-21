@@ -30,7 +30,7 @@ public class FRMCliente extends javax.swing.JFrame {
         initComponents();
         cliCont = new ControleCliente();
         
-        dados = cliCont.listarALL();
+        //dados = cliCont.listarALL();
         
         this.preencheTabela();
     }
@@ -309,9 +309,9 @@ public class FRMCliente extends javax.swing.JFrame {
             int opc = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o(a) cliente " + dados.get(linha).getNome() + "?");
 
             if (opc == 0) {
-                cliCont.remover(codigo);
+                //cliCont.remover(codigo);
             }
-            dados = cliCont.listarALL();
+            //dados = cliCont.listarALL();
             this.preencheTabela();
         }
     }//GEN-LAST:event_btnExcluirClienteActionPerformed
@@ -412,14 +412,14 @@ public class FRMCliente extends javax.swing.JFrame {
         } else {
             if (cbOpc.getSelectedIndex() == 0) {
                 //if (tfDado.getText().contains("0123456789")) {
-                    dados = cliCont.listarPorCodigo(Integer.parseInt(tfDado.getText()));
+                    //dados = cliCont.listarPorCodigo(Integer.parseInt(tfDado.getText()));
                     this.preencheTabela();
                     
                 //} else {
                 //    JOptionPane.showMessageDialog(null, "Para pesquisar por código, apenas inteiros devem ser inseridos");
                 //}
             } else if (cbOpc.getSelectedIndex() == 1) {
-                dados = cliCont.listarPorNome(tfDado.getText());
+                //dados = cliCont.listarPorNome(tfDado.getText());
                 this.preencheTabela();
             }
         }

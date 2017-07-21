@@ -222,7 +222,7 @@ public class FRMEditarFornecedor extends javax.swing.JFrame {
         if (((rbEmpresa.isSelected() == true) && (tfCNPJ.getText().equals("  .   .   /    -  "))) || ((rbPessoa.isSelected() == true) && (tfCPF.getText().equals("   .   .   -  "))) || (tfNome.getText().equals(""))|| (tfTelefone.getText().equals("(  )     -    "))){
             JOptionPane.showMessageDialog(null, "Todos os dados devem estar preenchidos");
         } else {
-            forn.setCodigo(fornecedorbean.getCodigo());
+            /*forn.setCodigo(fornecedorbean.getCodigo());
             
             forn.setNome(tfNome.getText());
             forn.setTelefone(tfTelefone.getText());
@@ -241,7 +241,7 @@ public class FRMEditarFornecedor extends javax.swing.JFrame {
             
             JOptionPane.showMessageDialog(null, "Fornecedor editado com sucesso.");
             
-            this.mudaFrame();
+            this.mudaFrame();*/
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -370,7 +370,7 @@ public class FRMEditarFornecedor extends javax.swing.JFrame {
     }
 
     private void preencheDados() {
-        
+        /*
         tfCPF.setText(fornecedorbean.getCpf());
         tfNome.setText(fornecedorbean.getNome());
         tfTelefone.setText(fornecedorbean.getTelefone());
@@ -382,7 +382,7 @@ public class FRMEditarFornecedor extends javax.swing.JFrame {
         } else if (fornecedorbean.getTipo() == 2){
             rbPessoa.setSelected(true);
             rbPessoa.doClick();
-        }
+        }*/
     }
 
     private void mudaFrame() {
