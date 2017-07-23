@@ -5,10 +5,34 @@
  */
 package Controle;
 
+import Modelo.BEAN.Saida;
+import Modelo.SQL.SaidaSql;
+import java.util.Set;
+import javax.persistence.PersistenceException;
+
 /**
  *
  * @author Guilherme
  */
 public class ControleSaida {
     
+    public static void insereSaidaEItens(Saida s) throws PersistenceException {
+        SaidaSql.insereSaidaEItens(s);
+    }
+    
+    public static void editaSaida(Saida s) throws RuntimeException {
+        SaidaSql.editaSaida(s);
+    }
+    
+    public static void deletaSaida(Saida s) throws RuntimeException {
+        SaidaSql.deletaSaida(s);
+    }
+    
+    public Set listarTodos() throws RuntimeException {
+        return SaidaSql.listarTodos();
+    }
+    
+    public static Saida listarSaidaPorCodigo(int codigo) throws RuntimeException {
+        return SaidaSql.listarSaidaPorCodigo(codigo);
+    }
 }

@@ -6,37 +6,33 @@
 package Controle;
 
 import Modelo.BEAN.Cliente;
-//import Modelo.MysqlDAO.ClienteMysqlDAO;
-import java.util.ArrayList;
+import Modelo.SQL.ClienteSql;
+import java.util.Set;
+import javax.persistence.PersistenceException;
 
 /**
  *
- * @author Isabella
+ * @author Guilherme
  */
 public class ControleCliente {
-//    ClienteMysqlDAO objClienteDAO = new ClienteMysqlDAO();
-//    /*pra chamar o metodo cadatrar que está em modlo:
-//    
-//    */
-//    public void cadastrar(Cliente cliente) {                
-//        objClienteDAO.cadastrar(cliente);
-//    }
-//    public ArrayList<Cliente> listarALL () {
-//        return objClienteDAO.listarTodos();
-//    }
-//    public void remover (int cliCodigo) {
-//        objClienteDAO.remover(cliCodigo);
-//    }
-//
-//    public ArrayList<Cliente> listarPorCodigo(int cod) {
-//        return objClienteDAO.localizarCodigo(cod);
-//    }
-//    
-//    public ArrayList<Cliente> listarPorNome(String nome) {
-//        return objClienteDAO.localizarNome(nome);
-//    }
-//
-//    public void editar(Cliente cli) {
-//        objClienteDAO.editar(cli);
-//    }
+    
+    public static void insereCliente(Cliente c) throws PersistenceException {
+        ClienteSql.insereCliente(c);
+    }
+    
+    public static void editaCliente(Cliente c) throws RuntimeException {
+        ClienteSql.editaCliente(c);
+    }
+    
+    public static void deletaCliente(Cliente c) throws RuntimeException {
+        ClienteSql.deletaCliente(c);
+    }
+    
+    public static Set<Cliente> listarTodos() throws RuntimeException {
+        return ClienteSql.listarTodos();
+    }
+    
+    public static Set<Cliente> listarTudoTodosOuPorCodigo(int codigo) throws RuntimeException {
+        return ClienteSql.listarTudoTodosOuPorCodigo(codigo);
+    }
 }

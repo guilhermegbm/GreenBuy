@@ -6,30 +6,34 @@
 package Controle;
 
 import Modelo.BEAN.Grupo;
-//import Modelo.MysqlDAO.ClasseObjetoMysqlDAO;
-import java.util.ArrayList;
+import Modelo.SQL.GrupoSql;
+import java.util.Set;
+import javax.persistence.PersistenceException;
+
 
 /**
  *
  * @author Guilherme
  */
 public class ControleGrupo {
-//    ClasseObjetoMysqlDAO classe = new ClasseObjetoMysqlDAO();
-//    
-//    public boolean verifNome (String nome){
-//        ArrayList<Classe> auxAL = new ArrayList<Classe>();
-//        
-//        auxAL = classe.listarTodos();
-//        
-//        for (Grupo c : auxAL) {
-//            if (nome.equals(c.getNome())){
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-//
-//    public void cadastrar(String nome) {
-//        classe.cadastrar(nome);
-//    }
+     
+    public static void insereGrupo(Grupo g) throws PersistenceException {
+        GrupoSql.insereGrupo(g);
+    }
+    
+    public static void editaGrupo(Grupo g) throws RuntimeException {
+        GrupoSql.editaGrupo(g);
+    }
+    
+    public static void deletaGrupo(Grupo g) throws RuntimeException {
+        GrupoSql.deletaGrupo(g);
+    }
+    
+    public Set<Grupo> listarTodos() throws RuntimeException {
+        return GrupoSql.listarTodos();
+    }
+    
+    public static Set<Grupo> listarTudoTodosOuPorCodigo(int codigo) throws RuntimeException {
+        return GrupoSql.listarTudoTodosOuPorCodigo(codigo);
+    }
 }

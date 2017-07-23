@@ -70,7 +70,7 @@ public class ClienteSql {
 
     }
 
-    public Set<Cliente> listarTodos() throws RuntimeException {
+    public static Set<Cliente> listarTodos() throws RuntimeException {
         EntityManager manager = JpaUtil.getEntityManager();
 
         try {

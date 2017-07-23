@@ -5,41 +5,35 @@
  */
 package Controle;
 
-import Modelo.BEAN.Cargo;
 import Modelo.BEAN.Funcionario;
-//import Modelo.MysqlDAO.FuncionarioMysqlDAO;
-import java.util.ArrayList;
+import Modelo.SQL.FuncionarioSql;
+import java.util.Set;
+import javax.persistence.PersistenceException;
+
 
 /**
  *
- * @author Isabella
+ * @author Guilherme
  */
 public class ControleFuncionario {
-//   FuncionarioMysqlDAO funcionario = new FuncionarioMysqlDAO();
     
-    /*pra chamar o metodo cadatrar que está em modlo:
+    public static void insereFuncionario(Funcionario f) throws PersistenceException {
+        FuncionarioSql.insereFuncionario(f);
+    }
     
-    */
-//    public void cadastrar(Funcionario f) {                
-//        funcionario.cadastrar(f);
-//    }
-//    public ArrayList<Funcionario> listarTodos () {
-//        return funcionario.listarTodos();
-//    }
-//    
-//    public void editar (Funcionario f){
-//        funcionario.editar(f);
-//    }
-//    
-//    public ArrayList<Funcionario> listarPorCodigo (int codigo) {
-//        return funcionario.listarPorCodigo(codigo);
-//    }
-//    
-//    public ArrayList<Funcionario> listarPorNome (String nome) {
-//        return funcionario.listarPorNome(nome);
-//    }
-//
-//    public void deletar(int codigo) {
-//        funcionario.deletar(codigo);
-//    }
+    public static void editaFuncionario(Funcionario f) throws RuntimeException {
+        FuncionarioSql.editaFuncionario(f);
+    }
+    
+    public static void deletaFuncionario(Funcionario f) throws RuntimeException {
+        FuncionarioSql.deletaFuncionario(f);
+    }
+    
+    public static Set<Funcionario> listarTodos() throws RuntimeException {
+        return FuncionarioSql.listarTodos();
+    }
+    
+    public static Set<Funcionario> listarTudoTodosOuPorCodigo(int codigo) {
+        return FuncionarioSql.listarTudoTodosOuPorCodigo(codigo);
+    }
 }

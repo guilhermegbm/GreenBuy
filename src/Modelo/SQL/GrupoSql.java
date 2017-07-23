@@ -70,7 +70,7 @@ public class GrupoSql {
 
     }
 
-    public Set<Grupo> listarTodos() throws RuntimeException {
+    public static Set<Grupo> listarTodos() throws RuntimeException {
         EntityManager manager = JpaUtil.getEntityManager();
 
         try {

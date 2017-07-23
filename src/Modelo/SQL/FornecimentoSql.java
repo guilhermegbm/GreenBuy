@@ -69,7 +69,7 @@ public class FornecimentoSql {
 
     }
 
-    public Set<Fornecimento> listarTodos() throws RuntimeException {
+    public static Set<Fornecimento> listarTodos() throws RuntimeException {
         EntityManager manager = JpaUtil.getEntityManager();
 
         try {

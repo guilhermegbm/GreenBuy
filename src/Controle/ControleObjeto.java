@@ -6,70 +6,33 @@
 package Controle;
 
 import Modelo.BEAN.Objeto;
-import java.util.ArrayList;
+import Modelo.SQL.ObjetoSql;
+import java.util.Set;
+import javax.persistence.PersistenceException;
 
 /**
  *
- * @author Henrique
+ * @author Guilherme
  */
 public class ControleObjeto {
-//    ObjetoMysqlDAO Objeto = new ObjetoMysqlDAO();
-//    
-//    public boolean verifCodigo(int codigo){
-//        ArrayList<Objeto> auxAL = Objeto.listarTodos();
-//        
-//        for (Objeto produto : auxAL) {
-//            if (codigo == produto.getCodigo()){
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-//    
-//    public ArrayList<Objeto> listarTodos(){
-//        ArrayList<Objeto> auxAL = Objeto.listarTodos();
-//        return auxAL;
-//    }
-//
-//    public ArrayList<Objeto> listarPorCodigo(int codigo) {
-//        return Objeto.listarPorCodigo(codigo);
-//    }
-//
-//    public void cadastrar(Objeto prod) {
-//        Objeto.cadastrar(prod);
-//    }
-//
-//    public void deletar(int codigo) {
-//        Objeto.deletar(codigo);
-//    }
-//
-//    public void editar(Objeto prod) {
-//        Objeto.editar(prod);
-//    }
-//
-//    public ArrayList<Objeto> listarPorNome(String prodN) {
-//        return Objeto.listarPorNome(prodN);
-//    }
-//
-//    public ArrayList<Objeto> listarPorValorMenor(float menValor) {
-//        ArrayList<Objeto> auxAL = Objeto.listarPorMenorValor(menValor);
-//        return auxAL;
-//    }
-//
-//    public ArrayList<Objeto> listarPorValorMaior(float maiValor) {
-//        ArrayList<Objeto> auxAL = Objeto.listarPorMaiorValor(maiValor);
-//        return auxAL;
-//    }
-//
-//    public boolean verifNome(String nomeP) {
-//        ArrayList<Objeto> auxAL = Objeto.listarTodos();
-//        
-//        for (Objeto prod : auxAL) {
-//            if (prod.getNome().equals(nomeP)){
-//                return true;
-//            }
-//        }
-//        
-//        return false;
-//    }
+    
+    public static void insereObjeto(Objeto o) throws PersistenceException {
+        ObjetoSql.insereObjeto(o);
+    }
+    
+    public static void editaObjeto(Objeto o) throws RuntimeException {
+        ObjetoSql.editaObjeto(o);
+    }
+    
+    public static void deletaObjeto(Objeto o) throws RuntimeException {
+        ObjetoSql.deletaObjeto(o);
+    }
+    
+    public static Set<Objeto> listarTodos() throws RuntimeException {
+        return ObjetoSql.listarTodos();
+    }
+    
+    public static Set<Objeto> listarObjetoPorCodigo(int codigo) throws RuntimeException {
+        return ObjetoSql.listarObjetoPorCodigo(codigo);
+    }
 }

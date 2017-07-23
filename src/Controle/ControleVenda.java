@@ -5,10 +5,34 @@
  */
 package Controle;
 
+import Modelo.BEAN.Venda;
+import Modelo.SQL.VendaSql;
+import java.util.Set;
+import javax.persistence.PersistenceException;
+
 /**
  *
  * @author Guilherme
  */
 public class ControleVenda {
     
+    public static void insereVendaEItens(Venda v) throws PersistenceException {
+        VendaSql.insereVendaEItens(v);
+    }
+    
+    public static void editaVenda(Venda v) throws RuntimeException {
+        VendaSql.editaVenda(v);
+    }
+    
+    public static void deletaVenda(Venda v) throws RuntimeException {
+        VendaSql.deletaVenda(v);
+    }
+    
+    public static Set<Venda> listarTodos() {
+        return VendaSql.listarTodos();
+    }
+    
+    public static Venda listarVendaPorCodigo(int codigo) {
+        return VendaSql.listarVendaPorCodigo(codigo);
+    }
 }

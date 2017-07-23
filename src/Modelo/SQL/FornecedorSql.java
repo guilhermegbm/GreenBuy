@@ -71,7 +71,7 @@ public class FornecedorSql {
 
     }
 
-    public Set<Fornecedor> listarTodos() throws RuntimeException {
+    public static Set<Fornecedor> listarTodos() throws RuntimeException {
         EntityManager manager = JpaUtil.getEntityManager();
 
         try {

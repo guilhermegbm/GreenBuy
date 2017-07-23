@@ -12,7 +12,6 @@ import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 /**
@@ -71,7 +70,7 @@ public class SubGrupoSql {
 
     }
 
-    public Set listarTodos() throws RuntimeException {
+    public static Set<SubGrupo> listarTodos() throws RuntimeException {
         EntityManager manager = JpaUtil.getEntityManager();
 
         try {
@@ -82,7 +81,7 @@ public class SubGrupoSql {
 
     }
 
-    public static Set<SubGrupo> listarTudoTodos(int codigo) throws RuntimeException {
+    public static Set<SubGrupo> listarTudoTodosOuPorCodigo(int codigo) throws RuntimeException {
         EntityManager manager = JpaUtil.getEntityManager();
 
         try {

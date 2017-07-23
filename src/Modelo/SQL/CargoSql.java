@@ -11,7 +11,6 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import javax.persistence.NamedQuery;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 

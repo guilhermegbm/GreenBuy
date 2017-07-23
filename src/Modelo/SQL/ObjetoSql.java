@@ -24,16 +24,15 @@ public class ObjetoSql {
         EntityTransaction tx = manager.getTransaction();
 
         try {
+            tx.begin();
 
+            manager.persist(o);
+
+            tx.commit();
         } finally {
-
+            manager.close();
         }
-        tx.begin();
 
-        manager.persist(o);
-
-        tx.commit();
-        manager.close();
     }
 
     public static void editaObjeto(Objeto o) throws RuntimeException {
@@ -70,7 +69,7 @@ public class ObjetoSql {
 
     }
 
-    public Set<Objeto> listarTodos() throws RuntimeException {
+    public static Set<Objeto> listarTodos() throws RuntimeException {
         EntityManager manager = JpaUtil.getEntityManager();
 
         try {

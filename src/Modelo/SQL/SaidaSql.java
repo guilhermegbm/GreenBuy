@@ -68,7 +68,7 @@ public class SaidaSql {
 
     }
 
-    public Set listarTodos() throws RuntimeException {
+    public static Set<Saida> listarTodos() throws RuntimeException {
         EntityManager manager = JpaUtil.getEntityManager();
 
         try {

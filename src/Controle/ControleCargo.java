@@ -6,16 +6,32 @@
 package Controle;
 
 import Modelo.BEAN.Cargo;
-import java.util.ArrayList;
+import Modelo.SQL.CargoSql;
+import java.util.Set;
 
 /**
  *
- * @author Isabella
+ * @author Guilherme
  */
 public class ControleCargo {
     
+    public static void insereCargo (Cargo c){
+        CargoSql.insereCargo(c);
+    }
     
-//    public ArrayList<Cargo> listarTodos (){
-//        return cargo.listarTodos();
-//    }
+    public static void editaCargo(Cargo c) throws RuntimeException {
+        CargoSql.editaCargo(c);
+    }
+    
+    public static void deletaCargo(Cargo c) throws RuntimeException {
+        CargoSql.deletaCargo(c);
+    }
+    
+    public static Set<Cargo> listarTodos() throws RuntimeException {
+        return CargoSql.listarTodos();
+    }
+    
+    public static Set<Cargo> listarTudoTodosOuPorCodigo(int codigo) throws RuntimeException {
+        return CargoSql.listarTudoTodosOuPorCodigo(codigo);
+    }
 }

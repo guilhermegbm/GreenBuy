@@ -70,7 +70,7 @@ public class FuncionarioSql {
 
     }
 
-    public Set<Funcionario> listarTodos() throws RuntimeException {
+    public static Set<Funcionario> listarTodos() throws RuntimeException {
         EntityManager manager = JpaUtil.getEntityManager();
 
         try {

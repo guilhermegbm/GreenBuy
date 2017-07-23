@@ -67,8 +67,8 @@ public class VendaSql {
         }
 
     }
-    
-    public Set listarTodos (){
+
+    public static Set<Venda> listarTodos() {
         EntityManager manager = JpaUtil.getEntityManager();
 
         try {
@@ -78,10 +78,10 @@ public class VendaSql {
         }
 
     }
-    
-    public static Venda listarVendaPorCodigo(int codigo){
+
+    public static Venda listarVendaPorCodigo(int codigo) {
         EntityManager manager = JpaUtil.getEntityManager();
-        
+
         try {
             return manager.find(Venda.class, codigo);
         } finally {
