@@ -28,7 +28,7 @@ import javax.persistence.Table;
 public class Grupo implements Serializable {
     private int codigo;
     private String nome;
-    private Set<SubGrupo> subClasses = new HashSet<>();
+    private Set<SubGrupo> subGrupos = new HashSet<>();
 
     @Id
     @GeneratedValue
@@ -51,12 +51,12 @@ public class Grupo implements Serializable {
     }
 
     @OneToMany(mappedBy = "grupo", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    public Set<SubGrupo> getSubClasses() {
-        return subClasses;
+    public Set<SubGrupo> getSubGrupos() {
+        return subGrupos;
     }
 
-    public void setSubClasses(Set<SubGrupo> subClasses) {
-        this.subClasses = subClasses;
+    public void setSubGrupos(Set<SubGrupo> subGrupos) {
+        this.subGrupos = subGrupos;
     }
 
 }

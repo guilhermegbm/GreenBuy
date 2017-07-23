@@ -137,7 +137,7 @@ public class Venda implements Serializable {
         this.funcionario = funcionario;
     }
 
-    @OneToMany(mappedBy = "objVen.venda", fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "objVen.venda", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public Set<ObjetoVenda> getItensDaVenda() {
         return itensDaVenda;
     }

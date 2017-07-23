@@ -100,7 +100,7 @@ public class Fornecimento implements Serializable {
         this.fornecedor = fornecedor;
     }
 
-    @OneToMany(mappedBy = "objFor.fornecimento", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "objFor.fornecimento", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public Set<ObjetoFornecimento> getObjetosNoFornecimento() {
         return objetosNoFornecimento;
     }
