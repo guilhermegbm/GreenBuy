@@ -7,6 +7,7 @@ package Controle;
 
 import Modelo.BEAN.Grupo;
 import Modelo.SQL.GrupoSql;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.PersistenceException;
 
@@ -29,11 +30,11 @@ public class ControleGrupo {
         GrupoSql.deletaGrupo(g);
     }
     
-    public Set<Grupo> listarTodos() throws RuntimeException {
+    public List<Grupo> listarTodos() throws RuntimeException {
         return GrupoSql.listarTodos();
     }
     
-    public static Set<Grupo> listarTudoTodosOuPorCodigo(int codigo) throws RuntimeException {
+    public static List<Grupo> listarTudoTodosOuPorCodigo(int codigo) throws RuntimeException {
         return GrupoSql.listarTudoTodosOuPorCodigo(codigo);
     }
 }

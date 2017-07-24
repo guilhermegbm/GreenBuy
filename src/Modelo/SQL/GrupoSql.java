@@ -7,7 +7,9 @@ package Modelo.SQL;
 
 import Jpa.JpaUtil;
 import Modelo.BEAN.Grupo;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -70,18 +72,19 @@ public class GrupoSql {
 
     }
 
-    public static Set<Grupo> listarTodos() throws RuntimeException {
+    public static List<Grupo> listarTodos() throws RuntimeException {
         EntityManager manager = JpaUtil.getEntityManager();
 
         try {
-            return (Set<Grupo>) manager.createQuery("from Grupo", Grupo.class);
+            TypedQuery<Grupo> tq = manager.createQuery("from Grupo", Grupo.class);
+            return tq.getResultList();
         } finally {
             manager.close();
         }
 
     }
 
-    public static Set<Grupo> listarTudoTodosOuPorCodigo(int codigo) throws RuntimeException {
+    public static List<Grupo> listarTudoTodosOuPorCodigo(int codigo) throws RuntimeException {
         EntityManager manager = JpaUtil.getEntityManager();
 
         try {
@@ -90,9 +93,9 @@ public class GrupoSql {
                 TypedQuery<Grupo> query = manager.createQuery("select g "
                         + "select distinct g from Grupo g left join fetch g.subGrupos", Grupo.class);
 
-                return (Set<Grupo>) query.getResultList();
+                return query.getResultList();
             } else {
-                Set<Grupo> s = new HashSet();
+                List<Grupo> s = new ArrayList<>();
                 s.add(manager.find(Grupo.class, codigo));
                 return s;
             }

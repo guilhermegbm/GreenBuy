@@ -7,6 +7,7 @@ package Controle;
 
 import Modelo.BEAN.Objeto;
 import Modelo.SQL.ObjetoSql;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.PersistenceException;
 
@@ -28,11 +29,11 @@ public class ControleObjeto {
         ObjetoSql.deletaObjeto(o);
     }
     
-    public static Set<Objeto> listarTodos() throws RuntimeException {
+    public static List<Objeto> listarTodos() throws RuntimeException {
         return ObjetoSql.listarTodos();
     }
     
-    public static Set<Objeto> listarObjetoPorCodigo(int codigo) throws RuntimeException {
+    public static List<Objeto> listarObjetoPorCodigo(int codigo) throws RuntimeException {
         return ObjetoSql.listarObjetoPorCodigo(codigo);
     }
 }

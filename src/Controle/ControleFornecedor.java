@@ -7,6 +7,7 @@ package Controle;
 
 import Modelo.BEAN.Fornecedor;
 import Modelo.SQL.FornecedorSql;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.PersistenceException;
 
@@ -28,11 +29,11 @@ public class ControleFornecedor {
         FornecedorSql.deletaFornecedor(f);
     }
     
-    public Set<Fornecedor> listarTodos() throws RuntimeException {
+    public List<Fornecedor> listarTodos() throws RuntimeException {
         return FornecedorSql.listarTodos();
     }
     
-    public static Set<Fornecedor> listarTudoTodosOuPorCodigo(int codigo) throws RuntimeException {
+    public static List<Fornecedor> listarTudoTodosOuPorCodigo(int codigo) throws RuntimeException {
         return FornecedorSql.listarTudoTodosOuPorCodigo(codigo);
     }
 }

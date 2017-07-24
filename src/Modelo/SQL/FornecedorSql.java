@@ -8,7 +8,9 @@ package Modelo.SQL;
 import Jpa.JpaUtil;
 import Modelo.BEAN.Fornecedor;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -71,18 +73,19 @@ public class FornecedorSql {
 
     }
 
-    public static Set<Fornecedor> listarTodos() throws RuntimeException {
+    public static List<Fornecedor> listarTodos() throws RuntimeException {
         EntityManager manager = JpaUtil.getEntityManager();
 
         try {
-            return (Set<Fornecedor>) manager.createQuery("from Fornecedor", Fornecedor.class);
+            TypedQuery tq = manager.createQuery("from Fornecedor", Fornecedor.class);
+            return tq.getResultList();
         } finally {
             manager.close();
         }
 
     }
 
-    public static Set<Fornecedor> listarTudoTodosOuPorCodigo(int codigo) throws RuntimeException {
+    public static List<Fornecedor> listarTudoTodosOuPorCodigo(int codigo) throws RuntimeException {
         EntityManager manager = JpaUtil.getEntityManager();
 
         try {
@@ -91,9 +94,9 @@ public class FornecedorSql {
                 TypedQuery<Fornecedor> query = manager.createQuery("select f "
                         + "select distinct f from Fornecedor f left join fetch f.fornecimentos fo", Fornecedor.class);
 
-                return (Set<Fornecedor>) query.getResultList();
+                return query.getResultList();
             } else {
-                Set<Fornecedor> s = new HashSet<>();
+                List<Fornecedor> s = new ArrayList<>();
                 s.add(manager.find(Fornecedor.class, codigo));
                 return s;
             }

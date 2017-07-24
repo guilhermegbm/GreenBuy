@@ -7,10 +7,13 @@ package Modelo.SQL;
 
 import Jpa.JpaUtil;
 import Modelo.BEAN.Saida;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -68,22 +71,25 @@ public class SaidaSql {
 
     }
 
-    public static Set<Saida> listarTodos() throws RuntimeException {
+    public static List<Saida> listarTodos() throws RuntimeException {
         EntityManager manager = JpaUtil.getEntityManager();
 
         try {
-            return (Set<Saida>) manager.createQuery("from Saida", Saida.class);
+             TypedQuery<Saida> tq = manager.createQuery("from Saida", Saida.class);
+             return tq.getResultList();
         } finally {
             manager.close();
         }
 
     }
 
-    public static Saida listarSaidaPorCodigo(int codigo) throws RuntimeException {
+    public static List<Saida> listarSaidaPorCodigo(int codigo) throws RuntimeException {
         EntityManager manager = JpaUtil.getEntityManager();
 
         try {
-            return manager.find(Saida.class, codigo);
+            List s = new ArrayList<>();
+            s.add(manager.find(Saida.class, codigo));
+            return s;
         } finally {
             manager.close();
         }

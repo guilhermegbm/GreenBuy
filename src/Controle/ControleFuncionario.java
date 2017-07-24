@@ -7,6 +7,8 @@ package Controle;
 
 import Modelo.BEAN.Funcionario;
 import Modelo.SQL.FuncionarioSql;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.PersistenceException;
 
@@ -29,11 +31,33 @@ public class ControleFuncionario {
         FuncionarioSql.deletaFuncionario(f);
     }
     
-    public static Set<Funcionario> listarTodos() throws RuntimeException {
+    public static List<Funcionario> listarTodos() throws RuntimeException {
         return FuncionarioSql.listarTodos();
     }
     
-    public static Set<Funcionario> listarTudoTodosOuPorCodigo(int codigo) {
+    public static List<Funcionario> listarTudoTodosOuPorCodigo(int codigo) throws RuntimeException{
         return FuncionarioSql.listarTudoTodosOuPorCodigo(codigo);
+    }
+
+    public static boolean verificaLogin(String usuario) throws RuntimeException{
+        List<String> s = FuncionarioSql.listarTodosLogins();
+        
+        for (String str : s) {
+            if (usuario.equals(str)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static Funcionario verificaSenha(String login, String senha) {
+        List<Funcionario> f = FuncionarioSql.listarTodos();
+        
+        for (Funcionario fun : f) {
+            if ((fun.getLogin().equals(login)) && (fun.getSenha().equals(senha))){
+                return fun;
+            }
+        }
+        return null;
     }
 }

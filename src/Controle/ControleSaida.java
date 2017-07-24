@@ -7,6 +7,7 @@ package Controle;
 
 import Modelo.BEAN.Saida;
 import Modelo.SQL.SaidaSql;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.PersistenceException;
 
@@ -28,11 +29,11 @@ public class ControleSaida {
         SaidaSql.deletaSaida(s);
     }
     
-    public Set listarTodos() throws RuntimeException {
+    public static List<Saida> listarTodos() throws RuntimeException {
         return SaidaSql.listarTodos();
     }
     
-    public static Saida listarSaidaPorCodigo(int codigo) throws RuntimeException {
+    public static List<Saida> listarSaidaPorCodigo(int codigo) throws RuntimeException {
         return SaidaSql.listarSaidaPorCodigo(codigo);
     }
 }

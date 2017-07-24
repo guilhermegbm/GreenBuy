@@ -7,10 +7,12 @@ package Modelo.SQL;
 
 import Jpa.JpaUtil;
 import Modelo.BEAN.Venda;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -68,22 +70,25 @@ public class VendaSql {
 
     }
 
-    public static Set<Venda> listarTodos() {
+    public static List<Venda> listarTodos() {
         EntityManager manager = JpaUtil.getEntityManager();
 
         try {
-            return (Set<Venda>) manager.createQuery("from Venda", Venda.class);
+            TypedQuery<Venda> tq = manager.createQuery("from Venda", Venda.class);
+            return tq.getResultList();
         } finally {
             manager.close();
         }
 
     }
 
-    public static Venda listarVendaPorCodigo(int codigo) {
+    public static List<Venda> listarVendaPorCodigo(int codigo) {
         EntityManager manager = JpaUtil.getEntityManager();
 
         try {
-            return manager.find(Venda.class, codigo);
+            List s = new ArrayList<>();
+            s.add(manager.find(Venda.class, codigo));
+            return s;
         } finally {
             manager.close();
         }

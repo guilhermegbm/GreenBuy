@@ -7,7 +7,9 @@ package Modelo.SQL;
 
 import Jpa.JpaUtil;
 import Modelo.BEAN.Cliente;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -70,18 +72,19 @@ public class ClienteSql {
 
     }
 
-    public static Set<Cliente> listarTodos() throws RuntimeException {
+    public static List<Cliente> listarTodos() throws RuntimeException {
         EntityManager manager = JpaUtil.getEntityManager();
 
         try {
-            return (Set<Cliente>) manager.createQuery("from Cliente", Cliente.class);
+            TypedQuery<Cliente> tq = manager.createQuery("from Cliente", Cliente.class);
+            return tq.getResultList();
         } finally {
             manager.close();
         }
 
     }
 
-    public static Set<Cliente> listarTudoTodosOuPorCodigo(int codigo) throws RuntimeException {
+    public static List<Cliente> listarTudoTodosOuPorCodigo(int codigo) throws RuntimeException {
         EntityManager manager = JpaUtil.getEntityManager();
 
         try {
@@ -89,9 +92,9 @@ public class ClienteSql {
                 TypedQuery<Cliente> query = manager.createQuery("select c "
                         + "select distinct c from Cliente c left join fetch c.vendas v", Cliente.class);
 
-                return (Set<Cliente>) query.getResultList();
+                return query.getResultList();
             } else {
-                Set<Cliente> s = new HashSet<>();
+                List<Cliente> s = new ArrayList<>();
                 s.add(manager.find(Cliente.class, codigo));
                 return s;
             }

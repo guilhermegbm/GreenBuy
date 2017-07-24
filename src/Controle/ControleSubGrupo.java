@@ -7,6 +7,7 @@ package Controle;
 
 import Modelo.BEAN.SubGrupo;
 import Modelo.SQL.SubGrupoSql;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.PersistenceException;
 
@@ -28,11 +29,11 @@ public class ControleSubGrupo {
         SubGrupoSql.deletaSubGrupo(sg);
     }
     
-    public static Set<SubGrupo> listarTodos() throws RuntimeException {
+    public static List<SubGrupo> listarTodos() throws RuntimeException {
         return SubGrupoSql.listarTodos();
     }
     
-    public static Set<SubGrupo> listarTudoTodosOuPorCodigo(int codigo) throws RuntimeException {
+    public static List<SubGrupo> listarTudoTodosOuPorCodigo(int codigo) throws RuntimeException {
         return SubGrupoSql.listarTudoTodosOuPorCodigo(codigo);
     }
 }

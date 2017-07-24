@@ -7,6 +7,7 @@ package Controle;
 
 import Modelo.BEAN.Cliente;
 import Modelo.SQL.ClienteSql;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.PersistenceException;
 
@@ -28,11 +29,11 @@ public class ControleCliente {
         ClienteSql.deletaCliente(c);
     }
     
-    public static Set<Cliente> listarTodos() throws RuntimeException {
+    public static List<Cliente> listarTodos() throws RuntimeException {
         return ClienteSql.listarTodos();
     }
     
-    public static Set<Cliente> listarTudoTodosOuPorCodigo(int codigo) throws RuntimeException {
+    public static List<Cliente> listarTudoTodosOuPorCodigo(int codigo) throws RuntimeException {
         return ClienteSql.listarTudoTodosOuPorCodigo(codigo);
     }
 }

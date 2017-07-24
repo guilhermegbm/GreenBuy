@@ -7,7 +7,9 @@ package Modelo.SQL;
 
 import Jpa.JpaUtil;
 import Modelo.BEAN.Funcionario;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -70,18 +72,19 @@ public class FuncionarioSql {
 
     }
 
-    public static Set<Funcionario> listarTodos() throws RuntimeException {
+    public static List<Funcionario> listarTodos() throws RuntimeException {
         EntityManager manager = JpaUtil.getEntityManager();
 
         try {
-            return (Set<Funcionario>) manager.createQuery("from Funcionario", Funcionario.class);
+            TypedQuery<Funcionario> q = manager.createQuery("from Funcionario", Funcionario.class);
+            return q.getResultList();
         } finally {
             manager.close();
         }
 
     }
 
-    public static Set<Funcionario> listarTudoTodosOuPorCodigo(int codigo) {
+    public static List<Funcionario> listarTudoTodosOuPorCodigo(int codigo) throws RuntimeException{
         EntityManager manager = JpaUtil.getEntityManager();
 
         try {
@@ -89,12 +92,24 @@ public class FuncionarioSql {
                 TypedQuery<Funcionario> query = manager.createQuery("select f "
                         + "select distinct f from Funcionario f left join fetch f.vendas v", Funcionario.class);
 
-                return (Set<Funcionario>) query.getResultList();
+                return query.getResultList();
             } else {
-                Set<Funcionario> s = new HashSet();
+                List<Funcionario> s = new ArrayList<>();
                 s.add(manager.find(Funcionario.class, codigo));
                 return s;
             }
+        } finally {
+            manager.close();
+        }
+    }
+
+    public static List<String> listarTodosLogins() throws RuntimeException{
+        EntityManager manager = JpaUtil.getEntityManager();
+        
+        try {
+            TypedQuery<String> query = manager.createQuery("select f.login from Funcionario f", String.class);
+            List<String> l = query.getResultList();
+            return l;
         } finally {
             manager.close();
         }

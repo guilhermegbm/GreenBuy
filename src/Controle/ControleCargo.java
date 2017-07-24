@@ -7,6 +7,7 @@ package Controle;
 
 import Modelo.BEAN.Cargo;
 import Modelo.SQL.CargoSql;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -27,11 +28,11 @@ public class ControleCargo {
         CargoSql.deletaCargo(c);
     }
     
-    public static Set<Cargo> listarTodos() throws RuntimeException {
+    public static List<Cargo> listarTodos() throws RuntimeException {
         return CargoSql.listarTodos();
     }
     
-    public static Set<Cargo> listarTudoTodosOuPorCodigo(int codigo) throws RuntimeException {
+    public static List<Cargo> listarTudoTodosOuPorCodigo(int codigo) throws RuntimeException {
         return CargoSql.listarTudoTodosOuPorCodigo(codigo);
     }
 }

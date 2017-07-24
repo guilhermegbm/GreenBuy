@@ -91,7 +91,7 @@ public class ClasseTeste {
         f1.setTelefone("(37)12345-6789");
         f1.setSituacaoFun(Funcionario.SituacaoFun.DESPEDIDO);
         f1.setCargo(ca1);
-        f1.setAdministrador(false);
+        f1.setAdministrador(true);
         
         f2.setNome("Bárbara");
         f2.setCpf("321");
@@ -110,6 +110,7 @@ public class ClasseTeste {
         f3.setSalario(850);
         f3.setTelefone("");
         f3.setSituacaoFun(Funcionario.SituacaoFun.DESPEDIDO);
+        f3.setAdministrador(false);
         f3.setCargo(ca3);
         
         f4.setNome("Daniela");
@@ -119,6 +120,7 @@ public class ClasseTeste {
         f4.setSalario(1390);
         f4.setTelefone("(37)12345-6789");
         f4.setSituacaoFun(Funcionario.SituacaoFun.ATIVO);
+        f4.setAdministrador(true);
         f4.setCargo(ca1);
         
         manager.persist(f1);

@@ -7,6 +7,7 @@ package Controle;
 
 import Modelo.BEAN.Venda;
 import Modelo.SQL.VendaSql;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.PersistenceException;
 
@@ -28,11 +29,11 @@ public class ControleVenda {
         VendaSql.deletaVenda(v);
     }
     
-    public static Set<Venda> listarTodos() {
+    public static List<Venda> listarTodos() {
         return VendaSql.listarTodos();
     }
     
-    public static Venda listarVendaPorCodigo(int codigo) {
+    public static List listarVendaPorCodigo(int codigo) {
         return VendaSql.listarVendaPorCodigo(codigo);
     }
 }

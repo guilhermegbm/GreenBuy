@@ -7,11 +7,14 @@ package Modelo.SQL;
 
 import Jpa.JpaUtil;
 import Modelo.BEAN.Fornecimento;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -69,22 +72,23 @@ public class FornecimentoSql {
 
     }
 
-    public static Set<Fornecimento> listarTodos() throws RuntimeException {
+    public static List<Fornecimento> listarTodos() throws RuntimeException {
         EntityManager manager = JpaUtil.getEntityManager();
 
         try {
-            return (Set<Fornecimento>) manager.createQuery("from Fornecimento", Fornecimento.class);
+            TypedQuery<Fornecimento> tq = manager.createQuery("from Fornecimento", Fornecimento.class);
+            return tq.getResultList();
         } finally {
             manager.close();
         }
 
     }
 
-    public static Set<Fornecimento> listarFornecimentoPorCodigo(int codigo) throws RuntimeException {
+    public static List<Fornecimento> listarFornecimentoPorCodigo(int codigo) throws RuntimeException {
         EntityManager manager = JpaUtil.getEntityManager();
 
         try {
-            Set<Fornecimento> s = new HashSet<>();
+            List<Fornecimento> s = new ArrayList<>();
             s.add(manager.find(Fornecimento.class, codigo));
             return s;
         } finally {

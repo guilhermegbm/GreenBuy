@@ -7,7 +7,9 @@ package Modelo.SQL;
 
 import Jpa.JpaUtil;
 import Modelo.BEAN.Cargo;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -70,18 +72,19 @@ public class CargoSql {
 
     }
 
-    public static Set<Cargo> listarTodos() throws RuntimeException {
+    public static List<Cargo> listarTodos() throws RuntimeException {
         EntityManager manager = JpaUtil.getEntityManager();
 
         try {
-            return (Set<Cargo>) manager.createQuery("from Cargo", Cargo.class);
+            TypedQuery<Cargo> tq = manager.createQuery("from Cargo", Cargo.class);
+            return tq.getResultList();
         } finally {
             manager.close();
         }
 
     }
 
-    public static Set<Cargo> listarTudoTodosOuPorCodigo(int codigo) throws RuntimeException {
+    public static List<Cargo> listarTudoTodosOuPorCodigo(int codigo) throws RuntimeException {
         EntityManager manager = JpaUtil.getEntityManager();
 
         try {
@@ -89,9 +92,9 @@ public class CargoSql {
                 TypedQuery<Cargo> query = manager.createQuery("select c "
                         + "select distinct c from Cargo c left join fetch c.funcionarios f", Cargo.class);
 
-                return (Set<Cargo>) query.getResultList();
+                return query.getResultList();
             } else {
-                Set<Cargo> s = new HashSet<>();
+                List<Cargo> s = new ArrayList<>();
                 s.add(manager.find(Cargo.class, codigo));
                 return s;
             }
