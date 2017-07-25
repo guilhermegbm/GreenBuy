@@ -8,7 +8,7 @@ package Visao.Cadastro;
 import Controle.ControleObjeto;
 import Modelo.BEAN.Objeto;
 import Modelo.BEAN.Grupo;
-import Visao.Inicio.FRMObjeto;
+import Visao.Gerenciamento.FRMObjeto;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 

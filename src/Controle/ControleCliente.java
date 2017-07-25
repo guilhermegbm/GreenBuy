@@ -33,7 +33,27 @@ public class ControleCliente {
         return ClienteSql.listarTodos();
     }
     
+    public static List<Cliente> listarTodosAtivos() throws RuntimeException {
+        return ClienteSql.listarTodosAtivos();
+    }
+    
+    public static List<Cliente> listarTodosDesligados() throws RuntimeException{
+        return ClienteSql.listarTodosDesligados();
+    }
+    
     public static List<Cliente> listarTudoTodosOuPorCodigo(int codigo) throws RuntimeException {
         return ClienteSql.listarTudoTodosOuPorCodigo(codigo);
+    }
+
+    public static List<Cliente> listarPorNome(String nome) throws RuntimeException{
+        return ClienteSql.listarPorNome(nome);
+    }
+
+    public static void desativaCliente(Cliente c) throws RuntimeException{
+        ClienteSql.desativaCliente(c);
+    }
+
+    public static void reativaCliente(Cliente c) throws RuntimeException{
+        ClienteSql.reativaCliente(c);
     }
 }

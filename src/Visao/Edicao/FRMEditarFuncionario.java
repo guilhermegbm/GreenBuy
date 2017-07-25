@@ -9,7 +9,7 @@ import Controle.ControleCargo;
 import Controle.ControleFuncionario;
 import Modelo.BEAN.Cargo;
 import Modelo.BEAN.Funcionario;
-import Visao.Inicio.FRMFuncionario;
+import Visao.Gerenciamento.FRMFuncionario;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 

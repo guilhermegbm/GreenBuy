@@ -7,7 +7,7 @@ package Visao.Cadastro;
 
 import Controle.ControleFornecedor;
 import Modelo.BEAN.Fornecedor;
-import Visao.Inicio.FRMFornecedor;
+import Visao.Gerenciamento.FRMFornecedor;
 import javax.swing.JOptionPane;
 
 /**

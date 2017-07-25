@@ -93,9 +93,9 @@
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="btnLocalizarCliente" max="32767" attributes="0"/>
                           <Component id="btnCadastrarCliente" alignment="1" max="32767" attributes="0"/>
-                          <Component id="btnExcluirCliente" alignment="1" max="32767" attributes="0"/>
+                          <Component id="btnDelCliente" alignment="1" max="32767" attributes="0"/>
                           <Component id="btnCancelar" max="32767" attributes="0"/>
-                          <Component id="btnAttCliente" alignment="1" max="32767" attributes="0"/>
+                          <Component id="btnEdtCliente" alignment="1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -120,9 +120,9 @@
                               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                               <Component id="btnCadastrarCliente" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="btnAttCliente" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnEdtCliente" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="btnExcluirCliente" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnDelCliente" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="183" max="32767" attributes="0"/>
                               <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -144,18 +144,18 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCadastrarClienteActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnExcluirCliente">
+            <Component class="javax.swing.JButton" name="btnDelCliente">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Visao.icon/clienteDel.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Deletar"/>
+                <Property name="text" type="java.lang.String" value="Desligar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExcluirClienteActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDelClienteActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnAttCliente">
+            <Component class="javax.swing.JButton" name="btnEdtCliente">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Visao.icon/Editar.png"/>
@@ -163,7 +163,7 @@
                 <Property name="text" type="java.lang.String" value="Editar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAttClienteActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEdtClienteActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnLocalizarCliente">
@@ -193,9 +193,11 @@
             <Component class="javax.swing.JComboBox" name="cbOpc">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="2">
-                    <StringItem index="0" value="C&#xf3;digo"/>
-                    <StringItem index="1" value="Nome"/>
+                  <StringArray count="4">
+                    <StringItem index="0" value="Todos os Ativos"/>
+                    <StringItem index="1" value="C&#xf3;digo"/>
+                    <StringItem index="2" value="Nome"/>
+                    <StringItem index="3" value="Mostrar Desligados"/>
                   </StringArray>
                 </Property>
               </Properties>

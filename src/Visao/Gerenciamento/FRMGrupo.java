@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Visao.Inicio;
+package Visao.Gerenciamento;
 
 import Visao.Cadastro.FRMCadastrarObjeto;
 import Controle.ControleObjeto;

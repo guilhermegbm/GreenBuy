@@ -5,7 +5,7 @@
  */
 package Visao.Outros;
 
-import Visao.Inicio.FRMObjeto;
+import Visao.Gerenciamento.FRMObjeto;
 import java.awt.Color;
 
 /**

@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Visao.Inicio;
+package Visao.Gerenciamento;
 
-import Visao.Cadastro.FRMCadastrarObjeto;
-import Controle.ControleObjeto;
-import Modelo.BEAN.Objeto;
+import Visao.Cadastro.FRMCadastrarFornecedor;
+import Controle.ControleFornecedor;
+import Modelo.BEAN.Fornecedor;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -17,20 +17,19 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Henrique
  */
-public class FRMObjeto extends javax.swing.JFrame {
+public class FRMFornecedor extends javax.swing.JFrame {
 
     private DefaultTableModel dTable;
-    ArrayList<Objeto> dados;
-    ControleObjeto controleO = new ControleObjeto();
+    private ArrayList<Fornecedor> dados;
+    private ControleFornecedor controleForn = new ControleFornecedor();
 
     /**
      * Creates new form FRMFornecedor
      */
-    public FRMObjeto() {
+    public FRMFornecedor() {
         initComponents();
 
-        //dados = controleO.listarTodos();
-
+        //dados = controleForn.listarTodos();
         this.preencheTabela();
     }
 
@@ -47,7 +46,7 @@ public class FRMObjeto extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableObjeto = new javax.swing.JTable();
+        tableFornecedor = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -58,7 +57,7 @@ public class FRMObjeto extends javax.swing.JFrame {
         tfDado = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Produtos");
+        setTitle("Gerenciar Fornecedores");
 
         jPanel3.setBackground(new java.awt.Color(153, 255, 153));
 
@@ -66,9 +65,9 @@ public class FRMObjeto extends javax.swing.JFrame {
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 204));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Todos os produtos cadastrados"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Todos os fornecedores cadastrados"));
 
-        tableObjeto.setModel(new javax.swing.table.DefaultTableModel(
+        tableFornecedor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -79,7 +78,7 @@ public class FRMObjeto extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(tableObjeto);
+        jScrollPane1.setViewportView(tableFornecedor);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -98,7 +97,7 @@ public class FRMObjeto extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/prodAdd.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/fornAdd.png"))); // NOI18N
         jButton1.setText("Cadastrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,7 +105,7 @@ public class FRMObjeto extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/prodEditar.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/Editar.png"))); // NOI18N
         jButton2.setText("Editar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,7 +113,7 @@ public class FRMObjeto extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/prodDel.png"))); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/FornDel.png"))); // NOI18N
         jButton3.setText("Deletar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,22 +124,23 @@ public class FRMObjeto extends javax.swing.JFrame {
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/logout.png"))); // NOI18N
         jButton4.setText("Voltar");
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/prodLoc.png"))); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/funcLoc.png"))); // NOI18N
         jButton5.setText("Localizar");
+        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
 
-        cbOpc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código", "Nome", "(A partir) Preço de venda", "(Até)Preço de venda" }));
+        cbOpc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código", "Nome", "CNPJ" }));
         cbOpc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbOpcActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Localizar objeto por:");
+        jLabel1.setText("Localizar fornecedor por:");
 
         tfDado.setForeground(new java.awt.Color(153, 153, 153));
         tfDado.setText("Insira o dado para pesquisa...");
@@ -157,11 +157,6 @@ public class FRMObjeto extends javax.swing.JFrame {
                 tfDadoActionPerformed(evt);
             }
         });
-        tfDado.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                tfDadoKeyTyped(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -171,20 +166,25 @@ public class FRMObjeto extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbOpc, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfDado, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(tfDado)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGap(10, 10, 10)
+                                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(1, 1, 1))
+                                .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -201,13 +201,13 @@ public class FRMObjeto extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
+                        .addGap(34, 34, 34)
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
                         .addComponent(jButton4)))
                 .addContainerGap())
         );
@@ -218,8 +218,8 @@ public class FRMObjeto extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,20 +233,20 @@ public class FRMObjeto extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        FRMCadastrarObjeto cadProd = new FRMCadastrarObjeto();
+        FRMCadastrarFornecedor fornecedor = new FRMCadastrarFornecedor();
 
-        cadProd.setVisible(true);
+        fornecedor.setVisible(true);
 
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -254,6 +254,56 @@ public class FRMObjeto extends javax.swing.JFrame {
     private void cbOpcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOpcActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbOpcActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        this.localizar();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        /*FRMEditarFornecedor edtFornecedor = new FRMEditarFornecedor();
+        int qtd = tableFornecedor.getSelectedRowCount();
+        Fornecedor forn = new Fornecedor();
+
+        if (qtd < 1) {
+            JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para deletar.");
+        } else if (qtd > 1) {
+            JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez.");
+        } else {
+            int linha = tableFornecedor.getSelectedRow();
+            forn.setCodigo(dados.get(linha).getCodigo());
+            forn.setNome(dados.get(linha).getNome());
+            forn.setTipo(dados.get(linha).getTipo());
+            forn.setCnpj(dados.get(linha).getCnpj());
+            forn.setCpf(dados.get(linha).getCpf());
+            forn.setTelefone(dados.get(linha).getTelefone());
+
+            edtFornecedor.pegaObjeto(forn);
+
+            edtFornecedor.setVisible(true);
+
+            this.dispose();
+        }*/
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        int qtd = tableFornecedor.getSelectedColumnCount();
+
+        if (qtd < 1) {
+            JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para deletar.");
+        } else if (qtd > 1) {
+            JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez.");
+        } else {
+            int linha = tableFornecedor.getSelectedRow();
+            int codigo = dados.get(linha).getCodigo();
+            int opc = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o fornecedor " + dados.get(linha).getNome() + "?");
+
+            if (opc == 0) {
+                //controleForn.deletar(codigo);
+            }
+            //dados = controleForn.listarTodos();
+            this.preencheTabela();
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void tfDadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDadoActionPerformed
         this.localizar();
@@ -273,65 +323,6 @@ public class FRMObjeto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tfDadoFocusLost
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        this.localizar();
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-//        int qnt = tableObjeto.getSelectedColumnCount();
-//        
-//        if (qnt < 1) {
-//            JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para deletar.");
-//        } else if (qnt > 1) {
-//            JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez;");
-//        } else {
-//
-//            int linha = tableObjeto.getSelectedRow();
-//            int codigo = dados.get(linha).getCodigo();
-//
-//            int opc = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o objeto " + dados.get(linha).getNome() + " ?");
-//
-//            if (opc == 0) {
-//                //controleO.deletar(codigo);
-//                //dados = controleO.listarTodos();
-//                this.preencheTabela();
-//            }
-//        }
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-//        FRMEditarObjeto edtObj = new FRMEditarObjeto();
-//        int qnt = tableObjeto.getSelectedRowCount();
-//        Objeto obj = new Objeto();
-//
-//        if (qnt < 1) {
-//            JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para editar.");
-//        } else if (qnt > 1) {
-//            JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez.");
-//        } else {
-//            int linha = tableObjeto.getSelectedRow();
-//            obj.setCodigo(dados.get(linha).getCodigo());
-//            obj.setNome(dados.get(linha).getNome());
-//            obj.setDescricao(dados.get(linha).getDescricao());
-//            obj.setPrecoVendaBase(dados.get(linha).getPrecoVendaBase());
-//            obj.setPrecoCompraBase(dados.get(linha).getPrecoCompraBase());
-//            obj.setUnidade(dados.get(linha).getUnidade());
-//            obj.setQtdeEstoque(dados.get(linha).getQtdeEstoque());
-//            obj.setTipoObj(dados.get(linha).getTipoObj());
-//            //obj.setSubClasse(dados.get(linha).getClasse());
-//
-//            edtObj.pegaObjeto(obj);
-//
-//            edtObj.setVisible(true);
-//
-//            this.setVisible(false);
-//        }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void tfDadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfDadoKeyTyped
-
-    }//GEN-LAST:event_tfDadoKeyTyped
-
     /**
      * @param args the command line arguments
      */
@@ -349,13 +340,13 @@ public class FRMObjeto extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FRMObjeto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FRMFornecedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FRMObjeto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FRMFornecedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FRMObjeto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FRMFornecedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FRMObjeto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FRMFornecedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -377,7 +368,7 @@ public class FRMObjeto extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FRMObjeto().setVisible(true);
+                new FRMFornecedor().setVisible(true);
             }
         });
     }
@@ -394,7 +385,7 @@ public class FRMObjeto extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tableObjeto;
+    private javax.swing.JTable tableFornecedor;
     private javax.swing.JTextField tfDado;
     // End of variables declaration//GEN-END:variables
 
@@ -403,47 +394,43 @@ public class FRMObjeto extends javax.swing.JFrame {
 
         dTable.addColumn("Código");
         dTable.addColumn("Nome");
-        dTable.addColumn("Preço de venda");
-        dTable.addColumn("Preço de compra");
         dTable.addColumn("Tipo");
-        dTable.addColumn("Classe");
-        dTable.addColumn("Unidade");
+        dTable.addColumn("CNPJ/CPF");
+        dTable.addColumn("Telefone");
 
-        for (Objeto dado : dados) {
+        for (Fornecedor dado : dados) {
             
             String tipo = "";
+            String cpfOuCnpj = "";
             
-            if (dado.getTipoObj() == 1){
-                tipo = "Produto";
-            } else if (dado.getTipoObj() == 2){
-                tipo = "Mercadoria";
+            if (dado.getTipo() == 1){
+                tipo = "Empresa";
+                cpfOuCnpj = dado.getCnpj();
+            } else if (dado.getTipo() == 2){
+                tipo = "Pessoa";
+                cpfOuCnpj = dado.getCpf();
             }
             
-            dTable.addRow(new Object[]{dado.getCodigo(), dado.getNome(),
-                dado.getPrecoVendaBase(), dado.getPrecoCompraBase(), tipo,
-                dado.getClasse().getNome(), dado.getUnidade()});
+            dTable.addRow(new Object[]{dado.getCodigo(), dado.getNome(), tipo, cpfOuCnpj, dado.getTelefone()});
         }
 
-        tableObjeto.setModel(dTable);*/
+        tableFornecedor.setModel(dTable);
+*/
     }
 
-    /*private DefaultTableModel criaTabela() {
-
+    private DefaultTableModel criaTabela() {
         DefaultTableModel dTable = new DefaultTableModel() {
             //Define o tipo dos campos (coluna) na mesma ordem que as colunas foram criadas
             Class[] types = new Class[]{
                 java.lang.Integer.class, //codigo
                 java.lang.String.class, //nome
-                java.lang.Float.class, //preço de venda
-                java.lang.Float.class, //preço de compra
-                java.lang.String.class, //tipo (Prod ou mer)
-                java.lang.String.class, //classe
-                java.lang.String.class //unidade
-                
+                java.lang.String.class, //Tipo
+                java.lang.String.class, //CNPJ/CPF
+                java.lang.String.class, //Telefone
             };
             //define se os campos podem ser editados na propria tabela
             boolean[] canEdit = new boolean[]{
-                false, false, false, false, false, false, false
+                false, false, false, false, false
             };
 
             @Override
@@ -455,53 +442,26 @@ public class FRMObjeto extends javax.swing.JFrame {
         };
         //retorna o DefaultTableModel
     return dTable;
-    }*/
+    }
 
     private void localizar() {
         /*if ((tfDado.getText().equals("")) || (tfDado.getText().equals("Insira o dado para pesquisa..."))) {
-            JOptionPane.showMessageDialog(null, "Insira algum dado para pesquisa.");
+            JOptionPane.showMessageDialog(null, "Insira algum dado para pesquisa");
         } else {
             if (cbOpc.getSelectedIndex() == 0) {
                 //if (tfDado.getText().contains("0123456789")) {
-                    dados = controleO.listarPorCodigo(Integer.parseInt(tfDado.getText()));
+                    dados = controleForn.listarPorCodigo(Integer.parseInt(tfDado.getText()));
                     this.preencheTabela();
+                    
                 //} else {
                 //    JOptionPane.showMessageDialog(null, "Para pesquisar por código, apenas inteiros devem ser inseridos");
                 //}
             } else if (cbOpc.getSelectedIndex() == 1) {
-                dados = controleO.listarPorNome(tfDado.getText());
+                dados = controleForn.listarPorNome(tfDado.getText());
                 this.preencheTabela();
             } else if (cbOpc.getSelectedIndex() == 2) {
-                //if (tfDado.getText().contains("0123456789,.")) {
-                    String texto = tfDado.getText();
-
-                    if (texto.contains(",")) {
-                        String partes[] = texto.split(",");
-                        String parte1 = partes[0];
-                        String parte2 = partes[1];
-                        texto = parte1 + "." + parte2;
-                    }
-                    dados = controleO.listarPorValorMenor(Float.parseFloat(texto));
-                    this.preencheTabela();
-                //} else {
-                //    JOptionPane.showMessageDialog(null, "Para pesquisar por valor, apenas números, vírgula ou ponto devem ser inseridos");
-                //}
-            } else if (cbOpc.getSelectedIndex() == 3) {
-                //if (tfDado.getText().contains("0123456789,.")) {
-                    String texto = tfDado.getText();
-
-                    if (texto.contains(",")) {
-                        String partes[] = texto.split(",");
-                        String parte1 = partes[0];
-                        String parte2 = partes[1];
-                        texto = parte1 + "." + parte2;
-                    }
-
-                    dados = controleO.listarPorValorMaior(Float.parseFloat(texto));
-                    this.preencheTabela();
-                //} else {
-                //    JOptionPane.showMessageDialog(null, "Para pesquisar por valor, apenas números, vírgula ou ponto devem ser inseridos");
-                //}
+                dados = controleForn.listarPorCNPJ(tfDado.getText());
+                this.preencheTabela();
             }
         }*/
     }
