@@ -16,8 +16,7 @@ import javax.swing.JOptionPane;
  */
 public class FRMEditarFornecedor extends javax.swing.JFrame {
 
-    ControleFornecedor fornControle = new ControleFornecedor();
-    Fornecedor fornecedorbean = new Fornecedor();
+    Fornecedor fornecedor = new Fornecedor();
 
     /**
      * Creates new form CadastrarFornecedor
@@ -66,11 +65,13 @@ public class FRMEditarFornecedor extends javax.swing.JFrame {
         }  
         catch (Exception e){  
         }
-        jButton1 = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        btnReativar = new javax.swing.JButton();
+        btnDeletar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Cadastrar Fornecedor");
+        setTitle("Editar Fornecedor");
 
         jPanel1.setBackground(new java.awt.Color(153, 255, 153));
 
@@ -102,9 +103,15 @@ public class FRMEditarFornecedor extends javax.swing.JFrame {
             }
         });
         jPanel3.add(rbPessoa);
-        rbPessoa.setBounds(180, 0, 110, 23);
+        rbPessoa.setBounds(210, 0, 110, 23);
+
+        tfCNPJ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfCNPJActionPerformed(evt);
+            }
+        });
         jPanel3.add(tfCNPJ);
-        tfCNPJ.setBounds(50, 30, 250, 30);
+        tfCNPJ.setBounds(50, 30, 270, 30);
 
         lblCPFCNPJ.setText("CNPJ:");
         jPanel3.add(lblCPFCNPJ);
@@ -112,14 +119,14 @@ public class FRMEditarFornecedor extends javax.swing.JFrame {
 
         tfCPF.setText("jTextField1");
         jPanel3.add(tfCPF);
-        tfCPF.setBounds(50, 30, 250, 30);
+        tfCPF.setBounds(50, 30, 270, 30);
 
         lblTel.setText("Telefone:");
 
-        jButton1.setText("Editar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnEditarActionPerformed(evt);
             }
         });
 
@@ -127,6 +134,20 @@ public class FRMEditarFornecedor extends javax.swing.JFrame {
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+
+        btnReativar.setText("Reativar");
+        btnReativar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReativarActionPerformed(evt);
+            }
+        });
+
+        btnDeletar.setText("Deletar");
+        btnDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeletarActionPerformed(evt);
             }
         });
 
@@ -139,22 +160,26 @@ public class FRMEditarFornecedor extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(lblTel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tfTelefone))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
-                                .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39))))
+                                .addComponent(tfNome))
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(lblTel)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(tfTelefone))
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnReativar)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnDeletar)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(0, 0, Short.MAX_VALUE))))
+                        .addContainerGap())))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,11 +194,13 @@ public class FRMEditarFornecedor extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTel)
                     .addComponent(tfTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton2)
+                    .addComponent(btnEditar)
+                    .addComponent(btnReativar)
+                    .addComponent(btnDeletar))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -189,8 +216,8 @@ public class FRMEditarFornecedor extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -210,45 +237,79 @@ public class FRMEditarFornecedor extends javax.swing.JFrame {
     private void rbEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbEmpresaActionPerformed
         tfCNPJ.setVisible(true);
         tfCPF.setVisible(false);
+        lblCPFCNPJ.setText("CNPJ:");
     }//GEN-LAST:event_rbEmpresaActionPerformed
 
     private void rbPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPessoaActionPerformed
         tfCNPJ.setVisible(false);
         tfCPF.setVisible(true);
+        lblCPFCNPJ.setText("CPF:");
     }//GEN-LAST:event_rbPessoaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Fornecedor forn = new Fornecedor();
-        
-        if (((rbEmpresa.isSelected() == true) && (tfCNPJ.getText().equals("  .   .   /    -  "))) || ((rbPessoa.isSelected() == true) && (tfCPF.getText().equals("   .   .   -  "))) || (tfNome.getText().equals(""))|| (tfTelefone.getText().equals("(  )     -    "))){
-            JOptionPane.showMessageDialog(null, "Todos os dados devem estar preenchidos");
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+
+        if (((rbEmpresa.isSelected() == true) && (tfCNPJ.getText().equals("  .   .   /    -  "))) || ((rbPessoa.isSelected() == true) && (tfCPF.getText().equals("   .   .   -  "))) || (tfNome.getText().equals(""))) {
+            JOptionPane.showMessageDialog(null, "Com exceção do telefone, todos os campos devem estar preenchidos");
         } else {
-            /*forn.setCodigo(fornecedorbean.getCodigo());
-            
-            forn.setNome(tfNome.getText());
-            forn.setTelefone(tfTelefone.getText());
-            
-            if (rbEmpresa.isSelected()){
-                forn.setTipo(1);
-                forn.setCnpj(tfCNPJ.getText());
-                forn.setCpf(null);
-            } else if (rbPessoa.isSelected()){
-                forn.setTipo(2);
-                forn.setCnpj(null);
-                forn.setCpf(tfCPF.getText());
+
+            fornecedor.setNome(tfNome.getText());
+            fornecedor.setTelefone(tfTelefone.getText());
+
+            if (rbEmpresa.isSelected()) {
+                fornecedor.setTipoFornecedor(Fornecedor.TipoFornecedor.EMPRESA);
+                fornecedor.setCnpj(tfCNPJ.getText());
+                fornecedor.setCpf(null);
+            } else if (rbPessoa.isSelected()) {
+                fornecedor.setTipoFornecedor(Fornecedor.TipoFornecedor.PESSOA);
+                fornecedor.setCnpj(null);
+                fornecedor.setCpf(tfCPF.getText());
             }
-            
-            fornControle.editar(forn);
-            
-            JOptionPane.showMessageDialog(null, "Fornecedor editado com sucesso.");
-            
-            this.mudaFrame();*/
+            try {
+                ControleFornecedor.editaFornecedor(fornecedor);
+
+                JOptionPane.showMessageDialog(null, "Fornecedor editado com sucesso.");
+
+                this.mudaFrame();
+            } catch (RuntimeException e) {
+                JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+            }
+
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnEditarActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.mudaFrame();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void tfCNPJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCNPJActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfCNPJActionPerformed
+
+    private void btnReativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReativarActionPerformed
+        try {
+            ControleFornecedor.reativaFornecedor(fornecedor);
+            JOptionPane.showMessageDialog(null, "Fornecedor reativado com sucesso!");
+            this.mudaFrame();
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+        }
+    }//GEN-LAST:event_btnReativarActionPerformed
+
+    private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
+        int opc = JOptionPane.showConfirmDialog(null, "Deseja realmente deletar o(a) fornecedor " + fornecedor.getNome() + "?"
+                + " Todos os fornecimentos que esse fornecedor já efetuou também serão apagados, por isso, é ALTAMENTE RECOMENDADO NÃO"
+                + " apagar o fornecedor, mas apenas desativá-lo.");
+
+        if (opc == 0) {
+            try {
+                ControleFornecedor.deletaFornecedor(fornecedor);
+                JOptionPane.showMessageDialog(null, "Fornecedor deletado com sucesso!");
+                this.mudaFrame();
+            } catch (RuntimeException e) {
+                JOptionPane.showMessageDialog(null, "DeuRuim: " + e);
+            }
+        }
+    }//GEN-LAST:event_btnDeletarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -276,69 +337,7 @@ public class FRMEditarFornecedor extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(FRMEditarFornecedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -349,8 +348,10 @@ public class FRMEditarFornecedor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDeletar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnReativar;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
@@ -365,32 +366,31 @@ public class FRMEditarFornecedor extends javax.swing.JFrame {
     private javax.swing.JTextField tfNome;
     private javax.swing.JTextField tfTelefone;
     // End of variables declaration//GEN-END:variables
-    void pegaObjeto(Fornecedor forn) {
-        fornecedorbean = forn;
+    public void pegaObjeto(Fornecedor forn) {
+        fornecedor = forn;
         this.preencheDados();
     }
 
     private void preencheDados() {
-        /*
-        tfCPF.setText(fornecedorbean.getCpf());
-        tfNome.setText(fornecedorbean.getNome());
-        tfTelefone.setText(fornecedorbean.getTelefone());
-        
-        if (fornecedorbean.getTipo() == 1){
+        tfNome.setText(fornecedor.getNome());
+        tfTelefone.setText(fornecedor.getTelefone());
+
+        if (fornecedor.getTipoFornecedor().equals(Fornecedor.TipoFornecedor.EMPRESA)) {
             rbEmpresa.setSelected(true);
             rbEmpresa.doClick();
-            tfCNPJ.setText(fornecedorbean.getCnpj());
-        } else if (fornecedorbean.getTipo() == 2){
+            tfCNPJ.setText(fornecedor.getCnpj());
+        } else if (fornecedor.getTipoFornecedor().equals(Fornecedor.TipoFornecedor.PESSOA)) {
             rbPessoa.setSelected(true);
             rbPessoa.doClick();
-        }*/
+            tfCPF.setText(fornecedor.getCpf());
+        }
     }
 
     private void mudaFrame() {
-        FRMFornecedor fornecedor = new FRMFornecedor();
-        
-        fornecedor.setVisible(true);
-        
+        FRMFornecedor fornec = new FRMFornecedor();
+
+        fornec.setVisible(true);
+
         this.dispose();
     }
 }

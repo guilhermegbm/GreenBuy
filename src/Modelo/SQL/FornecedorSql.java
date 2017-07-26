@@ -62,9 +62,9 @@ public class FornecedorSql {
         try {
             tx.begin();
 
-            manager.merge(f);
+            Fornecedor forn = manager.merge(f);
 
-            manager.remove(f);
+            manager.remove(forn);
 
             tx.commit();
         } finally {
@@ -85,6 +85,30 @@ public class FornecedorSql {
 
     }
 
+    public static List<Fornecedor> listarTodosAtivos() {
+        EntityManager manager = JpaUtil.getEntityManager();
+
+        try {
+            TypedQuery tq = manager.createQuery("select f from Fornecedor f where f.situacaoFor = :sit", Fornecedor.class);
+            tq.setParameter("sit", Fornecedor.SituacaoFor.ATIVO);
+            return tq.getResultList();
+        } finally {
+            manager.close();
+        }
+    }
+
+    public static List<Fornecedor> listarTodosInativos() {
+        EntityManager manager = JpaUtil.getEntityManager();
+
+        try {
+            TypedQuery tq = manager.createQuery("select f from Fornecedor f where f.situacaoFor = :sit", Fornecedor.class);
+            tq.setParameter("sit", Fornecedor.SituacaoFor.INATIVO);
+            return tq.getResultList();
+        } finally {
+            manager.close();
+        }
+    }
+
     public static List<Fornecedor> listarTudoTodosOuPorCodigo(int codigo) throws RuntimeException {
         EntityManager manager = JpaUtil.getEntityManager();
 
@@ -97,7 +121,12 @@ public class FornecedorSql {
                 return query.getResultList();
             } else {
                 List<Fornecedor> s = new ArrayList<>();
-                s.add(manager.find(Fornecedor.class, codigo));
+                Fornecedor f = manager.find(Fornecedor.class, codigo);
+
+                if (f != null) {
+                    s.add(f);
+                }
+
                 return s;
             }
         } finally {
@@ -105,4 +134,97 @@ public class FornecedorSql {
         }
     }
 
+    public static List<Fornecedor> listarApenasEmpresas() throws RuntimeException {
+        EntityManager manager = JpaUtil.getEntityManager();
+
+        try {
+            TypedQuery tq = manager.createQuery("select f from Fornecedor f where f.tipoFornecedor = :tipo", Fornecedor.class);
+            tq.setParameter("tipo", Fornecedor.TipoFornecedor.EMPRESA);
+            return tq.getResultList();
+        } finally {
+            manager.close();
+        }
+    }
+
+    public static List<Fornecedor> listarApenasPessoas() throws RuntimeException {
+        EntityManager manager = JpaUtil.getEntityManager();
+
+        try {
+            TypedQuery tq = manager.createQuery("select f from Fornecedor f where f.tipoFornecedor = :tipo", Fornecedor.class);
+            tq.setParameter("tipo", Fornecedor.TipoFornecedor.PESSOA);
+            return tq.getResultList();
+        } finally {
+            manager.close();
+        }
+    }
+
+    public static List<Fornecedor> listarPorNome(String nome) throws RuntimeException {
+        EntityManager manager = JpaUtil.getEntityManager();
+
+        try {
+            TypedQuery<Fornecedor> tq = manager.createQuery("select f from Fornecedor f where f.nome like :nome", Fornecedor.class);
+            tq.setParameter("nome", "%" + nome + "%");
+            return tq.getResultList();
+        } finally {
+            manager.close();
+        }
+    }
+
+    public static List<Fornecedor> listarPorCNPJ(String cnpj) throws RuntimeException {
+        EntityManager manager = JpaUtil.getEntityManager();
+
+        try {
+            TypedQuery<Fornecedor> tq = manager.createQuery("select f from Fornecedor f where f.cnpj like :cnpj", Fornecedor.class);
+            tq.setParameter("cnpj", "%" + cnpj + "%");
+            return tq.getResultList();
+        } finally {
+            manager.close();
+        }
+    }
+
+    public static List<Fornecedor> listarPorCPF(String cpf) throws RuntimeException {
+        EntityManager manager = JpaUtil.getEntityManager();
+
+        try {
+            TypedQuery<Fornecedor> tq = manager.createQuery("select f from Fornecedor f where f.cpf like :cpf", Fornecedor.class);
+            tq.setParameter("cpf", "%" + cpf + "%");
+            return tq.getResultList();
+        } finally {
+            manager.close();
+        }
+    }
+
+    public static void inativaFornecedor(Fornecedor f) throws RuntimeException {
+        EntityManager manager = JpaUtil.getEntityManager();
+        EntityTransaction tx = manager.getTransaction();
+
+        try {
+            tx.begin();
+
+            f.setSituacaoFor(Fornecedor.SituacaoFor.INATIVO);
+
+            manager.merge(f);
+
+            tx.commit();
+        } finally {
+            manager.close();
+        }
+    }
+
+    public static void reativaFornecedor(Fornecedor f) throws RuntimeException {
+        EntityManager manager = JpaUtil.getEntityManager();
+        EntityTransaction tx = manager.getTransaction();
+
+        try {
+            tx.begin();
+
+            f.setSituacaoFor(Fornecedor.SituacaoFor.ATIVO);
+
+            manager.merge(f);
+
+            tx.commit();
+        } finally {
+            manager.close();
+        }
+    }
 }

@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Isabella
+ * @author Guilherme
  */
 public class FRMFuncionario extends javax.swing.JFrame {
     

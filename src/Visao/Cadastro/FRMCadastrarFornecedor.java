@@ -8,6 +8,7 @@ package Visao.Cadastro;
 import Controle.ControleFornecedor;
 import Modelo.BEAN.Fornecedor;
 import Visao.Gerenciamento.FRMFornecedor;
+import javax.persistence.PersistenceException;
 import javax.swing.JOptionPane;
 
 /**
@@ -102,6 +103,12 @@ public class FRMCadastrarFornecedor extends javax.swing.JFrame {
         });
         jPanel3.add(rbPessoa);
         rbPessoa.setBounds(180, 0, 110, 23);
+
+        tfCNPJ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfCNPJActionPerformed(evt);
+            }
+        });
         jPanel3.add(tfCNPJ);
         tfCNPJ.setBounds(50, 30, 250, 30);
 
@@ -215,52 +222,64 @@ public class FRMCadastrarFornecedor extends javax.swing.JFrame {
     private void rbEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbEmpresaActionPerformed
         tfCNPJ.setVisible(true);
         tfCPF.setVisible(false);
+        lblCPFCNPJ.setText("CNPJ:");
     }//GEN-LAST:event_rbEmpresaActionPerformed
 
     private void rbPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPessoaActionPerformed
         tfCNPJ.setVisible(false);
         tfCPF.setVisible(true);
+        lblCPFCNPJ.setText("CPF:");
     }//GEN-LAST:event_rbPessoaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (((rbEmpresa.isSelected() == true) && (tfCNPJ.getText().equals("  .   .   /    -  "))) || ((rbPessoa.isSelected() == true) && (tfCPF.getText().equals("   .   .   -  "))) || (tfNome.getText().equals(""))|| (tfTelefone.getText().equals("(  )     -    "))){
-            JOptionPane.showMessageDialog(null, "Todos os dados devem estar preenchidos");
+        if (((rbEmpresa.isSelected() == true) && (tfCNPJ.getText().equals("  .   .   /    -  "))) || ((rbPessoa.isSelected() == true) && (tfCPF.getText().equals("   .   .   -  "))) || (tfNome.getText().equals(""))) {
+            JOptionPane.showMessageDialog(null, "Con exceção do telefone, todos os campos devem estar preenchidos");
         } else {
-            /*Fornecedor forn = new Fornecedor();
-            
+            Fornecedor forn = new Fornecedor();
+
             forn.setNome(tfNome.getText());
             forn.setTelefone(tfTelefone.getText());
-            
-            if (rbEmpresa.isSelected()){
-                forn.setTipo(1);
+            forn.setSituacaoFor(Fornecedor.SituacaoFor.ATIVO);
+
+            if (rbEmpresa.isSelected()) {
+                forn.setTipoFornecedor(Fornecedor.TipoFornecedor.EMPRESA);
                 forn.setCnpj(tfCNPJ.getText());
                 forn.setCpf(null);
-            } else if (rbPessoa.isSelected()){
-                forn.setTipo(2);
+            } else if (rbPessoa.isSelected()) {
+                forn.setTipoFornecedor(Fornecedor.TipoFornecedor.PESSOA);
                 forn.setCnpj(null);
                 forn.setCpf(tfCPF.getText());
             }
-            
-            fornControle.cadastrar(forn);
-            JOptionPane.showMessageDialog(null, "Fornecedor cadastrado com sucesso!");
-            tfCNPJ.setText("");
-            tfCPF.setText("");
-            tfNome.setText("");
-            tfTelefone.setText("");*/
+
+            try {
+                ControleFornecedor.insereFornecedor(forn);
+                JOptionPane.showMessageDialog(null, "Fornecedor cadastrado com sucesso!");
+                tfCNPJ.setText("");
+                tfCPF.setText("");
+                tfNome.setText("");
+                tfTelefone.setText("");
+            } catch (PersistenceException e) {
+                JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+            }
+
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         FRMFornecedor fornec = new FRMFornecedor();
-        
+
         fornec.setVisible(true);
-        
+
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void tfNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfNomeActionPerformed
+
+    private void tfCNPJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCNPJActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfCNPJActionPerformed
 
     /**
      * @param args the command line arguments

@@ -264,16 +264,14 @@ public class FRMEditarCliente extends javax.swing.JFrame {
                 cliente.setCpf(tfCPF.getText());
 
                 try {
-                    
+
                     ControleCliente.editaCliente(cliente);
-                    
+
                     JOptionPane.showMessageDialog(null, "Cliente editado com sucesso.");
                     this.mudaFrame();
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(null, e);
                 }
-
-                
             }
         } else {
             JOptionPane.showMessageDialog(null, "Senha de confirmação incorreta.");
@@ -305,8 +303,8 @@ public class FRMEditarCliente extends javax.swing.JFrame {
         int opc = JOptionPane.showConfirmDialog(null, "Deseja realmente deletar o(a) cliente " + cliente.getNome() + "?"
                 + " Todas as vendas que esse cliente já fez também serão apagadas, por isso, é ALTAMENTE RECOMENDADO NÃO"
                 + " apagar o cliente, mas apenas desativá-lo.");
-        
-        if (opc == 0){
+
+        if (opc == 0) {
             try {
                 ControleCliente.deletaCliente(cliente);
                 JOptionPane.showMessageDialog(null, "Cliente deletado com sucesso! :(");
@@ -393,9 +391,9 @@ public class FRMEditarCliente extends javax.swing.JFrame {
 
     private void mudaFrame() {
         FRMCliente clie = new FRMCliente();
-        
+
         clie.setVisible(true);
-        
+
         this.dispose();
     }
 

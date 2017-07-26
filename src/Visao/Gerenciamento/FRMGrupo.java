@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Henrique
+ * @author Guilherme
  */
 public class FRMGrupo extends javax.swing.JFrame {
 

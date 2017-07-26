@@ -129,7 +129,7 @@ public class CargoSql {
         }
     }
 
-    public static List<Cargo> listarPorNome(String nome) {
+    public static List<Cargo> listarPorNome(String nome) throws RuntimeException{
         EntityManager manager = JpaUtil.getEntityManager();
 
         try {

@@ -8,20 +8,21 @@ package Visao.Gerenciamento;
 import Visao.Cadastro.FRMCadastrarFornecedor;
 import Controle.ControleFornecedor;
 import Modelo.BEAN.Fornecedor;
+import Visao.Edicao.FRMEditarFornecedor;
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Henrique
+ * @author Guilherme
  */
 public class FRMFornecedor extends javax.swing.JFrame {
 
     private DefaultTableModel dTable;
-    private ArrayList<Fornecedor> dados;
-    private ControleFornecedor controleForn = new ControleFornecedor();
+    private List<Fornecedor> dados;
 
     /**
      * Creates new form FRMFornecedor
@@ -29,7 +30,7 @@ public class FRMFornecedor extends javax.swing.JFrame {
     public FRMFornecedor() {
         initComponents();
 
-        //dados = controleForn.listarTodos();
+        dados = ControleFornecedor.listarTodosAtivos();
         this.preencheTabela();
     }
 
@@ -47,11 +48,11 @@ public class FRMFornecedor extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableFornecedor = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnCadastrar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnInativar = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnLocalizar = new javax.swing.JButton();
         cbOpc = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         tfDado = new javax.swing.JTextField();
@@ -97,43 +98,43 @@ public class FRMFornecedor extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/fornAdd.png"))); // NOI18N
-        jButton1.setText("Cadastrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/fornAdd.png"))); // NOI18N
+        btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCadastrarActionPerformed(evt);
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/Editar.png"))); // NOI18N
-        jButton2.setText("Editar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/Editar.png"))); // NOI18N
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnEditarActionPerformed(evt);
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/FornDel.png"))); // NOI18N
-        jButton3.setText("Deletar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnInativar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/FornDel.png"))); // NOI18N
+        btnInativar.setText("Inativar");
+        btnInativar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnInativarActionPerformed(evt);
             }
         });
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/logout.png"))); // NOI18N
         jButton4.setText("Voltar");
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/funcLoc.png"))); // NOI18N
-        jButton5.setText("Localizar");
-        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnLocalizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/funcLoc.png"))); // NOI18N
+        btnLocalizar.setText("Localizar");
+        btnLocalizar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnLocalizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnLocalizarActionPerformed(evt);
             }
         });
 
-        cbOpc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código", "Nome", "CNPJ" }));
+        cbOpc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Listar todos Ativos", "Código", "Nome", "Apenas Pessoas", "Apenas Empresas", "CNPJ", "CPf", "Listar todos inativos" }));
         cbOpc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbOpcActionPerformed(evt);
@@ -172,7 +173,7 @@ public class FRMFornecedor extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tfDado)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnLocalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -182,9 +183,9 @@ public class FRMFornecedor extends javax.swing.JFrame {
                                     .addGap(10, 10, 10)
                                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(1, 1, 1))
-                                .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(btnInativar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnCadastrar, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnEditar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -194,7 +195,7 @@ public class FRMFornecedor extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(cbOpc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5)
+                    .addComponent(btnLocalizar)
                     .addComponent(tfDado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -202,11 +203,11 @@ public class FRMFornecedor extends javax.swing.JFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(34, 34, 34)
-                        .addComponent(jButton1)
+                        .addComponent(btnCadastrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2)
+                        .addComponent(btnEditar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3)
+                        .addComponent(btnInativar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
                         .addComponent(jButton4)))
                 .addContainerGap())
@@ -243,49 +244,69 @@ public class FRMFornecedor extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         FRMCadastrarFornecedor fornecedor = new FRMCadastrarFornecedor();
 
         fornecedor.setVisible(true);
 
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void cbOpcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOpcActionPerformed
-        // TODO add your handling code here:
+        if (cbOpc.getSelectedIndex() == 0) {
+            try {
+                dados = ControleFornecedor.listarTodosAtivos();
+                this.preencheTabela();
+            } catch (RuntimeException e) {
+                JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+            }
+        } else if (cbOpc.getSelectedIndex() == 3) {
+            try {
+                dados = ControleFornecedor.listarApenasPessoas();
+                this.preencheTabela();
+            } catch (RuntimeException e) {
+                JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+            }
+        } else if (cbOpc.getSelectedIndex() == 4) {
+            try {
+                dados = ControleFornecedor.listarApenasEmpresas();
+                this.preencheTabela();
+            } catch (RuntimeException e) {
+                JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+            }
+        } else if (cbOpc.getSelectedIndex() == 7) {
+            try {
+                dados = ControleFornecedor.listarTodosInativos();
+                this.preencheTabela();
+            } catch (RuntimeException e) {
+                JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+            }
+        }
     }//GEN-LAST:event_cbOpcActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btnLocalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocalizarActionPerformed
         this.localizar();
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btnLocalizarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        /*FRMEditarFornecedor edtFornecedor = new FRMEditarFornecedor();
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        FRMEditarFornecedor edtFornecedor = new FRMEditarFornecedor();
         int qtd = tableFornecedor.getSelectedRowCount();
-        Fornecedor forn = new Fornecedor();
 
         if (qtd < 1) {
             JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para deletar.");
         } else if (qtd > 1) {
             JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez.");
         } else {
-            int linha = tableFornecedor.getSelectedRow();
-            forn.setCodigo(dados.get(linha).getCodigo());
-            forn.setNome(dados.get(linha).getNome());
-            forn.setTipo(dados.get(linha).getTipo());
-            forn.setCnpj(dados.get(linha).getCnpj());
-            forn.setCpf(dados.get(linha).getCpf());
-            forn.setTelefone(dados.get(linha).getTelefone());
 
-            edtFornecedor.pegaObjeto(forn);
+            edtFornecedor.pegaObjeto(dados.get(tableFornecedor.getSelectedRow()));
 
             edtFornecedor.setVisible(true);
 
             this.dispose();
-        }*/
-    }//GEN-LAST:event_jButton2ActionPerformed
+        }
+    }//GEN-LAST:event_btnEditarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnInativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInativarActionPerformed
         int qtd = tableFornecedor.getSelectedColumnCount();
 
         if (qtd < 1) {
@@ -293,17 +314,15 @@ public class FRMFornecedor extends javax.swing.JFrame {
         } else if (qtd > 1) {
             JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez.");
         } else {
-            int linha = tableFornecedor.getSelectedRow();
-            int codigo = dados.get(linha).getCodigo();
-            int opc = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o fornecedor " + dados.get(linha).getNome() + "?");
+            int opc = JOptionPane.showConfirmDialog(null, "Deseja realmente inativar o fornecedor " + dados.get(tableFornecedor.getSelectedRow()).getNome() + "?");
 
             if (opc == 0) {
-                //controleForn.deletar(codigo);
+                ControleFornecedor.inativaFornecedor(dados.get(tableFornecedor.getSelectedRow()));
+                dados = ControleFornecedor.listarTodosAtivos();
+                this.preencheTabela();
             }
-            //dados = controleForn.listarTodos();
-            this.preencheTabela();
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnInativarActionPerformed
 
     private void tfDadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDadoActionPerformed
         this.localizar();
@@ -374,12 +393,12 @@ public class FRMFornecedor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnInativar;
+    private javax.swing.JButton btnLocalizar;
     private javax.swing.JComboBox<String> cbOpc;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -390,7 +409,7 @@ public class FRMFornecedor extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void preencheTabela() {
-        /*dTable = criaTabela();
+        dTable = criaTabela();
 
         dTable.addColumn("Código");
         dTable.addColumn("Nome");
@@ -399,23 +418,23 @@ public class FRMFornecedor extends javax.swing.JFrame {
         dTable.addColumn("Telefone");
 
         for (Fornecedor dado : dados) {
-            
+
             String tipo = "";
             String cpfOuCnpj = "";
-            
-            if (dado.getTipo() == 1){
+
+            if (dado.getTipoFornecedor().equals(Fornecedor.TipoFornecedor.EMPRESA)) {
                 tipo = "Empresa";
                 cpfOuCnpj = dado.getCnpj();
-            } else if (dado.getTipo() == 2){
+            } else if (dado.getTipoFornecedor().equals(Fornecedor.TipoFornecedor.PESSOA)) {
                 tipo = "Pessoa";
                 cpfOuCnpj = dado.getCpf();
             }
-            
+
             dTable.addRow(new Object[]{dado.getCodigo(), dado.getNome(), tipo, cpfOuCnpj, dado.getTelefone()});
         }
 
         tableFornecedor.setModel(dTable);
-*/
+
     }
 
     private DefaultTableModel criaTabela() {
@@ -445,24 +464,40 @@ public class FRMFornecedor extends javax.swing.JFrame {
     }
 
     private void localizar() {
-        /*if ((tfDado.getText().equals("")) || (tfDado.getText().equals("Insira o dado para pesquisa..."))) {
+        if ((tfDado.getText().equals("")) || (tfDado.getText().equals("Insira o dado para pesquisa..."))) {
             JOptionPane.showMessageDialog(null, "Insira algum dado para pesquisa");
         } else {
-            if (cbOpc.getSelectedIndex() == 0) {
-                //if (tfDado.getText().contains("0123456789")) {
-                    dados = controleForn.listarPorCodigo(Integer.parseInt(tfDado.getText()));
+            if (cbOpc.getSelectedIndex() == 1) {
+                try {
+                    dados = ControleFornecedor.listarTudoTodosOuPorCodigo(Integer.parseInt(tfDado.getText()));
                     this.preencheTabela();
-                    
-                //} else {
-                //    JOptionPane.showMessageDialog(null, "Para pesquisar por código, apenas inteiros devem ser inseridos");
-                //}
-            } else if (cbOpc.getSelectedIndex() == 1) {
-                dados = controleForn.listarPorNome(tfDado.getText());
-                this.preencheTabela();
+                } catch (RuntimeException e) {
+                    JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+                }
             } else if (cbOpc.getSelectedIndex() == 2) {
-                dados = controleForn.listarPorCNPJ(tfDado.getText());
-                this.preencheTabela();
+                try {
+                    dados = ControleFornecedor.listarPorNome(tfDado.getText());
+                    this.preencheTabela();
+                } catch (RuntimeException e) {
+                    JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+                }
+
+            } else if (cbOpc.getSelectedIndex() == 5) {
+                try {
+                    dados = ControleFornecedor.listarPorCNPJ(tfDado.getText());
+                    this.preencheTabela();
+                } catch (RuntimeException e) {
+                    JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+                }
+
+            } else if (cbOpc.getSelectedIndex() == 6) {
+                try {
+                    dados = ControleFornecedor.listarPorCPF(tfDado.getText());
+                    this.preencheTabela();
+                } catch (RuntimeException e) {
+                    JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+                }
             }
-        }*/
+        }
     }
 }

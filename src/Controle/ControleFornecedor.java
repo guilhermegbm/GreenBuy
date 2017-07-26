@@ -29,11 +29,47 @@ public class ControleFornecedor {
         FornecedorSql.deletaFornecedor(f);
     }
     
-    public List<Fornecedor> listarTodos() throws RuntimeException {
+    public static List<Fornecedor> listarTodos() throws RuntimeException {
         return FornecedorSql.listarTodos();
     }
     
     public static List<Fornecedor> listarTudoTodosOuPorCodigo(int codigo) throws RuntimeException {
         return FornecedorSql.listarTudoTodosOuPorCodigo(codigo);
+    }
+
+    public static List<Fornecedor> listarTodosAtivos() throws RuntimeException {
+        return FornecedorSql.listarTodosAtivos();
+    }
+    
+    public static List<Fornecedor> listarTodosInativos() throws RuntimeException {
+        return FornecedorSql.listarTodosInativos();
+    }
+
+    public static List<Fornecedor> listarApenasPessoas() throws RuntimeException {
+        return FornecedorSql.listarApenasPessoas();
+    }
+
+    public static List<Fornecedor> listarApenasEmpresas() throws RuntimeException {
+        return FornecedorSql.listarApenasEmpresas();
+    }
+
+    public static List<Fornecedor> listarPorNome(String nome) throws RuntimeException {
+        return FornecedorSql.listarPorNome(nome);
+    }
+
+    public static List<Fornecedor> listarPorCNPJ(String cnpj) throws RuntimeException {
+        return FornecedorSql.listarPorCNPJ(cnpj);
+    }
+
+    public static List<Fornecedor> listarPorCPF(String cpf) throws RuntimeException {
+        return FornecedorSql.listarPorCPF(cpf);
+    }
+    
+    public static void inativaFornecedor (Fornecedor f) throws RuntimeException {
+        FornecedorSql.inativaFornecedor(f);
+    }
+    
+    public static void reativaFornecedor (Fornecedor f) throws RuntimeException {
+        FornecedorSql.reativaFornecedor(f);
     }
 }
