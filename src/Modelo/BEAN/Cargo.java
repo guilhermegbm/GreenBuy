@@ -5,6 +5,7 @@
  */
 package Modelo.BEAN;
 
+import Modelo.SQL.CargoSql;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,7 +16,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.PostLoad;
+import javax.persistence.PostPersist;
+import javax.persistence.PostUpdate;
+import javax.persistence.Query;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -28,6 +34,7 @@ public class Cargo implements Serializable {
     private int codigo;
     private String nome;
     private Set<Funcionario> funcionarios = new HashSet<>();
+    private Long funcionariosNesteCargo;
 
     @Id
     @GeneratedValue
@@ -56,6 +63,22 @@ public class Cargo implements Serializable {
 
     public void setFuncionarios(Set<Funcionario> funcionarios) {
         this.funcionarios = funcionarios;
+    }
+
+    @Transient
+    public Long getFuncionariosNesteCargo() {
+        return funcionariosNesteCargo;
+    }
+
+    public void setFuncionariosNesteCargo(Long funcionariosNesteCargo) {
+        this.funcionariosNesteCargo = funcionariosNesteCargo;
+    }
+    
+    @PostPersist
+    @PostUpdate
+    @PostLoad
+    private void calculaFuncionariosNesteCargo (){
+        this.funcionariosNesteCargo = CargoSql.calculaFuncionariosAtivosNesteCargo(codigo);
     }
     
 }

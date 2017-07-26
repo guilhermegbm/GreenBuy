@@ -129,7 +129,7 @@ public class FRMCliente extends javax.swing.JFrame {
         });
 
         jPanel3.setBackground(new java.awt.Color(204, 255, 204));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Todos os clientes cadastrados"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Lista de Clientes:"));
 
         tableCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

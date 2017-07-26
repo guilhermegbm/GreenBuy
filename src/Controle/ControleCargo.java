@@ -35,4 +35,8 @@ public class ControleCargo {
     public static List<Cargo> listarTudoTodosOuPorCodigo(int codigo) throws RuntimeException {
         return CargoSql.listarTudoTodosOuPorCodigo(codigo);
     }
+
+    public static List<Cargo> listarPorNome(String nome) {
+        return CargoSql.listarPorNome(nome);
+    }
 }
