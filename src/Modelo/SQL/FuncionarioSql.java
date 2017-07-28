@@ -21,6 +21,8 @@ import javax.persistence.TypedQuery;
  * @author Guilherme
  */
 public class FuncionarioSql {
+    
+    private static Funcionario funLogado = new Funcionario();
 
     public static void insereFuncionario(Funcionario f) throws PersistenceException {
         EntityManager manager = JpaUtil.getEntityManager();
@@ -41,7 +43,7 @@ public class FuncionarioSql {
     public static void editaFuncionario(Funcionario f) throws RuntimeException {
         EntityManager manager = JpaUtil.getEntityManager();
         EntityTransaction tx = manager.getTransaction();
-
+        
         try {
             tx.begin();
 
@@ -61,9 +63,9 @@ public class FuncionarioSql {
         try {
             tx.begin();
 
-            manager.merge(f);
+            Funcionario fun = manager.merge(f);
 
-            manager.remove(f);
+            manager.remove(fun);
 
             tx.commit();
         } finally {
@@ -84,7 +86,7 @@ public class FuncionarioSql {
 
     }
 
-    public static List<Funcionario> listarTudoTodosOuPorCodigo(int codigo) throws RuntimeException{
+    public static List<Funcionario> listarTudoTodosOuPorCodigo(int codigo) throws RuntimeException {
         EntityManager manager = JpaUtil.getEntityManager();
 
         try {
@@ -95,7 +97,13 @@ public class FuncionarioSql {
                 return query.getResultList();
             } else {
                 List<Funcionario> s = new ArrayList<>();
-                s.add(manager.find(Funcionario.class, codigo));
+
+                Funcionario f = manager.find(Funcionario.class, codigo);
+
+                if (f != null) {
+                    s.add(f);
+                }
+
                 return s;
             }
         } finally {
@@ -103,9 +111,9 @@ public class FuncionarioSql {
         }
     }
 
-    public static List<String> listarTodosLogins() throws RuntimeException{
+    public static List<String> listarTodosLogins() throws RuntimeException {
         EntityManager manager = JpaUtil.getEntityManager();
-        
+
         try {
             TypedQuery<String> query = manager.createQuery("select f.login from Funcionario f", String.class);
             List<String> l = query.getResultList();
@@ -114,4 +122,84 @@ public class FuncionarioSql {
             manager.close();
         }
     }
+
+    public static List<Funcionario> listarTodosAtivos()throws RuntimeException {
+        EntityManager manager = JpaUtil.getEntityManager();
+
+        try {
+            TypedQuery<Funcionario> tq = manager.createQuery("select f from Funcionario f where f.situacaoFun = :situacao", Funcionario.class);
+            tq.setParameter("situacao", Funcionario.SituacaoFun.ATIVO);
+            return tq.getResultList();
+        } finally {
+            manager.close();
+        }
+    }
+
+    public static List<Funcionario> listarTodosDespedidos() throws RuntimeException{
+        EntityManager manager = JpaUtil.getEntityManager();
+
+        try {
+            TypedQuery<Funcionario> tq = manager.createQuery("select f from Funcionario f where f.situacaoFun = :situacao", Funcionario.class);
+            tq.setParameter("situacao", Funcionario.SituacaoFun.DESPEDIDO);
+            return tq.getResultList();
+        } finally {
+            manager.close();
+        }
+    }
+
+    public static List<Funcionario> listarPorNome(String nome)throws RuntimeException {
+        EntityManager manager = JpaUtil.getEntityManager();
+
+        try {
+            TypedQuery<Funcionario> tq = manager.createQuery("select f from Funcionario f where f.nome like :nome", Funcionario.class);
+            tq.setParameter("nome", "%" + nome + "%");
+            return tq.getResultList();
+        } finally {
+            manager.close();
+        }
+    }
+    
+    public static void despedeFuncionario(Funcionario f) throws RuntimeException{
+        EntityManager manager = JpaUtil.getEntityManager();
+        EntityTransaction tx = manager.getTransaction();
+
+        try {
+            tx.begin();
+            
+            f.setSituacaoFun(Funcionario.SituacaoFun.DESPEDIDO);
+            f.setAdministrador(false);
+
+            manager.merge(f);
+
+            tx.commit();
+        } finally {
+            manager.close();
+        }
+    }
+
+    public static void recontrataFuncionario(Funcionario f) throws RuntimeException{
+        EntityManager manager = JpaUtil.getEntityManager();
+        EntityTransaction tx = manager.getTransaction();
+
+        try {
+            tx.begin();
+            
+            f.setSituacaoFun(Funcionario.SituacaoFun.ATIVO);
+
+            manager.merge(f);
+
+            tx.commit();
+        } finally {
+            manager.close();
+        }
+    }
+
+    public static Funcionario getFunLogado() {
+        return funLogado;
+    }
+
+    public static void setFunLogado(Funcionario funLogado) {
+        FuncionarioSql.funLogado = funLogado;
+    }
+    
 }

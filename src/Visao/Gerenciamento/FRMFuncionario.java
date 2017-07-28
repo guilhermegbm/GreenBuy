@@ -12,6 +12,7 @@ import Controle.ControleFuncionario;
 import Modelo.BEAN.Funcionario;
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,20 +21,27 @@ import javax.swing.table.DefaultTableModel;
  * @author Guilherme
  */
 public class FRMFuncionario extends javax.swing.JFrame {
-    
+
     private DefaultTableModel dTable;
-    private ArrayList<Funcionario> dados;
-    private ControleFuncionario contFun = new ControleFuncionario();
+    private List<Funcionario> dados;
 
     /**
      * Creates new form FRMCliente
      */
     public FRMFuncionario() {
         initComponents();
+
+        try {
+            dados = ControleFuncionario.listarTodosAtivos();
+            this.preencheTabela();
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+        }
         
-        //dados = contFun.listarTodos();
-        
-        this.preencheTabela();
+        Funcionario f = new Funcionario();
+        f.setCodigo(1);
+        f.setAdministrador(true);
+        ControleFuncionario.setFuncionarioLogado(f);
     }
 
     /**
@@ -48,7 +56,7 @@ public class FRMFuncionario extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         btnCadastrarFuncionario = new javax.swing.JButton();
-        btnExcluirFuncionario = new javax.swing.JButton();
+        btnDespedirFuncionario = new javax.swing.JButton();
         btnAttFuncionario = new javax.swing.JButton();
         btnLocalizarFuncionario = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
@@ -75,11 +83,11 @@ public class FRMFuncionario extends javax.swing.JFrame {
             }
         });
 
-        btnExcluirFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/FuncDelete.png"))); // NOI18N
-        btnExcluirFuncionario.setText("Deletar");
-        btnExcluirFuncionario.addActionListener(new java.awt.event.ActionListener() {
+        btnDespedirFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/FuncDelete.png"))); // NOI18N
+        btnDespedirFuncionario.setText("Despedir");
+        btnDespedirFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExcluirFuncionarioActionPerformed(evt);
+                btnDespedirFuncionarioActionPerformed(evt);
             }
         });
 
@@ -109,7 +117,7 @@ public class FRMFuncionario extends javax.swing.JFrame {
 
         jLabel1.setText("Localizar funcionário por:");
 
-        cbOpc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código", "Nome" }));
+        cbOpc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Listar todos ativos", "Código", "Nome", "Listar apenas despedidos" }));
         cbOpc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbOpcActionPerformed(evt);
@@ -183,7 +191,7 @@ public class FRMFuncionario extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnLocalizarFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCadastrarFuncionario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnExcluirFuncionario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDespedirFuncionario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnAttFuncionario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -207,7 +215,7 @@ public class FRMFuncionario extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnAttFuncionario)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnExcluirFuncionario)
+                        .addComponent(btnDespedirFuncionario)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
                         .addComponent(btnVoltar)))
                 .addContainerGap())
@@ -245,18 +253,32 @@ public class FRMFuncionario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbOpcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOpcActionPerformed
-        // TODO add your handling code here:
+        if (cbOpc.getSelectedIndex() == 0) {
+            try {
+                dados = ControleFuncionario.listarTodosAtivos();
+                this.preencheTabela();
+            } catch (RuntimeException e) {
+                JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+            }
+        } else if (cbOpc.getSelectedIndex() == 3) {
+            try {
+                dados = ControleFuncionario.listarTodosDespedidos();
+                this.preencheTabela();
+            } catch (RuntimeException e) {
+                JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+            }
+        }
     }//GEN-LAST:event_cbOpcActionPerformed
 
     private void tfDadoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfDadoFocusGained
-        if (tfDado.getText().equals("Insira o dado para pesquisa...")){
+        if (tfDado.getText().equals("Insira o dado para pesquisa...")) {
             tfDado.setText("");
             tfDado.setForeground(Color.BLACK);
         }
     }//GEN-LAST:event_tfDadoFocusGained
 
     private void tfDadoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfDadoFocusLost
-        if (tfDado.getText().equals("")){
+        if (tfDado.getText().equals("")) {
             tfDado.setText("Insira o dado para pesquisa...");
             tfDado.setForeground(Color.GRAY);
         }
@@ -267,67 +289,85 @@ public class FRMFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLocalizarFuncionarioActionPerformed
 
     private void btnCadastrarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarFuncionarioActionPerformed
-        FRMCadastrarFuncionario cadFun = new FRMCadastrarFuncionario();
-        
-        cadFun.setVisible(true);
-        
-        this.dispose();
+        if (ControleFuncionario.verificaFuncionarioLogado()) {
+            FRMCadastrarFuncionario cadFun = new FRMCadastrarFuncionario();
+
+            cadFun.setVisible(true);
+
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer essa ação.");
+        }
+
+
     }//GEN-LAST:event_btnCadastrarFuncionarioActionPerformed
 
     private void btnAttFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAttFuncionarioActionPerformed
-        FRMEditarFuncionario edtFun = new FRMEditarFuncionario();
-        
         int qtd = tableFuncionario.getSelectedRowCount();
-        Funcionario funcio = new Funcionario();
 
         if (qtd < 1) {
-            JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para deletar.");
+            JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para editar.");
         } else if (qtd > 1) {
             JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez.");
         } else {
-            int linha = tableFuncionario.getSelectedRow();
-            funcio.setCodigo(dados.get(linha).getCodigo());
-            funcio.setNome(dados.get(linha).getNome());
-            funcio.setCpf(dados.get(linha).getCpf());
-            funcio.setSalario(dados.get(linha).getSalario());
-            funcio.setLogin(dados.get(linha).getLogin());
-            funcio.setSenha(dados.get(linha).getSenha());
-            funcio.setTelefone(dados.get(linha).getTelefone());
-            funcio.setCargo(dados.get(linha).getCargo());
 
-            edtFun.pegaObjeto(funcio);
+            if (dados.get(tableFuncionario.getSelectedRow()).getCodigo() == ControleFuncionario.getFuncionarioLogado().getCodigo()) {
+                FRMEditarFuncionario edtFun = new FRMEditarFuncionario();
 
-            edtFun.setVisible(true);
+                edtFun.pegaObjeto(dados.get(tableFuncionario.getSelectedRow()));
 
-            this.dispose();
+                edtFun.setVisible(true);
+
+                this.dispose();
+            } else if (ControleFuncionario.verificaFuncionarioLogado()) {
+                FRMEditarFuncionario edtFun = new FRMEditarFuncionario();
+
+                edtFun.pegaObjeto(dados.get(tableFuncionario.getSelectedRow()));
+                edtFun.setVisible(true);
+
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer essa ação.");
+            }
+
         }
     }//GEN-LAST:event_btnAttFuncionarioActionPerformed
 
-    private void btnExcluirFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirFuncionarioActionPerformed
-        int qtd = tableFuncionario.getSelectedColumnCount();
+    private void btnDespedirFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDespedirFuncionarioActionPerformed
+        if (ControleFuncionario.verificaFuncionarioLogado()) {
+            int qtd = tableFuncionario.getSelectedColumnCount();
 
-        if (qtd < 1) {
-            JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para deletar.");
-        } else if (qtd > 1) {
-            JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez.");
-        } else {
-            int linha = tableFuncionario.getSelectedRow();
-            int codigo = dados.get(linha).getCodigo();
-            int opc = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o(a) funcionario(a) " + dados.get(linha).getNome() + "?");
+            if (qtd < 1) {
+                JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para deletar.");
+            } else if (qtd > 1) {
+                JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez.");
+            } else {
+                int linha = tableFuncionario.getSelectedRow();
+                int opc = JOptionPane.showConfirmDialog(null, "Deseja realmente despedir o(a) funcionario(a) " + dados.get(linha).getNome() + "?");
 
-            if (opc == 0) {
-               // contFun.deletar(codigo);
+                if (opc == 0) {
+                    try {
+                        ControleFuncionario.despedeFuncionario(dados.get(linha));
+                        dados = ControleFuncionario.listarTodosAtivos();
+                        cbOpc.setSelectedIndex(0);
+                        this.preencheTabela();
+                    } catch (RuntimeException e) {
+                        JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+                    }
+                }
+
             }
-            //dados = contFun.listarTodos();
-            this.preencheTabela();
+        } else {
+            JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer essa ação.");
         }
-    }//GEN-LAST:event_btnExcluirFuncionarioActionPerformed
+
+    }//GEN-LAST:event_btnDespedirFuncionarioActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         FRMPrincipal prin = new FRMPrincipal();
-        
+
         prin.setVisible(true);
-        
+
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
@@ -374,7 +414,7 @@ public class FRMFuncionario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAttFuncionario;
     private javax.swing.JButton btnCadastrarFuncionario;
-    private javax.swing.JButton btnExcluirFuncionario;
+    private javax.swing.JButton btnDespedirFuncionario;
     private javax.swing.JButton btnLocalizarFuncionario;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JComboBox<String> cbOpc;
@@ -388,27 +428,30 @@ public class FRMFuncionario extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void localizar() {
-        /*if ((tfDado.getText().equals("")) || (tfDado.getText().equals("Insira o dado para pesquisa..."))) {
+        if ((tfDado.getText().equals("")) || (tfDado.getText().equals("Insira o dado para pesquisa..."))) {
             JOptionPane.showMessageDialog(null, "Insira algum dado para pesquisa");
         } else {
-            if (cbOpc.getSelectedIndex() == 0) {
-                //if (tfDado.getText().contains("0123456789")) {
-                    dados = contFun.listarPorCodigo(Integer.parseInt(tfDado.getText()));
+            if (cbOpc.getSelectedIndex() == 1) {
+                try {
+                    dados = ControleFuncionario.listarTudoTodosOuPorCodigo(Integer.parseInt(tfDado.getText()));
                     this.preencheTabela();
-                    
-                //} else {
-                //    JOptionPane.showMessageDialog(null, "Para pesquisar por código, apenas inteiros devem ser inseridos");
-                //}
-            } else if (cbOpc.getSelectedIndex() == 1) {
-                dados = contFun.listarPorNome(tfDado.getText());
-                this.preencheTabela();
+                } catch (RuntimeException e) {
+                    JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+                }
+            } else if (cbOpc.getSelectedIndex() == 2) {
+                try {
+                    dados = ControleFuncionario.listarPorNome(tfDado.getText());
+                    this.preencheTabela();
+                } catch (RuntimeException e) {
+                    JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+                }
             }
-        }*/
+        }
     }
 
     private void preencheTabela() {
-        dTable = criaTabela();
-        
+        dTable = this.criaTabela();
+
         dTable.addColumn("Código");
         dTable.addColumn("Nome");
         dTable.addColumn("CPF");
@@ -416,16 +459,16 @@ public class FRMFuncionario extends javax.swing.JFrame {
         dTable.addColumn("Telefone");
 
         for (Funcionario dado : dados) {
-            dTable.addRow(new Object[] {dado.getCodigo(), dado.getNome(),dado.getCpf(), dado.getCargo().getNome(), dado.getTelefone()});
+            dTable.addRow(new Object[]{dado.getCodigo(), dado.getNome(), dado.getCpf(), dado.getCargo().getNome(), dado.getTelefone()});
         }
-        
+
         tableFuncionario.setModel(dTable);
-        
+
     }
 
     private DefaultTableModel criaTabela() {
         DefaultTableModel dTable = new DefaultTableModel() {
-            //Define o tipo dos campos (coluna) na mesma ordem que as colunas foram criadas
+
             Class[] types = new Class[]{
                 java.lang.Integer.class, //codigo
                 java.lang.String.class, //nome

@@ -29,6 +29,7 @@ public class FRMCargo extends javax.swing.JFrame {
      */
     public FRMCargo() {
         initComponents();
+        dados = new ArrayList<>();
         try {
             dados = ControleCargo.listarTodos();
             this.preencheTabela();

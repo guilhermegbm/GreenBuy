@@ -239,7 +239,7 @@ public class FRMLogin extends javax.swing.JFrame {
                     lblImg2.setIcon(new ImageIcon(url));
                 } else {
                     FRMPrincipal p = new FRMPrincipal();
-                    p.recebeFuncionario(f);
+                    ControleFuncionario.setFuncionarioLogado(f);
                     p.setVisible(true);
                     this.dispose();
                 }

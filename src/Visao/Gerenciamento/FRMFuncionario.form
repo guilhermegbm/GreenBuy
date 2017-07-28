@@ -93,7 +93,7 @@
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="btnLocalizarFuncionario" max="32767" attributes="0"/>
                           <Component id="btnCadastrarFuncionario" alignment="1" max="32767" attributes="0"/>
-                          <Component id="btnExcluirFuncionario" alignment="1" max="32767" attributes="0"/>
+                          <Component id="btnDespedirFuncionario" alignment="1" max="32767" attributes="0"/>
                           <Component id="btnVoltar" max="32767" attributes="0"/>
                           <Component id="btnAttFuncionario" alignment="1" max="32767" attributes="0"/>
                       </Group>
@@ -122,7 +122,7 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="btnAttFuncionario" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="btnExcluirFuncionario" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnDespedirFuncionario" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="183" max="32767" attributes="0"/>
                               <Component id="btnVoltar" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -144,15 +144,15 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCadastrarFuncionarioActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnExcluirFuncionario">
+            <Component class="javax.swing.JButton" name="btnDespedirFuncionario">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Visao.icon/FuncDelete.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Deletar"/>
+                <Property name="text" type="java.lang.String" value="Despedir"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExcluirFuncionarioActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDespedirFuncionarioActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnAttFuncionario">
@@ -196,9 +196,11 @@
             <Component class="javax.swing.JComboBox" name="cbOpc">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="2">
-                    <StringItem index="0" value="C&#xf3;digo"/>
-                    <StringItem index="1" value="Nome"/>
+                  <StringArray count="4">
+                    <StringItem index="0" value="Listar todos ativos"/>
+                    <StringItem index="1" value="C&#xf3;digo"/>
+                    <StringItem index="2" value="Nome"/>
+                    <StringItem index="3" value="Listar apenas despedidos"/>
                   </StringArray>
                 </Property>
               </Properties>

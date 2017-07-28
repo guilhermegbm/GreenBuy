@@ -152,8 +152,6 @@ public class ClienteSql {
             tx.begin();
             
             c.setSituacaoCli(Cliente.SituacaoCli.DESLIGADO);
-            
-            System.out.println("Código: " + c.getCodigo() + " Nome: " + c.getNome() + " Situação: " + c.getSituacaoCli());
 
             manager.merge(c);
 

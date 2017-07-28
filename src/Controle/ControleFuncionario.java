@@ -60,4 +60,37 @@ public class ControleFuncionario {
         }
         return null;
     }
+
+    public static List<Funcionario> listarTodosAtivos() throws RuntimeException{
+        return FuncionarioSql.listarTodosAtivos();
+    }
+
+    public static List<Funcionario> listarTodosDespedidos() throws RuntimeException{
+        return FuncionarioSql.listarTodosDespedidos();
+    }
+
+    public static List<Funcionario> listarPorNome(String nome) throws RuntimeException{
+        return FuncionarioSql.listarPorNome(nome);
+    }
+
+    public static boolean verificaFuncionarioLogado() {
+        Funcionario f = FuncionarioSql.getFunLogado();
+        return f.isAdministrador();
+    }
+
+    public static void setFuncionarioLogado(Funcionario f) {
+        FuncionarioSql.setFunLogado(f);
+    }
+    
+    public static Funcionario getFuncionarioLogado (){
+        return FuncionarioSql.getFunLogado();
+    }
+    
+    public static void despedeFuncionario(Funcionario f) throws RuntimeException{
+        FuncionarioSql.despedeFuncionario(f);
+    }
+    
+    public static void recontrataFuncionario(Funcionario f) throws RuntimeException{
+        FuncionarioSql.recontrataFuncionario(f);
+    }
 }

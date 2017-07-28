@@ -11,25 +11,24 @@ import Modelo.BEAN.Cargo;
 import Modelo.BEAN.Funcionario;
 import Visao.Gerenciamento.FRMFuncionario;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author Isabella
+ * @author Guilherme
  */
 public class FRMEditarFuncionario extends javax.swing.JFrame {
 
-    Funcionario f = new Funcionario();
-    ArrayList<Cargo> cargoAL = new ArrayList<Cargo>();
-    ControleCargo conC = new ControleCargo();
-    ControleFuncionario conF = new ControleFuncionario();
+    Funcionario fun = new Funcionario();
+    List<Cargo> cargoAL;
 
     /**
      * Creates new form FRMCadastrarFuncionario
      */
     public FRMEditarFuncionario() {
         initComponents();
-        //cargoAL = conC.listarTodos();
+        cargoAL = ControleCargo.listarTodos();
         this.preencheCB();
     }
 
@@ -51,7 +50,7 @@ public class FRMEditarFuncionario extends javax.swing.JFrame {
         }  
         catch (Exception e){  
         }
-        tfUsuario = new javax.swing.JTextField();
+        tfLogin = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
@@ -74,6 +73,9 @@ public class FRMEditarFuncionario extends javax.swing.JFrame {
         }  
         catch (Exception e){  
         }
+        cbAdm = new javax.swing.JCheckBox();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Edição de funcionário");
@@ -108,9 +110,15 @@ public class FRMEditarFuncionario extends javax.swing.JFrame {
 
         jLabel6.setText("Telefone:");
 
+        tfSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfSenhaActionPerformed(evt);
+            }
+        });
+
         jLabel1.setText("Nome:");
 
-        jLabel2.setText("Usuário:");
+        jLabel2.setText("Login:");
 
         jLabel3.setText("Senha:");
 
@@ -134,6 +142,28 @@ public class FRMEditarFuncionario extends javax.swing.JFrame {
             }
         });
 
+        cbAdm.setBackground(new java.awt.Color(204, 255, 204));
+        cbAdm.setText("Administrador");
+        cbAdm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbAdmActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Recontratar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Deletar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -141,51 +171,53 @@ public class FRMEditarFuncionario extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel8))
-                .addGap(25, 25, 25)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tfNome, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                    .addComponent(tfCPF))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel6)
-                            .addGap(260, 260, 260))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tfSenha, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(tfUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton3))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(20, 20, 20)
+                                .addComponent(tfSal, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbCargo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2)))
+                        .addContainerGap())
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tfConfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel7)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(tfTel, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(56, 56, 56)
-                                    .addComponent(tfSal, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addGap(34, 34, 34)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jButton2)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(cbCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap())
+                                .addComponent(tfConfSenha))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel8))
+                                .addGap(25, 25, 25)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(tfCPF, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfLogin, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tfNome)
+                                    .addComponent(tfSenha, javax.swing.GroupLayout.Alignment.LEADING)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tfTel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cbAdm))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addGap(10, 10, 10))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,20 +232,21 @@ public class FRMEditarFuncionario extends javax.swing.JFrame {
                     .addComponent(tfCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfConfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel6)
+                    .addComponent(cbAdm))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfSal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -223,7 +256,9 @@ public class FRMEditarFuncionario extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -248,7 +283,7 @@ public class FRMEditarFuncionario extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -259,31 +294,51 @@ public class FRMEditarFuncionario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Funcionario fun = new Funcionario();
-
+        Funcionario f = fun;
         if (tfSenha.getText().equals(tfConfSenha.getText())) {
-            if ((tfNome.getText().equals(""))|| (tfCPF.getText().equals("")) || (tfUsuario.getText().equals("")) || (tfSenha.getText().equals("")) || (tfConfSenha.getText().equals("")) || (tfSal.getText().equals("")) || (tfTel.getText().equals(""))) {
+            if ((tfNome.getText().equals("")) || (tfCPF.getText().equals("   .   .   -  ")) || (tfLogin.getText().equals("")) || (tfSenha.getText().equals("")) || (tfConfSenha.getText().equals("")) || (tfSal.getText().equals(""))) {
                 JOptionPane.showMessageDialog(null, "Todos os campos devem estar preenchidos");
             } else {
-                fun.setCodigo(f.getCodigo());
-                fun.setNome(tfNome.getText());
-                fun.setCpf(tfCPF.getText());
-                fun.setLogin(tfUsuario.getText());
-                fun.setSenha(tfSenha.getText());
-                fun.setSalario(Float.parseFloat(tfSal.getText()));
-                fun.setTelefone(tfTel.getText());
+                f.setNome(tfNome.getText());
+                f.setCpf(tfCPF.getText());
+                f.setLogin(tfLogin.getText());
+                f.setSenha(tfSenha.getText());
+                f.setTelefone(tfTel.getText());
 
-                for (Cargo c : cargoAL) {
-                    if (c.getNome().equals(cbCargo.getSelectedItem() + "")) {
-                        fun.setCargo(c);
-                    }
+                String sal = tfSal.getText();
+
+                if (sal.contains(",")) {
+                    String[] parts = sal.split(",");
+                    String part1 = parts[0];
+                    String part2 = parts[1];
+
+                    sal = part1 + "." + part2;
                 }
 
-                //conF.editar(fun);
+                f.setSalario(Float.parseFloat(sal));
 
-                JOptionPane.showMessageDialog(null, "Fornecedor editado com sucesso.");
+                if (tfCPF.getText().equals("   .   .   -  ")) {
+                    f.setCpf(null);
+                }
 
-                this.mudaFrame();
+                if (tfTel.getText().equals("(  )     -    ")) {
+                    f.setTelefone(null);
+                }
+
+                f.setCargo(cargoAL.get(cbCargo.getSelectedIndex()));
+
+                f.setAdministrador(cbAdm.isSelected());
+
+                try {
+                    ControleFuncionario.editaFuncionario(f);
+                    JOptionPane.showMessageDialog(null, "Fornecedor editado com sucesso.");
+
+                    this.mudaFrame();
+                } catch (RuntimeException e) {
+                    JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+                    throw new RuntimeException(e);
+                }
+
             }
         } else {
             JOptionPane.showMessageDialog(null, "Senha de confirmação incorreta.");
@@ -311,6 +366,48 @@ public class FRMEditarFuncionario extends javax.swing.JFrame {
     private void tfCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCPFActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfCPFActionPerformed
+
+    private void tfSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfSenhaActionPerformed
+
+    private void cbAdmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAdmActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbAdmActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        if (ControleFuncionario.verificaFuncionarioLogado()) {
+            try {
+                ControleFuncionario.recontrataFuncionario(fun);
+                JOptionPane.showMessageDialog(null, "Funcionario recontratado com sucesso!");
+                this.mudaFrame();
+            } catch (RuntimeException e) {
+                JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer essa ação.");
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        if (ControleFuncionario.verificaFuncionarioLogado()) {
+            int opc = JOptionPane.showConfirmDialog(null, "Deseja realmente deletar o(a) funcionário(a) " + fun.getNome() + "?"
+                    + " Todas as vendas que esse funcionario já fez também serão apagadas, por isso, é ALTAMENTE RECOMENDADO NÃO"
+                    + " apagar o funcionário, mas apenas despedí-lo.");
+
+            if (opc == 0) {
+                try {
+                    ControleFuncionario.deletaFuncionario(fun);
+                    JOptionPane.showMessageDialog(null, "Funcionario deletado com sucesso!");
+                    this.mudaFrame();
+                } catch (RuntimeException e) {
+                    JOptionPane.showMessageDialog(null, "DeuRuim: " + e);
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer essa ação.");
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -349,9 +446,12 @@ public class FRMEditarFuncionario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox cbAdm;
     private javax.swing.JComboBox<String> cbCargo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -364,28 +464,39 @@ public class FRMEditarFuncionario extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField tfCPF;
     private javax.swing.JTextField tfConfSenha;
+    private javax.swing.JTextField tfLogin;
     private javax.swing.JTextField tfNome;
     private javax.swing.JTextField tfSal;
     private javax.swing.JTextField tfSenha;
     private javax.swing.JTextField tfTel;
-    private javax.swing.JTextField tfUsuario;
     // End of variables declaration//GEN-END:variables
 
     public void pegaObjeto(Funcionario funcio) {
-        f = funcio;
+        fun = funcio;
         this.preencheDados();
     }
 
     private void preencheDados() {
-        tfNome.setText(f.getNome());
-        tfCPF.setText(f.getCpf());
-        tfConfSenha.setText(f.getSenha());
-        tfSal.setText(Float.toString(f.getSalario()));
-        tfTel.setText(f.getTelefone());
-        tfSenha.setText(f.getSenha());
-        tfUsuario.setText(f.getLogin());
+        tfNome.setText(fun.getNome());
+        tfCPF.setText(fun.getCpf());
+        tfConfSenha.setText(fun.getSenha());
+        tfSal.setText(Float.toString(fun.getSalario()));
+        tfTel.setText(fun.getTelefone());
+        tfSenha.setText(fun.getSenha());
+        tfLogin.setText(fun.getLogin());
 
-        cbCargo.setSelectedItem(f.getCargo().getNome());
+        int index = 0;
+        for (Cargo cargo : cargoAL) {
+            if (cargo.getCodigo() == fun.getCargo().getCodigo()) {
+                cbCargo.setSelectedIndex(index);
+            }
+            index++;
+        }
+
+        if (!ControleFuncionario.verificaFuncionarioLogado()) {
+            cbAdm.setEnabled(false);
+            cbCargo.setEnabled(false);
+        }
     }
 
     private void preencheCB() {

@@ -13,8 +13,6 @@ import Modelo.BEAN.Funcionario;
  */
 public class FRMPrincipal extends javax.swing.JFrame {
 
-    private Funcionario funcionario;
-
     /**
      * Creates new form FRMPrincipal
      */
@@ -376,13 +374,5 @@ public class FRMPrincipal extends javax.swing.JFrame {
     private java.awt.MenuBar menuBar1;
     private java.awt.MenuBar menuBar2;
     // End of variables declaration//GEN-END:variables
-
-    public void recebeFuncionario(Funcionario f) {
-        funcionario = f;
-    }
-
-    public Funcionario getFuncionario() {
-        return funcionario;
-    }
     
 }

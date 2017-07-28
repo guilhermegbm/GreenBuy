@@ -245,14 +245,14 @@ public class FRMCliente extends javax.swing.JFrame {
             try {
                 dados = ControleCliente.listarTodosAtivos();
                 this.preencheTabela();
-            } catch (Exception e) {
+            } catch (RuntimeException e) {
                 JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
             }
         } else if (cbOpc.getSelectedIndex() == 3) {
             try {
                 dados = ControleCliente.listarTodosDesligados();
                 this.preencheTabela();
-            } catch (Exception e) {
+            } catch (RuntimeException e) {
                 JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
             }
         }
