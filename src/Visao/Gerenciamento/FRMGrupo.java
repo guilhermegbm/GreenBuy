@@ -5,11 +5,13 @@
  */
 package Visao.Gerenciamento;
 
+import Controle.ControleGrupo;
 import Visao.Cadastro.FRMCadastrarObjeto;
-import Controle.ControleObjeto;
-import Modelo.BEAN.Objeto;
+import Modelo.BEAN.Grupo;
+import Visao.Cadastro.FRMCadastrarGrupo;
+import Visao.Edicao.FRMEditarGrupo;
 import java.awt.Color;
-import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,8 +22,7 @@ import javax.swing.table.DefaultTableModel;
 public class FRMGrupo extends javax.swing.JFrame {
 
     private DefaultTableModel dTable;
-    ArrayList<Objeto> dados;
-    ControleObjeto controleO = new ControleObjeto();
+    private List<Grupo> dados;
 
     /**
      * Creates new form FRMFornecedor
@@ -29,7 +30,7 @@ public class FRMGrupo extends javax.swing.JFrame {
     public FRMGrupo() {
         initComponents();
 
-        //dados = controleO.listarTodos();
+        dados = ControleGrupo.listarTodos();
 
         this.preencheTabela();
     }
@@ -47,7 +48,7 @@ public class FRMGrupo extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableObjeto = new javax.swing.JTable();
+        tableGrupo = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -66,9 +67,9 @@ public class FRMGrupo extends javax.swing.JFrame {
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 204));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Todos as classes cadastradas"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Todos os grupos cadastrados"));
 
-        tableObjeto.setModel(new javax.swing.table.DefaultTableModel(
+        tableGrupo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -79,7 +80,7 @@ public class FRMGrupo extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(tableObjeto);
+        jScrollPane1.setViewportView(tableGrupo);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -133,14 +134,14 @@ public class FRMGrupo extends javax.swing.JFrame {
             }
         });
 
-        cbOpc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código", "Nome" }));
+        cbOpc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Listar todos", "Código", "Nome" }));
         cbOpc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbOpcActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Localizar classe por:");
+        jLabel1.setText("Localizar grupo por:");
 
         tfDado.setForeground(new java.awt.Color(153, 153, 153));
         tfDado.setText("Insira o dado para pesquisa...");
@@ -243,15 +244,22 @@ public class FRMGrupo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        FRMCadastrarObjeto cadProd = new FRMCadastrarObjeto();
+        FRMCadastrarGrupo cadG = new FRMCadastrarGrupo();
 
-        cadProd.setVisible(true);
+        cadG.setVisible(true);
 
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cbOpcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOpcActionPerformed
-        // TODO add your handling code here:
+        if (cbOpc.getSelectedIndex() == 0) {
+            try {
+                dados = ControleGrupo.listarTodos();
+                this.preencheTabela();
+            } catch (RuntimeException e) {
+                JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+            }
+        }
     }//GEN-LAST:event_cbOpcActionPerformed
 
     private void tfDadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDadoActionPerformed
@@ -277,54 +285,44 @@ public class FRMGrupo extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        int qnt = tableObjeto.getSelectedColumnCount();
-        
+        int qnt = tableGrupo.getSelectedColumnCount();
+
         if (qnt < 1) {
             JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para deletar.");
         } else if (qnt > 1) {
             JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez;");
         } else {
 
-            /*int linha = tableObjeto.getSelectedRow();
-            int codigo = dados.get(linha).getCodigo();
-
-            int opc = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o objeto " + dados.get(linha).getNome() + " ?");
+            int opc = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o grupo " + dados.get(tableGrupo.getSelectedRow()).getNome() + " ?");
 
             if (opc == 0) {
-                controleO.deletar(codigo);
-                dados = controleO.listarTodos();
+                try {
+                    ControleGrupo.deletaGrupo(dados.get(tableGrupo.getSelectedRow()));
+                dados = ControleGrupo.listarTodos();
                 this.preencheTabela();
-            }*/
+                } catch (RuntimeException e) {
+                    JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+                }
+            }
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        /*FRMEditarObjeto edtObj = new FRMEditarObjeto();
-        int qnt = tableObjeto.getSelectedRowCount();
-        Objeto obj = new Objeto();
+        FRMEditarGrupo edtObj = new FRMEditarGrupo();
+        int qnt = tableGrupo.getSelectedRowCount();
 
         if (qnt < 1) {
             JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para editar.");
         } else if (qnt > 1) {
             JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez.");
         } else {
-            int linha = tableObjeto.getSelectedRow();
-            obj.setCodigo(dados.get(linha).getCodigo());
-            obj.setNome(dados.get(linha).getNome());
-            obj.setDescricao(dados.get(linha).getDescricao());
-            obj.setPrecoVendaBase(dados.get(linha).getPrecoVendaBase());
-            obj.setPrecoCompraBase(dados.get(linha).getPrecoCompraBase());
-            obj.setUnidade(dados.get(linha).getUnidade());
-            obj.setQtdeEstoque(dados.get(linha).getQtdeEstoque());
-            obj.setTipoObj(dados.get(linha).getTipoObj());
-            obj.setSubClasse(dados.get(linha).getClasse());
 
-            edtObj.pegaObjeto(obj);
+            edtObj.pegaObjeto(dados.get(tableGrupo.getSelectedRow()));
 
             edtObj.setVisible(true);
 
-            this.setVisible(false);
-        }*/
+            this.dispose();
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void tfDadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfDadoKeyTyped
@@ -441,37 +439,21 @@ public class FRMGrupo extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tableObjeto;
+    private javax.swing.JTable tableGrupo;
     private javax.swing.JTextField tfDado;
     // End of variables declaration//GEN-END:variables
 
     private void preencheTabela() {
-        /*dTable = criaTabela();
+        dTable = criaTabela();
 
         dTable.addColumn("Código");
         dTable.addColumn("Nome");
-        dTable.addColumn("Preço de venda");
-        dTable.addColumn("Preço de compra");
-        dTable.addColumn("Tipo");
-        dTable.addColumn("Classe");
-        dTable.addColumn("Unidade");
 
-        for (Objeto dado : dados) {
-            
-            String tipo = "";
-            
-            if (dado.getTipoObj() == 1){
-                tipo = "Produto";
-            } else if (dado.getTipoObj() == 2){
-                tipo = "Mercadoria";
-            }
-            
-            dTable.addRow(new Object[]{dado.getCodigo(), dado.getNome(),
-                dado.getPrecoVendaBase(), dado.getPrecoCompraBase(), tipo,
-                dado.getClasse().getNome(), dado.getUnidade()});
+        for (Grupo dado : dados) {
+            dTable.addRow(new Object[]{dado.getCodigo(), dado.getNome()});
         }
 
-        tableObjeto.setModel(dTable);*/
+        tableGrupo.setModel(dTable);
     }
 
     private DefaultTableModel criaTabela() {
@@ -481,16 +463,10 @@ public class FRMGrupo extends javax.swing.JFrame {
             Class[] types = new Class[]{
                 java.lang.Integer.class, //codigo
                 java.lang.String.class, //nome
-                java.lang.Float.class, //preço de venda
-                java.lang.Float.class, //preço de compra
-                java.lang.String.class, //tipo (Prod ou mer)
-                java.lang.String.class, //classe
-                java.lang.String.class //unidade
-                
             };
             //define se os campos podem ser editados na propria tabela
             boolean[] canEdit = new boolean[]{
-                false, false, false, false, false, false, false
+                false, false
             };
 
             @Override
@@ -505,51 +481,25 @@ public class FRMGrupo extends javax.swing.JFrame {
     }
 
     private void localizar() {
-        /*if ((tfDado.getText().equals("")) || (tfDado.getText().equals("Insira o dado para pesquisa..."))) {
+        if ((tfDado.getText().equals("")) || (tfDado.getText().equals("Insira o dado para pesquisa..."))) {
             JOptionPane.showMessageDialog(null, "Insira algum dado para pesquisa.");
         } else {
-            if (cbOpc.getSelectedIndex() == 0) {
-                //if (tfDado.getText().contains("0123456789")) {
-                    dados = controleO.listarPorCodigo(Integer.parseInt(tfDado.getText()));
+            if (cbOpc.getSelectedIndex() == 1) {
+                try {
+                    dados = ControleGrupo.listarTudoTodosOuPorCodigo(Integer.parseInt(tfDado.getText()));
                     this.preencheTabela();
-                //} else {
-                //    JOptionPane.showMessageDialog(null, "Para pesquisar por código, apenas inteiros devem ser inseridos");
-                //}
-            } else if (cbOpc.getSelectedIndex() == 1) {
-                dados = controleO.listarPorNome(tfDado.getText());
-                this.preencheTabela();
+                } catch (RuntimeException e) {
+                    JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+                }
+
             } else if (cbOpc.getSelectedIndex() == 2) {
-                //if (tfDado.getText().contains("0123456789,.")) {
-                    String texto = tfDado.getText();
-
-                    if (texto.contains(",")) {
-                        String partes[] = texto.split(",");
-                        String parte1 = partes[0];
-                        String parte2 = partes[1];
-                        texto = parte1 + "." + parte2;
-                    }
-                    dados = controleO.listarPorValorMenor(Float.parseFloat(texto));
-                    this.preencheTabela();
-                //} else {
-                //    JOptionPane.showMessageDialog(null, "Para pesquisar por valor, apenas números, vírgula ou ponto devem ser inseridos");
-                //}
-            } else if (cbOpc.getSelectedIndex() == 3) {
-                //if (tfDado.getText().contains("0123456789,.")) {
-                    String texto = tfDado.getText();
-
-                    if (texto.contains(",")) {
-                        String partes[] = texto.split(",");
-                        String parte1 = partes[0];
-                        String parte2 = partes[1];
-                        texto = parte1 + "." + parte2;
-                    }
-
-                    dados = controleO.listarPorValorMaior(Float.parseFloat(texto));
-                    this.preencheTabela();
-                //} else {
-                //    JOptionPane.showMessageDialog(null, "Para pesquisar por valor, apenas números, vírgula ou ponto devem ser inseridos");
-                //}
+                try {
+                    dados = ControleGrupo.listarPorNome(tfDado.getText());
+                this.preencheTabela();
+                } catch (RuntimeException e) {
+                    JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+                }
             }
-        }*/
+        }
     }
 }

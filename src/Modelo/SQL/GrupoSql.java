@@ -61,9 +61,9 @@ public class GrupoSql {
         try {
             tx.begin();
 
-            manager.merge(g);
+            Grupo grupo = manager.merge(g);
 
-            manager.remove(g);
+            manager.remove(grupo);
 
             tx.commit();
         } finally {
@@ -96,9 +96,26 @@ public class GrupoSql {
                 return query.getResultList();
             } else {
                 List<Grupo> s = new ArrayList<>();
-                s.add(manager.find(Grupo.class, codigo));
+                Grupo g = manager.find(Grupo.class, codigo);
+                
+                if (g != null){
+                    s.add(g);
+                }
+                
                 return s;
             }
+        } finally {
+            manager.close();
+        }
+    }
+    
+    public static List<Grupo> listarPorNome (String nome) throws RuntimeException {
+        EntityManager manager = JpaUtil.getEntityManager();
+
+        try {
+            TypedQuery<Grupo> tq = manager.createQuery("select g from Grupo g where g.nome like :nome", Grupo.class);
+            tq.setParameter("nome", "%" + nome + "%");
+            return tq.getResultList();
         } finally {
             manager.close();
         }
