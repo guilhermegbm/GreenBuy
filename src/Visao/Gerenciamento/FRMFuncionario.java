@@ -474,7 +474,7 @@ public class FRMFuncionario extends javax.swing.JFrame {
                 java.lang.String.class, //nome
                 java.lang.String.class, //cpf
                 java.lang.String.class, //Cargo(nome)
-                java.lang.String.class, //Telefone
+                java.lang.String.class //Telefone
             };
             //define se os campos podem ser editados na propria tabela
             boolean[] canEdit = new boolean[]{

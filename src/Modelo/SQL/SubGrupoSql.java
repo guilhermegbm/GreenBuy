@@ -8,9 +8,7 @@ package Modelo.SQL;
 import Jpa.JpaUtil;
 import Modelo.BEAN.SubGrupo;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
@@ -61,9 +59,9 @@ public class SubGrupoSql {
         try {
             tx.begin();
 
-            manager.merge(sg);
+            SubGrupo sub = manager.merge(sg);
 
-            manager.remove(sg);
+            manager.remove(sub);
 
             tx.commit();
         } finally {
@@ -89,15 +87,32 @@ public class SubGrupoSql {
 
         try {
             if (codigo == 0) {
-                TypedQuery<SubGrupo> query = manager.createQuery("select distinct s from "
-                        + "SubGrupo left join fetch s.grupo g left join fetch s.objetos", SubGrupo.class);
+                TypedQuery<SubGrupo> query = manager.createQuery("select distinct sg from "
+                        + "SubGrupo sg left join fetch sg.grupo g left join fetch sg.objetos", SubGrupo.class);
 
                 return query.getResultList();
             } else {
                 List<SubGrupo> s = new ArrayList<>();
-                s.add(manager.find(SubGrupo.class, codigo));
+                SubGrupo sg = manager.find(SubGrupo.class, codigo);
+
+                if (sg != null) {
+                    s.add(sg);
+                }
+
                 return s;
             }
+        } finally {
+            manager.close();
+        }
+    }
+
+    public static List<SubGrupo> listarPorNome(String nome) throws RuntimeException {
+        EntityManager manager = JpaUtil.getEntityManager();
+
+        try {
+            TypedQuery<SubGrupo> tq = manager.createQuery("select sg from SubGrupo sg where sg.nome like :nome", SubGrupo.class);
+            tq.setParameter("nome", "%" + nome + "%");
+            return tq.getResultList();
         } finally {
             manager.close();
         }

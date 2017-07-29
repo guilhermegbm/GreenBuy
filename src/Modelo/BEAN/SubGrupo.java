@@ -7,6 +7,7 @@ package Modelo.BEAN;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -26,6 +27,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "subGrupo")
 public class SubGrupo implements Serializable {
+
     private int codigo;
     private String nome;
     private Grupo grupo;
@@ -51,7 +53,7 @@ public class SubGrupo implements Serializable {
         this.nome = nome;
     }
 
-    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    @ManyToOne(optional = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "sub_gruCodigo")
     public Grupo getGrupo() {
         return grupo;
@@ -69,6 +71,40 @@ public class SubGrupo implements Serializable {
     public void setObjetos(Set<Objeto> objetos) {
         this.objetos = objetos;
     }
-    
-    
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + this.codigo;
+        hash = 53 * hash + Objects.hashCode(this.nome);
+        hash = 53 * hash + Objects.hashCode(this.grupo);
+        //hash = 53 * hash + Objects.hashCode(this.objetos);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final SubGrupo other = (SubGrupo) obj;
+        if (this.codigo != other.codigo) {
+            return false;
+        }
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        if (!Objects.equals(this.grupo, other.grupo)) {
+            return false;
+        }
+        
+        return true;
+    }
+
 }

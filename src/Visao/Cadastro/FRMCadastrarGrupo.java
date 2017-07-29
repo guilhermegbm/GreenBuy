@@ -136,7 +136,7 @@ public class FRMCadastrarGrupo extends javax.swing.JFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         if (tfNome.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Insira o nome da Grupo.");
+            JOptionPane.showMessageDialog(null, "Insira o nome do Grupo.");
         } else {
             boolean confirm = ControleGrupo.verifNome(tfNome.getText());
             int opc = 1;

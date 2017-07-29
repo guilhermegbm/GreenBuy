@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 public class FRMEditarGrupo extends javax.swing.JFrame {
 
     private Grupo g = new Grupo();
+
     /**
      * Creates new form FRMEditarGrupo
      */
@@ -126,26 +127,35 @@ public class FRMEditarGrupo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        if (tfNome.getText().equals("")){
+        if (tfNome.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "O campo nome deve estar preenchido");
         } else {
-            boolean confirm = ControleGrupo.verifNome(tfNome.getText());
-            int opc = 1;
 
-            if (confirm == true) {
-                opc = JOptionPane.showConfirmDialog(null, "Já existe um grupo com o nome " + tfNome.getText() + ". Gostaria de editá-lo mesmo assim?");
-            }
+            Grupo grupo = new Grupo();
 
-            if ((confirm == false) || (opc == 0)) {
+            grupo.setCodigo(g.getCodigo());
+            grupo.setNome(tfNome.getText());
 
-                g.setNome(tfNome.getText());
-                
-                try {
-                    ControleGrupo.editaGrupo(g);
-                    JOptionPane.showMessageDialog(null, "Grupo editado com sucesso!");
-                    this.mudaFrame();
-                } catch (RuntimeException e) {
-                    JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+            if (grupo.equals(g)) {
+                JOptionPane.showMessageDialog(null, "Faça alguma alteração no grupo primeiro.");
+            } else {
+
+                boolean confirm = ControleGrupo.verifNome(tfNome.getText());
+                int opc = 0;
+
+                if ((confirm == true) && (!grupo.getNome().equals(g.getNome()))) {
+                    opc = JOptionPane.showConfirmDialog(null, "Já existe um grupo com o nome " + tfNome.getText() + ". Gostaria de editá-lo mesmo assim?");
+                }
+
+                if ((confirm == false) || (opc == 0)) {
+
+                    try {
+                        ControleGrupo.editaGrupo(g);
+                        JOptionPane.showMessageDialog(null, "Grupo editado com sucesso!");
+                        this.mudaFrame();
+                    } catch (RuntimeException e) {
+                        JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+                    }
                 }
             }
         }
@@ -210,9 +220,9 @@ public class FRMEditarGrupo extends javax.swing.JFrame {
 
     private void mudaFrame() {
         FRMGrupo grp = new FRMGrupo();
-        
+
         grp.setVisible(true);
-        
+
         this.dispose();
     }
 }
