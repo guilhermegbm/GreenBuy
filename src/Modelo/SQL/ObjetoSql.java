@@ -8,9 +8,7 @@ package Modelo.SQL;
 import Jpa.JpaUtil;
 import Modelo.BEAN.Objeto;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
@@ -61,9 +59,9 @@ public class ObjetoSql {
         try {
             tx.begin();
 
-            manager.merge(o);
+            Objeto obj = manager.merge(o);
 
-            manager.remove(o);
+            manager.remove(obj);
 
             tx.commit();
         } finally {
@@ -89,8 +87,155 @@ public class ObjetoSql {
 
         try {
             List s = new ArrayList<>();
-            s.add(manager.find(Objeto.class, codigo));
+            Objeto o = manager.find(Objeto.class, codigo);
+
+            if (o != null) {
+                s.add(o);
+            }
+
             return s;
+        } finally {
+            manager.close();
+        }
+    }
+
+    public static List<Objeto> listarPorNome(String nome) throws RuntimeException {
+        EntityManager manager = JpaUtil.getEntityManager();
+
+        try {
+            TypedQuery<Objeto> tq = manager.createQuery("select o from Objeto o where o.nome like :nome", Objeto.class);
+            tq.setParameter("nome", "%" + nome + "%");
+            return tq.getResultList();
+        } finally {
+            manager.close();
+        }
+    }
+
+    public static List<Objeto> listarPorValorVendaMenor(float valor) throws RuntimeException {
+        EntityManager manager = JpaUtil.getEntityManager();
+
+        try {
+            TypedQuery<Objeto> tq = manager.createQuery("select o from Objeto o where o.precoVendaBase >= :valor", Objeto.class);
+            tq.setParameter("valor", valor);
+            return tq.getResultList();
+        } finally {
+            manager.close();
+        }
+    }
+
+    public static List<Objeto> listarPorValorVendaMaior(float valor) throws RuntimeException {
+        EntityManager manager = JpaUtil.getEntityManager();
+
+        try {
+            TypedQuery<Objeto> tq = manager.createQuery("select o from Objeto o where o.precoVendaBase <= :valor", Objeto.class);
+            tq.setParameter("valor", valor);
+            return tq.getResultList();
+        } finally {
+            manager.close();
+        }
+    }
+
+    public static List<Objeto> listarPorValorCompraMenor(float valor) throws RuntimeException {
+        EntityManager manager = JpaUtil.getEntityManager();
+
+        try {
+            TypedQuery<Objeto> tq = manager.createQuery("select o from Objeto o where o.precoCompraBase >= :valor", Objeto.class);
+            tq.setParameter("valor", valor);
+            return tq.getResultList();
+        } finally {
+            manager.close();
+        }
+    }
+
+    public static List<Objeto> listarPorValorCompraMaior(float valor) throws RuntimeException {
+        EntityManager manager = JpaUtil.getEntityManager();
+
+        try {
+            TypedQuery<Objeto> tq = manager.createQuery("select o from Objeto o where o.precoCompraBase <= :valor", Objeto.class);
+            tq.setParameter("valor", valor);
+            return tq.getResultList();
+        } finally {
+            manager.close();
+        }
+    }
+
+    public static List<Objeto> listarTodosAtivos()throws RuntimeException  {
+        EntityManager manager = JpaUtil.getEntityManager();
+
+        try {
+            TypedQuery<Objeto> tq = manager.createQuery("select o from Objeto o where o.situacaoObj = :situacao", Objeto.class);
+            tq.setParameter("situacao", Objeto.SituacaoObj.ATIVO);
+            return tq.getResultList();
+        } finally {
+            manager.close();
+        }
+    }
+
+    public static List<Objeto> listarTodosProdutos() throws RuntimeException {
+        EntityManager manager = JpaUtil.getEntityManager();
+
+        try {
+            TypedQuery<Objeto> tq = manager.createQuery("select o from Objeto o where o.tipoObj = :tipo", Objeto.class);
+            tq.setParameter("tipo", Objeto.TipoObjeto.PRODUTO);
+            return tq.getResultList();
+        } finally {
+            manager.close();
+        }
+    }
+
+    public static List<Objeto> listarTodosMercadorias() throws RuntimeException {
+        EntityManager manager = JpaUtil.getEntityManager();
+
+        try {
+            TypedQuery<Objeto> tq = manager.createQuery("select o from Objeto o where o.tipoObj = :tipo", Objeto.class);
+            tq.setParameter("tipo", Objeto.TipoObjeto.MERCADORIA);
+            return tq.getResultList();
+        } finally {
+            manager.close();
+        }
+    }
+
+    public static List<Objeto> listarTodosInativos() throws RuntimeException {
+        EntityManager manager = JpaUtil.getEntityManager();
+
+        try {
+            TypedQuery<Objeto> tq = manager.createQuery("select o from Objeto o where o.situacaoObj = :situacao", Objeto.class);
+            tq.setParameter("situacao", Objeto.SituacaoObj.INATIVO);
+            return tq.getResultList();
+        } finally {
+            manager.close();
+        }
+    }
+    
+    public static void inativaObjeto(Objeto o) throws RuntimeException{
+        EntityManager manager = JpaUtil.getEntityManager();
+        EntityTransaction tx = manager.getTransaction();
+
+        try {
+            tx.begin();
+            
+            o.setSituacaoObj(Objeto.SituacaoObj.INATIVO);
+
+            manager.merge(o);
+
+            tx.commit();
+        } finally {
+            manager.close();
+        }
+    }
+
+    public static void reativaObjeto(Objeto o) throws RuntimeException{
+        EntityManager manager = JpaUtil.getEntityManager();
+        EntityTransaction tx = manager.getTransaction();
+
+        try {
+            tx.begin();
+            
+            o.setSituacaoObj(Objeto.SituacaoObj.ATIVO);
+
+            manager.merge(o);
+
+            tx.commit();
         } finally {
             manager.close();
         }

@@ -8,9 +8,7 @@ package Modelo.SQL;
 import Jpa.JpaUtil;
 import Modelo.BEAN.Cliente;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
@@ -169,8 +167,6 @@ public class ClienteSql {
             tx.begin();
             
             c.setSituacaoCli(Cliente.SituacaoCli.ATIVO);
-            
-            System.out.println("Código: " + c.getCodigo() + " Nome: " + c.getNome() + " Situação: " + c.getSituacaoCli());
 
             manager.merge(c);
 

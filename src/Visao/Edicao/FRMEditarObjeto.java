@@ -6,10 +6,13 @@
 package Visao.Edicao;
 
 import Controle.ControleObjeto;
+import Controle.ControleSubGrupo;
 import Modelo.BEAN.Objeto;
 import Modelo.BEAN.Grupo;
+import Modelo.BEAN.SubGrupo;
 import Visao.Gerenciamento.FRMObjeto;
 import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,16 +21,16 @@ import javax.swing.JOptionPane;
  */
 public class FRMEditarObjeto extends javax.swing.JFrame {
 
-    //ClasseObjetoMysqlDAO tipoDAO = new ClasseObjetoMysqlDAO();
-    ArrayList<Grupo> tipoAL;
-    ControleObjeto pControle = new ControleObjeto();
     Objeto objetobean = new Objeto();
+    List<SubGrupo> g;
 
     /**
      * Creates new form CadastrarFornecedor
      */
     public FRMEditarObjeto() {
         initComponents();
+
+        g = ControleSubGrupo.listarTodos();
 
         this.preencheComboBoxTipo();
 
@@ -50,7 +53,7 @@ public class FRMEditarObjeto extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         tfNome = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        cbClasse = new javax.swing.JComboBox<>();
+        cbSubGrupo = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         cbUn = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
@@ -65,6 +68,8 @@ public class FRMEditarObjeto extends javax.swing.JFrame {
         tfPCompra = new javax.swing.JTextField();
         btnCadastrar = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
+        btnReativar = new javax.swing.JButton();
+        btnDeletar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de produtos");
@@ -76,17 +81,17 @@ public class FRMEditarObjeto extends javax.swing.JFrame {
 
         jLabel1.setText("Nome:");
 
-        jLabel4.setText("Classe:");
+        jLabel4.setText("Sub-grupo:");
 
-        cbClasse.addActionListener(new java.awt.event.ActionListener() {
+        cbSubGrupo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbClasseActionPerformed(evt);
+                cbSubGrupoActionPerformed(evt);
             }
         });
 
         jLabel11.setText("Unidade:");
 
-        cbUn.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Un", "Kg", "M", "cm", "mm", "ml", "L" }));
+        cbUn.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Unidade", "Kilograma", "Grama", "Litro", "Mililitro" }));
 
         jLabel14.setText("Descrição:");
 
@@ -153,6 +158,20 @@ public class FRMEditarObjeto extends javax.swing.JFrame {
             }
         });
 
+        btnReativar.setText("Reativar");
+        btnReativar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReativarActionPerformed(evt);
+            }
+        });
+
+        btnDeletar.setText("Deletar");
+        btnDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeletarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -168,20 +187,21 @@ public class FRMEditarObjeto extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(22, 22, 22)
                         .addComponent(tfNome))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbUn, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbClasse, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
                         .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnReativar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34))
+                        .addComponent(btnDeletar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(rbProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblPV)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tfPVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -190,15 +210,16 @@ public class FRMEditarObjeto extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(lblPC)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tfPCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 20, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(rbProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblPV)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tfPVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21)))
+                                .addComponent(tfPCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cbUn, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbSubGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -213,7 +234,7 @@ public class FRMEditarObjeto extends javax.swing.JFrame {
                     .addComponent(cbUn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11)
                     .addComponent(jLabel4)
-                    .addComponent(cbClasse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbSubGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14)
@@ -234,7 +255,9 @@ public class FRMEditarObjeto extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCadastrar)
-                    .addComponent(btnVoltar))
+                    .addComponent(btnVoltar)
+                    .addComponent(btnReativar)
+                    .addComponent(btnDeletar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -259,9 +282,7 @@ public class FRMEditarObjeto extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,13 +300,15 @@ public class FRMEditarObjeto extends javax.swing.JFrame {
     }//GEN-LAST:event_tfPVendaKeyTyped
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        Objeto objeto = new Objeto();
-
         if ((tfNome.getText().equals("")) || (tfPVenda.getText().equals("")) || ((rbMercadoria.isSelected()) && (tfPCompra.getText().equals("")))) {
             JOptionPane.showMessageDialog(null, "Com exceção do campo de descrição, todos os campos devem estar preenchidos");
         } else {
-            /*
+
+            Objeto objeto = new Objeto();
+
             objeto.setCodigo(objetobean.getCodigo());
+            objeto.setSituacaoObj(objetobean.getSituacaoObj());
+
             objeto.setNome(tfNome.getText());
             objeto.setDescricao(taDesc.getText());
 
@@ -300,9 +323,9 @@ public class FRMEditarObjeto extends javax.swing.JFrame {
             objeto.setPrecoVendaBase(Float.parseFloat(precoVenda));
 
             if (rbProduto.isSelected()) {
-                objeto.setTipoObj(1);
+                objeto.setTipoObj(Objeto.TipoObjeto.PRODUTO);
             } else if (rbMercadoria.isSelected()) {
-                objeto.setTipoObj(2);
+                objeto.setTipoObj(Objeto.TipoObjeto.MERCADORIA);
 
                 String precoCompra = tfPCompra.getText();
 
@@ -316,18 +339,34 @@ public class FRMEditarObjeto extends javax.swing.JFrame {
 
             }
 
-            objeto.setUnidade(cbUn.getSelectedItem() + "");
+            if (cbUn.getSelectedIndex() == 0) {
+                objeto.setUnidade(Objeto.Unidade.UNIDADE);
+            } else if (cbUn.getSelectedIndex() == 1) {
+                objeto.setUnidade(Objeto.Unidade.KILOGRAMA);
+            } else if (cbUn.getSelectedIndex() == 2) {
+                objeto.setUnidade(Objeto.Unidade.GRAMA);
+            } else if (cbUn.getSelectedIndex() == 3) {
+                objeto.setUnidade(Objeto.Unidade.LITRO);
+            } else if (cbUn.getSelectedIndex() == 4) {
+                objeto.setUnidade(Objeto.Unidade.MILILITRO);
+            }
 
-            for (Grupo classe : tipoAL) {
-                if (classe.getNome().equals(cbClasse.getSelectedItem() + "")) {
-                    objeto.setClasse(classe);
+            objeto.setSubGrupo(g.get(cbSubGrupo.getSelectedIndex()));
+
+            if (objeto.equals(objetobean)) {
+                JOptionPane.showMessageDialog(null, "Faça alguma modificação primeiro.");
+            } else {
+                try {
+                    ControleObjeto.editaObjeto(objeto);
+
+                    JOptionPane.showMessageDialog(null, "Objeto editado com sucesso.");
+
+                    this.mudaFrame();
+                } catch (RuntimeException e) {
+                    JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+                    throw new RuntimeException(e);
                 }
             }
-            pControle.editar(objeto);
-
-            JOptionPane.showMessageDialog(null, "Objeto editado com sucesso.");
-
-            this.mudaFrame();*/
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
@@ -335,9 +374,9 @@ public class FRMEditarObjeto extends javax.swing.JFrame {
         this.mudaFrame();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    private void cbClasseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbClasseActionPerformed
+    private void cbSubGrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSubGrupoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbClasseActionPerformed
+    }//GEN-LAST:event_cbSubGrupoActionPerformed
 
     private void tfPVendaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_tfPVendaCaretUpdate
         // TODO add your handling code here:
@@ -359,6 +398,36 @@ public class FRMEditarObjeto extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_tfPCompraKeyTyped
+
+    private void btnReativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReativarActionPerformed
+        if (objetobean.getSituacaoObj().equals(Objeto.SituacaoObj.ATIVO)) {
+            JOptionPane.showMessageDialog(null, "Este objeto não está inativado.");
+        } else {
+            try {
+                ControleObjeto.reativaObjeto(objetobean);
+                JOptionPane.showMessageDialog(null, "Objeto reativado com sucesso!");
+                this.mudaFrame();
+            } catch (RuntimeException e) {
+                JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+            }
+        }
+    }//GEN-LAST:event_btnReativarActionPerformed
+
+    private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
+        int opc = JOptionPane.showConfirmDialog(null, "Deseja realmente deletar o objeto " + objetobean.getNome() + "?"
+                + " Todas as vendas, saidas e fornecimentos em que esse objeto participou também serão apagados, por isso, é ALTAMENTE RECOMENDADO NÃO"
+                + " apagar o objeto, mas apenas inativá-lo.");
+
+        if (opc == 0) {
+            try {
+                ControleObjeto.deletaObjeto(objetobean);
+                JOptionPane.showMessageDialog(null, "Objeto deletado com sucesso! :(");
+                this.mudaFrame();
+            } catch (RuntimeException e) {
+                JOptionPane.showMessageDialog(null, "DeuRuim: " + e);
+            }
+        }
+    }//GEN-LAST:event_btnDeletarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -397,9 +466,11 @@ public class FRMEditarObjeto extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnDeletar;
+    private javax.swing.JButton btnReativar;
     private javax.swing.JButton btnVoltar;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JComboBox<String> cbClasse;
+    private javax.swing.JComboBox<String> cbSubGrupo;
     private javax.swing.JComboBox<String> cbUn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
@@ -421,31 +492,50 @@ public class FRMEditarObjeto extends javax.swing.JFrame {
 
     private void preencheComboBoxTipo() {
 
-//        tipoAL = tipoDAO.listarTodos();
-//
-//        for (Grupo tipo : tipoAL) {
-//            cbClasse.addItem(tipo.getNome());
-//        }
+        for (SubGrupo sg : g) {
+            cbSubGrupo.addItem(sg.getNome());
+        }
     }
-    
+
     public void pegaObjeto(Objeto obj) {
         objetobean = obj;
         this.preencheDados();
     }
 
     private void preencheDados() {
-        /*tfNome.setText(objetobean.getNome());
+        tfNome.setText(objetobean.getNome());
         tfPVenda.setText(Float.toString(objetobean.getPrecoVendaBase()));
         taDesc.setText(objetobean.getDescricao());
-        cbUn.setSelectedItem(objetobean.getUnidade());
-        cbClasse.setSelectedItem(objetobean.getClasse().getNome());
-        
-        if (objetobean.getTipoObj() == 1){
+        cbSubGrupo.setSelectedItem(objetobean.getSubGrupo().getNome());
+
+        int index = 0;
+        for (SubGrupo sg : g) {
+            if (sg.getCodigo() == objetobean.getSubGrupo().getCodigo()) {
+                cbSubGrupo.setSelectedIndex(index);
+            }
+            index++;
+        }
+
+        if (objetobean.getTipoObj().equals(Objeto.TipoObjeto.PRODUTO)) {
             rbProduto.setSelected(true);
-        } else {
+        } else if (objetobean.getTipoObj().equals(Objeto.TipoObjeto.MERCADORIA)) {
+            lblPC.setVisible(true);
+            tfPCompra.setVisible(true);
             rbMercadoria.setSelected(true);
             tfPCompra.setText(Float.toString(objetobean.getPrecoCompraBase()));
-        }*/
+        }
+
+        if (objetobean.getUnidade().equals(Objeto.Unidade.UNIDADE)) {
+            cbUn.setSelectedIndex(0);
+        } else if (objetobean.getUnidade().equals(Objeto.Unidade.KILOGRAMA)) {
+            cbUn.setSelectedIndex(1);
+        } else if (objetobean.getUnidade().equals(Objeto.Unidade.GRAMA)) {
+            cbUn.setSelectedIndex(2);
+        } else if (objetobean.getUnidade().equals(Objeto.Unidade.LITRO)) {
+            cbUn.setSelectedIndex(3);
+        } else if (objetobean.getUnidade().equals(Objeto.Unidade.MILILITRO)) {
+            cbUn.setSelectedIndex(4);
+        }
     }
 
     private void mudaFrame() {

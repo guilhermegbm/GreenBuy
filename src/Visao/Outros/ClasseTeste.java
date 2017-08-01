@@ -14,7 +14,6 @@ import Modelo.BEAN.Fornecimento;
 import Modelo.BEAN.Funcionario;
 import Modelo.BEAN.Objeto;
 import Modelo.BEAN.ObjetoVenda;
-import Modelo.BEAN.ObjetoVendaId;
 import Modelo.BEAN.SubGrupo;
 import Modelo.BEAN.Venda;
 import java.util.Date;
@@ -241,7 +240,7 @@ public class ClasseTeste {
         o1.setPrecoVendaBase(1);
         o1.setUnidade(Objeto.Unidade.UNIDADE);
         o1.setQtdeEstoque(40);
-        o1.setSituacaoObj(Objeto.SituacaoObj.VENDENDO);
+        o1.setSituacaoObj(Objeto.SituacaoObj.ATIVO);
         o1.setTipoObj(Objeto.TipoObjeto.MERCADORIA);
         o1.setSubGrupo(sg2);
         
@@ -251,7 +250,7 @@ public class ClasseTeste {
         o2.setPrecoVendaBase(3.25f);
         o2.setUnidade(Objeto.Unidade.UNIDADE);
         o2.setQtdeEstoque(8);
-        o2.setSituacaoObj(Objeto.SituacaoObj.VENDENDO);
+        o2.setSituacaoObj(Objeto.SituacaoObj.ATIVO);
         o2.setTipoObj(Objeto.TipoObjeto.MERCADORIA);
         o2.setSubGrupo(sg1);
         
@@ -261,7 +260,7 @@ public class ClasseTeste {
         o3.setPrecoVendaBase(1.50f);
         o3.setUnidade(Objeto.Unidade.UNIDADE);
         o3.setQtdeEstoque(0);
-        o3.setSituacaoObj(Objeto.SituacaoObj.NAOVENDENDO);
+        o3.setSituacaoObj(Objeto.SituacaoObj.INATIVO);
         o3.setTipoObj(Objeto.TipoObjeto.MERCADORIA);
         o3.setSubGrupo(sg3);
         
@@ -269,7 +268,7 @@ public class ClasseTeste {
         o4.setDescricao("É um rango bão");
         o4.setPrecoVendaBase(12);
         o4.setUnidade(Objeto.Unidade.UNIDADE);
-        o4.setSituacaoObj(Objeto.SituacaoObj.VENDENDO);
+        o4.setSituacaoObj(Objeto.SituacaoObj.ATIVO);
         o4.setTipoObj(Objeto.TipoObjeto.PRODUTO);
         o4.setSubGrupo(sg4);
         
@@ -277,7 +276,7 @@ public class ClasseTeste {
         o5.setDescricao("É outro rango bão");
         o5.setPrecoVendaBase(17.50f);
         o5.setUnidade(Objeto.Unidade.GRAMA);
-        o5.setSituacaoObj(Objeto.SituacaoObj.VENDENDO);
+        o5.setSituacaoObj(Objeto.SituacaoObj.ATIVO);
         o5.setTipoObj(Objeto.TipoObjeto.PRODUTO);
         o5.setSubGrupo(sg4);
         
@@ -286,7 +285,7 @@ public class ClasseTeste {
         o6.setPrecoCompraBase(26.90f);
         o6.setUnidade(Objeto.Unidade.KILOGRAMA);
         o6.setQtdeEstoque(5);
-        o6.setSituacaoObj(Objeto.SituacaoObj.NAOVENDENDO);
+        o6.setSituacaoObj(Objeto.SituacaoObj.INATIVO);
         o6.setTipoObj(Objeto.TipoObjeto.MERCADORIA);
         o6.setSubGrupo(sg5);
         

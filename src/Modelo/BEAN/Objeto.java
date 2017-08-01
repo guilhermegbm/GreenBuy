@@ -6,8 +6,8 @@
 package Modelo.BEAN;
 
 import java.io.Serializable;
-import java.sql.SQLException;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -29,6 +29,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "objeto")
 public class Objeto implements Serializable {
+
     private int codigo;
     private String nome;
     private String descricao;
@@ -71,7 +72,7 @@ public class Objeto implements Serializable {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    
+
     @Column(name = "objUnidade", nullable = false)
     @Enumerated(EnumType.STRING)
     public Unidade getUnidade() {
@@ -128,7 +129,7 @@ public class Objeto implements Serializable {
     public void setSituacaoObj(SituacaoObj situacaoObj) {
         this.situacaoObj = situacaoObj;
     }
-    
+
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "obj_subCodigo")
     public SubGrupo getSubGrupo() {
@@ -156,7 +157,7 @@ public class Objeto implements Serializable {
     public void setFornecimentos(Set<ObjetoFornecimento> fornecimentos) {
         this.fornecimentos = fornecimentos;
     }
-    
+
     @OneToMany(mappedBy = "objSai.objeto", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     public Set<ObjetoSaida> getSaidas() {
         return saidas;
@@ -165,12 +166,12 @@ public class Objeto implements Serializable {
     public void setSaidas(Set<ObjetoSaida> saidas) {
         this.saidas = saidas;
     }
-    
+
     public enum TipoObjeto {
         PRODUTO,
         MERCADORIA
     }
-    
+
     public enum Unidade {
         UNIDADE,
         KILOGRAMA,
@@ -178,10 +179,78 @@ public class Objeto implements Serializable {
         LITRO,
         MILILITRO
     }
-    
+
     public enum SituacaoObj {
-        VENDENDO,
-        NAOVENDENDO
+        ATIVO,
+        INATIVO
     }
-    
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 67 * hash + this.codigo;
+        hash = 67 * hash + Objects.hashCode(this.nome);
+        hash = 67 * hash + Objects.hashCode(this.descricao);
+        hash = 67 * hash + Float.floatToIntBits(this.precoVendaBase);
+        hash = 67 * hash + Float.floatToIntBits(this.precoCompraBase);
+        hash = 67 * hash + Objects.hashCode(this.unidade);
+        hash = 67 * hash + Float.floatToIntBits(this.qtdeEstoque);
+        hash = 67 * hash + Objects.hashCode(this.tipoObj);
+        hash = 67 * hash + Objects.hashCode(this.situacaoObj);
+        hash = 67 * hash + Objects.hashCode(this.subGrupo);
+        hash = 67 * hash + Objects.hashCode(this.itensNaVenda);
+        hash = 67 * hash + Objects.hashCode(this.fornecimentos);
+        hash = 67 * hash + Objects.hashCode(this.saidas);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        System.out.println("Passou1");
+        if (obj == null) {
+            return false;
+        }
+        System.out.println("Passou2");
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        System.out.println("Passou3");
+        final Objeto other = (Objeto) obj;
+        if (this.codigo != other.codigo) {
+            return false;
+        }
+        System.out.println("Passou4");
+        if (Float.floatToIntBits(this.precoVendaBase) != Float.floatToIntBits(other.precoVendaBase)) {
+            return false;
+        }
+        System.out.println("Passou5");
+        if (Float.floatToIntBits(this.precoCompraBase) != Float.floatToIntBits(other.precoCompraBase)) {
+            return false;
+        }
+        System.out.println("Passou6");
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        System.out.println("Passou7");
+        if (!Objects.equals(this.descricao, other.descricao)) {
+            return false;
+        }
+        System.out.println("Passou8");
+        if (this.unidade != other.unidade) {
+            return false;
+        }
+        System.out.println("Passou9");
+        if (this.tipoObj != other.tipoObj) {
+            return false;
+        }
+        System.out.println("Passou10");
+        if (this.subGrupo.getCodigo() != other.subGrupo.getCodigo()) {
+            return false;
+        }
+        System.out.println("Passou Tudo");
+        return true;
+    }
 }

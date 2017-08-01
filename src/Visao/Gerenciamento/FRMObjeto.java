@@ -8,8 +8,9 @@ package Visao.Gerenciamento;
 import Visao.Cadastro.FRMCadastrarObjeto;
 import Controle.ControleObjeto;
 import Modelo.BEAN.Objeto;
+import Visao.Edicao.FRMEditarObjeto;
 import java.awt.Color;
-import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,8 +21,7 @@ import javax.swing.table.DefaultTableModel;
 public class FRMObjeto extends javax.swing.JFrame {
 
     private DefaultTableModel dTable;
-    ArrayList<Objeto> dados;
-    ControleObjeto controleO = new ControleObjeto();
+    List<Objeto> dados;
 
     /**
      * Creates new form FRMFornecedor
@@ -29,7 +29,12 @@ public class FRMObjeto extends javax.swing.JFrame {
     public FRMObjeto() {
         initComponents();
 
-        //dados = controleO.listarTodos();
+        try {
+            dados = ControleObjeto.listarTodosAtivos();
+            this.preencheTabela();
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+        }
 
         this.preencheTabela();
     }
@@ -48,11 +53,11 @@ public class FRMObjeto extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableObjeto = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnCadastrar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnInativar = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnLocalizar = new javax.swing.JButton();
         cbOpc = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         tfDado = new javax.swing.JTextField();
@@ -98,42 +103,42 @@ public class FRMObjeto extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/prodAdd.png"))); // NOI18N
-        jButton1.setText("Cadastrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/prodAdd.png"))); // NOI18N
+        btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCadastrarActionPerformed(evt);
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/prodEditar.png"))); // NOI18N
-        jButton2.setText("Editar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/prodEditar.png"))); // NOI18N
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnEditarActionPerformed(evt);
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/prodDel.png"))); // NOI18N
-        jButton3.setText("Deletar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnInativar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/prodDel.png"))); // NOI18N
+        btnInativar.setText("Inativar");
+        btnInativar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnInativarActionPerformed(evt);
             }
         });
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/logout.png"))); // NOI18N
         jButton4.setText("Voltar");
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/prodLoc.png"))); // NOI18N
-        jButton5.setText("Localizar");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnLocalizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/prodLoc.png"))); // NOI18N
+        btnLocalizar.setText("Localizar");
+        btnLocalizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnLocalizarActionPerformed(evt);
             }
         });
 
-        cbOpc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Código", "Nome", "(A partir) Preço de venda", "(Até)Preço de venda" }));
+        cbOpc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Listar apenas ativos", "Código", "Nome", "(A partir) Preço de venda", "(Até)Preço de venda", "(A partir) Preço de compra", "(Até)Preço de compra", "Listar apenas produtos", "Listar apenas mercadorias", "Listar apenas inativos" }));
         cbOpc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbOpcActionPerformed(evt);
@@ -172,19 +177,19 @@ public class FRMObjeto extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbOpc, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfDado, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbOpc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15)
+                        .addComponent(tfDado, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLocalizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCadastrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnEditar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnInativar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -194,7 +199,7 @@ public class FRMObjeto extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(cbOpc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5)
+                    .addComponent(btnLocalizar)
                     .addComponent(tfDado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -202,11 +207,11 @@ public class FRMObjeto extends javax.swing.JFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(32, 32, 32)
-                        .addComponent(jButton1)
+                        .addComponent(btnCadastrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2)
+                        .addComponent(btnEditar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3)
+                        .addComponent(btnInativar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
                         .addComponent(jButton4)))
                 .addContainerGap())
@@ -243,16 +248,44 @@ public class FRMObjeto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        FRMCadastrarObjeto cadProd = new FRMCadastrarObjeto();
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        FRMCadastrarObjeto cadObj = new FRMCadastrarObjeto();
 
-        cadProd.setVisible(true);
+        cadObj.setVisible(true);
 
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void cbOpcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOpcActionPerformed
-        // TODO add your handling code here:
+        if (cbOpc.getSelectedIndex() == 0) {
+            try {
+                dados = ControleObjeto.listarTodosAtivos();
+                this.preencheTabela();
+            } catch (RuntimeException e) {
+                JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+            }
+        } else if (cbOpc.getSelectedIndex() == 7) {
+            try {
+                dados = ControleObjeto.listarTodosProdutos();
+                this.preencheTabela();
+            } catch (RuntimeException e) {
+                JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+            }
+        } else if (cbOpc.getSelectedIndex() == 8) {
+            try {
+                dados = ControleObjeto.listarTodosMercadorias();
+                this.preencheTabela();
+            } catch (RuntimeException e) {
+                JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+            }
+        } else if (cbOpc.getSelectedIndex() == 9) {
+            try {
+                dados = ControleObjeto.listarTodosInativos();
+                this.preencheTabela();
+            } catch (RuntimeException e) {
+                JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+            }
+        }
     }//GEN-LAST:event_cbOpcActionPerformed
 
     private void tfDadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDadoActionPerformed
@@ -273,60 +306,56 @@ public class FRMObjeto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tfDadoFocusLost
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btnLocalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocalizarActionPerformed
         this.localizar();
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btnLocalizarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-//        int qnt = tableObjeto.getSelectedColumnCount();
-//        
-//        if (qnt < 1) {
-//            JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para deletar.");
-//        } else if (qnt > 1) {
-//            JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez;");
-//        } else {
-//
-//            int linha = tableObjeto.getSelectedRow();
-//            int codigo = dados.get(linha).getCodigo();
-//
-//            int opc = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o objeto " + dados.get(linha).getNome() + " ?");
-//
-//            if (opc == 0) {
-//                //controleO.deletar(codigo);
-//                //dados = controleO.listarTodos();
-//                this.preencheTabela();
-//            }
-//        }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void btnInativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInativarActionPerformed
+        int qnt = tableObjeto.getSelectedColumnCount();
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-//        FRMEditarObjeto edtObj = new FRMEditarObjeto();
-//        int qnt = tableObjeto.getSelectedRowCount();
-//        Objeto obj = new Objeto();
-//
-//        if (qnt < 1) {
-//            JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para editar.");
-//        } else if (qnt > 1) {
-//            JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez.");
-//        } else {
-//            int linha = tableObjeto.getSelectedRow();
-//            obj.setCodigo(dados.get(linha).getCodigo());
-//            obj.setNome(dados.get(linha).getNome());
-//            obj.setDescricao(dados.get(linha).getDescricao());
-//            obj.setPrecoVendaBase(dados.get(linha).getPrecoVendaBase());
-//            obj.setPrecoCompraBase(dados.get(linha).getPrecoCompraBase());
-//            obj.setUnidade(dados.get(linha).getUnidade());
-//            obj.setQtdeEstoque(dados.get(linha).getQtdeEstoque());
-//            obj.setTipoObj(dados.get(linha).getTipoObj());
-//            //obj.setSubClasse(dados.get(linha).getClasse());
-//
-//            edtObj.pegaObjeto(obj);
-//
-//            edtObj.setVisible(true);
-//
-//            this.setVisible(false);
-//        }
-    }//GEN-LAST:event_jButton2ActionPerformed
+        if (qnt < 1) {
+            JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para deletar.");
+        } else if (qnt > 1) {
+            JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez;");
+        } else {
+
+            if (dados.get(tableObjeto.getSelectedRow()).getSituacaoObj().equals(Objeto.SituacaoObj.INATIVO)) {
+                JOptionPane.showMessageDialog(null, "Este objeto já está inativado.");
+            } else {
+                int opc = JOptionPane.showConfirmDialog(null, "Deseja realmente inativar o objeto " + dados.get(tableObjeto.getSelectedRow()).getNome() + " ?");
+
+                if (opc == 0) {
+                    try {
+                        ControleObjeto.inativaObjeto(dados.get(tableObjeto.getSelectedRow()));
+                        dados = ControleObjeto.listarTodosAtivos();
+                        cbOpc.setSelectedIndex(0);
+                        this.preencheTabela();
+                    } catch (RuntimeException e) {
+                        JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+                    }
+
+                }
+            }
+        }
+    }//GEN-LAST:event_btnInativarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        int qnt = tableObjeto.getSelectedRowCount();
+
+        if (qnt < 1) {
+            JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para editar.");
+        } else if (qnt > 1) {
+            JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez.");
+        } else {
+            FRMEditarObjeto edtObj = new FRMEditarObjeto();
+
+            edtObj.pegaObjeto(dados.get(tableObjeto.getSelectedRow()));
+
+            edtObj.setVisible(true);
+
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_btnEditarActionPerformed
 
     private void tfDadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfDadoKeyTyped
 
@@ -358,21 +387,7 @@ public class FRMObjeto extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(FRMObjeto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -383,12 +398,12 @@ public class FRMObjeto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnInativar;
+    private javax.swing.JButton btnLocalizar;
     private javax.swing.JComboBox<String> cbOpc;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -399,35 +414,44 @@ public class FRMObjeto extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void preencheTabela() {
-        /*dTable = criaTabela();
+        dTable = criaTabela();
 
         dTable.addColumn("Código");
         dTable.addColumn("Nome");
         dTable.addColumn("Preço de venda");
         dTable.addColumn("Preço de compra");
         dTable.addColumn("Tipo");
-        dTable.addColumn("Classe");
+        dTable.addColumn("Sub-grupo");
         dTable.addColumn("Unidade");
+        dTable.addColumn("Situação");
 
         for (Objeto dado : dados) {
-            
+
             String tipo = "";
-            
-            if (dado.getTipoObj() == 1){
+
+            if (dado.getTipoObj().equals(Objeto.TipoObjeto.PRODUTO)) {
                 tipo = "Produto";
-            } else if (dado.getTipoObj() == 2){
+            } else if (dado.getTipoObj().equals(Objeto.TipoObjeto.MERCADORIA)) {
                 tipo = "Mercadoria";
             }
-            
+
+            String situacao = "";
+
+            if (dado.getSituacaoObj().equals(Objeto.SituacaoObj.ATIVO)) {
+                situacao = "Ativo";
+            } else if (dado.getSituacaoObj().equals(Objeto.SituacaoObj.INATIVO)) {
+                situacao = "Inativo";
+            }
+
             dTable.addRow(new Object[]{dado.getCodigo(), dado.getNome(),
                 dado.getPrecoVendaBase(), dado.getPrecoCompraBase(), tipo,
-                dado.getClasse().getNome(), dado.getUnidade()});
+                dado.getSubGrupo().getNome(), dado.getUnidade(), situacao});
         }
 
-        tableObjeto.setModel(dTable);*/
+        tableObjeto.setModel(dTable);
     }
 
-    /*private DefaultTableModel criaTabela() {
+    private DefaultTableModel criaTabela() {
 
         DefaultTableModel dTable = new DefaultTableModel() {
             //Define o tipo dos campos (coluna) na mesma ordem que as colunas foram criadas
@@ -437,13 +461,13 @@ public class FRMObjeto extends javax.swing.JFrame {
                 java.lang.Float.class, //preço de venda
                 java.lang.Float.class, //preço de compra
                 java.lang.String.class, //tipo (Prod ou mer)
-                java.lang.String.class, //classe
-                java.lang.String.class //unidade
-                
+                java.lang.String.class, //sub-grupo
+                java.lang.String.class, //unidade
+                java.lang.String.class //situação
             };
             //define se os campos podem ser editados na propria tabela
             boolean[] canEdit = new boolean[]{
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             @Override
@@ -455,54 +479,99 @@ public class FRMObjeto extends javax.swing.JFrame {
         };
         //retorna o DefaultTableModel
     return dTable;
-    }*/
+    }
 
     private void localizar() {
-        /*if ((tfDado.getText().equals("")) || (tfDado.getText().equals("Insira o dado para pesquisa..."))) {
+        if ((tfDado.getText().equals("")) || (tfDado.getText().equals("Insira o dado para pesquisa..."))) {
             JOptionPane.showMessageDialog(null, "Insira algum dado para pesquisa.");
         } else {
-            if (cbOpc.getSelectedIndex() == 0) {
-                //if (tfDado.getText().contains("0123456789")) {
-                    dados = controleO.listarPorCodigo(Integer.parseInt(tfDado.getText()));
+            if (cbOpc.getSelectedIndex() == 1) {
+                try {
+                    dados = ControleObjeto.listarObjetoPorCodigo(Integer.parseInt(tfDado.getText()));
                     this.preencheTabela();
-                //} else {
-                //    JOptionPane.showMessageDialog(null, "Para pesquisar por código, apenas inteiros devem ser inseridos");
-                //}
-            } else if (cbOpc.getSelectedIndex() == 1) {
-                dados = controleO.listarPorNome(tfDado.getText());
-                this.preencheTabela();
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Atenção: para pesquisa por código, insira apenas números.");
+                } catch (RuntimeException e) {
+                    JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+                }
+
             } else if (cbOpc.getSelectedIndex() == 2) {
-                //if (tfDado.getText().contains("0123456789,.")) {
-                    String texto = tfDado.getText();
-
-                    if (texto.contains(",")) {
-                        String partes[] = texto.split(",");
-                        String parte1 = partes[0];
-                        String parte2 = partes[1];
-                        texto = parte1 + "." + parte2;
-                    }
-                    dados = controleO.listarPorValorMenor(Float.parseFloat(texto));
+                try {
+                    dados = ControleObjeto.listarPorNome(tfDado.getText());
                     this.preencheTabela();
-                //} else {
-                //    JOptionPane.showMessageDialog(null, "Para pesquisar por valor, apenas números, vírgula ou ponto devem ser inseridos");
-                //}
+                } catch (RuntimeException e) {
+                    JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+                }
             } else if (cbOpc.getSelectedIndex() == 3) {
-                //if (tfDado.getText().contains("0123456789,.")) {
-                    String texto = tfDado.getText();
+                String texto = tfDado.getText();
 
-                    if (texto.contains(",")) {
-                        String partes[] = texto.split(",");
-                        String parte1 = partes[0];
-                        String parte2 = partes[1];
-                        texto = parte1 + "." + parte2;
-                    }
-
-                    dados = controleO.listarPorValorMaior(Float.parseFloat(texto));
+                if (texto.contains(",")) {
+                    String partes[] = texto.split(",");
+                    String parte1 = partes[0];
+                    String parte2 = partes[1];
+                    texto = parte1 + "." + parte2;
+                }
+                try {
+                    dados = ControleObjeto.listarPorValorVendaMenor(Float.parseFloat(texto));
                     this.preencheTabela();
-                //} else {
-                //    JOptionPane.showMessageDialog(null, "Para pesquisar por valor, apenas números, vírgula ou ponto devem ser inseridos");
-                //}
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Atenção: para pesquisa por valores, insira apenas números.");
+                } catch (RuntimeException e) {
+                    JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+                }
+
+            } else if (cbOpc.getSelectedIndex() == 4) {
+                String texto = tfDado.getText();
+
+                if (texto.contains(",")) {
+                    String partes[] = texto.split(",");
+                    String parte1 = partes[0];
+                    String parte2 = partes[1];
+                    texto = parte1 + "." + parte2;
+                }
+                try {
+                    dados = ControleObjeto.listarPorValorVendaMaior(Float.parseFloat(texto));
+                    this.preencheTabela();
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Atenção: para pesquisa por valores, insira apenas números.");
+                } catch (RuntimeException e) {
+                    JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+                }
+            } else if (cbOpc.getSelectedIndex() == 5) {
+                String texto = tfDado.getText();
+
+                if (texto.contains(",")) {
+                    String partes[] = texto.split(",");
+                    String parte1 = partes[0];
+                    String parte2 = partes[1];
+                    texto = parte1 + "." + parte2;
+                }
+                try {
+                    dados = ControleObjeto.listarPorValorCompraMenor(Float.parseFloat(texto));
+                    this.preencheTabela();
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Atenção: para pesquisa por valores, insira apenas números.");
+                } catch (RuntimeException e) {
+                    JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+                }
+            } else if (cbOpc.getSelectedIndex() == 6) {
+                String texto = tfDado.getText();
+
+                if (texto.contains(",")) {
+                    String partes[] = texto.split(",");
+                    String parte1 = partes[0];
+                    String parte2 = partes[1];
+                    texto = parte1 + "." + parte2;
+                }
+                try {
+                    dados = ControleObjeto.listarPorValorCompraMaior(Float.parseFloat(texto));
+                    this.preencheTabela();
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Atenção: para pesquisa por valores, insira apenas números.");
+                } catch (RuntimeException e) {
+                    JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+                }
             }
-        }*/
+        }
     }
 }

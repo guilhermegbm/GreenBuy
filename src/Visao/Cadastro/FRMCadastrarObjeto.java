@@ -6,29 +6,32 @@
 package Visao.Cadastro;
 
 import Controle.ControleObjeto;
+import Controle.ControleSubGrupo;
 import Modelo.BEAN.Objeto;
 import Modelo.BEAN.Grupo;
+import Modelo.BEAN.SubGrupo;
 import Visao.Gerenciamento.FRMObjeto;
-import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author Alunos
+ * @author Guilherme
  */
 public class FRMCadastrarObjeto extends javax.swing.JFrame {
     
-    ArrayList<Grupo> tipoAL;
-    ControleObjeto pControle = new ControleObjeto();
+    List<SubGrupo> g;
 
     /**
      * Creates new form CadastrarFornecedor
      */
     public FRMCadastrarObjeto() {
         initComponents();
-
-//        this.preencheComboBoxTipo();
-
+        
+        g = ControleSubGrupo.listarTodos();
+        
+        this.preencheComboBoxSubGrupo();
+        
         lblPC.setVisible(false);
         tfPCompra.setVisible(false);
     }
@@ -48,7 +51,7 @@ public class FRMCadastrarObjeto extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         tfNome = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        cbClasse = new javax.swing.JComboBox<>();
+        cbSubGrupo = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         cbUn = new javax.swing.JComboBox<>();
         jLabel14 = new javax.swing.JLabel();
@@ -74,17 +77,17 @@ public class FRMCadastrarObjeto extends javax.swing.JFrame {
 
         jLabel1.setText("Nome:");
 
-        jLabel4.setText("Classe:");
+        jLabel4.setText("Sub-grupo:");
 
-        cbClasse.addActionListener(new java.awt.event.ActionListener() {
+        cbSubGrupo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbClasseActionPerformed(evt);
+                cbSubGrupoActionPerformed(evt);
             }
         });
 
         jLabel11.setText("Unidade:");
 
-        cbUn.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Un", "Kg", "M", "cm", "mm", "ml", "L" }));
+        cbUn.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Unidade", "Kilograma", "Grama", "Litro", "Mililitro" }));
 
         jLabel14.setText("Descrição:");
 
@@ -113,6 +116,7 @@ public class FRMCadastrarObjeto extends javax.swing.JFrame {
             }
         });
 
+        tfPVenda.setText("0,0");
         tfPVenda.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
                 tfPVendaCaretUpdate(evt);
@@ -128,6 +132,7 @@ public class FRMCadastrarObjeto extends javax.swing.JFrame {
 
         lblPC.setText("Preço de compra:");
 
+        tfPCompra.setText("0,0");
         tfPCompra.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tfPCompraKeyTyped(evt);
@@ -166,20 +171,19 @@ public class FRMCadastrarObjeto extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(22, 22, 22)
                         .addComponent(tfNome))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbUn, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbClasse, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addComponent(btnCadastrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnVoltar)
                         .addGap(34, 34, 34))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(rbProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblPV)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tfPVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -188,15 +192,16 @@ public class FRMCadastrarObjeto extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(lblPC)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(tfPCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 20, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(rbProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblPV)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tfPVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21)))
+                                .addComponent(tfPCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cbUn, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cbSubGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -211,7 +216,7 @@ public class FRMCadastrarObjeto extends javax.swing.JFrame {
                     .addComponent(cbUn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11)
                     .addComponent(jLabel4)
-                    .addComponent(cbClasse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbSubGrupo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14)
@@ -277,17 +282,17 @@ public class FRMCadastrarObjeto extends javax.swing.JFrame {
     }//GEN-LAST:event_tfPVendaKeyTyped
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        /*Objeto objeto = new Objeto();
-
         if ((tfNome.getText().equals("")) || (tfPVenda.getText().equals("")) || ((rbMercadoria.isSelected()) && (tfPCompra.getText().equals("")))) {
             JOptionPane.showMessageDialog(null, "Com exceção do campo de descrição, todos os campos devem estar preenchidos");
         } else {
-
+            
+            Objeto objeto = new Objeto();
+            
             objeto.setNome(tfNome.getText());
             objeto.setDescricao(taDesc.getText());
-
+            
             String precoVenda = tfPVenda.getText();
-
+            
             if (precoVenda.contains(",")) {
                 String[] parts = precoVenda.split(",");
                 String part1 = parts[0];
@@ -295,14 +300,14 @@ public class FRMCadastrarObjeto extends javax.swing.JFrame {
                 precoVenda = part1 + "." + part2;
             }
             objeto.setPrecoVendaBase(Float.parseFloat(precoVenda));
-
+            
             if (rbProduto.isSelected()) {
-                objeto.setTipoObj(1);
+                objeto.setTipoObj(Objeto.TipoObjeto.PRODUTO);
             } else if (rbMercadoria.isSelected()) {
-                objeto.setTipoObj(2);
-
+                objeto.setTipoObj(Objeto.TipoObjeto.MERCADORIA);
+                
                 String precoCompra = tfPCompra.getText();
-
+                
                 if (precoCompra.contains(",")) {
                     String[] parts = precoCompra.split(",");
                     String part1 = parts[0];
@@ -310,41 +315,54 @@ public class FRMCadastrarObjeto extends javax.swing.JFrame {
                     precoCompra = part1 + "." + part2;
                 }
                 objeto.setPrecoCompraBase(Float.parseFloat(precoCompra));
-
+                
             }
-
-            objeto.setUnidade(cbUn.getSelectedItem() + "");
-
-            for (Grupo classe : tipoAL) {
-                if (classe.getNome().equals(cbClasse.getSelectedItem() + "")) {
-                    objeto.setClasse(classe);
-                }
+            
+            if (cbUn.getSelectedIndex() == 0) {
+                objeto.setUnidade(Objeto.Unidade.UNIDADE);
+            } else if (cbUn.getSelectedIndex() == 1) {
+                objeto.setUnidade(Objeto.Unidade.KILOGRAMA);
+            } else if (cbUn.getSelectedIndex() == 2) {
+                objeto.setUnidade(Objeto.Unidade.GRAMA);
+            } else if (cbUn.getSelectedIndex() == 3) {
+                objeto.setUnidade(Objeto.Unidade.LITRO);
+            } else if (cbUn.getSelectedIndex() == 4) {
+                objeto.setUnidade(Objeto.Unidade.MILILITRO);
             }
-            pControle.cadastrar(objeto);
-
-            JOptionPane.showMessageDialog(null, "Objeto cadastrado com sucesso.");
-
-            tfNome.setText("");
-            tfPVenda.setText("");
-            tfPCompra.setText("");
-            taDesc.setText("");
-            cbClasse.setSelectedIndex(0);
-            cbUn.setSelectedIndex(0);
-
-        }*/
+            
+            objeto.setSubGrupo(g.get(cbSubGrupo.getSelectedIndex()));
+            
+            objeto.setSituacaoObj(Objeto.SituacaoObj.ATIVO);
+            
+            try {
+                
+                ControleObjeto.insereObjeto(objeto);
+                
+                JOptionPane.showMessageDialog(null, "Objeto cadastrado com sucesso.");
+                
+                tfNome.setText("");
+                tfPVenda.setText("0,0");
+                tfPCompra.setText("0,0");
+                taDesc.setText("");
+                cbSubGrupo.setSelectedIndex(0);
+                cbUn.setSelectedIndex(0);
+            } catch (RuntimeException e) {
+                JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+            }
+        }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        FRMObjeto produto = new FRMObjeto();
-
-        produto.setVisible(true);
-
+        FRMObjeto obj = new FRMObjeto();
+        
+        obj.setVisible(true);
+        
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    private void cbClasseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbClasseActionPerformed
+    private void cbSubGrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSubGrupoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbClasseActionPerformed
+    }//GEN-LAST:event_cbSubGrupoActionPerformed
 
     private void tfPVendaCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_tfPVendaCaretUpdate
         // TODO add your handling code here:
@@ -533,7 +551,7 @@ public class FRMCadastrarObjeto extends javax.swing.JFrame {
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnVoltar;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JComboBox<String> cbClasse;
+    private javax.swing.JComboBox<String> cbSubGrupo;
     private javax.swing.JComboBox<String> cbUn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
@@ -553,12 +571,10 @@ public class FRMCadastrarObjeto extends javax.swing.JFrame {
     private javax.swing.JTextField tfPVenda;
     // End of variables declaration//GEN-END:variables
 
-    private void preencheComboBoxTipo() {
-
-//        tipoAL = tipoDAO.listarTodos();
-//
-//        for (Grupo tipo : tipoAL) {
-//            cbClasse.addItem(tipo.getNome());
-//        }
+    private void preencheComboBoxSubGrupo() {
+        
+        for (SubGrupo sg : g) {
+            cbSubGrupo.addItem(sg.getNome());
+        }
     }
 }
