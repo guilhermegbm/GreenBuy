@@ -6,6 +6,7 @@
 package Visao.Gerenciamento;
 
 import Controle.ControleCargo;
+import Controle.ControleFuncionario;
 import Modelo.BEAN.Cargo;
 import Visao.Cadastro.FRMCadastrarCargo;
 import Visao.Edicao.FRMEditarCargo;
@@ -244,55 +245,64 @@ public class FRMCargo extends javax.swing.JFrame {
 
     private void btnCadastraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastraActionPerformed
         FRMCadastrarCargo c = new FRMCadastrarCargo();
-        
+
         c.setVisible(true);
-        
+
         this.dispose();
     }//GEN-LAST:event_btnCadastraActionPerformed
 
     private void btnEditaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditaActionPerformed
-        FRMEditarCargo edtCargo = new FRMEditarCargo();
-        int qtd = tableCargo.getSelectedRowCount();
+        if (ControleFuncionario.verificaFuncionarioLogado()) {
+            FRMEditarCargo edtCargo = new FRMEditarCargo();
+            int qtd = tableCargo.getSelectedRowCount();
 
-        if (qtd < 1) {
-            JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para deletar.");
-        } else if (qtd > 1) {
-            JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez.");
+            if (qtd < 1) {
+                JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para deletar.");
+            } else if (qtd > 1) {
+                JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez.");
+            } else {
+                edtCargo.pegaCargo(dados.get(tableCargo.getSelectedRow()));
+
+                edtCargo.setVisible(true);
+
+                this.dispose();
+            }
         } else {
-            edtCargo.pegaCargo(dados.get(tableCargo.getSelectedRow()));
-
-            edtCargo.setVisible(true);
-
-            this.dispose();
+            JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer essa ação.");
         }
     }//GEN-LAST:event_btnEditaActionPerformed
 
     private void btnDeletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletaActionPerformed
-        int qtd = tableCargo.getSelectedRowCount();
+        if (ControleFuncionario.verificaFuncionarioLogado()) {
+            int qtd = tableCargo.getSelectedRowCount();
 
-        if (qtd < 1) {
-            JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para deletar.");
-        } else if (qtd > 1) {
-            JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez.");
-        } else {
-            int linha = tableCargo.getSelectedRow();
-            int opc = JOptionPane.showConfirmDialog(null, "Deseja realmente deletar o cargo " + dados.get(linha).getNome() + "? Todos /n"
-                    + "os funcionários (e também as suas respectivas vendas) serão apagadas!!!");
+            if (qtd < 1) {
+                JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para deletar.");
+            } else if (qtd > 1) {
+                JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez.");
+            } else {
+                int linha = tableCargo.getSelectedRow();
+                int opc = JOptionPane.showConfirmDialog(null, "Deseja realmente deletar o cargo " + dados.get(linha).getNome() + "? Todos "
+                        + "os funcionários (e também as suas respectivas vendas) serão apagadas!!!");
 
-            if (opc == 0) {
+                if (opc == 0) {
+                    try {
+                        ControleCargo.deletaCargo(dados.get(linha));
+                        JOptionPane.showMessageDialog(null, "Cargo deletado com sucesso.");
+                    } catch (RuntimeException e) {
+                        JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+                    }
+                }
                 try {
-                    ControleCargo.deletaCargo(dados.get(linha));
+                    dados = ControleCargo.listarTodos();
                 } catch (RuntimeException e) {
                     JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
                 }
+
+                this.preencheTabela();
             }
-            try {
-                dados = ControleCargo.listarTodos();
-            } catch (RuntimeException e) {
-                JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
-            }
-            
-            this.preencheTabela();
+        } else {
+            JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer essa ação.");
         }
     }//GEN-LAST:event_btnDeletaActionPerformed
 

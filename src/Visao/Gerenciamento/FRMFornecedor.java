@@ -7,6 +7,7 @@ package Visao.Gerenciamento;
 
 import Visao.Cadastro.FRMCadastrarFornecedor;
 import Controle.ControleFornecedor;
+import Controle.ControleFuncionario;
 import Modelo.BEAN.Fornecedor;
 import Visao.Edicao.FRMEditarFornecedor;
 import java.awt.Color;
@@ -289,38 +290,46 @@ public class FRMFornecedor extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLocalizarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        FRMEditarFornecedor edtFornecedor = new FRMEditarFornecedor();
-        int qtd = tableFornecedor.getSelectedRowCount();
+        if (ControleFuncionario.verificaFuncionarioLogado()) {
+            FRMEditarFornecedor edtFornecedor = new FRMEditarFornecedor();
+            int qtd = tableFornecedor.getSelectedRowCount();
 
-        if (qtd < 1) {
-            JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para deletar.");
-        } else if (qtd > 1) {
-            JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez.");
+            if (qtd < 1) {
+                JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para deletar.");
+            } else if (qtd > 1) {
+                JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez.");
+            } else {
+
+                edtFornecedor.pegaObjeto(dados.get(tableFornecedor.getSelectedRow()));
+
+                edtFornecedor.setVisible(true);
+
+                this.dispose();
+            }
         } else {
-
-            edtFornecedor.pegaObjeto(dados.get(tableFornecedor.getSelectedRow()));
-
-            edtFornecedor.setVisible(true);
-
-            this.dispose();
+            JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer essa ação.");
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnInativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInativarActionPerformed
-        int qtd = tableFornecedor.getSelectedColumnCount();
+        if (ControleFuncionario.verificaFuncionarioLogado()) {
+            int qtd = tableFornecedor.getSelectedColumnCount();
 
-        if (qtd < 1) {
-            JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para deletar.");
-        } else if (qtd > 1) {
-            JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez.");
-        } else {
-            int opc = JOptionPane.showConfirmDialog(null, "Deseja realmente inativar o fornecedor " + dados.get(tableFornecedor.getSelectedRow()).getNome() + "?");
+            if (qtd < 1) {
+                JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para deletar.");
+            } else if (qtd > 1) {
+                JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez.");
+            } else {
+                int opc = JOptionPane.showConfirmDialog(null, "Deseja realmente inativar o fornecedor " + dados.get(tableFornecedor.getSelectedRow()).getNome() + "?");
 
-            if (opc == 0) {
-                ControleFornecedor.inativaFornecedor(dados.get(tableFornecedor.getSelectedRow()));
-                dados = ControleFornecedor.listarTodosAtivos();
-                this.preencheTabela();
+                if (opc == 0) {
+                    ControleFornecedor.inativaFornecedor(dados.get(tableFornecedor.getSelectedRow()));
+                    dados = ControleFornecedor.listarTodosAtivos();
+                    this.preencheTabela();
+                }
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer essa ação.");
         }
     }//GEN-LAST:event_btnInativarActionPerformed
 

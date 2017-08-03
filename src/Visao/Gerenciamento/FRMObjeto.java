@@ -5,6 +5,7 @@
  */
 package Visao.Gerenciamento;
 
+import Controle.ControleFuncionario;
 import Visao.Cadastro.FRMCadastrarObjeto;
 import Controle.ControleObjeto;
 import Modelo.BEAN.Objeto;
@@ -311,49 +312,57 @@ public class FRMObjeto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLocalizarActionPerformed
 
     private void btnInativarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInativarActionPerformed
-        int qnt = tableObjeto.getSelectedColumnCount();
+        if (ControleFuncionario.verificaFuncionarioLogado()) {
+            int qnt = tableObjeto.getSelectedColumnCount();
 
-        if (qnt < 1) {
-            JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para deletar.");
-        } else if (qnt > 1) {
-            JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez;");
-        } else {
-
-            if (dados.get(tableObjeto.getSelectedRow()).getSituacaoObj().equals(Objeto.SituacaoObj.INATIVO)) {
-                JOptionPane.showMessageDialog(null, "Este objeto já está inativado.");
+            if (qnt < 1) {
+                JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para deletar.");
+            } else if (qnt > 1) {
+                JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez;");
             } else {
-                int opc = JOptionPane.showConfirmDialog(null, "Deseja realmente inativar o objeto " + dados.get(tableObjeto.getSelectedRow()).getNome() + " ?");
 
-                if (opc == 0) {
-                    try {
-                        ControleObjeto.inativaObjeto(dados.get(tableObjeto.getSelectedRow()));
-                        dados = ControleObjeto.listarTodosAtivos();
-                        cbOpc.setSelectedIndex(0);
-                        this.preencheTabela();
-                    } catch (RuntimeException e) {
-                        JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+                if (dados.get(tableObjeto.getSelectedRow()).getSituacaoObj().equals(Objeto.SituacaoObj.INATIVO)) {
+                    JOptionPane.showMessageDialog(null, "Este objeto já está inativado.");
+                } else {
+                    int opc = JOptionPane.showConfirmDialog(null, "Deseja realmente inativar o objeto " + dados.get(tableObjeto.getSelectedRow()).getNome() + " ?");
+
+                    if (opc == 0) {
+                        try {
+                            ControleObjeto.inativaObjeto(dados.get(tableObjeto.getSelectedRow()));
+                            dados = ControleObjeto.listarTodosAtivos();
+                            cbOpc.setSelectedIndex(0);
+                            this.preencheTabela();
+                        } catch (RuntimeException e) {
+                            JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+                        }
+
                     }
-
                 }
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer essa ação.");
         }
     }//GEN-LAST:event_btnInativarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        int qnt = tableObjeto.getSelectedRowCount();
+        if (ControleFuncionario.verificaFuncionarioLogado()) {
+            int qnt = tableObjeto.getSelectedRowCount();
 
-        if (qnt < 1) {
-            JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para editar.");
-        } else if (qnt > 1) {
-            JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez.");
+            if (qnt < 1) {
+                JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para editar.");
+            } else if (qnt > 1) {
+                JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez.");
+            } else {
+                FRMEditarObjeto edtObj = new FRMEditarObjeto();
+
+                edtObj.pegaObjeto(dados.get(tableObjeto.getSelectedRow()));
+
+                edtObj.setVisible(true);
+
+                this.setVisible(false);
+            }
         } else {
-            FRMEditarObjeto edtObj = new FRMEditarObjeto();
-
-            edtObj.pegaObjeto(dados.get(tableObjeto.getSelectedRow()));
-
-            edtObj.setVisible(true);
-
-            this.setVisible(false);
+            JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer essa ação.");
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 

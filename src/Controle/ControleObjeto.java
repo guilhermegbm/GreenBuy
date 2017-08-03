@@ -8,7 +8,6 @@ package Controle;
 import Modelo.BEAN.Objeto;
 import Modelo.SQL.ObjetoSql;
 import java.util.List;
-import java.util.Set;
 import javax.persistence.PersistenceException;
 
 /**

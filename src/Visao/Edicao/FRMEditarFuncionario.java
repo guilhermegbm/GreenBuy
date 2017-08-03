@@ -336,9 +336,7 @@ public class FRMEditarFuncionario extends javax.swing.JFrame {
                     this.mudaFrame();
                 } catch (RuntimeException e) {
                     JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
-                    throw new RuntimeException(e);
                 }
-
             }
         } else {
             JOptionPane.showMessageDialog(null, "Senha de confirmação incorreta.");

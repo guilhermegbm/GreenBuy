@@ -5,6 +5,7 @@
  */
 package Visao.Gerenciamento;
 
+import Controle.ControleFuncionario;
 import Controle.ControleSubGrupo;
 import Modelo.BEAN.SubGrupo;
 import Visao.Cadastro.FRMCadastrarSubGrupo;
@@ -253,43 +254,51 @@ public class FRMSubGrupo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        FRMEditarSubGrupo edtSG = new FRMEditarSubGrupo();
-        int qnt = tableSubGrupo.getSelectedRowCount();
+        if (ControleFuncionario.verificaFuncionarioLogado()) {
+            FRMEditarSubGrupo edtSG = new FRMEditarSubGrupo();
+            int qnt = tableSubGrupo.getSelectedRowCount();
 
-        if (qnt < 1) {
-            JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para editar.");
-        } else if (qnt > 1) {
-            JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez.");
+            if (qnt < 1) {
+                JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para editar.");
+            } else if (qnt > 1) {
+                JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez.");
+            } else {
+
+                edtSG.pegaObjeto(dados.get(tableSubGrupo.getSelectedRow()));
+
+                edtSG.setVisible(true);
+
+                this.dispose();
+            }
         } else {
-
-            edtSG.pegaObjeto(dados.get(tableSubGrupo.getSelectedRow()));
-
-            edtSG.setVisible(true);
-
-            this.dispose();
+            JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer essa ação.");
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
-        int qnt = tableSubGrupo.getSelectedColumnCount();
+        if (ControleFuncionario.verificaFuncionarioLogado()) {
+            int qnt = tableSubGrupo.getSelectedColumnCount();
 
-        if (qnt < 1) {
-            JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para deletar.");
-        } else if (qnt > 1) {
-            JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez;");
-        } else {
+            if (qnt < 1) {
+                JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para deletar.");
+            } else if (qnt > 1) {
+                JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez;");
+            } else {
 
-            int opc = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o sub-grupo " + dados.get(tableSubGrupo.getSelectedRow()).getNome() + " ?");
+                int opc = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o sub-grupo " + dados.get(tableSubGrupo.getSelectedRow()).getNome() + " ?");
 
-            if (opc == 0) {
-                try {
-                    ControleSubGrupo.deletaSubGrupo(dados.get(tableSubGrupo.getSelectedRow()));
-                    dados = ControleSubGrupo.listarTodos();
-                    this.preencheTabela();
-                } catch (RuntimeException e) {
-                    JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+                if (opc == 0) {
+                    try {
+                        ControleSubGrupo.deletaSubGrupo(dados.get(tableSubGrupo.getSelectedRow()));
+                        dados = ControleSubGrupo.listarTodos();
+                        this.preencheTabela();
+                    } catch (RuntimeException e) {
+                        JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+                    }
                 }
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer essa ação.");
         }
     }//GEN-LAST:event_btnDeletarActionPerformed
 
@@ -391,7 +400,7 @@ public class FRMSubGrupo extends javax.swing.JFrame {
                     this.preencheTabela();
                 } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(null, "Atenção: para pesquisa por código, insira apenas números.");
-                } catch (RuntimeException e){
+                } catch (RuntimeException e) {
                     JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
                 }
 
@@ -415,13 +424,13 @@ public class FRMSubGrupo extends javax.swing.JFrame {
 
         String nomeCargo = "";
         for (SubGrupo dado : dados) {
-            
-            if (dado.getGrupo() == null){
+
+            if (dado.getGrupo() == null) {
                 nomeCargo = "Nenhum";
             } else {
                 nomeCargo = dado.getGrupo().getNome();
             }
-            
+
             dTable.addRow(new Object[]{dado.getCodigo(), dado.getNome(), nomeCargo});
         }
 

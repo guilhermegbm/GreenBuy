@@ -5,6 +5,7 @@
  */
 package Visao.Gerenciamento;
 
+import Controle.ControleFuncionario;
 import Controle.ControleGrupo;
 import Visao.Cadastro.FRMCadastrarObjeto;
 import Modelo.BEAN.Grupo;
@@ -36,7 +37,6 @@ public class FRMGrupo extends javax.swing.JFrame {
         } catch (RuntimeException e) {
             JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
         }
-        
 
         this.preencheTabela();
     }
@@ -291,43 +291,51 @@ public class FRMGrupo extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        int qnt = tableGrupo.getSelectedColumnCount();
+        if (ControleFuncionario.verificaFuncionarioLogado()) {
+            int qnt = tableGrupo.getSelectedColumnCount();
 
-        if (qnt < 1) {
-            JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para deletar.");
-        } else if (qnt > 1) {
-            JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez;");
-        } else {
+            if (qnt < 1) {
+                JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para deletar.");
+            } else if (qnt > 1) {
+                JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez;");
+            } else {
 
-            int opc = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o grupo " + dados.get(tableGrupo.getSelectedRow()).getNome() + " ?");
+                int opc = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o grupo " + dados.get(tableGrupo.getSelectedRow()).getNome() + " ?");
 
-            if (opc == 0) {
-                try {
-                    ControleGrupo.deletaGrupo(dados.get(tableGrupo.getSelectedRow()));
-                    dados = ControleGrupo.listarTodos();
-                    this.preencheTabela();
-                } catch (RuntimeException e) {
-                    JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+                if (opc == 0) {
+                    try {
+                        ControleGrupo.deletaGrupo(dados.get(tableGrupo.getSelectedRow()));
+                        dados = ControleGrupo.listarTodos();
+                        this.preencheTabela();
+                    } catch (RuntimeException e) {
+                        JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+                    }
                 }
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer essa ação.");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        FRMEditarGrupo edtObj = new FRMEditarGrupo();
-        int qnt = tableGrupo.getSelectedRowCount();
+        if (ControleFuncionario.verificaFuncionarioLogado()) {
+            FRMEditarGrupo edtObj = new FRMEditarGrupo();
+            int qnt = tableGrupo.getSelectedRowCount();
 
-        if (qnt < 1) {
-            JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para editar.");
-        } else if (qnt > 1) {
-            JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez.");
+            if (qnt < 1) {
+                JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para editar.");
+            } else if (qnt > 1) {
+                JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez.");
+            } else {
+
+                edtObj.pegaObjeto(dados.get(tableGrupo.getSelectedRow()));
+
+                edtObj.setVisible(true);
+
+                this.dispose();
+            }
         } else {
-
-            edtObj.pegaObjeto(dados.get(tableGrupo.getSelectedRow()));
-
-            edtObj.setVisible(true);
-
-            this.dispose();
+            JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer essa ação.");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 

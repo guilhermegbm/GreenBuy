@@ -8,6 +8,7 @@ package Visao.Gerenciamento;
 import Visao.Edicao.FRMEditarCliente;
 import Visao.Cadastro.FRMCadastrarCliente;
 import Controle.ControleCliente;
+import Controle.ControleFuncionario;
 import Modelo.BEAN.Cliente;
 import java.awt.Color;
 import java.util.List;
@@ -287,42 +288,50 @@ public class FRMCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCadastrarClienteActionPerformed
 
     private void btnEdtClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEdtClienteActionPerformed
-        FRMEditarCliente edtCliente = new FRMEditarCliente();
-        int qtd = tableCliente.getSelectedRowCount();
+        if (ControleFuncionario.verificaFuncionarioLogado()) {
+            FRMEditarCliente edtCliente = new FRMEditarCliente();
+            int qtd = tableCliente.getSelectedRowCount();
 
-        if (qtd < 1) {
-            JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para deletar.");
-        } else if (qtd > 1) {
-            JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez.");
+            if (qtd < 1) {
+                JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para deletar.");
+            } else if (qtd > 1) {
+                JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez.");
+            } else {
+                edtCliente.pegaCliente(dados.get(tableCliente.getSelectedRow()));
+
+                edtCliente.setVisible(true);
+
+                this.dispose();
+            }
         } else {
-            edtCliente.pegaCliente(dados.get(tableCliente.getSelectedRow()));
-
-            edtCliente.setVisible(true);
-
-            this.dispose();
+            JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer essa ação.");
         }
     }//GEN-LAST:event_btnEdtClienteActionPerformed
 
     private void btnDelClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelClienteActionPerformed
-        int qtd = tableCliente.getSelectedRowCount();
+        if (ControleFuncionario.verificaFuncionarioLogado()) {
+            int qtd = tableCliente.getSelectedRowCount();
 
-        if (qtd < 1) {
-            JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para deletar.");
-        } else if (qtd > 1) {
-            JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez.");
-        } else {
-            int linha = tableCliente.getSelectedRow();
-            int opc = JOptionPane.showConfirmDialog(null, "Deseja realmente desativar o(a) cliente " + dados.get(linha).getNome() + "?");
+            if (qtd < 1) {
+                JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para deletar.");
+            } else if (qtd > 1) {
+                JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez.");
+            } else {
+                int linha = tableCliente.getSelectedRow();
+                int opc = JOptionPane.showConfirmDialog(null, "Deseja realmente desativar o(a) cliente " + dados.get(linha).getNome() + "?");
 
-            if (opc == 0) {
-                try {
-                    ControleCliente.desativaCliente(dados.get(linha));
-                } catch (RuntimeException e) {
-                    JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+                if (opc == 0) {
+                    try {
+                        ControleCliente.desativaCliente(dados.get(linha));
+                    } catch (RuntimeException e) {
+                        JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+                    }
                 }
+                dados = ControleCliente.listarTodosAtivos();
+                this.preencheTabela();
             }
-            dados = ControleCliente.listarTodosAtivos();
-            this.preencheTabela();
+        } else {
+            JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer essa ação.");
         }
     }//GEN-LAST:event_btnDelClienteActionPerformed
 
