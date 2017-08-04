@@ -8,16 +8,14 @@ package Visao.Edicao;
 import Controle.ControleObjeto;
 import Controle.ControleSubGrupo;
 import Modelo.BEAN.Objeto;
-import Modelo.BEAN.Grupo;
 import Modelo.BEAN.SubGrupo;
 import Visao.Gerenciamento.FRMObjeto;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
  *
- * @author Alunos
+ * @author Guilherme
  */
 public class FRMEditarObjeto extends javax.swing.JFrame {
 
@@ -308,6 +306,7 @@ public class FRMEditarObjeto extends javax.swing.JFrame {
 
             objeto.setCodigo(objetobean.getCodigo());
             objeto.setSituacaoObj(objetobean.getSituacaoObj());
+            objeto.setQtdeEstoque(objetobean.getQtdeEstoque());
 
             objeto.setNome(tfNome.getText());
             objeto.setDescricao(taDesc.getText());

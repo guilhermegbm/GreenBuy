@@ -5,6 +5,7 @@
  */
 package Visao.Outros;
 
+import Modelo.BEAN.Venda;
 import java.awt.Color;
 
 /**
@@ -12,6 +13,7 @@ import java.awt.Color;
  * @author Alunos
  */
 public class FRMFinalizarVenda extends javax.swing.JFrame {
+    private Venda venda;
 
     /**
      * Creates new form FRMFinalizarVenda
@@ -452,4 +454,8 @@ public class FRMFinalizarVenda extends javax.swing.JFrame {
     private javax.swing.JTextField tfNome;
     private javax.swing.JTextField tfPar;
     // End of variables declaration//GEN-END:variables
+
+    void pegaVenda(Venda v) {
+        this.venda = v;
+    }
 }

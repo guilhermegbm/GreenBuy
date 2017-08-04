@@ -5,6 +5,7 @@
  */
 package Modelo.BEAN;
 
+import java.io.Serializable;
 import javax.persistence.AssociationOverride;
 import javax.persistence.AssociationOverrides;
 import javax.persistence.Column;
@@ -27,7 +28,7 @@ import javax.persistence.UniqueConstraint;
     @AssociationOverride(name = "objVen.objeto",
             joinColumns = @JoinColumn(name = "obv_objCodigo"))
 })
-public class ObjetoVenda {
+public class ObjetoVenda implements Serializable {
     private ObjetoVendaId objVen = new ObjetoVendaId();
     private float qtdeVendida;
     private float precoVendaPraticadoUnidade;

@@ -5,6 +5,7 @@
  */
 package Modelo.BEAN;
 
+import java.io.Serializable;
 import javax.persistence.AssociationOverride;
 import javax.persistence.AssociationOverrides;
 import javax.persistence.Column;
@@ -26,7 +27,7 @@ import javax.persistence.Transient;
     @AssociationOverride(name = "objSai.objeto",
             joinColumns = @JoinColumn(name = "sao_objCodigo"))
 })
-public class ObjetoSaida {
+public class ObjetoSaida implements Serializable {
     private ObjetoSaidaId objSai = new ObjetoSaidaId();
     private float qtdeRetirada;
     private float precoNaSaida;

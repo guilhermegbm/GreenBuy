@@ -7,11 +7,8 @@ package Visao.Outros;
 
 import Controle.ControleFuncionario;
 import Modelo.BEAN.Funcionario;
-import Modelo.SQL.FuncionarioSql;
 import java.awt.Color;
 import java.net.URL;
-import java.util.List;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -67,6 +64,11 @@ public class FRMLogin extends javax.swing.JFrame {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 tfSenhaFocusLost(evt);
+            }
+        });
+        tfSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfSenhaActionPerformed(evt);
             }
         });
 
@@ -217,37 +219,7 @@ public class FRMLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_tfUsuarioKeyTyped
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-        if ((tfUsuario.getText().equals("")) || (tfUsuario.getText().equals("Insira o login..."))) {
-            lblImg1.setVisible(true);
-            lblImg1.setToolTipText("Insira o Login!");
-            URL url = this.getClass().getResource("/Visao.icon/warning.png");
-            lblImg1.setIcon(new ImageIcon(url));
-        } else if (!loginValido) {
-
-        } else if (tfSenha.getText().equals("")){
-            lblImg2.setVisible(true);
-            lblImg2.setToolTipText("Insira a Senha!");
-            URL url = this.getClass().getResource("/Visao.icon/warning.png");
-            lblImg2.setIcon(new ImageIcon(url));
-        } else {
-            try {
-                Funcionario f = ControleFuncionario.verificaSenha(tfUsuario.getText(), tfSenha.getText());
-                if (f == null) {
-                    lblImg2.setVisible(true);
-                    lblImg2.setToolTipText("Senha incorreta!");
-                    URL url = this.getClass().getResource("/Visao.icon/warning.png");
-                    lblImg2.setIcon(new ImageIcon(url));
-                } else {
-                    FRMPrincipal p = new FRMPrincipal();
-                    ControleFuncionario.setFuncionarioLogado(f);
-                    p.setVisible(true);
-                    this.dispose();
-                }
-            } catch (RuntimeException e) {
-                JOptionPane.showMessageDialog(null, "Deu ruim");
-                throw new RuntimeException(e);
-            }
-        }
+        this.entrar();
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     private void tfSenhaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfSenhaFocusGained
@@ -263,6 +235,10 @@ public class FRMLogin extends javax.swing.JFrame {
 //            tfSenha.setForeground(Color.GRAY);
 //        }
     }//GEN-LAST:event_tfSenhaFocusLost
+
+    private void tfSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfSenhaActionPerformed
+        this.entrar();
+    }//GEN-LAST:event_tfSenhaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -310,4 +286,38 @@ public class FRMLogin extends javax.swing.JFrame {
     private javax.swing.JPasswordField tfSenha;
     private javax.swing.JTextField tfUsuario;
     // End of variables declaration//GEN-END:variables
+    
+    private void entrar (){
+        if ((tfUsuario.getText().equals("")) || (tfUsuario.getText().equals("Insira o login..."))) {
+            lblImg1.setVisible(true);
+            lblImg1.setToolTipText("Insira o Login!");
+            URL url = this.getClass().getResource("/Visao.icon/warning.png");
+            lblImg1.setIcon(new ImageIcon(url));
+        } else if (!loginValido) {
+
+        } else if (tfSenha.getText().equals("")){
+            lblImg2.setVisible(true);
+            lblImg2.setToolTipText("Insira a Senha!");
+            URL url = this.getClass().getResource("/Visao.icon/warning.png");
+            lblImg2.setIcon(new ImageIcon(url));
+        } else {
+            try {
+                Funcionario f = ControleFuncionario.verificaSenha(tfUsuario.getText(), tfSenha.getText());
+                if (f == null) {
+                    lblImg2.setVisible(true);
+                    lblImg2.setToolTipText("Senha incorreta!");
+                    URL url = this.getClass().getResource("/Visao.icon/warning.png");
+                    lblImg2.setIcon(new ImageIcon(url));
+                } else {
+                    FRMPrincipal p = new FRMPrincipal();
+                    ControleFuncionario.setFuncionarioLogado(f);
+                    p.setVisible(true);
+                    this.dispose();
+                }
+            } catch (RuntimeException e) {
+                JOptionPane.showMessageDialog(null, "Deu ruim");
+                throw new RuntimeException(e);
+            }
+        }
+    }
 }

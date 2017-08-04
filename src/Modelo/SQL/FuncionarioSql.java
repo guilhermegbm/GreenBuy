@@ -115,7 +115,8 @@ public class FuncionarioSql {
         EntityManager manager = JpaUtil.getEntityManager();
 
         try {
-            TypedQuery<String> query = manager.createQuery("select f.login from Funcionario f", String.class);
+            TypedQuery<String> query = manager.createQuery("select f.login from Funcionario f where f.situacaoFun = :situacao", String.class);
+            query.setParameter("situacao", Funcionario.SituacaoFun.ATIVO);
             List<String> l = query.getResultList();
             return l;
         } finally {

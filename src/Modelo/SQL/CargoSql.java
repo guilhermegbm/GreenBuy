@@ -9,9 +9,7 @@ import Jpa.JpaUtil;
 import Modelo.BEAN.Cargo;
 import Modelo.BEAN.Funcionario;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
@@ -53,7 +51,6 @@ public class CargoSql {
         } finally {
             manager.close();
         }
-
     }
 
     public static void deletaCargo(Cargo c) throws RuntimeException {
@@ -76,9 +73,13 @@ public class CargoSql {
 
     public static List<Cargo> listarTodos() throws RuntimeException {
         EntityManager manager = JpaUtil.getEntityManager();
-
+        
+        //List<Cargo> cargos =  new ArrayList<Cargo>();
         try {
             TypedQuery<Cargo> tq = manager.createQuery("from Cargo", Cargo.class);
+            //Query query = manager.createQuery("from Cargo"); 
+            //cargos = query.getResultList();
+         
             return tq.getResultList();
         } finally {
             manager.close();
