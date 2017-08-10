@@ -7,8 +7,8 @@ package Modelo.BEAN;
 
 import Modelo.SQL.CargoSql;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,7 +19,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.PostLoad;
 import javax.persistence.PostPersist;
 import javax.persistence.PostUpdate;
-import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -33,7 +32,7 @@ import javax.persistence.Transient;
 public class Cargo implements Serializable {
     private int codigo;
     private String nome;
-    private Set<Funcionario> funcionarios = new HashSet<>();
+    private List<Funcionario> funcionarios = new ArrayList<>();
     private Long funcionariosNesteCargo;
 
     @Id
@@ -57,11 +56,11 @@ public class Cargo implements Serializable {
     }
 
     @OneToMany(mappedBy = "cargo", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    public Set<Funcionario> getFuncionarios() {
+    public List<Funcionario> getFuncionarios() {
         return funcionarios;
     }
 
-    public void setFuncionarios(Set<Funcionario> funcionarios) {
+    public void setFuncionarios(List<Funcionario> funcionarios) {
         this.funcionarios = funcionarios;
     }
 

@@ -6,9 +6,9 @@
 package Modelo.BEAN;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -38,7 +38,7 @@ public class Saida implements Serializable {
     private float acrescimoAdicional;
     private float debitoAdicional;
     private TipoSaida tipoSaida;
-    private Set<ObjetoSaida> objetos = new HashSet<>();
+    private List<ObjetoSaida> objetos = new ArrayList<>();
     private float valorTotal;
 
     @Id
@@ -91,11 +91,11 @@ public class Saida implements Serializable {
     }
     
     @OneToMany(mappedBy = "objSai.saida", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    public Set<ObjetoSaida> getObjetos() {
+    public List<ObjetoSaida> getObjetos() {
         return objetos;
     }
 
-    public void setObjetos(Set<ObjetoSaida> objetos) {
+    public void setObjetos(List<ObjetoSaida> objetos) {
         this.objetos = objetos;
     }
     

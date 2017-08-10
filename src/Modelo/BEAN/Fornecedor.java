@@ -6,8 +6,8 @@
 package Modelo.BEAN;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,7 +33,7 @@ public class Fornecedor implements Serializable {
     private String cnpj;
     private String telefone;
     private SituacaoFor situacaoFor;
-    private Set<Fornecimento> fornecimentos = new HashSet<>();
+    private List<Fornecimento> fornecimentos = new ArrayList<>();
 
     @Id
     @GeneratedValue
@@ -103,11 +103,11 @@ public class Fornecedor implements Serializable {
     }
     
     @OneToMany(mappedBy = "fornecedor", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    public Set<Fornecimento> getFornecimentos() {
+    public List<Fornecimento> getFornecimentos() {
         return fornecimentos;
     }
 
-    public void setFornecimentos(Set<Fornecimento> fornecimentos) {
+    public void setFornecimentos(List<Fornecimento> fornecimentos) {
         this.fornecimentos = fornecimentos;
     }
     

@@ -7,9 +7,9 @@ package Modelo.BEAN;
 
 import Modelo.BEAN.Objeto.TipoObjeto;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -45,7 +45,7 @@ public class Venda implements Serializable {
     private Cliente cliente;
     private Funcionario funcionario;
     private FormasDePagamento formaPagamento;
-    private Set<ObjetoVenda> itensDaVenda = new HashSet<>();
+    private List<ObjetoVenda> itensDaVenda = new ArrayList<>();
     private float valorTotal;
 
     @Id
@@ -138,11 +138,11 @@ public class Venda implements Serializable {
     }
 
     @OneToMany(mappedBy = "objVen.venda", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    public Set<ObjetoVenda> getItensDaVenda() {
+    public List<ObjetoVenda> getItensDaVenda() {
         return itensDaVenda;
     }
 
-    public void setItensDaVenda(Set<ObjetoVenda> itensDaVenda) {
+    public void setItensDaVenda(List<ObjetoVenda> itensDaVenda) {
         this.itensDaVenda = itensDaVenda;
     }
     

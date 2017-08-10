@@ -6,9 +6,9 @@
 package Modelo.BEAN;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -39,7 +39,7 @@ public class Fornecimento implements Serializable {
     private float acrescimo;
     private float desconto;
     private Fornecedor fornecedor;
-    private Set<ObjetoFornecimento> objetosNoFornecimento = new HashSet<>();
+    private List<ObjetoFornecimento> objetosNoFornecimento = new ArrayList<>();
     private float valorTotal;
 
     @Id
@@ -101,11 +101,11 @@ public class Fornecimento implements Serializable {
     }
 
     @OneToMany(mappedBy = "objFor.fornecimento", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    public Set<ObjetoFornecimento> getObjetosNoFornecimento() {
+    public List<ObjetoFornecimento> getObjetosNoFornecimento() {
         return objetosNoFornecimento;
     }
 
-    public void setObjetosNoFornecimento(Set<ObjetoFornecimento> objetosNoFornecimento) {
+    public void setObjetosNoFornecimento(List<ObjetoFornecimento> objetosNoFornecimento) {
         this.objetosNoFornecimento = objetosNoFornecimento;
     }
 

@@ -6,9 +6,9 @@
 package Modelo.BEAN;
 
 import java.io.Serializable;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,7 +31,7 @@ public class SubGrupo implements Serializable {
     private int codigo;
     private String nome;
     private Grupo grupo;
-    private Set<Objeto> objetos = new HashSet<>();
+    private List<Objeto> objetos = new ArrayList<>();
 
     @Id
     @GeneratedValue
@@ -64,11 +64,11 @@ public class SubGrupo implements Serializable {
     }
 
     @OneToMany(mappedBy = "subGrupo", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    public Set<Objeto> getObjetos() {
+    public List<Objeto> getObjetos() {
         return objetos;
     }
 
-    public void setObjetos(Set<Objeto> objetos) {
+    public void setObjetos(List<Objeto> objetos) {
         this.objetos = objetos;
     }
 

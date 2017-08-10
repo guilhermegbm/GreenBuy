@@ -6,9 +6,9 @@
 package Modelo.BEAN;
 
 import java.io.Serializable;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -40,9 +40,9 @@ public class Objeto implements Serializable {
     private TipoObjeto tipoObj;
     private SituacaoObj situacaoObj;
     private SubGrupo subGrupo;
-    private Set<ObjetoVenda> itensNaVenda = new HashSet<>();
-    private Set<ObjetoFornecimento> fornecimentos = new HashSet<>();
-    private Set<ObjetoSaida> saidas = new HashSet<>();
+    private List<ObjetoVenda> itensNaVenda = new ArrayList<>();
+    private List<ObjetoFornecimento> fornecimentos = new ArrayList<>();
+    private List<ObjetoSaida> saidas = new ArrayList<>();
 
     @Id
     @GeneratedValue
@@ -141,29 +141,29 @@ public class Objeto implements Serializable {
     }
 
     @OneToMany(mappedBy = "objVen.objeto", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    public Set<ObjetoVenda> getItensNaVenda() {
+    public List<ObjetoVenda> getItensNaVenda() {
         return itensNaVenda;
     }
 
-    public void setItensNaVenda(Set<ObjetoVenda> itensNaVenda) {
+    public void setItensNaVenda(List<ObjetoVenda> itensNaVenda) {
         this.itensNaVenda = itensNaVenda;
     }
 
     @OneToMany(mappedBy = "objFor.objeto", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    public Set<ObjetoFornecimento> getFornecimentos() {
+    public List<ObjetoFornecimento> getFornecimentos() {
         return fornecimentos;
     }
 
-    public void setFornecimentos(Set<ObjetoFornecimento> fornecimentos) {
+    public void setFornecimentos(List<ObjetoFornecimento> fornecimentos) {
         this.fornecimentos = fornecimentos;
     }
 
     @OneToMany(mappedBy = "objSai.objeto", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    public Set<ObjetoSaida> getSaidas() {
+    public List<ObjetoSaida> getSaidas() {
         return saidas;
     }
 
-    public void setSaidas(Set<ObjetoSaida> saidas) {
+    public void setSaidas(List<ObjetoSaida> saidas) {
         this.saidas = saidas;
     }
 
