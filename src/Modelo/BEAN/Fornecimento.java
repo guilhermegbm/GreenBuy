@@ -114,11 +114,14 @@ public class Fornecimento implements Serializable {
         return valorTotal;
     }
     
-    @PostPersist
     @PostLoad
     @PostUpdate
     public void setValorTotal (){
         
     }
     
+    @PostPersist
+    public void alteraQtdeEstoque (){
+        //
+    }
 }

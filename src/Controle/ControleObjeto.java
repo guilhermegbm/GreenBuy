@@ -64,19 +64,65 @@ public class ControleObjeto {
         return ObjetoSql.listarTodosProdutos();
     }
 
-    public static List<Objeto> listarTodosMercadorias()throws RuntimeException  {
+    public static List<Objeto> listarTodosMercadorias() throws RuntimeException {
         return ObjetoSql.listarTodosMercadorias();
     }
 
-    public static List<Objeto> listarTodosInativos()throws RuntimeException  {
+    public static List<Objeto> listarTodosInativos() throws RuntimeException {
         return ObjetoSql.listarTodosInativos();
     }
-    
-    public static void inativaObjeto(Objeto o) throws RuntimeException{
+
+    public static void inativaObjeto(Objeto o) throws RuntimeException {
         ObjetoSql.inativaObjeto(o);
     }
-    
-    public static void reativaObjeto(Objeto o) throws RuntimeException{
+
+    public static void reativaObjeto(Objeto o) throws RuntimeException {
         ObjetoSql.reativaObjeto(o);
+    }
+
+    //Os métodos seguintes são usados majoritariamente pelo FRMFornecimento
+    public static List<Objeto> listarTodosMercadoriasEAtivos() throws RuntimeException {
+        return ObjetoSql.listarTodosMercadoriasEAtivos();
+    }
+    
+    public static List<Objeto> listarTodosMercadoriasEInativos() throws RuntimeException {
+        return ObjetoSql.listarTodosMercadoriasEAtivos();
+    }
+
+    public static List<Objeto> listarMercadoriaPorCodigo(int cod) throws RuntimeException {
+        return ObjetoSql.listarMercadoriaPorCodigo(cod);
+    }
+
+    public static List<Objeto> listarMercadoriaPorNome(String nome) throws RuntimeException {
+        return ObjetoSql.listarMercadoriaPorNome(nome);
+    }
+
+    public static List<Objeto> listarMercadoriaPorValorCompraMenor(float valor) throws RuntimeException {
+        return ObjetoSql.listarMercadoriaPorValorCompraMenor(valor);
+    }
+
+    public static List<Objeto> listarMercadoriaPorValorCompraMaior(float valor) throws RuntimeException {
+        return ObjetoSql.listarMercadoriaPorValorCompraMaior(valor);
+    }
+
+    //Os métodos seguintes são usados majoritariamente pelo FRMVenda
+    public static List<Objeto> listarTodosProdutosAtivos()throws RuntimeException {
+        return ObjetoSql.listarTodosProdutosAtivos();
+    }
+
+    public static List<Objeto> listarObjetoPorCodigoEAtivo(int cod) throws RuntimeException{
+        return ObjetoSql.listarObjetoPorCodigoEAtivo(cod);
+    }
+
+    public static List<Objeto> listarPorNomeEAtivo(String nome)throws RuntimeException {
+        return ObjetoSql.listarPorNomeEAtivo(nome);
+    }
+
+    public static List<Objeto> listarPorValorVendaMaiorEAtivo(float valor)throws RuntimeException {
+        return ObjetoSql.listarPorValorVendaMaiorEAtivo(valor);
+    }
+
+    public static List<Objeto> listarPorValorVendaMenorEAtivo(float valor)throws RuntimeException {
+        return ObjetoSql.listarPorValorVendaMenorEAtivo(valor);
     }
 }

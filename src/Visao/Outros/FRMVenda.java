@@ -36,16 +36,16 @@ public class FRMVenda extends javax.swing.JFrame {
      * Creates new form FRMVenda
      */
     public FRMVenda() {
+        initComponents();
         venda = new Venda();
         objetoSelecionado = null;
         itensNaVenda = new ArrayList<>();
         try {
             objetosListados = ControleObjeto.listarTodosAtivos();
+            this.preencheTabelaPesquisa();
         } catch (RuntimeException e) {
             JOptionPane.showMessageDialog(null, "Deu ruium: " + e);
         }
-        initComponents();
-        this.preencheTabelaPesquisa();
     }
 
     /**
@@ -281,7 +281,7 @@ public class FRMVenda extends javax.swing.JFrame {
         );
 
         jPanel4.setBackground(new java.awt.Color(204, 255, 204));
-        jPanel4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Escolha o objeto"));
 
         tablePesquisa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -530,11 +530,11 @@ public class FRMVenda extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Insira ao menos um item.");
 
         } else {
-            
+
             Funcionario f = new Funcionario();
             f.setCodigo(2);
             ControleFuncionario.setFuncionarioLogado(f);
-            
+
             FRMFinalizarVenda fim = new FRMFinalizarVenda();
 
             venda.setItensDaVenda(itensNaVenda);
@@ -562,7 +562,7 @@ public class FRMVenda extends javax.swing.JFrame {
             }
         } else if (cbOpc.getSelectedIndex() == 5) {
             try {
-                objetosListados = ControleObjeto.listarTodosProdutos();
+                objetosListados = ControleObjeto.listarTodosProdutosAtivos();
                 this.preencheTabelaPesquisa();
                 this.verificaTabelaPesquisa();
             } catch (RuntimeException e) {
@@ -570,7 +570,7 @@ public class FRMVenda extends javax.swing.JFrame {
             }
         } else if (cbOpc.getSelectedIndex() == 6) {
             try {
-                objetosListados = ControleObjeto.listarTodosMercadorias();
+                objetosListados = ControleObjeto.listarTodosMercadoriasEAtivos();
                 this.preencheTabelaPesquisa();
                 this.verificaTabelaPesquisa();
             } catch (RuntimeException e) {
@@ -651,7 +651,7 @@ public class FRMVenda extends javax.swing.JFrame {
         int qnt = tableItens.getSelectedRowCount();
 
         if (qnt < 1) {
-            JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para editar.");
+            JOptionPane.showMessageDialog(null, "Selecione um ítem da lista ao lado para remover.");
         } else if (qnt > 1) {
             JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez.");
         } else {
@@ -744,7 +744,7 @@ public class FRMVenda extends javax.swing.JFrame {
         } else {
             if (cbOpc.getSelectedIndex() == 1) {
                 try {
-                    objetosListados = ControleObjeto.listarObjetoPorCodigo(Integer.parseInt(tfDado.getText()));
+                    objetosListados = ControleObjeto.listarObjetoPorCodigoEAtivo(Integer.parseInt(tfDado.getText()));
                     this.preencheTabelaPesquisa();
                     this.verificaTabelaPesquisa();
                 } catch (NumberFormatException e) {
@@ -755,7 +755,7 @@ public class FRMVenda extends javax.swing.JFrame {
 
             } else if (cbOpc.getSelectedIndex() == 2) {
                 try {
-                    objetosListados = ControleObjeto.listarPorNome(tfDado.getText());
+                    objetosListados = ControleObjeto.listarPorNomeEAtivo(tfDado.getText());
                     this.preencheTabelaPesquisa();
                     this.verificaTabelaPesquisa();
                 } catch (RuntimeException e) {
@@ -771,7 +771,7 @@ public class FRMVenda extends javax.swing.JFrame {
                     texto = parte1 + "." + parte2;
                 }
                 try {
-                    objetosListados = ControleObjeto.listarPorValorVendaMenor(Float.parseFloat(texto));
+                    objetosListados = ControleObjeto.listarPorValorVendaMenorEAtivo(Float.parseFloat(texto));
                     this.preencheTabelaPesquisa();
                     this.verificaTabelaPesquisa();
                 } catch (NumberFormatException e) {
@@ -790,7 +790,7 @@ public class FRMVenda extends javax.swing.JFrame {
                     texto = parte1 + "." + parte2;
                 }
                 try {
-                    objetosListados = ControleObjeto.listarPorValorVendaMaior(Float.parseFloat(texto));
+                    objetosListados = ControleObjeto.listarPorValorVendaMaiorEAtivo(Float.parseFloat(texto));
                     this.preencheTabelaPesquisa();
                     this.verificaTabelaPesquisa();
                 } catch (NumberFormatException e) {
@@ -810,9 +810,7 @@ public class FRMVenda extends javax.swing.JFrame {
         dtm.addColumn("Preço de venda:");
 
         for (Objeto objL : objetosListados) {
-            if (objL.getSituacaoObj().equals(Objeto.SituacaoObj.ATIVO)) {
-                dtm.addRow(new Object[]{objL.getCodigo(), objL.getNome(), objL.getPrecoVendaBase()});
-            }
+            dtm.addRow(new Object[]{objL.getCodigo(), objL.getNome(), objL.getPrecoVendaBase()});
         }
 
         tablePesquisa.setModel(dtm);

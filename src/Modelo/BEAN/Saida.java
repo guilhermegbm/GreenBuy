@@ -109,10 +109,14 @@ public class Saida implements Serializable {
         return valorTotal;
     }
     
-    @PostPersist
     @PostLoad
     @PostUpdate
     private void setValorTotal(){
         
+    }
+    
+    @PostPersist
+    public void alteraQtdeEstoque (){
+        //
     }
 }
