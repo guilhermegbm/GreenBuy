@@ -86,7 +86,7 @@ public class ControleObjeto {
     }
     
     public static List<Objeto> listarTodosMercadoriasEInativos() throws RuntimeException {
-        return ObjetoSql.listarTodosMercadoriasEAtivos();
+        return ObjetoSql.listarTodosMercadoriasEInativos();
     }
 
     public static List<Objeto> listarMercadoriaPorCodigo(int cod) throws RuntimeException {

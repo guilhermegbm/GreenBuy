@@ -38,7 +38,7 @@ public class FRMFornecimento extends javax.swing.JFrame {
         mercadoriaSelecionada = null;
         mercadoriasNoFornecimento = new ArrayList<>();
         try {
-            mercadoriasListadas = ControleObjeto.listarTodosMercadoriasEAtivos();
+            mercadoriasListadas = ControleObjeto.listarTodosMercadorias();
             this.preencheTabelaPesquisa();
         } catch (RuntimeException e) {
             JOptionPane.showMessageDialog(null, "Deu ruium: " + e);
@@ -972,7 +972,7 @@ public class FRMFornecimento extends javax.swing.JFrame {
                 cbOpc.setSelectedIndex(0);
 
                 try {
-                    mercadoriasListadas = ControleObjeto.listarTodosMercadoriasEAtivos();
+                    mercadoriasListadas = ControleObjeto.listarTodosMercadorias();
                     this.preencheTabelaPesquisa();
                 } catch (RuntimeException e) {
                     JOptionPane.showMessageDialog(null, "Deu ruium: " + e);
