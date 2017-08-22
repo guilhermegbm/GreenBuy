@@ -227,4 +227,32 @@ public class FornecedorSql {
             manager.close();
         }
     }
+
+    public static List<Fornecedor> listarPorNomeEAtivo(String nome) throws RuntimeException {
+        EntityManager manager = JpaUtil.getEntityManager();
+
+        try {
+            TypedQuery<Fornecedor> tq = manager.createQuery("select f from Fornecedor f where f.nome like :nome "
+                    + "and f.situacaoFor = :sit", Fornecedor.class);
+            tq.setParameter("nome", "%" + nome + "%");
+            tq.setParameter("sit", Fornecedor.SituacaoFor.ATIVO);
+            return tq.getResultList();
+        } finally {
+            manager.close();
+        }
+    }
+
+    public static List<Fornecedor> listarPorCodigoEAtivo(int cod) throws RuntimeException {
+        EntityManager manager = JpaUtil.getEntityManager();
+
+        try {
+            TypedQuery<Fornecedor> tq = manager.createQuery("select f from Fornecedor f where f.codigo = :codigo "
+                    + "and f.situacaoFor = :sit", Fornecedor.class);
+            tq.setParameter("codigo", cod);
+            tq.setParameter("sit", Fornecedor.SituacaoFor.ATIVO);
+            return tq.getResultList();
+        } finally {
+            manager.close();
+        }
+    }
 }

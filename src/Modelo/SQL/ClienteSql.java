@@ -142,13 +142,13 @@ public class ClienteSql {
         }
     }
 
-    public static void desativaCliente(Cliente c) throws RuntimeException{
+    public static void desativaCliente(Cliente c) throws RuntimeException {
         EntityManager manager = JpaUtil.getEntityManager();
         EntityTransaction tx = manager.getTransaction();
 
         try {
             tx.begin();
-            
+
             c.setSituacaoCli(Cliente.SituacaoCli.DESLIGADO);
 
             manager.merge(c);
@@ -159,18 +159,46 @@ public class ClienteSql {
         }
     }
 
-    public static void reativaCliente(Cliente c) throws RuntimeException{
+    public static void reativaCliente(Cliente c) throws RuntimeException {
         EntityManager manager = JpaUtil.getEntityManager();
         EntityTransaction tx = manager.getTransaction();
 
         try {
             tx.begin();
-            
+
             c.setSituacaoCli(Cliente.SituacaoCli.ATIVO);
 
             manager.merge(c);
 
             tx.commit();
+        } finally {
+            manager.close();
+        }
+    }
+
+    public static List<Cliente> listarPorCodigoEAtivo(int cod) throws RuntimeException {
+        EntityManager manager = JpaUtil.getEntityManager();
+
+        try {
+            TypedQuery tq = manager.createQuery("select c from Cliente c where c.codigo = :codigo and c.situacaoCli = :sit", Cliente.class);
+            tq.setParameter("codigo", cod);
+            tq.setParameter("sit", Cliente.SituacaoCli.ATIVO);
+
+            return tq.getResultList();
+
+        } finally {
+            manager.close();
+        }
+    }
+
+    public static List<Cliente> listarPorNomeEAtivo(String nome) throws RuntimeException {
+        EntityManager manager = JpaUtil.getEntityManager();
+
+        try {
+            TypedQuery<Cliente> tq = manager.createQuery("select c from Cliente c where c.nome like :nome and c.situacaoCli = :sit", Cliente.class);
+            tq.setParameter("nome", "%" + nome + "%");
+            tq.setParameter("sit", Cliente.SituacaoCli.ATIVO);
+            return tq.getResultList();
         } finally {
             manager.close();
         }

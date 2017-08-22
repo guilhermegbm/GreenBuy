@@ -5,19 +5,41 @@
  */
 package Visao.Outros;
 
+import Controle.ControleFornecedor;
+import Controle.ControleFornecimento;
+import Modelo.BEAN.Fornecedor;
 import Modelo.BEAN.Fornecimento;
+import Modelo.BEAN.ObjetoFornecimento;
+import java.awt.Color;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Guilherme
  */
 public class FRMFinalizarFornecimento extends javax.swing.JFrame {
-    private Fornecimento fornecimento; 
+
+    private Fornecimento fornecimento;
+    private List<Fornecedor> fornecedoresListados;
+    private Fornecedor fornecedorSelecionado;
+
     /**
      * Creates new form FRMFinalizarFornecimento
      */
     public FRMFinalizarFornecimento() {
         initComponents();
+
+        fornecedorSelecionado = null;
+
+        try {
+            fornecedoresListados = ControleFornecedor.listarTodosAtivos();
+            this.preencheTabela();
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+        }
     }
 
     /**
@@ -55,7 +77,7 @@ public class FRMFinalizarFornecimento extends javax.swing.JFrame {
         lblCPFCNPJ2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        lblTipo = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         tfNotaFiscal = new javax.swing.JTextField();
 
@@ -239,7 +261,7 @@ public class FRMFinalizarFornecimento extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(lblTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(lblCodigo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(8, 8, 8)
@@ -316,7 +338,7 @@ public class FRMFinalizarFornecimento extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(lblTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -410,61 +432,48 @@ public class FRMFinalizarFornecimento extends javax.swing.JFrame {
     }//GEN-LAST:event_tfDescKeyTyped
 
     private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
-        if (clienteSelecionado == null) {
-            JOptionPane.showMessageDialog(null, "Escolha um cliente da tabela acima.");
+        if (fornecedorSelecionado == null) {
+            JOptionPane.showMessageDialog(null, "Escolha um fornecedor da tabela acima.");
         } else {
-            venda.setCliente(clienteSelecionado);
-            venda.setFuncionario(ControleFuncionario.getFuncionarioLogado());
-
-            String acr = tfAcr.getText();
-
-            if (acr.contains(",")) {
-                String[] parts = acr.split(",");
-                String part1 = parts[0];
-                String part2 = parts[1];
-
-                acr = part1 + "." + part2;
-            }
-            venda.setAcrescimo(Float.parseFloat(acr));
-
-            String desc = tfDesc.getText();
-
-            if (desc.contains(",")) {
-                String[] parts = desc.split(",");
-                String part1 = parts[0];
-                String part2 = parts[1];
-
-                desc = part1 + "." + part2;
-            }
-            venda.setDesconto(Float.parseFloat(desc));
-
-            if (cbFormaPagamento.getSelectedIndex() == 0) {
-                venda.setFormaPagamento(Venda.FormasDePagamento.DINHEIRO);
-            } else if (cbFormaPagamento.getSelectedIndex() == 1) {
-                venda.setFormaPagamento(Venda.FormasDePagamento.CHEQUE);
-            } else if (cbFormaPagamento.getSelectedIndex() == 2) {
-                venda.setFormaPagamento(Venda.FormasDePagamento.CARTAO);
-            } else if (cbFormaPagamento.getSelectedIndex() == 3) {
-                venda.setFormaPagamento(Venda.FormasDePagamento.NAOPAGO);
-            }
-
-            venda.setDataHora(new Date());
-
-            if (venda.getFormaPagamento().equals(Venda.FormasDePagamento.NAOPAGO)) {
-                venda.setSituacao(Venda.Situacao.NAOPAGO);
-                venda.setDataPagamento(null);
+            if (tfNotaFiscal.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "O número da nota fiscal é obrigatório.");
             } else {
-                venda.setSituacao(Venda.Situacao.PAGO);
-                venda.setDataPagamento(new Date());
-            }
+                fornecimento.setFornecedor(fornecedorSelecionado);
 
-            try {
-                ControleVenda.insereVendaEItens(venda);
-                JOptionPane.showMessageDialog(null, "Venda feita com sucesso!");
+                String acr = tfAcr.getText();
 
-                this.sair();
-            } catch (RuntimeException e) {
-                JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+                if (acr.contains(",")) {
+                    String[] parts = acr.split(",");
+                    String part1 = parts[0];
+                    String part2 = parts[1];
+
+                    acr = part1 + "." + part2;
+                }
+                fornecimento.setAcrescimo(Float.parseFloat(acr));
+
+                String desc = tfDesc.getText();
+
+                if (desc.contains(",")) {
+                    String[] parts = desc.split(",");
+                    String part1 = parts[0];
+                    String part2 = parts[1];
+
+                    desc = part1 + "." + part2;
+                }
+                fornecimento.setDesconto(Float.parseFloat(desc));
+
+                fornecimento.setnNotaFiscal(tfNotaFiscal.getText());
+
+                fornecimento.setData(new Date());
+
+                try {
+                    ControleFornecimento.insereFornecimentoEItens(fornecimento);
+                    JOptionPane.showMessageDialog(null, "Fornecimento efetuado com sucesso!");
+
+                    this.sair();
+                } catch (RuntimeException e) {
+                    JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+                }
             }
         }
     }//GEN-LAST:event_btnFinalizarActionPerformed
@@ -517,11 +526,11 @@ public class FRMFinalizarFornecimento extends javax.swing.JFrame {
     private void cbOpcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOpcActionPerformed
         if (cbOpc.getSelectedIndex() == 0) {
             try {
-                clientes = ControleCliente.listarTodosAtivos();
-                this.preencheTabelaCliente();
+                fornecedoresListados = ControleFornecedor.listarTodosAtivos();
+                this.preencheTabela();
 
-                if (clienteSelecionado == null) {
-                    clienteSelecionado = clientes.get(0);
+                if (fornecedorSelecionado == null) {
+                    fornecedorSelecionado = fornecedoresListados.get(0);
                     this.preencheDados();
                 }
 
@@ -561,17 +570,17 @@ public class FRMFinalizarFornecimento extends javax.swing.JFrame {
         } else if (qnt > 1) {
 
         } else {
-            clienteSelecionado = clientes.get(tableFornecedor.getSelectedRow());
+            fornecedorSelecionado = fornecedoresListados.get(tableFornecedor.getSelectedRow());
             this.preencheDados();
         }
     }//GEN-LAST:event_tableFornecedorMouseClicked
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-        FRMVenda v = new FRMVenda();
+        FRMFornecimento f = new FRMFornecimento();
 
-        v.pegaVenda(venda);
+        f.pegaFornecimento(fornecimento);
 
-        v.setVisible(true);
+        f.setVisible(true);
 
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
@@ -627,7 +636,6 @@ public class FRMFinalizarFornecimento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -641,6 +649,7 @@ public class FRMFinalizarFornecimento extends javax.swing.JFrame {
     private javax.swing.JLabel lblCPFCNPJ2;
     private javax.swing.JLabel lblCodigo;
     private javax.swing.JLabel lblNome;
+    private javax.swing.JLabel lblTipo;
     private javax.swing.JTable tableFornecedor;
     private javax.swing.JTextField tfAcr;
     private javax.swing.JTextField tfDado;
@@ -648,4 +657,155 @@ public class FRMFinalizarFornecimento extends javax.swing.JFrame {
     private javax.swing.JTextField tfNotaFiscal;
     private javax.swing.JTextField tfTotal;
     // End of variables declaration//GEN-END:variables
+
+    private void preencheTabela() {
+        DefaultTableModel dtm = this.criaTabela();
+
+        dtm.addColumn("Código");
+        dtm.addColumn("Nome");
+        dtm.addColumn("Tipo");
+        dtm.addColumn("CPF/CNPJ");
+
+        for (Fornecedor dado : fornecedoresListados) {
+
+            String tipo = "";
+            String cpfOuCnpj = "";
+
+            if (dado.getTipoFornecedor().equals(Fornecedor.TipoFornecedor.EMPRESA)) {
+                tipo = "Empresa";
+                cpfOuCnpj = dado.getCnpj();
+            } else if (dado.getTipoFornecedor().equals(Fornecedor.TipoFornecedor.PESSOA)) {
+                tipo = "Pessoa";
+                cpfOuCnpj = dado.getCpf();
+            }
+
+            dtm.addRow(new Object[]{dado.getCodigo(), dado.getNome(), tipo, cpfOuCnpj});
+        }
+
+        tableFornecedor.setModel(dtm);
+    }
+
+    private DefaultTableModel criaTabela() {
+        DefaultTableModel dTable = new DefaultTableModel() {
+            //Define o tipo dos campos (coluna) na mesma ordem que as colunas foram criadas
+            Class[] types = new Class[]{
+                java.lang.Integer.class, //codigo
+                java.lang.String.class, // nome
+                java.lang.String.class, // Tipo
+                java.lang.String.class // CPF/CNPJ
+            };
+
+            boolean[] canEdit = new boolean[]{
+                false, false, false, false
+            };
+
+            @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit[columnIndex];
+            }
+        ;
+
+        };
+        
+    return dTable;
+    }
+
+    private void preencheDados() {
+        lblCodigo.setText(fornecedorSelecionado.getCodigo() + "");
+        lblNome.setText(fornecedorSelecionado.getNome());
+
+        if (fornecedorSelecionado.getTipoFornecedor().equals(Fornecedor.TipoFornecedor.PESSOA)) {
+            lblCPFCNPJ.setText("CPF:");
+            lblCPFCNPJ2.setText(fornecedorSelecionado.getCpf());
+            lblTipo.setText("Pessoa");
+        } else {
+            lblCPFCNPJ.setText("CNPJ:");
+            lblCPFCNPJ2.setText(fornecedorSelecionado.getCnpj());
+            lblTipo.setText("Empresa");
+        }
+    }
+
+    private void localiza() {
+        if (cbOpc.getSelectedIndex() == 1) {
+            if ((tfDado.getText().equals("")) || (tfDado.getText().equals("Insira o dado para pesquisa..."))) {
+                JOptionPane.showMessageDialog(null, "Insira algum dado para pesquisa");
+            } else {
+                try {
+                    fornecedoresListados = ControleFornecedor.listarPorCodigoEAtivo(Integer.parseInt(tfDado.getText()));
+                    this.preencheTabela();
+                    this.verificaTabela();
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Atenção: para pesquisa por código, insira apenas números.");
+                } catch (RuntimeException e) {
+                    JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+                }
+            }
+        } else if (cbOpc.getSelectedIndex() == 2) {
+            if ((tfDado.getText().equals("")) || (tfDado.getText().equals("Insira o dado para pesquisa..."))) {
+                JOptionPane.showMessageDialog(null, "Insira algum dado para pesquisa");
+            } else {
+                try {
+                    fornecedoresListados = ControleFornecedor.listarPorNomeEAtivo(tfDado.getText());
+                    this.preencheTabela();
+                    this.verificaTabela();
+                } catch (RuntimeException e) {
+                    JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+                }
+            }
+        }
+    }
+
+    private void verificaTabela() {
+        if (tableFornecedor.getRowCount() == 1) {
+            fornecedorSelecionado = fornecedoresListados.get(0);
+            this.preencheDados();
+        }
+    }
+
+    private void calculaValorTotal() {
+        try {
+            float valorTotal = 0;
+
+            for (ObjetoFornecimento of : fornecimento.getObjetosNoFornecimento()) {
+                valorTotal += (of.getPrecoPraticadoCompra() * of.getQtdeFornecida());
+            }
+
+            String desc = tfDesc.getText();
+
+            if (desc.contains(",")) {
+                String[] parts = desc.split(",");
+                String part1 = parts[0];
+                String part2 = parts[1];
+
+                desc = part1 + "." + part2;
+            }
+
+            String acr = tfAcr.getText();
+
+            if (acr.contains(",")) {
+                String[] parts = acr.split(",");
+                String part1 = parts[0];
+                String part2 = parts[1];
+
+                acr = part1 + "." + part2;
+            }
+
+            System.out.println(acr + "   " + desc);
+
+            valorTotal -= Float.parseFloat(desc);
+            valorTotal += Float.parseFloat(acr);
+
+            tfTotal.setText(valorTotal + "");
+        } catch (NumberFormatException e) {
+
+        }
+    }
+
+    private void sair() {
+        FRMFornecimento f = new FRMFornecimento();
+        
+        f.setVisible(true);
+        
+        this.dispose();
+    }
 }

@@ -670,10 +670,6 @@ public class FRMFornecimento extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Insira ao menos um item.");
         } else {
 
-            Funcionario f = new Funcionario();
-            f.setCodigo(2);
-            ControleFuncionario.setFuncionarioLogado(f);
-
             FRMFinalizarFornecimento fim = new FRMFinalizarFornecimento();
 
             fornecimento.setObjetosNoFornecimento(mercadoriasNoFornecimento);
@@ -898,6 +894,7 @@ public class FRMFornecimento extends javax.swing.JFrame {
 
                 of.setObjeto(mercadoriaSelecionada);
                 of.setFornecimento(fornecimento);
+                of.setLote(tfLote.getText());
 
                 String qtde = tfQuant.getText();
 

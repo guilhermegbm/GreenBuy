@@ -72,4 +72,12 @@ public class ControleFornecedor {
     public static void reativaFornecedor (Fornecedor f) throws RuntimeException {
         FornecedorSql.reativaFornecedor(f);
     }
+
+    public static List<Fornecedor> listarPorNomeEAtivo(String nome)throws RuntimeException {
+        return FornecedorSql.listarPorNomeEAtivo(nome);
+    }
+
+    public static List<Fornecedor> listarPorCodigoEAtivo(int cod)throws RuntimeException {
+        return FornecedorSql.listarPorCodigoEAtivo(cod);
+    }
 }

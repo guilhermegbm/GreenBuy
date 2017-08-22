@@ -11,7 +11,6 @@ import Controle.ControleFuncionario;
 import Modelo.BEAN.Fornecedor;
 import Visao.Edicao.FRMEditarFornecedor;
 import java.awt.Color;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -31,8 +30,12 @@ public class FRMFornecedor extends javax.swing.JFrame {
     public FRMFornecedor() {
         initComponents();
 
+        try {
         dados = ControleFornecedor.listarTodosAtivos();
         this.preencheTabela();
+        } catch (RuntimeException e){
+            JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+        }
     }
 
     /**

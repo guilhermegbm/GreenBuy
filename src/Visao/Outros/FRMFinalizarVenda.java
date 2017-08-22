@@ -669,7 +669,7 @@ public class FRMFinalizarVenda extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Insira algum dado para pesquisa");
             } else {
                 try {
-                    clientes = ControleCliente.listarTudoTodosOuPorCodigo(Integer.parseInt(tfDado.getText()));
+                    clientes = ControleCliente.listarPorCodigoEAtivo(Integer.parseInt(tfDado.getText()));
                     this.preencheTabelaCliente();
                     this.verificaTabela();
                 } catch (NumberFormatException e) {
@@ -683,7 +683,7 @@ public class FRMFinalizarVenda extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Insira algum dado para pesquisa");
             } else {
                 try {
-                    clientes = ControleCliente.listarPorNome(tfDado.getText());
+                    clientes = ControleCliente.listarPorNomeEAtivo(tfDado.getText());
                     this.preencheTabelaCliente();
                     this.verificaTabela();
                 } catch (RuntimeException e) {
