@@ -30,7 +30,7 @@ import javax.persistence.Transient;
 public class ObjetoSaida implements Serializable {
     private ObjetoSaidaId objSai = new ObjetoSaidaId();
     private float qtdeRetirada;
-    private float precoNaSaida;
+    private float precoCompraNaSaida;
 
     @EmbeddedId
     public ObjetoSaidaId getObjSai() {
@@ -68,13 +68,13 @@ public class ObjetoSaida implements Serializable {
         this.qtdeRetirada = qtdeRetirada;
     }
 
-    @Column(name = "saoPrecoNaSaida", nullable = false)
-    public float getPrecoNaSaida() {
-        return precoNaSaida;
+    @Column(name = "saoPrecoCompraNaSaida", nullable = false)
+    public float getPrecoCompraNaSaida() {
+        return precoCompraNaSaida;
     }
 
-    public void setPrecoNaSaida(float precoNaSaida) {
-        this.precoNaSaida = precoNaSaida;
+    public void setPrecoCompraNaSaida(float precoCompraNaSaida) {
+        this.precoCompraNaSaida = precoCompraNaSaida;
     }
     
 }

@@ -395,4 +395,22 @@ public class ObjetoSql {
             manager.close();
         }
     }
+
+    public static void retiraDoEstoque(List<Objeto> objetosRetirados) throws RuntimeException{
+        EntityManager manager = JpaUtil.getEntityManager();
+        
+        EntityTransaction tx = manager.getTransaction();
+
+        try {
+            tx.begin();
+
+            for (Objeto obj : objetosRetirados) {
+                manager.merge(obj);
+            }
+
+            tx.commit();
+        } finally {
+            manager.close();
+        }
+    }
 }

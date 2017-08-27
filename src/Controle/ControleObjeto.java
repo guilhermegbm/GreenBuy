@@ -125,4 +125,9 @@ public class ControleObjeto {
     public static List<Objeto> listarPorValorVendaMenorEAtivo(float valor)throws RuntimeException {
         return ObjetoSql.listarPorValorVendaMenorEAtivo(valor);
     }
+    //
+    
+    public static void retiraDoEstoque(List<Objeto> objetosRetirados) throws RuntimeException{
+        ObjetoSql.retiraDoEstoque(objetosRetirados);
+    }
 }

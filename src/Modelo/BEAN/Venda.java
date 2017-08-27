@@ -5,6 +5,7 @@
  */
 package Modelo.BEAN;
 
+import Controle.ControleSaida;
 import Modelo.BEAN.Objeto.TipoObjeto;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -36,6 +38,7 @@ import javax.persistence.Transient;
 @Entity
 @Table(name = "venda")
 public class Venda implements Serializable {
+
     private int codigo;
     private Date dataHora;
     private Date dataPagamento;
@@ -116,7 +119,7 @@ public class Venda implements Serializable {
     public void setFormaPagamento(FormasDePagamento formaPagamento) {
         this.formaPagamento = formaPagamento;
     }
-    
+
     @ManyToOne(optional = false)
     @JoinColumn(name = "ven_cliCodigo")
     public Cliente getCliente() {
@@ -145,12 +148,12 @@ public class Venda implements Serializable {
     public void setItensDaVenda(List<ObjetoVenda> itensDaVenda) {
         this.itensDaVenda = itensDaVenda;
     }
-    
+
     public enum Situacao {
         NAOPAGO,
         PAGO
     }
-    
+
     public enum FormasDePagamento {
         DINHEIRO,
         CARTAO,
@@ -162,21 +165,49 @@ public class Venda implements Serializable {
     public float getValorTotal() {
         return valorTotal;
     }
-    
+
     @PostLoad
     @PostUpdate
-    public void setValorTotal(){
+    public void setValorTotal() {
         System.out.println("Passou1");
         //1ª Função: Calcular o valor total.
     }
-    
+
     @PostPersist
-    public void registraSaidaPelaVenda(){
+    public void registraSaidaPelaVenda() {
         //2ª Função: Verificar os ítens da venda e, se for uma mercadoria, registrar a saída.
+
+        
+        Saida s = new Saida();
+        List<ObjetoSaida> objetosNaSaida = new ArrayList<>();
+
         for (ObjetoVenda objetoVenda : this.getItensDaVenda()) {
-            if (objetoVenda.getObjeto().getTipoObj().equals(TipoObjeto.MERCADORIA)){
-                System.out.println("Passou 2");
+            if (objetoVenda.getObjeto().getTipoObj().equals(TipoObjeto.MERCADORIA)) {
+                ObjetoSaida os = new ObjetoSaida();
+
+                os.setObjeto(objetoVenda.getObjeto());
+                os.setSaida(s);
+                os.setPrecoCompraNaSaida(objetoVenda.getObjeto().getPrecoCompraBase());
+                os.setQtdeRetirada(objetoVenda.getQtdeVendida());
+
+                objetosNaSaida.add(os);
             }
         }
+
+        if (!objetosNaSaida.isEmpty()) {
+            s.setObjetos(objetosNaSaida);
+
+            s.setDataHora(dataHora);
+            s.setAcrescimoAdicional(0);
+            s.setDebitoAdicional(0);
+            s.setTipoSaida(Saida.TipoSaida.SAIDAPELAVENDA);
+            
+            try {
+                ControleSaida.insereSaidaEItens(s);
+            } catch (RuntimeException e) {
+                JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+            }
+        }
+        
     }
 }

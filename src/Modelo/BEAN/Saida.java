@@ -5,6 +5,7 @@
  */
 package Modelo.BEAN;
 
+import Controle.ControleObjeto;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,6 +26,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -116,7 +118,20 @@ public class Saida implements Serializable {
     }
     
     @PostPersist
-    public void alteraQtdeEstoque (){
-        //
+    public void retiraQtdeEstoque (){
+        List<Objeto> objetosRetirados = new ArrayList<>();
+        for (ObjetoSaida objeto : objetos) {
+            Objeto obj = objeto.getObjeto();
+            obj.setQtdeEstoque(obj.getQtdeEstoque() - objeto.getQtdeRetirada());
+            objetosRetirados.add(obj);
+        }
+        
+        try {
+        ControleObjeto.retiraDoEstoque(objetosRetirados);
+            System.out.println("Retirados");
+        } catch (RuntimeException e){
+            System.err.print("Deu ruim");
+            e.printStackTrace();
+        }
     }
 }
