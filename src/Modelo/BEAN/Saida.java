@@ -127,7 +127,7 @@ public class Saida implements Serializable {
         }
         
         try {
-        ControleObjeto.retiraDoEstoque(objetosRetirados);
+            ControleObjeto.alteraQtdNoEstoque(objetosRetirados);
             System.out.println("Retirados");
         } catch (RuntimeException e){
             System.err.print("Deu ruim");

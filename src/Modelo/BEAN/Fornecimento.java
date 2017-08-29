@@ -5,6 +5,8 @@
  */
 package Modelo.BEAN;
 
+import Controle.ControleObjeto;
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -121,7 +123,20 @@ public class Fornecimento implements Serializable {
     }
     
     @PostPersist
-    public void alteraQtdeEstoque (){
-        //
+    public void adicionaQtdeEstoque (){
+        List<Objeto> objetosAdicionados = new ArrayList<>();
+        
+        for (ObjetoFornecimento of : objetosNoFornecimento) {
+            Objeto obj = of.getObjeto();
+            obj.setQtdeEstoque(obj.getQtdeEstoque() + of.getQtdeFornecida());
+            objetosAdicionados.add(obj);
+        }
+        
+        try {
+            ControleObjeto.alteraQtdNoEstoque(objetosAdicionados);
+        } catch (RuntimeException e){
+            System.out.println("Deu ruim:");
+            e.printStackTrace();
+        }
     }
 }

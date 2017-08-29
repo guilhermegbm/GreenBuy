@@ -396,7 +396,7 @@ public class ObjetoSql {
         }
     }
 
-    public static void retiraDoEstoque(List<Objeto> objetosRetirados) throws RuntimeException{
+    public static void alteraQtdNoEstoque(List<Objeto> objetosRetirados) throws RuntimeException{
         EntityManager manager = JpaUtil.getEntityManager();
         
         EntityTransaction tx = manager.getTransaction();

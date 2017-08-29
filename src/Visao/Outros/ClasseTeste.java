@@ -194,6 +194,7 @@ public class ClasseTeste {
         manager.persist(fo2);
         manager.persist(fo3);
 
+        /*
         Fornecimento for1 = new Fornecimento();
         Fornecimento for2 = new Fornecimento();
         Fornecimento for3 = new Fornecimento();
@@ -234,7 +235,7 @@ public class ClasseTeste {
         manager.persist(for2);
         manager.persist(for3);
         manager.persist(for4);
-        manager.persist(for5);
+        manager.persist(for5); */
 
         Objeto o1 = new Objeto();
         Objeto o2 = new Objeto();

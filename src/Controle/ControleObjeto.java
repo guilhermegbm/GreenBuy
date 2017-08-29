@@ -127,7 +127,7 @@ public class ControleObjeto {
     }
     //
     
-    public static void retiraDoEstoque(List<Objeto> objetosRetirados) throws RuntimeException{
-        ObjetoSql.retiraDoEstoque(objetosRetirados);
+    public static void alteraQtdNoEstoque(List<Objeto> objetosRetirados) throws RuntimeException{
+        ObjetoSql.alteraQtdNoEstoque(objetosRetirados);
     }
 }
