@@ -26,7 +26,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -128,7 +127,6 @@ public class Saida implements Serializable {
         
         try {
             ControleObjeto.alteraQtdNoEstoque(objetosRetirados);
-            System.out.println("Retirados");
         } catch (RuntimeException e){
             System.err.print("Deu ruim");
             e.printStackTrace();

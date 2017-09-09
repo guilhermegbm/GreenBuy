@@ -417,8 +417,8 @@ public class FRMFinalizarFornecimento extends javax.swing.JFrame {
                 tfDesc.setText(desc);
             }
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Formato inválido!");
             tfDesc.setText("0.00");
+            JOptionPane.showMessageDialog(null, "Formato inválido!");
         } finally {
             this.calculaValorTotal();
         }
@@ -509,8 +509,8 @@ public class FRMFinalizarFornecimento extends javax.swing.JFrame {
                 tfAcr.setText(acr);
             }
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Formato inválido!");
             tfAcr.setText("0.00");
+            JOptionPane.showMessageDialog(null, "Formato inválido!");
         } finally {
             this.calculaValorTotal();
         }

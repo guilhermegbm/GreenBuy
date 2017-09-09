@@ -385,8 +385,8 @@ public class FRMVenda extends javax.swing.JFrame {
                         .addComponent(cbAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfQuant, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tfQuant, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblImg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -612,7 +612,11 @@ public class FRMVenda extends javax.swing.JFrame {
     }//GEN-LAST:event_cbAlterarActionPerformed
 
     private void tfQuantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfQuantActionPerformed
-        this.inserirItem();
+        if (cbAlterar.isSelected()){
+            tfPreco.requestFocusInWindow();
+        } else {
+            this.inserirItem();
+        }
     }//GEN-LAST:event_tfQuantActionPerformed
 
     private void btnLocalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocalizarActionPerformed
