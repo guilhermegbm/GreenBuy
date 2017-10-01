@@ -10,6 +10,7 @@ import Visao.Cadastro.FRMCadastrarObjeto;
 import Controle.ControleObjeto;
 import Modelo.BEAN.Objeto;
 import Visao.Edicao.FRMEditarObjeto;
+import Visao.Outros.FRMPrincipal;
 import java.awt.Color;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -57,14 +58,14 @@ public class FRMObjeto extends javax.swing.JFrame {
         btnCadastrar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnInativar = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
         btnLocalizar = new javax.swing.JButton();
         cbOpc = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         tfDado = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Produtos");
+        setTitle("Objetos");
 
         jPanel3.setBackground(new java.awt.Color(153, 255, 153));
 
@@ -128,8 +129,13 @@ public class FRMObjeto extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/logout.png"))); // NOI18N
-        jButton4.setText("Voltar");
+        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/logout.png"))); // NOI18N
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
 
         btnLocalizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/prodLoc.png"))); // NOI18N
         btnLocalizar.setText("Localizar");
@@ -188,7 +194,7 @@ public class FRMObjeto extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnLocalizar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCadastrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnEditar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnInativar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -214,7 +220,7 @@ public class FRMObjeto extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnInativar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
-                        .addComponent(jButton4)))
+                        .addComponent(btnVoltar)))
                 .addContainerGap())
         );
 
@@ -370,6 +376,12 @@ public class FRMObjeto extends javax.swing.JFrame {
 
     }//GEN-LAST:event_tfDadoKeyTyped
 
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        FRMPrincipal principal = new FRMPrincipal();
+        principal.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -411,8 +423,8 @@ public class FRMObjeto extends javax.swing.JFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnInativar;
     private javax.swing.JButton btnLocalizar;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JComboBox<String> cbOpc;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

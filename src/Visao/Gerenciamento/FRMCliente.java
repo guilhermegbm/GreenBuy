@@ -10,6 +10,7 @@ import Visao.Cadastro.FRMCadastrarCliente;
 import Controle.ControleCliente;
 import Controle.ControleFuncionario;
 import Modelo.BEAN.Cliente;
+import Visao.Outros.FRMPrincipal;
 import java.awt.Color;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -53,7 +54,7 @@ public class FRMCliente extends javax.swing.JFrame {
         btnDelCliente = new javax.swing.JButton();
         btnEdtCliente = new javax.swing.JButton();
         btnLocalizarCliente = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         cbOpc = new javax.swing.JComboBox<>();
         tfDado = new javax.swing.JTextField();
@@ -62,7 +63,7 @@ public class FRMCliente extends javax.swing.JFrame {
         tableCliente = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Cliente");
+        setTitle("Clientes");
 
         jPanel2.setBackground(new java.awt.Color(153, 255, 153));
 
@@ -101,8 +102,13 @@ public class FRMCliente extends javax.swing.JFrame {
             }
         });
 
-        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/logout.png"))); // NOI18N
-        btnCancelar.setText("Voltar");
+        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/logout.png"))); // NOI18N
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Localizar cliente por:");
 
@@ -181,7 +187,7 @@ public class FRMCliente extends javax.swing.JFrame {
                     .addComponent(btnLocalizarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnCadastrarCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnDelCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnEdtCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -206,7 +212,7 @@ public class FRMCliente extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnDelCliente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
-                        .addComponent(btnCancelar)))
+                        .addComponent(btnVoltar)))
                 .addContainerGap())
         );
 
@@ -335,6 +341,12 @@ public class FRMCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnDelClienteActionPerformed
 
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        FRMPrincipal principal = new FRMPrincipal();
+        principal.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -372,10 +384,10 @@ public class FRMCliente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrarCliente;
-    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnDelCliente;
     private javax.swing.JButton btnEdtCliente;
     private javax.swing.JButton btnLocalizarCliente;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JComboBox<String> cbOpc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

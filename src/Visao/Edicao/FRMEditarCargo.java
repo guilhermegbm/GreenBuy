@@ -41,6 +41,7 @@ public class FRMEditarCargo extends javax.swing.JFrame {
         btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Editar Cargo");
 
         jPanel1.setBackground(new java.awt.Color(153, 255, 153));
 

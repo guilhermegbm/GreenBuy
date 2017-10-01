@@ -49,6 +49,7 @@ public class FRMCadastrarSubGrupo extends javax.swing.JFrame {
         cbGrupos = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cadastrar Sub Grupo");
 
         jPanel1.setBackground(new java.awt.Color(153, 255, 153));
         jPanel1.setForeground(new java.awt.Color(153, 255, 153));

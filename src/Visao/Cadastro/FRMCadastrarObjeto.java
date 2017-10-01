@@ -68,7 +68,7 @@ public class FRMCadastrarObjeto extends javax.swing.JFrame {
         btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Cadastro de produtos");
+        setTitle("Cadastrar Objeto");
 
         jPanel2.setBackground(new java.awt.Color(153, 255, 153));
 

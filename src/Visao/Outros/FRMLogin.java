@@ -25,6 +25,14 @@ public class FRMLogin extends javax.swing.JFrame {
      */
     public FRMLogin() {
         initComponents();
+        
+        try{
+        
+        ControleFuncionario.iniciaConexao();
+        
+        } catch (RuntimeException e){
+            JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+        }
     }
 
     /**
@@ -204,7 +212,7 @@ public class FRMLogin extends javax.swing.JFrame {
                     loginValido = false;
                 }
             } catch (RuntimeException e) {
-                JOptionPane.showMessageDialog(null, "Deu ruim1");
+                JOptionPane.showMessageDialog(null, "Deu ruim");
                 System.out.println(e);
             }
         }
@@ -315,8 +323,7 @@ public class FRMLogin extends javax.swing.JFrame {
                     this.dispose();
                 }
             } catch (RuntimeException e) {
-                JOptionPane.showMessageDialog(null, "Deu ruim");
-                throw new RuntimeException(e);
+                JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
             }
         }
     }

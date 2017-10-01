@@ -194,16 +194,17 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="btnGerenciarFornecedor" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btnGerenciarCliente" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btnGerenciarFuncionario" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnFornecedor" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnCliente" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnFuncionario" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnSair" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btnGerenciarProduto" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btnGerenciarEstoque" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btnGerenciarVenda" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btnRegistrarFornecimento" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnObjeto" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnVenda" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnFornecimento" alignment="0" max="32767" attributes="0"/>
                       <Component id="btnSaidaEstoque" max="32767" attributes="0"/>
-                      <Component id="jButton1" max="32767" attributes="0"/>
+                      <Component id="btnCargo" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnGrupo" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnSubGrupo" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="25" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -224,41 +225,44 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="btnGerenciarCliente" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                          <Component id="btnCargo" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Component id="btnGerenciarEstoque" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="btnCliente" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnGerenciarFornecedor" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnFornecedor" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnGerenciarFuncionario" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnFuncionario" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnGerenciarProduto" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnGrupo" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnGerenciarVenda" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnSubGrupo" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="btnRegistrarFornecimento" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnObjeto" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="btnVenda" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="btnFornecimento" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="btnSaidaEstoque" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="7" max="32767" attributes="0"/>
-                                  <Component id="btnSair" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="jLabel4" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="btnSair" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btnGerenciarCliente">
+        <Component class="javax.swing.JButton" name="btnCliente">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -266,13 +270,13 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Visao.icon/Cliente.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Gerenciar Cliente"/>
+            <Property name="text" type="java.lang.String" value="Gerenciar Clientes"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGerenciarClienteActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnClienteActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnGerenciarProduto">
+        <Component class="javax.swing.JButton" name="btnObjeto">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -280,10 +284,13 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Visao.icon/Produto.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Gerenciar Objeto"/>
+            <Property name="text" type="java.lang.String" value="Gerenciar Objetos"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnObjetoActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnGerenciarFornecedor">
+        <Component class="javax.swing.JButton" name="btnFornecedor">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -291,10 +298,13 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Visao.icon/Fornecedor.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Gerenciar Fornecedor"/>
+            <Property name="text" type="java.lang.String" value="Gerenciar Fornecedores"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFornecedorActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnGerenciarFuncionario">
+        <Component class="javax.swing.JButton" name="btnFuncionario">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -302,21 +312,13 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Visao.icon/Funcionario.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Gerenciar Funcionario"/>
+            <Property name="text" type="java.lang.String" value="Gerenciar Funcionarios"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFuncionarioActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnGerenciarEstoque">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Visao.icon/Estoque.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Gerenciar Estoque"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnGerenciarVenda">
+        <Component class="javax.swing.JButton" name="btnVenda">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -324,8 +326,11 @@
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Visao.icon/Venda.png"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Gerenciar Venda"/>
+            <Property name="text" type="java.lang.String" value="Fazer Venda"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVendaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnSair">
           <Properties>
@@ -337,6 +342,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Sair"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSairActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
@@ -356,7 +364,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="btnRegistrarFornecimento">
+        <Component class="javax.swing.JButton" name="btnFornecimento">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Visao.icon/EntraMercadoria.png"/>
@@ -364,7 +372,7 @@
             <Property name="text" type="java.lang.String" value="Registrar fornecimento"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegistrarFornecimentoActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFornecimentoActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnSaidaEstoque">
@@ -374,13 +382,32 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Registrar saida estoque"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSaidaEstoqueActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="btnCargo">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Criar Classe"/>
+            <Property name="text" type="java.lang.String" value="Gerenciar Cargos"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCargoActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnGrupo">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Gerenciar Grupos"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGrupoActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnSubGrupo">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Gerenciar Sub-Grupos"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSubGrupoActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

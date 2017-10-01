@@ -40,7 +40,7 @@ public class FRMCadastrarGrupo extends javax.swing.JFrame {
         btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Cadastro de classes");
+        setTitle("Cadastrar Grupo");
 
         jPanel1.setBackground(new java.awt.Color(153, 255, 153));
         jPanel1.setForeground(new java.awt.Color(153, 255, 153));

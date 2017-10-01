@@ -69,7 +69,7 @@ public class FRMVenda extends javax.swing.JFrame {
         lblTotal = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         btnFinalizar = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
         btnRemover = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -240,11 +240,11 @@ public class FRMVenda extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/logout.png"))); // NOI18N
-        jButton3.setText("Voltar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/logout.png"))); // NOI18N
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnVoltarActionPerformed(evt);
             }
         });
 
@@ -265,7 +265,7 @@ public class FRMVenda extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnFinalizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -276,7 +276,7 @@ public class FRMVenda extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
                 .addComponent(btnFinalizar)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(btnVoltar)
                 .addGap(16, 16, 16))
         );
 
@@ -547,9 +547,11 @@ public class FRMVenda extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnFinalizarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        FRMPrincipal principal = new FRMPrincipal();
+        principal.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void cbOpcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOpcActionPerformed
         if (cbOpc.getSelectedIndex() == 0) {
@@ -714,9 +716,9 @@ public class FRMVenda extends javax.swing.JFrame {
     private javax.swing.JButton btnInserirItem;
     private javax.swing.JButton btnLocalizar;
     private javax.swing.JButton btnRemover;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JCheckBox cbAlterar;
     private javax.swing.JComboBox<String> cbOpc;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

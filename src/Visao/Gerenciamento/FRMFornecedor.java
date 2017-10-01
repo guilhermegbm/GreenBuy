@@ -10,6 +10,7 @@ import Controle.ControleFornecedor;
 import Controle.ControleFuncionario;
 import Modelo.BEAN.Fornecedor;
 import Visao.Edicao.FRMEditarFornecedor;
+import Visao.Outros.FRMPrincipal;
 import java.awt.Color;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -55,14 +56,14 @@ public class FRMFornecedor extends javax.swing.JFrame {
         btnCadastrar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnInativar = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
         btnLocalizar = new javax.swing.JButton();
         cbOpc = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         tfDado = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Gerenciar Fornecedores");
+        setTitle("Fornecedores");
 
         jPanel3.setBackground(new java.awt.Color(153, 255, 153));
 
@@ -126,8 +127,13 @@ public class FRMFornecedor extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/logout.png"))); // NOI18N
-        jButton4.setText("Voltar");
+        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/logout.png"))); // NOI18N
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
 
         btnLocalizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/funcLoc.png"))); // NOI18N
         btnLocalizar.setText("Localizar");
@@ -185,7 +191,7 @@ public class FRMFornecedor extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addGap(10, 10, 10)
-                                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(1, 1, 1))
                                 .addComponent(btnInativar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btnCadastrar, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -213,7 +219,7 @@ public class FRMFornecedor extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnInativar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
-                        .addComponent(jButton4)))
+                        .addComponent(btnVoltar)))
                 .addContainerGap())
         );
 
@@ -354,6 +360,12 @@ public class FRMFornecedor extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tfDadoFocusLost
 
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        FRMPrincipal principal = new FRMPrincipal();
+        principal.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -409,8 +421,8 @@ public class FRMFornecedor extends javax.swing.JFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnInativar;
     private javax.swing.JButton btnLocalizar;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JComboBox<String> cbOpc;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

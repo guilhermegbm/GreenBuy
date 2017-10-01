@@ -11,6 +11,7 @@ import Visao.Cadastro.FRMCadastrarObjeto;
 import Modelo.BEAN.Grupo;
 import Visao.Cadastro.FRMCadastrarGrupo;
 import Visao.Edicao.FRMEditarGrupo;
+import Visao.Outros.FRMPrincipal;
 import java.awt.Color;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -65,7 +66,7 @@ public class FRMGrupo extends javax.swing.JFrame {
         tfDado = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Classes");
+        setTitle("Grupos");
 
         jPanel3.setBackground(new java.awt.Color(153, 255, 153));
 
@@ -131,6 +132,11 @@ public class FRMGrupo extends javax.swing.JFrame {
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/logout.png"))); // NOI18N
         jButton4.setText("Voltar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/prodLoc.png"))); // NOI18N
         jButton5.setText("Localizar");
@@ -342,6 +348,12 @@ public class FRMGrupo extends javax.swing.JFrame {
     private void tfDadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfDadoKeyTyped
 
     }//GEN-LAST:event_tfDadoKeyTyped
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        FRMPrincipal principal = new FRMPrincipal();
+        principal.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments

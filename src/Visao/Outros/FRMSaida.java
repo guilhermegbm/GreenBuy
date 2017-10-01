@@ -81,7 +81,7 @@ public class FRMSaida extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         btnRemover = new javax.swing.JButton();
         btnFinalizar = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableMercadoriasInseridas = new javax.swing.JTable();
@@ -95,7 +95,7 @@ public class FRMSaida extends javax.swing.JFrame {
         tfDebt = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Registrar Saida");
+        setTitle("Registrar Saida do Estoque");
 
         jPanel1.setBackground(new java.awt.Color(153, 255, 153));
 
@@ -352,11 +352,11 @@ public class FRMSaida extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/logout.png"))); // NOI18N
-        jButton3.setText("Voltar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/logout.png"))); // NOI18N
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnVoltarActionPerformed(evt);
             }
         });
 
@@ -367,7 +367,7 @@ public class FRMSaida extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnRemover, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnFinalizar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -380,7 +380,7 @@ public class FRMSaida extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnFinalizar)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3)
+                .addComponent(btnVoltar)
                 .addContainerGap())
         );
 
@@ -517,7 +517,7 @@ public class FRMSaida extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 657, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -744,9 +744,9 @@ public class FRMSaida extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnFinalizarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void tfAcrKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfAcrKeyTyped
         String caracteres = "0987654321.,";
@@ -862,9 +862,9 @@ public class FRMSaida extends javax.swing.JFrame {
     private javax.swing.JButton btnInserirItem;
     private javax.swing.JButton btnLocalizar;
     private javax.swing.JButton btnRemover;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JCheckBox cbAlterar;
     private javax.swing.JComboBox<String> cbOpc;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;

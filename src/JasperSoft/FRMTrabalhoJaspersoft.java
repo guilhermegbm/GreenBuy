@@ -189,7 +189,7 @@ public class FRMTrabalhoJaspersoft extends javax.swing.JFrame {
                     .addComponent(jButton4)
                     .addComponent(jLabel2)
                     .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -235,9 +235,21 @@ public class FRMTrabalhoJaspersoft extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
+            
+            Date d1 = new Date();
+            d1.setDate(Integer.parseInt(cbDia1.getSelectedItem() + ""));
+            d1.setMonth(cbMes1.getSelectedIndex());
+            d1.setYear(Integer.parseInt(cbAno1.getSelectedItem() + "") - 1900);
+
+            //System.out.println("Data de início: " + sdf.format(d1));
+            Date d2 = new Date();
+            d2.setDate(Integer.parseInt(cbDia2.getSelectedItem() + ""));
+            d2.setMonth(cbMes2.getSelectedIndex());
+            d2.setYear(Integer.parseInt(cbAno2.getSelectedItem() + "") - 1900);
+            
             ControleJaspersoft cj = new ControleJaspersoft();
 
-            cj.gerarRelatorio2();
+            cj.gerarRelatorio2(d1, d2);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -246,7 +258,7 @@ public class FRMTrabalhoJaspersoft extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try {
 
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            //SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
             Date d1 = new Date();
             d1.setDate(Integer.parseInt(cbDia1.getSelectedItem() + ""));
@@ -282,7 +294,7 @@ public class FRMTrabalhoJaspersoft extends javax.swing.JFrame {
                     throw new RuntimeException(e);
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Não existe");
+                JOptionPane.showMessageDialog(null, "Fornecedor não encontrado");
             }
         }
     }//GEN-LAST:event_jButton4ActionPerformed

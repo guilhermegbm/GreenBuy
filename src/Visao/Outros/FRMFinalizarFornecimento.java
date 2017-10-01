@@ -82,6 +82,7 @@ public class FRMFinalizarFornecimento extends javax.swing.JFrame {
         tfNotaFiscal = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Finalizar Fornecimento");
 
         jPanel2.setBackground(new java.awt.Color(153, 255, 153));
 

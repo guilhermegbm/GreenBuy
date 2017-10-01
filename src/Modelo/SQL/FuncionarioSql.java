@@ -202,5 +202,18 @@ public class FuncionarioSql {
     public static void setFunLogado(Funcionario funLogado) {
         FuncionarioSql.funLogado = funLogado;
     }
+
+    public static void iniciaConexao() throws RuntimeException{
+        EntityManager manager = JpaUtil.getEntityManager();
+        EntityTransaction tx = manager.getTransaction();
+
+        try {
+            tx.begin();
+
+            tx.commit();
+        } finally {
+            manager.close();
+        }
+    }
     
 }

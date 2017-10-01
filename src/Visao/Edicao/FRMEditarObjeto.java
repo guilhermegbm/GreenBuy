@@ -70,7 +70,7 @@ public class FRMEditarObjeto extends javax.swing.JFrame {
         btnDeletar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Cadastro de produtos");
+        setTitle("Editar Objeto");
 
         jPanel2.setBackground(new java.awt.Color(153, 255, 153));
 

@@ -93,4 +93,8 @@ public class ControleFuncionario {
     public static void recontrataFuncionario(Funcionario f) throws RuntimeException{
         FuncionarioSql.recontrataFuncionario(f);
     }
+
+    public static void iniciaConexao() throws RuntimeException{
+        FuncionarioSql.iniciaConexao();
+    }
 }

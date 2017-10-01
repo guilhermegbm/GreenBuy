@@ -68,7 +68,7 @@ public class FRMEditarCliente extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Edição de Cliente");
+        setTitle("Editar Cliente");
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel2.setBackground(new java.awt.Color(153, 255, 153));

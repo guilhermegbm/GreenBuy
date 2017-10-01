@@ -76,7 +76,7 @@ public class FRMCadastrarFuncionario extends javax.swing.JFrame {
         cbAdm = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Cadastro de funcionário");
+        setTitle("Cadastrar funcionário");
 
         jPanel2.setBackground(new java.awt.Color(153, 255, 153));
 

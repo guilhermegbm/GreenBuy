@@ -68,7 +68,7 @@ public class FRMFuncionario extends javax.swing.JFrame {
         tableFuncionario = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Funcionário");
+        setTitle("Funcionários");
 
         jPanel2.setBackground(new java.awt.Color(153, 255, 153));
 
@@ -365,9 +365,7 @@ public class FRMFuncionario extends javax.swing.JFrame {
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         FRMPrincipal prin = new FRMPrincipal();
-
         prin.setVisible(true);
-
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 

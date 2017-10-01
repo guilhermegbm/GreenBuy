@@ -5,7 +5,8 @@
  */
 package Visao.Outros;
 
-import Modelo.BEAN.Funcionario;
+import Controle.ControleFuncionario;
+import Visao.Gerenciamento.*;
 
 /**
  *
@@ -37,18 +38,19 @@ public class FRMPrincipal extends javax.swing.JFrame {
         menu3 = new java.awt.Menu();
         menu4 = new java.awt.Menu();
         jPanel1 = new javax.swing.JPanel();
-        btnGerenciarCliente = new javax.swing.JButton();
-        btnGerenciarProduto = new javax.swing.JButton();
-        btnGerenciarFornecedor = new javax.swing.JButton();
-        btnGerenciarFuncionario = new javax.swing.JButton();
-        btnGerenciarEstoque = new javax.swing.JButton();
-        btnGerenciarVenda = new javax.swing.JButton();
+        btnCliente = new javax.swing.JButton();
+        btnObjeto = new javax.swing.JButton();
+        btnFornecedor = new javax.swing.JButton();
+        btnFuncionario = new javax.swing.JButton();
+        btnVenda = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        btnRegistrarFornecimento = new javax.swing.JButton();
+        btnFornecimento = new javax.swing.JButton();
         btnSaidaEstoque = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnCargo = new javax.swing.JButton();
+        btnGrupo = new javax.swing.JButton();
+        btnSubGrupo = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -91,38 +93,59 @@ public class FRMPrincipal extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 204));
 
-        btnGerenciarCliente.setBackground(new java.awt.Color(255, 255, 255));
-        btnGerenciarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/Cliente.png"))); // NOI18N
-        btnGerenciarCliente.setText("Gerenciar Cliente");
-        btnGerenciarCliente.addActionListener(new java.awt.event.ActionListener() {
+        btnCliente.setBackground(new java.awt.Color(255, 255, 255));
+        btnCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/Cliente.png"))); // NOI18N
+        btnCliente.setText("Gerenciar Clientes");
+        btnCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGerenciarClienteActionPerformed(evt);
+                btnClienteActionPerformed(evt);
             }
         });
 
-        btnGerenciarProduto.setBackground(new java.awt.Color(255, 255, 255));
-        btnGerenciarProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/Produto.png"))); // NOI18N
-        btnGerenciarProduto.setText("Gerenciar Objeto");
+        btnObjeto.setBackground(new java.awt.Color(255, 255, 255));
+        btnObjeto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/Produto.png"))); // NOI18N
+        btnObjeto.setText("Gerenciar Objetos");
+        btnObjeto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnObjetoActionPerformed(evt);
+            }
+        });
 
-        btnGerenciarFornecedor.setBackground(new java.awt.Color(255, 255, 255));
-        btnGerenciarFornecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/Fornecedor.png"))); // NOI18N
-        btnGerenciarFornecedor.setText("Gerenciar Fornecedor");
+        btnFornecedor.setBackground(new java.awt.Color(255, 255, 255));
+        btnFornecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/Fornecedor.png"))); // NOI18N
+        btnFornecedor.setText("Gerenciar Fornecedores");
+        btnFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFornecedorActionPerformed(evt);
+            }
+        });
 
-        btnGerenciarFuncionario.setBackground(new java.awt.Color(255, 255, 255));
-        btnGerenciarFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/Funcionario.png"))); // NOI18N
-        btnGerenciarFuncionario.setText("Gerenciar Funcionario");
+        btnFuncionario.setBackground(new java.awt.Color(255, 255, 255));
+        btnFuncionario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/Funcionario.png"))); // NOI18N
+        btnFuncionario.setText("Gerenciar Funcionarios");
+        btnFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFuncionarioActionPerformed(evt);
+            }
+        });
 
-        btnGerenciarEstoque.setBackground(new java.awt.Color(255, 255, 255));
-        btnGerenciarEstoque.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/Estoque.png"))); // NOI18N
-        btnGerenciarEstoque.setText("Gerenciar Estoque");
-
-        btnGerenciarVenda.setBackground(new java.awt.Color(255, 255, 255));
-        btnGerenciarVenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/Venda.png"))); // NOI18N
-        btnGerenciarVenda.setText("Gerenciar Venda");
+        btnVenda.setBackground(new java.awt.Color(255, 255, 255));
+        btnVenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/Venda.png"))); // NOI18N
+        btnVenda.setText("Fazer Venda");
+        btnVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVendaActionPerformed(evt);
+            }
+        });
 
         btnSair.setBackground(new java.awt.Color(255, 255, 255));
         btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/logout.png"))); // NOI18N
         btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Tw Cen MT", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 255, 51));
@@ -130,21 +153,40 @@ public class FRMPrincipal extends javax.swing.JFrame {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/cash-register.png"))); // NOI18N
 
-        btnRegistrarFornecimento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/EntraMercadoria.png"))); // NOI18N
-        btnRegistrarFornecimento.setText("Registrar fornecimento");
-        btnRegistrarFornecimento.addActionListener(new java.awt.event.ActionListener() {
+        btnFornecimento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/EntraMercadoria.png"))); // NOI18N
+        btnFornecimento.setText("Registrar fornecimento");
+        btnFornecimento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarFornecimentoActionPerformed(evt);
+                btnFornecimentoActionPerformed(evt);
             }
         });
 
         btnSaidaEstoque.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/SaiMercadoria.png"))); // NOI18N
         btnSaidaEstoque.setText("Registrar saida estoque");
-
-        jButton1.setText("Criar Classe");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSaidaEstoque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSaidaEstoqueActionPerformed(evt);
+            }
+        });
+
+        btnCargo.setText("Gerenciar Cargos");
+        btnCargo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCargoActionPerformed(evt);
+            }
+        });
+
+        btnGrupo.setText("Gerenciar Grupos");
+        btnGrupo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGrupoActionPerformed(evt);
+            }
+        });
+
+        btnSubGrupo.setText("Gerenciar Sub-Grupos");
+        btnSubGrupo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubGrupoActionPerformed(evt);
             }
         });
 
@@ -155,16 +197,17 @@ public class FRMPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnGerenciarFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnGerenciarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnGerenciarFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnGerenciarProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnGerenciarEstoque, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnGerenciarVenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnRegistrarFornecimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnObjeto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnVenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnFornecimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnSaidaEstoque, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnCargo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnGrupo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSubGrupo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -180,30 +223,33 @@ public class FRMPrincipal extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnGerenciarCliente)
+                        .addGap(2, 2, 2)
+                        .addComponent(btnCargo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnGerenciarEstoque)
+                                .addComponent(btnCliente)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnGerenciarFornecedor)
+                                .addComponent(btnFornecedor)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnGerenciarFuncionario)
+                                .addComponent(btnFuncionario)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnGerenciarProduto)
+                                .addComponent(btnGrupo)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnGerenciarVenda)
+                                .addComponent(btnSubGrupo)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnRegistrarFornecimento)
+                                .addComponent(btnObjeto)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnSaidaEstoque)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                                .addComponent(btnSair))
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(btnVenda)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnFornecimento)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnSaidaEstoque))))
                     .addComponent(jLabel3))
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(btnSair)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jMenu3.setText("Opções");
@@ -289,21 +335,73 @@ public class FRMPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    private void btnGerenciarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerenciarClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnGerenciarClienteActionPerformed
+    private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
+        FRMCliente cliente = new FRMCliente();
+        cliente.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnClienteActionPerformed
 
-    private void btnRegistrarFornecimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarFornecimentoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegistrarFornecimentoActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnFornecimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFornecimentoActionPerformed
+        FRMFornecimento fornecimento = new FRMFornecimento();
+        fornecimento.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnFornecimentoActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void btnCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargoActionPerformed
+        FRMCargo cargo = new FRMCargo();
+        cargo.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnCargoActionPerformed
+
+    private void btnGrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrupoActionPerformed
+        FRMGrupo grupo = new FRMGrupo();
+        grupo.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnGrupoActionPerformed
+
+    private void btnSubGrupoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubGrupoActionPerformed
+        FRMSubGrupo subGrupo = new FRMSubGrupo();
+        subGrupo.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSubGrupoActionPerformed
+
+    private void btnFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFornecedorActionPerformed
+        FRMFornecedor fornecedor = new FRMFornecedor();
+        fornecedor.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnFornecedorActionPerformed
+
+    private void btnFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFuncionarioActionPerformed
+        FRMFuncionario funcionario = new FRMFuncionario();
+        funcionario.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnFuncionarioActionPerformed
+
+    private void btnObjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObjetoActionPerformed
+        FRMObjeto objeto = new FRMObjeto();
+        objeto.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnObjetoActionPerformed
+
+    private void btnVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendaActionPerformed
+        FRMVenda venda = new FRMVenda();
+        venda.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnVendaActionPerformed
+
+    private void btnSaidaEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaidaEstoqueActionPerformed
+        FRMSaida saida = new FRMSaida();
+        saida.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSaidaEstoqueActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -341,16 +439,17 @@ public class FRMPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnGerenciarCliente;
-    private javax.swing.JButton btnGerenciarEstoque;
-    private javax.swing.JButton btnGerenciarFornecedor;
-    private javax.swing.JButton btnGerenciarFuncionario;
-    private javax.swing.JButton btnGerenciarProduto;
-    private javax.swing.JButton btnGerenciarVenda;
-    private javax.swing.JButton btnRegistrarFornecimento;
+    private javax.swing.JButton btnCargo;
+    private javax.swing.JButton btnCliente;
+    private javax.swing.JButton btnFornecedor;
+    private javax.swing.JButton btnFornecimento;
+    private javax.swing.JButton btnFuncionario;
+    private javax.swing.JButton btnGrupo;
+    private javax.swing.JButton btnObjeto;
     private javax.swing.JButton btnSaidaEstoque;
     private javax.swing.JButton btnSair;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnSubGrupo;
+    private javax.swing.JButton btnVenda;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;

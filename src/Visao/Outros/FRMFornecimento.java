@@ -87,6 +87,7 @@ public class FRMFornecimento extends javax.swing.JFrame {
         lblTotal = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Registrar Fornecimento");
 
         jPanel1.setBackground(new java.awt.Color(153, 255, 153));
 
