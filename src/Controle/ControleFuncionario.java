@@ -38,6 +38,10 @@ public class ControleFuncionario {
     public static List<Funcionario> listarTudoTodosOuPorCodigo(int codigo) throws RuntimeException{
         return FuncionarioSql.listarTudoTodosOuPorCodigo(codigo);
     }
+    
+    public static Funcionario listarPorLogin (String login) throws RuntimeException {
+        return FuncionarioSql.listarPorLogin(login);
+    }
 
     public static boolean verificaLogin(String usuario) throws RuntimeException{
         List<String> s = FuncionarioSql.listarTodosLogins();

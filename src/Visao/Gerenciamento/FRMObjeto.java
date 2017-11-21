@@ -257,9 +257,7 @@ public class FRMObjeto extends javax.swing.JFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         FRMCadastrarObjeto cadObj = new FRMCadastrarObjeto();
-
         cadObj.setVisible(true);
-
         this.dispose();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
@@ -346,7 +344,7 @@ public class FRMObjeto extends javax.swing.JFrame {
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer essa ação.");
+            JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer isso.");
         }
     }//GEN-LAST:event_btnInativarActionPerformed
 
@@ -368,7 +366,7 @@ public class FRMObjeto extends javax.swing.JFrame {
                 this.setVisible(false);
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer essa ação.");
+            JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer isso.");
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 

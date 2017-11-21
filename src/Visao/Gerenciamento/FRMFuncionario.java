@@ -291,15 +291,11 @@ public class FRMFuncionario extends javax.swing.JFrame {
     private void btnCadastrarFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarFuncionarioActionPerformed
         if (ControleFuncionario.verificaFuncionarioLogado()) {
             FRMCadastrarFuncionario cadFun = new FRMCadastrarFuncionario();
-
             cadFun.setVisible(true);
-
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer essa ação.");
         }
-
-
     }//GEN-LAST:event_btnCadastrarFuncionarioActionPerformed
 
     private void btnAttFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAttFuncionarioActionPerformed
@@ -310,26 +306,17 @@ public class FRMFuncionario extends javax.swing.JFrame {
         } else if (qtd > 1) {
             JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez.");
         } else {
-
-            if (dados.get(tableFuncionario.getSelectedRow()).getCodigo() == ControleFuncionario.getFuncionarioLogado().getCodigo()) {
+            if ((dados.get(tableFuncionario.getSelectedRow()).getCodigo() == ControleFuncionario.getFuncionarioLogado().getCodigo()) || (ControleFuncionario.verificaFuncionarioLogado())) {
                 FRMEditarFuncionario edtFun = new FRMEditarFuncionario();
 
                 edtFun.pegaObjeto(dados.get(tableFuncionario.getSelectedRow()));
 
-                edtFun.setVisible(true);
-
-                this.dispose();
-            } else if (ControleFuncionario.verificaFuncionarioLogado()) {
-                FRMEditarFuncionario edtFun = new FRMEditarFuncionario();
-
-                edtFun.pegaObjeto(dados.get(tableFuncionario.getSelectedRow()));
                 edtFun.setVisible(true);
 
                 this.dispose();
             } else {
-                JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer essa ação.");
+                JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer isso.");
             }
-
         }
     }//GEN-LAST:event_btnAttFuncionarioActionPerformed
 
@@ -358,9 +345,8 @@ public class FRMFuncionario extends javax.swing.JFrame {
 
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer essa ação.");
+            JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer isso.");
         }
-
     }//GEN-LAST:event_btnDespedirFuncionarioActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed

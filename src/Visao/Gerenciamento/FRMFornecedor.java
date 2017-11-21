@@ -256,9 +256,7 @@ public class FRMFornecedor extends javax.swing.JFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         FRMCadastrarFornecedor fornecedor = new FRMCadastrarFornecedor();
-
         fornecedor.setVisible(true);
-
         this.dispose();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
@@ -316,7 +314,7 @@ public class FRMFornecedor extends javax.swing.JFrame {
                 this.dispose();
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer essa ação.");
+            JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer isso.");
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -338,7 +336,7 @@ public class FRMFornecedor extends javax.swing.JFrame {
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer essa ação.");
+            JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer isso.");
         }
     }//GEN-LAST:event_btnInativarActionPerformed
 

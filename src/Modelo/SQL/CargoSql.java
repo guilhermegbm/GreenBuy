@@ -44,9 +44,7 @@ public class CargoSql {
 
         try {
             tx.begin();
-
             manager.merge(c);
-
             tx.commit();
         } finally {
             manager.close();

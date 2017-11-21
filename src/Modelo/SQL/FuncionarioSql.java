@@ -123,6 +123,20 @@ public class FuncionarioSql {
             manager.close();
         }
     }
+    
+    public static Funcionario listarPorLogin (String login) throws RuntimeException {
+        EntityManager manager = JpaUtil.getEntityManager();
+        
+        try {
+            TypedQuery<Funcionario> query = manager.createQuery("select f from Funcionario f where f.situacaoFun = :situacao and f.login = :login", Funcionario.class);
+            query.setParameter("situacao", Funcionario.SituacaoFun.ATIVO);
+            query.setParameter("login", login);
+            List<Funcionario> l = query.getResultList();
+            return l.get(0);
+        } finally {
+            manager.close();
+        }
+    }
 
     public static List<Funcionario> listarTodosAtivos()throws RuntimeException {
         EntityManager manager = JpaUtil.getEntityManager();

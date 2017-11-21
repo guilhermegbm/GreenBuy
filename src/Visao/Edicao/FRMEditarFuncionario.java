@@ -331,7 +331,7 @@ public class FRMEditarFuncionario extends javax.swing.JFrame {
 
                 try {
                     ControleFuncionario.editaFuncionario(f);
-                    JOptionPane.showMessageDialog(null, "Fornecedor editado com sucesso.");
+                    JOptionPane.showMessageDialog(null, "Funcionario editado com sucesso.");
 
                     this.mudaFrame();
                 } catch (RuntimeException e) {
@@ -399,11 +399,11 @@ public class FRMEditarFuncionario extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Funcionario deletado com sucesso!");
                     this.mudaFrame();
                 } catch (RuntimeException e) {
-                    JOptionPane.showMessageDialog(null, "DeuRuim: " + e);
+                    JOptionPane.showMessageDialog(null, "Deu Ruim: " + e);
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer essa ação.");
+            JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer isso.");
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -482,6 +482,7 @@ public class FRMEditarFuncionario extends javax.swing.JFrame {
         tfTel.setText(fun.getTelefone());
         tfSenha.setText(fun.getSenha());
         tfLogin.setText(fun.getLogin());
+        cbAdm.setSelected(fun.isAdministrador());
 
         int index = 0;
         for (Cargo cargo : cargoAL) {

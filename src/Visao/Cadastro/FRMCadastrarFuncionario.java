@@ -310,7 +310,7 @@ public class FRMCadastrarFuncionario extends javax.swing.JFrame {
 
                 try {
                     ControleFuncionario.insereFuncionario(fun);
-                    JOptionPane.showMessageDialog(null, "Cliente cadastrado com sucesso");
+                    JOptionPane.showMessageDialog(null, "Funcionario cadastrado com sucesso");
 
                     tfConfSenha.setText("");
                     tfNome.setText("");

@@ -310,7 +310,7 @@ public class FRMCliente extends javax.swing.JFrame {
                 this.dispose();
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer essa ação.");
+            JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer isso.");
         }
     }//GEN-LAST:event_btnEdtClienteActionPerformed
 
@@ -337,7 +337,7 @@ public class FRMCliente extends javax.swing.JFrame {
                 this.preencheTabela();
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer essa ação.");
+            JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer isso.");
         }
     }//GEN-LAST:event_btnDelClienteActionPerformed
 

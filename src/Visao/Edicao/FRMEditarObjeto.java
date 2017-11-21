@@ -420,10 +420,10 @@ public class FRMEditarObjeto extends javax.swing.JFrame {
         if (opc == 0) {
             try {
                 ControleObjeto.deletaObjeto(objetobean);
-                JOptionPane.showMessageDialog(null, "Objeto deletado com sucesso! :(");
+                JOptionPane.showMessageDialog(null, "Objeto deletado com sucesso!");
                 this.mudaFrame();
             } catch (RuntimeException e) {
-                JOptionPane.showMessageDialog(null, "DeuRuim: " + e);
+                JOptionPane.showMessageDialog(null, "Deu Ruim: " + e);
             }
         }
     }//GEN-LAST:event_btnDeletarActionPerformed

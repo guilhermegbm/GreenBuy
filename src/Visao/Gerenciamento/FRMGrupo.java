@@ -257,9 +257,7 @@ public class FRMGrupo extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         FRMCadastrarGrupo cadG = new FRMCadastrarGrupo();
-
         cadG.setVisible(true);
-
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -306,7 +304,8 @@ public class FRMGrupo extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Apenas um ítem da lista deve ser selecionado por vez;");
             } else {
 
-                int opc = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o grupo " + dados.get(tableGrupo.getSelectedRow()).getNome() + " ?");
+                int opc = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir o grupo " + dados.get(tableGrupo.getSelectedRow()).getNome() + " ? Todos"
+                        + " os sub grupos e objetos desse grupo também serão apagados!");
 
                 if (opc == 0) {
                     try {
@@ -319,7 +318,7 @@ public class FRMGrupo extends javax.swing.JFrame {
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer essa ação.");
+            JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer isso.");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -341,7 +340,7 @@ public class FRMGrupo extends javax.swing.JFrame {
                 this.dispose();
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer essa ação.");
+            JOptionPane.showMessageDialog(null, "Atenção, você não tem autorização para fazer isso.");
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 

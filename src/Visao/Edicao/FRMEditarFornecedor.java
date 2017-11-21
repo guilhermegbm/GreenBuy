@@ -305,7 +305,7 @@ public class FRMEditarFornecedor extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Fornecedor deletado com sucesso!");
                 this.mudaFrame();
             } catch (RuntimeException e) {
-                JOptionPane.showMessageDialog(null, "DeuRuim: " + e);
+                JOptionPane.showMessageDialog(null, "Deu Ruim: " + e);
             }
         }
     }//GEN-LAST:event_btnDeletarActionPerformed
