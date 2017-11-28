@@ -72,13 +72,14 @@ public class CargoSql {
     public static List<Cargo> listarTodos() throws RuntimeException {
         EntityManager manager = JpaUtil.getEntityManager();
         
-        //List<Cargo> cargos =  new ArrayList<Cargo>();
+        List<Cargo> cargos =  new ArrayList<Cargo>();
         try {
-            TypedQuery<Cargo> tq = manager.createQuery("from Cargo", Cargo.class);
-            //Query query = manager.createQuery("from Cargo"); 
-            //cargos = query.getResultList();
-         
-            return tq.getResultList();
+            //TypedQuery<Cargo> tq = manager.createQuery("from Cargo", Cargo.class);
+            Query query = manager.createQuery("from Cargo"); 
+            cargos = query.getResultList();
+            
+            //return query.getResultList();
+            return cargos;
         } finally {
             manager.close();
         }
@@ -91,8 +92,9 @@ public class CargoSql {
         try {
             if (codigo == 0) {
                 TypedQuery<Cargo> query = manager.createQuery("select distinct c from Cargo c left join fetch c.funcionarios f", Cargo.class);
-
+                
                 return query.getResultList();
+                
             } else {
                 List<Cargo> s = new ArrayList<>();
                 Cargo c = manager.find(Cargo.class, codigo);

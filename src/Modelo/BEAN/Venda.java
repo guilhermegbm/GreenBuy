@@ -171,6 +171,7 @@ public class Venda implements Serializable {
     public void setValorTotal() {
         System.out.println("Passou1");
         //1ª Função: Calcular o valor total.
+        valorTotal = 0;
     }
 
     @PostPersist

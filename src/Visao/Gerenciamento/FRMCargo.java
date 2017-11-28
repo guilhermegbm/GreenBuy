@@ -24,14 +24,12 @@ import javax.swing.table.DefaultTableModel;
 public class FRMCargo extends javax.swing.JFrame {
 
     private List<Cargo> dados;
-    private DefaultTableModel dtm;
 
     /**
      * Creates new form FRMCargo
      */
     public FRMCargo() {
         initComponents();
-        dados = new ArrayList<>();
         try {
             dados = ControleCargo.listarTodos();
             this.preencheTabela();
@@ -242,9 +240,9 @@ public class FRMCargo extends javax.swing.JFrame {
     private void cbOpcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOpcActionPerformed
         if (cbOpc.getSelectedIndex() == 0) {
             try {
-                dados = ControleCargo.listarTodos();
-                this.preencheTabela();
-            } catch (RuntimeException e) {
+            dados = ControleCargo.listarTodos();
+            this.preencheTabela();
+            } catch (RuntimeException e){
                 JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
             }
         }
@@ -255,9 +253,9 @@ public class FRMCargo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLocalizaActionPerformed
 
     private void btnCadastraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastraActionPerformed
-            FRMCadastrarCargo c = new FRMCadastrarCargo();
-            c.setVisible(true);
-            this.dispose();
+        FRMCadastrarCargo c = new FRMCadastrarCargo();
+        c.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnCadastraActionPerformed
 
     private void btnEditaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditaActionPerformed
@@ -401,14 +399,15 @@ public class FRMCargo extends javax.swing.JFrame {
                 }
             } else if (cbOpc.getSelectedIndex() == 2) {
                 dados = ControleCargo.listarPorNome(tfDado.getText());
+               
                 this.preencheTabela();
             }
         }
     }
 
     private void preencheTabela() {
-        dtm = this.criaTabela();
-
+        DefaultTableModel dtm = this.criaTabela();
+        
         dtm.addColumn("Código");
         dtm.addColumn("Nome");
         dtm.addColumn("Funcionarios neste cargo");
