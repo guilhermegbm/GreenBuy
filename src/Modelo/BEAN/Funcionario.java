@@ -35,6 +35,7 @@ public class Funcionario implements Serializable {
     private float salario;
     private String login;
     private String senha;
+    private String email;
     private String telefone;
     private boolean administrador;
     private Cargo cargo;
@@ -104,6 +105,15 @@ public class Funcionario implements Serializable {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    @Column(name = "funEmail", length = 100, nullable = false)
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Column(name = "funTelefone", length = 20, nullable = true)

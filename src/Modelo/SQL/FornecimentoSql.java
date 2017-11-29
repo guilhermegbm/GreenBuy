@@ -95,4 +95,24 @@ public class FornecimentoSql {
             manager.close();
         }
     }
+
+    public static List<Fornecimento> listarTudoTodosOuPorCodigo(int cod) {
+        EntityManager manager = JpaUtil.getEntityManager();
+
+        try {
+            if (cod == 0) {
+                TypedQuery<Fornecimento> query = manager.createQuery(""
+                        + "select distinct f from Fornecimento f left join fetch f.fornecedor", Fornecimento.class);
+                
+                return query.getResultList();
+                
+            } else {
+                TypedQuery<Fornecimento> tq = manager.createQuery("select distinct f from Fornecimento f left join fetch f.fornecedor where f.codigo = :cod", Fornecimento.class);
+                tq.setParameter("cod", cod);
+                return tq.getResultList();
+            }
+        } finally {
+            manager.close();
+        }
+    }
 }

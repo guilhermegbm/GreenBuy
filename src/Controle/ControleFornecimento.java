@@ -36,4 +36,8 @@ public class ControleFornecimento {
     public static List<Fornecimento> listarFornecimentoPorCodigo(int codigo) throws RuntimeException {
         return FornecimentoSql.listarFornecimentoPorCodigo(codigo);
     }
+
+    public static List<Fornecimento> listarTudoTodosOuPorCodigo(int codigo) throws RuntimeException {
+        return FornecimentoSql.listarTudoTodosOuPorCodigo(codigo);
+    }
 }

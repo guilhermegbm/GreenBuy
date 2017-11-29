@@ -169,9 +169,14 @@ public class Venda implements Serializable {
     @PostLoad
     @PostUpdate
     public void setValorTotal() {
-        System.out.println("Passou1");
         //1ª Função: Calcular o valor total.
-        valorTotal = 0;
+        float valorBruto = 0;
+        
+        for (ObjetoVenda ov : itensDaVenda) {
+            valorBruto += (ov.getQtdeVendida() * ov.getPrecoVendaPraticadoUnidade());
+        }
+        
+        valorTotal = (valorBruto + this.acrescimo - this.desconto);
     }
 
     @PostPersist

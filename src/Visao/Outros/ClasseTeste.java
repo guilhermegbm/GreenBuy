@@ -96,6 +96,7 @@ public class ClasseTeste {
         f1.setLogin("andreLogin");
         f1.setSenha("erdna");
         f1.setSalario(1180);
+        f1.setEmail("andre@gmail.com");
         f1.setTelefone("(37)12345-6789");
         f1.setSituacaoFun(Funcionario.SituacaoFun.DESPEDIDO);
         f1.setCargo(ca1);
@@ -106,6 +107,7 @@ public class ClasseTeste {
         f2.setLogin("barbaraLogin");
         f2.setSenha("arabrab");
         f2.setSalario(980);
+        f2.setEmail("barbara@gmail.com");
         f2.setTelefone("(37)12345-6789");
         f2.setSituacaoFun(Funcionario.SituacaoFun.ATIVO);
         f2.setAdministrador(false);
@@ -116,7 +118,8 @@ public class ClasseTeste {
         f3.setLogin("carlosLogin");
         f3.setSenha("solrac");
         f3.setSalario(850);
-        f3.setTelefone("");
+        f3.setEmail("carlos@gmail.com");
+        f3.setTelefone("(37)55881-7744");
         f3.setSituacaoFun(Funcionario.SituacaoFun.DESPEDIDO);
         f3.setAdministrador(false);
         f3.setCargo(ca3);
@@ -126,6 +129,7 @@ public class ClasseTeste {
         f4.setLogin("danielaLogin");
         f4.setSenha("aleinad");
         f4.setSalario(1390);
+        f4.setEmail("daniela@gmail.com");
         f4.setTelefone("(37)12345-6789");
         f4.setSituacaoFun(Funcionario.SituacaoFun.ATIVO);
         f4.setAdministrador(true);

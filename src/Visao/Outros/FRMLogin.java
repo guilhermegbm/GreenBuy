@@ -265,11 +265,11 @@ public class FRMLogin extends javax.swing.JFrame {
 
     private void lblEsqSenhaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEsqSenhaMouseClicked
         if (tfUsuario.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "");
+            JOptionPane.showMessageDialog(null, "Insira ao menos o seu login.");
         } else {
             if (ControleFuncionario.verificaLogin(tfUsuario.getText())) {
                 Funcionario f = ControleFuncionario.listarPorLogin(tfUsuario.getText());
-                int opc = JOptionPane.showConfirmDialog(null, "Login encontrado. Deseja enviar um email com sua mensagem para " + f.getLogin() + " ?");
+                int opc = JOptionPane.showConfirmDialog(null, "Login encontrado. Deseja enviar um email com sua senha para " + f.getEmail() + " ?");
 
                 if (opc == 0) {
                     try {
@@ -279,7 +279,7 @@ public class FRMLogin extends javax.swing.JFrame {
                         email.setHostName("smtp.gmail.com");
                         email.setAuthentication("guilhermebmendonca60@gmail.com", "guilherme2000");
                         email.setSSL(true);
-                        email.addTo(f.getLogin());
+                        email.addTo(f.getEmail());
                         email.setFrom("guilhermebmendonca60@gmail.com");
                         email.setSubject("Senha esquecida");
                         email.setMsg("A sua senha é: " + f.getSenha());

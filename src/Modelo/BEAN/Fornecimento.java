@@ -119,7 +119,13 @@ public class Fornecimento implements Serializable {
     @PostLoad
     @PostUpdate
     public void setValorTotal (){
+        float valorBruto = 0;
         
+        for (ObjetoFornecimento of : objetosNoFornecimento) {
+            valorBruto += (of.getPrecoPraticadoCompra() * of.getQtdeFornecida());
+        }
+        
+        this.valorTotal = (valorBruto + this.acrescimo - this.desconto);
     }
     
     @PostPersist
