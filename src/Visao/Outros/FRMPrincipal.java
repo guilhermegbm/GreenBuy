@@ -62,7 +62,7 @@ public class FRMPrincipal extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem8 = new javax.swing.JMenuItem();
+        menuRelatorio = new javax.swing.JMenuItem();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -300,14 +300,14 @@ public class FRMPrincipal extends javax.swing.JFrame {
 
         jMenu2.setText("Relatórios");
 
-        jMenuItem8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/list.png"))); // NOI18N
-        jMenuItem8.setText("Relatórios");
-        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+        menuRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/list.png"))); // NOI18N
+        menuRelatorio.setText("Relatórios");
+        menuRelatorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem8ActionPerformed(evt);
+                menuRelatorioActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem8);
+        jMenu2.add(menuRelatorio);
 
         jMenuBar1.add(jMenu2);
 
@@ -347,9 +347,11 @@ public class FRMPrincipal extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnFornecimentoActionPerformed
 
-    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem8ActionPerformed
+    private void menuRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRelatorioActionPerformed
+        FRMRelatorio relatorio = new FRMRelatorio();
+        relatorio.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_menuRelatorioActionPerformed
 
     private void btnCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargoActionPerformed
         FRMCargo cargo = new FRMCargo();
@@ -463,7 +465,6 @@ public class FRMPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private java.awt.Menu menu1;
@@ -472,6 +473,7 @@ public class FRMPrincipal extends javax.swing.JFrame {
     private java.awt.Menu menu4;
     private java.awt.MenuBar menuBar1;
     private java.awt.MenuBar menuBar2;
+    private javax.swing.JMenuItem menuRelatorio;
     // End of variables declaration//GEN-END:variables
     
 }

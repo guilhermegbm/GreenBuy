@@ -7,6 +7,7 @@ package Controle;
 
 import Modelo.BEAN.Fornecimento;
 import Modelo.SQL.FornecimentoSql;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.PersistenceException;
@@ -39,5 +40,17 @@ public class ControleFornecimento {
 
     public static List<Fornecimento> listarTudoTodosOuPorCodigo(int codigo) throws RuntimeException {
         return FornecimentoSql.listarTudoTodosOuPorCodigo(codigo);
+    }
+
+    public static List<Fornecimento> listarPorDataInicioFim(Date dataInicio, Date dataFim) throws RuntimeException {
+        return FornecimentoSql.listarPorDataInicioFim(dataInicio, dataFim);
+    }
+
+    public static List<Fornecimento> listarPorDataInicio(Date dataInicio) throws RuntimeException {
+        return FornecimentoSql.listarPorDataInicio(dataInicio);
+    }
+
+    public static List<Fornecimento> listarPorDataFim(Date dataFim) throws RuntimeException {
+        return FornecimentoSql.listarPorDataFim(dataFim);
     }
 }

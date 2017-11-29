@@ -8,6 +8,7 @@ package Modelo.SQL;
 import Jpa.JpaUtil;
 import Modelo.BEAN.Fornecimento;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -96,7 +97,7 @@ public class FornecimentoSql {
         }
     }
 
-    public static List<Fornecimento> listarTudoTodosOuPorCodigo(int cod) {
+    public static List<Fornecimento> listarTudoTodosOuPorCodigo(int cod) throws RuntimeException {
         EntityManager manager = JpaUtil.getEntityManager();
 
         try {
@@ -111,6 +112,46 @@ public class FornecimentoSql {
                 tq.setParameter("cod", cod);
                 return tq.getResultList();
             }
+        } finally {
+            manager.close();
+        }
+    }
+
+    public static List<Fornecimento> listarPorDataInicioFim(Date dataInicio, Date dataFim) throws RuntimeException {
+        EntityManager manager = JpaUtil.getEntityManager();
+        
+        try {
+            TypedQuery tq = manager.createQuery("select distinct f from Fornecimento f left join fetch f.fornecedor "
+                    + "where f.data >= :dataInicio and f.data <= :dataFim", Fornecimento.class);
+            tq.setParameter("dataInicio", dataInicio);
+            tq.setParameter("dataFim", dataFim);
+            return tq.getResultList();
+        } finally {
+            manager.close();
+        }
+    }
+
+    public static List<Fornecimento> listarPorDataInicio(Date dataInicio) throws RuntimeException {
+        EntityManager manager = JpaUtil.getEntityManager();
+        
+        try {
+            TypedQuery tq = manager.createQuery("select distinct f from Fornecimento f left join fetch f.fornecedor"
+                    + " where f.data >= :dataInicio", Fornecimento.class);
+            tq.setParameter("dataInicio", dataInicio);
+            return tq.getResultList();
+        } finally {
+            manager.close();
+        }
+    }
+
+    public static List<Fornecimento> listarPorDataFim(Date dataFim) throws RuntimeException {
+        EntityManager manager = JpaUtil.getEntityManager();
+        
+        try {
+            TypedQuery tq = manager.createQuery("select distinct f from Fornecimento f left join fetch f.fornecedor "
+                    + "where f.data <= :dataFim", Fornecimento.class);
+            tq.setParameter("dataFim", dataFim);
+            return tq.getResultList();
         } finally {
             manager.close();
         }
