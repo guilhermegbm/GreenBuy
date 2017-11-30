@@ -45,104 +45,6 @@
         </Menu>
       </SubComponents>
     </Menu>
-    <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
-      <SubComponents>
-        <Menu class="javax.swing.JMenu" name="jMenu3">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Op&#xe7;&#xf5;es"/>
-          </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Visao.icon/Cliente.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Gerenciar Cliente"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem5">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Visao.icon/Produto.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Gerenciar Produto"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Visao.icon/Fornecedor.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Gerenciar Fornecedor"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem3ActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem4">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Visao.icon/Funcionario.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Gerenciar Funcion&#xe1;rio"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Visao.icon/Estoque.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Gerenciar Estoque"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem2ActionPerformed"/>
-              </Events>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem6">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Visao.icon/Venda.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Gerenciar Venda"/>
-              </Properties>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu1">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Informa&#xe7;&#xf5;es"/>
-          </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem7">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Visao.icon/info.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Sobre o sistema"/>
-              </Properties>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu2">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Relat&#xf3;rios"/>
-          </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="menuRelatorio">
-              <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Visao.icon/list.png"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Relat&#xf3;rios"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuRelatorioActionPerformed"/>
-              </Events>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
-      </SubComponents>
-    </Menu>
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
@@ -152,7 +54,6 @@
     </Property>
   </Properties>
   <SyntheticProperties>
-    <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
@@ -191,20 +92,23 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="btnFornecedor" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btnCliente" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btnFuncionario" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btnSair" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btnObjeto" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btnVenda" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btnFornecimento" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btnSaidaEstoque" max="32767" attributes="0"/>
-                      <Component id="btnCargo" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btnGrupo" alignment="0" max="32767" attributes="0"/>
-                      <Component id="btnSubGrupo" alignment="0" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="btnRelatórios" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="btnFornecedor" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnCliente" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnFuncionario" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnSair" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnObjeto" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnVenda" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnFornecimento" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnSaidaEstoque" max="32767" attributes="0"/>
+                          <Component id="btnCargo" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnGrupo" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnSubGrupo" alignment="0" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace pref="25" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -254,9 +158,11 @@
                       </Group>
                       <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="btnSair" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
+                  <Component id="btnRelatórios" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="btnSair" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -366,6 +272,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnFornecimento">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Visao.icon/EntraMercadoria.png"/>
             </Property>
@@ -377,6 +286,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnSaidaEstoque">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/Visao.icon/SaiMercadoria.png"/>
             </Property>
@@ -388,6 +300,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnCargo">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Gerenciar Cargos"/>
           </Properties>
           <Events>
@@ -396,6 +311,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnGrupo">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Gerenciar Grupos"/>
           </Properties>
           <Events>
@@ -404,10 +322,24 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnSubGrupo">
           <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Gerenciar Sub-Grupos"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSubGrupoActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnRelat&#xf3;rios">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Relat&#xf3;rios"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRelat&#xf3;riosActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

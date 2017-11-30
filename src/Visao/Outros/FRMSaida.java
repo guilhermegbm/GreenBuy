@@ -44,7 +44,7 @@ public class FRMSaida extends javax.swing.JFrame {
             mercadoriasListadas = ControleObjeto.listarTodosMercadorias();
             this.preencheTabelaPesquisa();
         } catch (RuntimeException e) {
-            JOptionPane.showMessageDialog(null, "Deu ruium: " + e);
+            JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
         }
 
     }
@@ -735,9 +735,17 @@ public class FRMSaida extends javax.swing.JFrame {
             s.setDebitoAdicional(Float.parseFloat(tfDebt.getText()));
             s.setObjetos(mercadoriasNaSaida);
             s.setTipoSaida(Saida.TipoSaida.SAIDAMANUAL);
-            
+
             try {
                 ControleSaida.insereSaidaEItens(s);
+                JOptionPane.showMessageDialog(null, "Saida efetuada com sucesso.");
+                this.limpaDados();
+                s = new Saida();
+                mercadoriasNaSaida.clear();
+                this.preencheTabelaMercadoriasInseridas();
+                tfAcr.setText("0.00");
+                tfDebt.setText("0.00");
+                lblTotal.setText("");
             } catch (RuntimeException e) {
                 JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
             }
@@ -1088,35 +1096,7 @@ public class FRMSaida extends javax.swing.JFrame {
                 }
 
                 if (limpaDados == 0) {
-
-                    cbAlterar.setSelected(false);
-
-                    tfDado.setText("");
-                    tfDado.requestFocusInWindow();
-
-                    tfQuant.setText("Insira a quantidade...");
-                    tfQuant.setForeground(Color.GRAY);
-
-                    tfPreco.setText("");
-                    tfPreco.setEnabled(false);
-
-                    lblImg.setVisible(false);
-                    lblCodigo.setText("");
-                    lblNome.setText("");
-                    lblQtdEstoque.setText("");
-
-                    mercadoriaSelecionada = null;
-
-                    cbOpc.setSelectedIndex(0);
-
-                    try {
-                        mercadoriasListadas = ControleObjeto.listarTodosMercadorias();
-                        this.preencheTabelaPesquisa();
-                    } catch (RuntimeException e) {
-                        JOptionPane.showMessageDialog(null, "Deu ruium: " + e);
-                    }
-
-                    this.calculaTotal();
+                    this.limpaDados();
                 }
 
             }
@@ -1207,6 +1187,37 @@ public class FRMSaida extends javax.swing.JFrame {
         valorTotal += Float.parseFloat(acr);
 
         lblTotal.setText(valorTotal + "");
+    }
+
+    private void limpaDados() {
+        cbAlterar.setSelected(false);
+
+        tfDado.setText("");
+        tfDado.requestFocusInWindow();
+
+        tfQuant.setText("Insira a quantidade...");
+        tfQuant.setForeground(Color.GRAY);
+
+        tfPreco.setText("");
+        tfPreco.setEnabled(false);
+
+        lblImg.setVisible(false);
+        lblCodigo.setText("");
+        lblNome.setText("");
+        lblQtdEstoque.setText("");
+
+        mercadoriaSelecionada = null;
+
+        cbOpc.setSelectedIndex(0);
+
+        try {
+            mercadoriasListadas = ControleObjeto.listarTodosMercadorias();
+            this.preencheTabelaPesquisa();
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+        }
+
+        this.calculaTotal();
     }
 
 }

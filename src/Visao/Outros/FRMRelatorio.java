@@ -5,7 +5,12 @@
  */
 package Visao.Outros;
 
+import Controle.ControleCliente;
+import Controle.ControleFornecedor;
 import Controle.ControleFornecimento;
+import Controle.ControleFuncionario;
+import Controle.ControleObjeto;
+import Controle.ControleSaida;
 import Controle.ControleVenda;
 import Modelo.BEAN.Cliente;
 import Modelo.BEAN.Fornecedor;
@@ -32,10 +37,6 @@ public class FRMRelatorio extends javax.swing.JFrame {
     private static List<Venda> dadosVenda;
     private static List<Fornecimento> dadosFornecimento;
     private static List<Saida> dadosSaida;
-    private static List<Cliente> dadosCliente;
-    private static List<Funcionario> dadosFuncionario;
-    private static List<Fornecedor> dadosFornecedor;
-    private static List<Objeto> dadosObjeto;
 
     /**
      * Creates new form FRMRelatorio
@@ -45,6 +46,12 @@ public class FRMRelatorio extends javax.swing.JFrame {
         try {
             dadosVenda = ControleVenda.listarTodos();
             this.preencheTabelaVenda();
+            
+            dadosFornecimento = ControleFornecimento.listarTodos();
+            this.preencheTabelaFornecimento();
+            
+            dadosSaida = ControleSaida.listarTodos();
+            this.preencheTabelaSaida();
         } catch (RuntimeException e) {
             JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
         }
@@ -106,50 +113,14 @@ public class FRMRelatorio extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tableSaida = new javax.swing.JTable();
         jPanel16 = new javax.swing.JPanel();
-        dcDataInicioFornecimento1 = new com.toedter.calendar.JDateChooser();
+        dcDataInicioSaida = new com.toedter.calendar.JDateChooser();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        dcDataFimFornecimento1 = new com.toedter.calendar.JDateChooser();
-        btnPesquisarPeriodoFornecimento1 = new javax.swing.JButton();
+        dcDataFimSaida = new com.toedter.calendar.JDateChooser();
+        btnPesquisarPeriodoSaida = new javax.swing.JButton();
         jPanel17 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         lblTotalSaida = new javax.swing.JLabel();
-        jToolBar4 = new javax.swing.JToolBar();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel13 = new javax.swing.JLabel();
-        cbOpcCliente = new javax.swing.JComboBox<>();
-        tfDadoCliente = new javax.swing.JTextField();
-        btnPesquisaCliente = new javax.swing.JButton();
-        jPanel18 = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        tableCliente = new javax.swing.JTable();
-        jToolBar5 = new javax.swing.JToolBar();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel14 = new javax.swing.JLabel();
-        cbOpcFuncionario = new javax.swing.JComboBox<>();
-        tfDadoFuncionario = new javax.swing.JTextField();
-        btnPesquisaFuncionario = new javax.swing.JButton();
-        jPanel19 = new javax.swing.JPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        tableFuncionario = new javax.swing.JTable();
-        jToolBar6 = new javax.swing.JToolBar();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel15 = new javax.swing.JLabel();
-        cbOpcFornecedor = new javax.swing.JComboBox<>();
-        tfDadoFornecedor = new javax.swing.JTextField();
-        btnPesquisaFornecedor = new javax.swing.JButton();
-        jPanel20 = new javax.swing.JPanel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        tableFornecedor = new javax.swing.JTable();
-        jToolBar7 = new javax.swing.JToolBar();
-        jPanel8 = new javax.swing.JPanel();
-        jLabel16 = new javax.swing.JLabel();
-        cbOpcObjeto = new javax.swing.JComboBox<>();
-        tfDadoObjeto = new javax.swing.JTextField();
-        btnPesquisaObjeto = new javax.swing.JButton();
-        jPanel21 = new javax.swing.JPanel();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        tableObjeto = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -623,8 +594,8 @@ public class FRMRelatorio extends javax.swing.JFrame {
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel15Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel16.setBackground(new java.awt.Color(204, 255, 204));
@@ -634,10 +605,10 @@ public class FRMRelatorio extends javax.swing.JFrame {
 
         jLabel11.setText("Data de fim:");
 
-        btnPesquisarPeriodoFornecimento1.setText("Pesquisar");
-        btnPesquisarPeriodoFornecimento1.addActionListener(new java.awt.event.ActionListener() {
+        btnPesquisarPeriodoSaida.setText("Pesquisar");
+        btnPesquisarPeriodoSaida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPesquisarPeriodoFornecimento1ActionPerformed(evt);
+                btnPesquisarPeriodoSaidaActionPerformed(evt);
             }
         });
 
@@ -648,11 +619,11 @@ public class FRMRelatorio extends javax.swing.JFrame {
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dcDataFimFornecimento1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dcDataFimSaida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnPesquisarPeriodoFornecimento1))
-                    .addComponent(dcDataInicioFornecimento1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnPesquisarPeriodoSaida))
+                    .addComponent(dcDataInicioSaida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel16Layout.createSequentialGroup()
                         .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10)
@@ -666,13 +637,13 @@ public class FRMRelatorio extends javax.swing.JFrame {
                 .addGap(6, 6, 6)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dcDataInicioFornecimento1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(dcDataInicioSaida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(dcDataFimFornecimento1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(dcDataFimSaida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnPesquisarPeriodoFornecimento1)
+                .addComponent(btnPesquisarPeriodoSaida)
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -749,433 +720,13 @@ public class FRMRelatorio extends javax.swing.JFrame {
                         .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jToolBar3.add(jPanel4);
 
         jTabbedPane1.addTab("Saidas", jToolBar3);
-
-        jToolBar4.setRollover(true);
-
-        jPanel5.setBackground(new java.awt.Color(204, 255, 204));
-
-        jLabel13.setText("Pesquisar cliente por:");
-
-        cbOpcCliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Listar todos", "Listar por Código" }));
-        cbOpcCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbOpcClienteActionPerformed(evt);
-            }
-        });
-
-        tfDadoCliente.setForeground(new java.awt.Color(153, 153, 153));
-        tfDadoCliente.setText("Insira o dado para pesquisa...");
-        tfDadoCliente.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                tfDadoClienteFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                tfDadoClienteFocusLost(evt);
-            }
-        });
-        tfDadoCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfDadoClienteActionPerformed(evt);
-            }
-        });
-
-        btnPesquisaCliente.setText("Localizar");
-        btnPesquisaCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPesquisaClienteActionPerformed(evt);
-            }
-        });
-
-        jPanel18.setBackground(new java.awt.Color(204, 255, 204));
-        jPanel18.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Relatório de clientes"));
-
-        tableCliente.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane4.setViewportView(tableCliente);
-
-        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
-        jPanel18.setLayout(jPanel18Layout);
-        jPanel18Layout.setHorizontalGroup(
-            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel18Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane4)
-                .addContainerGap())
-        );
-        jPanel18Layout.setVerticalGroup(
-            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel18Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
-                        .addGap(18, 18, 18)
-                        .addComponent(cbOpcCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tfDadoCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnPesquisaCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(cbOpcCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfDadoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPesquisaCliente))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jToolBar4.add(jPanel5);
-
-        jTabbedPane1.addTab("Clientes", jToolBar4);
-
-        jToolBar5.setRollover(true);
-
-        jPanel6.setBackground(new java.awt.Color(204, 255, 204));
-
-        jLabel14.setText("Pesquisar funcionarios por:");
-
-        cbOpcFuncionario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Listar todos", "Listar por Código" }));
-        cbOpcFuncionario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbOpcFuncionarioActionPerformed(evt);
-            }
-        });
-
-        tfDadoFuncionario.setForeground(new java.awt.Color(153, 153, 153));
-        tfDadoFuncionario.setText("Insira o dado para pesquisa...");
-        tfDadoFuncionario.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                tfDadoFuncionarioFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                tfDadoFuncionarioFocusLost(evt);
-            }
-        });
-        tfDadoFuncionario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfDadoFuncionarioActionPerformed(evt);
-            }
-        });
-
-        btnPesquisaFuncionario.setText("Localizar");
-        btnPesquisaFuncionario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPesquisaFuncionarioActionPerformed(evt);
-            }
-        });
-
-        jPanel19.setBackground(new java.awt.Color(204, 255, 204));
-        jPanel19.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Relatório de funcionários"));
-
-        tableFuncionario.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane5.setViewportView(tableFuncionario);
-
-        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
-        jPanel19.setLayout(jPanel19Layout);
-        jPanel19Layout.setHorizontalGroup(
-            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel19Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane5)
-                .addContainerGap())
-        );
-        jPanel19Layout.setVerticalGroup(
-            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel19Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jLabel14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbOpcFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tfDadoFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnPesquisaFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel14)
-                    .addComponent(cbOpcFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfDadoFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPesquisaFuncionario))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jToolBar5.add(jPanel6);
-
-        jTabbedPane1.addTab("Funcionarios", jToolBar5);
-
-        jToolBar6.setRollover(true);
-
-        jPanel7.setBackground(new java.awt.Color(204, 255, 204));
-
-        jLabel15.setText("Pesquisar fornecedores por:");
-
-        cbOpcFornecedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Listar todos", "Listar por Código" }));
-        cbOpcFornecedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbOpcFornecedorActionPerformed(evt);
-            }
-        });
-
-        tfDadoFornecedor.setForeground(new java.awt.Color(153, 153, 153));
-        tfDadoFornecedor.setText("Insira o dado para pesquisa...");
-        tfDadoFornecedor.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                tfDadoFornecedorFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                tfDadoFornecedorFocusLost(evt);
-            }
-        });
-        tfDadoFornecedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfDadoFornecedorActionPerformed(evt);
-            }
-        });
-
-        btnPesquisaFornecedor.setText("Localizar");
-        btnPesquisaFornecedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPesquisaFornecedorActionPerformed(evt);
-            }
-        });
-
-        jPanel20.setBackground(new java.awt.Color(204, 255, 204));
-        jPanel20.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Relatório de fornecedores"));
-
-        tableFornecedor.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane6.setViewportView(tableFornecedor);
-
-        javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
-        jPanel20.setLayout(jPanel20Layout);
-        jPanel20Layout.setHorizontalGroup(
-            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel20Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane6)
-                .addContainerGap())
-        );
-        jPanel20Layout.setVerticalGroup(
-            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel20Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jLabel15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbOpcFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tfDadoFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnPesquisaFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel15)
-                    .addComponent(cbOpcFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfDadoFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPesquisaFornecedor))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jToolBar6.add(jPanel7);
-
-        jTabbedPane1.addTab("Fornecedores", jToolBar6);
-
-        jToolBar7.setRollover(true);
-
-        jPanel8.setBackground(new java.awt.Color(204, 255, 204));
-
-        jLabel16.setText("Pesquisar objeto por:");
-
-        cbOpcObjeto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Listar todos", "Listar por Código" }));
-        cbOpcObjeto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbOpcObjetoActionPerformed(evt);
-            }
-        });
-
-        tfDadoObjeto.setForeground(new java.awt.Color(153, 153, 153));
-        tfDadoObjeto.setText("Insira o dado para pesquisa...");
-        tfDadoObjeto.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                tfDadoObjetoFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                tfDadoObjetoFocusLost(evt);
-            }
-        });
-        tfDadoObjeto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfDadoObjetoActionPerformed(evt);
-            }
-        });
-
-        btnPesquisaObjeto.setText("Localizar");
-        btnPesquisaObjeto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPesquisaObjetoActionPerformed(evt);
-            }
-        });
-
-        jPanel21.setBackground(new java.awt.Color(204, 255, 204));
-        jPanel21.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Relatório de objetos"));
-
-        tableObjeto.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane7.setViewportView(tableObjeto);
-
-        javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
-        jPanel21.setLayout(jPanel21Layout);
-        jPanel21Layout.setHorizontalGroup(
-            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel21Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane7)
-                .addContainerGap())
-        );
-        jPanel21Layout.setVerticalGroup(
-            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel21Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbOpcObjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tfDadoObjeto, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnPesquisaObjeto, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(cbOpcObjeto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfDadoObjeto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPesquisaObjeto))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jToolBar7.add(jPanel8);
-
-        jTabbedPane1.addTab("Objetos", jToolBar7);
 
         jButton1.setText("Voltar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -1382,7 +933,14 @@ public class FRMRelatorio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPesquisarPeriodoFornecimentoActionPerformed
 
     private void cbOpcSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOpcSaidaActionPerformed
-        // TODO add your handling code here:
+        if (cbOpcSaida.getSelectedIndex() == 0) {
+            try {
+                dadosSaida = ControleSaida.listarTodos();
+                this.preencheTabelaSaida();
+            } catch (RuntimeException e) {
+                JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+            }
+        }
     }//GEN-LAST:event_cbOpcSaidaActionPerformed
 
     private void tfDadoSaidaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfDadoSaidaFocusGained
@@ -1400,120 +958,52 @@ public class FRMRelatorio extends javax.swing.JFrame {
     }//GEN-LAST:event_tfDadoSaidaFocusLost
 
     private void tfDadoSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDadoSaidaActionPerformed
-        // TODO add your handling code here:
+        this.localizarSaida();
     }//GEN-LAST:event_tfDadoSaidaActionPerformed
 
     private void btnPesquisaSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaSaidaActionPerformed
-        // TODO add your handling code here:
+        this.localizarSaida();
     }//GEN-LAST:event_btnPesquisaSaidaActionPerformed
 
-    private void btnPesquisarPeriodoFornecimento1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarPeriodoFornecimento1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnPesquisarPeriodoFornecimento1ActionPerformed
+    private void btnPesquisarPeriodoSaidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarPeriodoSaidaActionPerformed
+        try {
+            if ((dcDataInicioSaida.getDate() != null) && (dcDataFimSaida.getDate() != null)) {
+                Date dataInicio = DateUtils.truncate(dcDataInicioSaida.getDate(), Calendar.DATE);
 
-    private void cbOpcClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOpcClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbOpcClienteActionPerformed
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(dcDataFimSaida.getDate());
+                calendar.set(Calendar.MILLISECOND, 0);
+                calendar.set(Calendar.SECOND, 59);
+                calendar.set(Calendar.MINUTE, 59);
+                calendar.set(Calendar.HOUR_OF_DAY, 23);
 
-    private void tfDadoClienteFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfDadoClienteFocusGained
-        if (tfDadoCliente.getText().equals("Insira o dado para pesquisa...")) {
-            tfDadoCliente.setText("");
-            tfDadoCliente.setForeground(Color.BLACK);
+                Date dataFim = calendar.getTime();
+
+                dadosSaida = ControleSaida.listarPorDataInicioFim(dataInicio, dataFim);
+                this.preencheTabelaSaida();
+            } else if (dcDataInicioSaida.getDate() != null) {
+                Date dataInicio = DateUtils.truncate(dcDataInicioSaida.getDate(), Calendar.DATE);
+                dadosSaida = ControleSaida.listarPorDataInicio(dataInicio);
+                this.preencheTabelaSaida();
+            } else if (dcDataFimSaida.getDate() != null) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(dcDataFimSaida.getDate());
+                calendar.set(Calendar.MILLISECOND, 0);
+                calendar.set(Calendar.SECOND, 59);
+                calendar.set(Calendar.MINUTE, 59);
+                calendar.set(Calendar.HOUR_OF_DAY, 23);
+
+                Date dataFim = calendar.getTime();
+
+                dadosSaida = ControleSaida.listarPorDataFim(dataFim);
+                this.preencheTabelaSaida();
+            } else {
+                JOptionPane.showMessageDialog(null, "Ao menos uma data deve ser inserida ou escolhida.");
+            }
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
         }
-    }//GEN-LAST:event_tfDadoClienteFocusGained
-
-    private void tfDadoClienteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfDadoClienteFocusLost
-        if (tfDadoCliente.getText().equals("")) {
-            tfDadoCliente.setForeground(Color.GRAY);
-            tfDadoCliente.setText("Insira o dado para pesquisa...");
-        }
-    }//GEN-LAST:event_tfDadoClienteFocusLost
-
-    private void tfDadoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDadoClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfDadoClienteActionPerformed
-
-    private void btnPesquisaClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnPesquisaClienteActionPerformed
-
-    private void cbOpcFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOpcFuncionarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbOpcFuncionarioActionPerformed
-
-    private void tfDadoFuncionarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfDadoFuncionarioFocusGained
-        if (tfDadoFuncionario.getText().equals("Insira o dado para pesquisa...")) {
-            tfDadoFuncionario.setText("");
-            tfDadoFuncionario.setForeground(Color.BLACK);
-        }
-    }//GEN-LAST:event_tfDadoFuncionarioFocusGained
-
-    private void tfDadoFuncionarioFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfDadoFuncionarioFocusLost
-        if (tfDadoFuncionario.getText().equals("")) {
-            tfDadoFuncionario.setForeground(Color.GRAY);
-            tfDadoFuncionario.setText("Insira o dado para pesquisa...");
-        }
-    }//GEN-LAST:event_tfDadoFuncionarioFocusLost
-
-    private void tfDadoFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDadoFuncionarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfDadoFuncionarioActionPerformed
-
-    private void btnPesquisaFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaFuncionarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnPesquisaFuncionarioActionPerformed
-
-    private void cbOpcFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOpcFornecedorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbOpcFornecedorActionPerformed
-
-    private void tfDadoFornecedorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfDadoFornecedorFocusGained
-        if (tfDadoFornecedor.getText().equals("Insira o dado para pesquisa...")) {
-            tfDadoFornecedor.setText("");
-            tfDadoFornecedor.setForeground(Color.BLACK);
-        }
-    }//GEN-LAST:event_tfDadoFornecedorFocusGained
-
-    private void tfDadoFornecedorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfDadoFornecedorFocusLost
-        if (tfDadoFornecedor.getText().equals("")) {
-            tfDadoFornecedor.setForeground(Color.GRAY);
-            tfDadoFornecedor.setText("Insira o dado para pesquisa...");
-        }
-    }//GEN-LAST:event_tfDadoFornecedorFocusLost
-
-    private void tfDadoFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDadoFornecedorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfDadoFornecedorActionPerformed
-
-    private void btnPesquisaFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaFornecedorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnPesquisaFornecedorActionPerformed
-
-    private void cbOpcObjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOpcObjetoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbOpcObjetoActionPerformed
-
-    private void tfDadoObjetoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfDadoObjetoFocusGained
-        if (tfDadoObjeto.getText().equals("Insira o dado para pesquisa...")) {
-            tfDadoObjeto.setText("");
-            tfDadoObjeto.setForeground(Color.BLACK);
-        }
-    }//GEN-LAST:event_tfDadoObjetoFocusGained
-
-    private void tfDadoObjetoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfDadoObjetoFocusLost
-        if (tfDadoObjeto.getText().equals("")) {
-            tfDadoObjeto.setForeground(Color.GRAY);
-            tfDadoObjeto.setText("Insira o dado para pesquisa...");
-        }
-    }//GEN-LAST:event_tfDadoObjetoFocusLost
-
-    private void tfDadoObjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDadoObjetoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfDadoObjetoActionPerformed
-
-    private void btnPesquisaObjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisaObjetoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnPesquisaObjetoActionPerformed
+    }//GEN-LAST:event_btnPesquisarPeriodoSaidaActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         FRMPrincipal p = new FRMPrincipal();
@@ -1557,38 +1047,26 @@ public class FRMRelatorio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnPesquisaCliente;
-    private javax.swing.JButton btnPesquisaFornecedor;
     private javax.swing.JButton btnPesquisaFornecimento;
-    private javax.swing.JButton btnPesquisaFuncionario;
-    private javax.swing.JButton btnPesquisaObjeto;
     private javax.swing.JButton btnPesquisaSaida;
     private javax.swing.JButton btnPesquisaVenda;
     private javax.swing.JButton btnPesquisarPeriodoFornecimento;
-    private javax.swing.JButton btnPesquisarPeriodoFornecimento1;
+    private javax.swing.JButton btnPesquisarPeriodoSaida;
     private javax.swing.JButton btnPesquisarPeriodoVenda;
-    private javax.swing.JComboBox<String> cbOpcCliente;
-    private javax.swing.JComboBox<String> cbOpcFornecedor;
     private javax.swing.JComboBox<String> cbOpcFornecimento;
-    private javax.swing.JComboBox<String> cbOpcFuncionario;
-    private javax.swing.JComboBox<String> cbOpcObjeto;
     private javax.swing.JComboBox<String> cbOpcSaida;
     private javax.swing.JComboBox<String> cbOpcVenda;
     private com.toedter.calendar.JDateChooser dcDataFimFornecimento;
-    private com.toedter.calendar.JDateChooser dcDataFimFornecimento1;
+    private com.toedter.calendar.JDateChooser dcDataFimSaida;
     private com.toedter.calendar.JDateChooser dcDataFimVenda;
     private com.toedter.calendar.JDateChooser dcDataInicioFornecimento;
-    private com.toedter.calendar.JDateChooser dcDataInicioFornecimento1;
+    private com.toedter.calendar.JDateChooser dcDataInicioSaida;
     private com.toedter.calendar.JDateChooser dcDataInicioVenda;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1606,48 +1084,24 @@ public class FRMRelatorio extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
-    private javax.swing.JPanel jPanel18;
-    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel20;
-    private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
     private javax.swing.JToolBar jToolBar3;
-    private javax.swing.JToolBar jToolBar4;
-    private javax.swing.JToolBar jToolBar5;
-    private javax.swing.JToolBar jToolBar6;
-    private javax.swing.JToolBar jToolBar7;
     private javax.swing.JLabel lblTotalFornecimento;
     private javax.swing.JLabel lblTotalSaida;
     private javax.swing.JLabel lblTotalVenda;
-    private javax.swing.JTable tableCliente;
-    private javax.swing.JTable tableFornecedor;
     private javax.swing.JTable tableFornecimento;
-    private javax.swing.JTable tableFuncionario;
-    private javax.swing.JTable tableObjeto;
     private javax.swing.JTable tableSaida;
     private javax.swing.JTable tableVenda;
-    private javax.swing.JTextField tfDadoCliente;
-    private javax.swing.JTextField tfDadoFornecedor;
     private javax.swing.JTextField tfDadoFornecimento;
-    private javax.swing.JTextField tfDadoFuncionario;
-    private javax.swing.JTextField tfDadoObjeto;
     private javax.swing.JTextField tfDadoSaida;
     private javax.swing.JTextField tfDadoVenda;
     // End of variables declaration//GEN-END:variables
@@ -1794,4 +1248,79 @@ public class FRMRelatorio extends javax.swing.JFrame {
 
         lblTotalFornecimento.setText(valorTotal + "");
     }
+
+    private void localizarSaida() {
+        if (cbOpcSaida.getSelectedIndex() == 1) {
+            if ((tfDadoSaida.getText().equals("")) || (tfDadoSaida.getText().equals("Insira o dado para pesquisa..."))) {
+                JOptionPane.showMessageDialog(null, "Insira algum dado para pesquisa.");
+            } else {
+                try {
+                    dadosSaida = ControleSaida.listarTudoTodosOuPorCodigo(Integer.parseInt(tfDadoSaida.getText()));
+                    this.preencheTabelaSaida();
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Para pesquisa por códigos, insira apenas números");
+                } catch (RuntimeException e) {
+                    JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+                }
+            }
+        }
+    }
+    
+    private void preencheTabelaSaida() {
+        DefaultTableModel dtm = this.criaTabelaSaida();
+        
+        dtm.addColumn("Código");
+        dtm.addColumn("Data");
+        dtm.addColumn("Valor total");
+        dtm.addColumn("Tipo de saida");
+
+        for (Saida dado : dadosSaida) {
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm - dd/MM/yyyy");
+            String dataHora = sdf.format(dado.getDataHora());
+            
+            String tipo = "";
+            
+            if (dado.getTipoSaida().equals(Saida.TipoSaida.SAIDAMANUAL)){
+                tipo = "Manual";
+            } else {
+                tipo = "Pela venda";
+            }
+
+            dtm.addRow(new Object[]{dado.getCodigo(), dataHora, dado.getValorTotal(), tipo});
+        }
+
+        tableSaida.setModel(dtm);
+        this.calculaTotalSaida();
+    }
+
+    private DefaultTableModel criaTabelaSaida() {
+        DefaultTableModel dTable = new DefaultTableModel() {
+            Class[] types = new Class[]{
+                java.lang.Integer.class, java.lang.String.class, java.lang.Float.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean[]{
+                false, false, false, false
+            };
+
+            @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit[columnIndex];
+            }
+        ;
+
+        };
+        return dTable;
+    }
+
+    private void calculaTotalSaida() {
+        float valorTotal = 0;
+        
+        for (Saida saida : dadosSaida) {
+            valorTotal += saida.getValorTotal();
+        }
+        
+        lblTotalSaida.setText(valorTotal + "");
+    }
+    
+    
 }

@@ -51,18 +51,7 @@ public class FRMPrincipal extends javax.swing.JFrame {
         btnCargo = new javax.swing.JButton();
         btnGrupo = new javax.swing.JButton();
         btnSubGrupo = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        menuRelatorio = new javax.swing.JMenuItem();
+        btnRelatórios = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -153,6 +142,7 @@ public class FRMPrincipal extends javax.swing.JFrame {
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/cash-register.png"))); // NOI18N
 
+        btnFornecimento.setBackground(new java.awt.Color(255, 255, 255));
         btnFornecimento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/EntraMercadoria.png"))); // NOI18N
         btnFornecimento.setText("Registrar fornecimento");
         btnFornecimento.addActionListener(new java.awt.event.ActionListener() {
@@ -161,6 +151,7 @@ public class FRMPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnSaidaEstoque.setBackground(new java.awt.Color(255, 255, 255));
         btnSaidaEstoque.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/SaiMercadoria.png"))); // NOI18N
         btnSaidaEstoque.setText("Registrar saida estoque");
         btnSaidaEstoque.addActionListener(new java.awt.event.ActionListener() {
@@ -169,6 +160,7 @@ public class FRMPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnCargo.setBackground(new java.awt.Color(255, 255, 255));
         btnCargo.setText("Gerenciar Cargos");
         btnCargo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -176,6 +168,7 @@ public class FRMPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnGrupo.setBackground(new java.awt.Color(255, 255, 255));
         btnGrupo.setText("Gerenciar Grupos");
         btnGrupo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -183,10 +176,19 @@ public class FRMPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnSubGrupo.setBackground(new java.awt.Color(255, 255, 255));
         btnSubGrupo.setText("Gerenciar Sub-Grupos");
         btnSubGrupo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSubGrupoActionPerformed(evt);
+            }
+        });
+
+        btnRelatórios.setBackground(new java.awt.Color(255, 255, 255));
+        btnRelatórios.setText("Relatórios");
+        btnRelatórios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRelatóriosActionPerformed(evt);
             }
         });
 
@@ -196,18 +198,20 @@ public class FRMPrincipal extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnObjeto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnVenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnFornecimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSaidaEstoque, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCargo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnGrupo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSubGrupo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnRelatórios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnFornecedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSair, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnObjeto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnVenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnFornecimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSaidaEstoque, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCargo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnGrupo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSubGrupo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -247,71 +251,12 @@ public class FRMPrincipal extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnSaidaEstoque))))
                     .addComponent(jLabel3))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnRelatórios)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSair)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
-
-        jMenu3.setText("Opções");
-
-        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/Cliente.png"))); // NOI18N
-        jMenuItem1.setText("Gerenciar Cliente");
-        jMenu3.add(jMenuItem1);
-
-        jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/Produto.png"))); // NOI18N
-        jMenuItem5.setText("Gerenciar Produto");
-        jMenu3.add(jMenuItem5);
-
-        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/Fornecedor.png"))); // NOI18N
-        jMenuItem3.setText("Gerenciar Fornecedor");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem3);
-
-        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/Funcionario.png"))); // NOI18N
-        jMenuItem4.setText("Gerenciar Funcionário");
-        jMenu3.add(jMenuItem4);
-
-        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/Estoque.png"))); // NOI18N
-        jMenuItem2.setText("Gerenciar Estoque");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem2);
-
-        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/Venda.png"))); // NOI18N
-        jMenuItem6.setText("Gerenciar Venda");
-        jMenu3.add(jMenuItem6);
-
-        jMenuBar1.add(jMenu3);
-
-        jMenu1.setText("Informações");
-
-        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/info.png"))); // NOI18N
-        jMenuItem7.setText("Sobre o sistema");
-        jMenu1.add(jMenuItem7);
-
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Relatórios");
-
-        menuRelatorio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/list.png"))); // NOI18N
-        menuRelatorio.setText("Relatórios");
-        menuRelatorio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuRelatorioActionPerformed(evt);
-            }
-        });
-        jMenu2.add(menuRelatorio);
-
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -327,14 +272,6 @@ public class FRMPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
     private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
         FRMCliente cliente = new FRMCliente();
         cliente.setVisible(true);
@@ -346,12 +283,6 @@ public class FRMPrincipal extends javax.swing.JFrame {
         fornecimento.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnFornecimentoActionPerformed
-
-    private void menuRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRelatorioActionPerformed
-        FRMRelatorio relatorio = new FRMRelatorio();
-        relatorio.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_menuRelatorioActionPerformed
 
     private void btnCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargoActionPerformed
         FRMCargo cargo = new FRMCargo();
@@ -405,6 +336,12 @@ public class FRMPrincipal extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnSairActionPerformed
 
+    private void btnRelatóriosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatóriosActionPerformed
+        FRMRelatorio relatorio = new FRMRelatorio();
+        relatorio.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnRelatóriosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -448,23 +385,13 @@ public class FRMPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnFuncionario;
     private javax.swing.JButton btnGrupo;
     private javax.swing.JButton btnObjeto;
+    private javax.swing.JButton btnRelatórios;
     private javax.swing.JButton btnSaidaEstoque;
     private javax.swing.JButton btnSair;
     private javax.swing.JButton btnSubGrupo;
     private javax.swing.JButton btnVenda;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private java.awt.Menu menu1;
@@ -473,7 +400,6 @@ public class FRMPrincipal extends javax.swing.JFrame {
     private java.awt.Menu menu4;
     private java.awt.MenuBar menuBar1;
     private java.awt.MenuBar menuBar2;
-    private javax.swing.JMenuItem menuRelatorio;
     // End of variables declaration//GEN-END:variables
     
 }

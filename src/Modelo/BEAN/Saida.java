@@ -113,7 +113,13 @@ public class Saida implements Serializable {
     @PostLoad
     @PostUpdate
     private void setValorTotal(){
+        float valorBruto = 0;
         
+        for (ObjetoSaida objeto : objetos) {
+            valorBruto += (objeto.getPrecoCompraNaSaida() * objeto.getQtdeRetirada());
+        }
+        
+        this.valorTotal = (valorBruto + this.acrescimoAdicional - this.debitoAdicional);
     }
     
     @PostPersist
