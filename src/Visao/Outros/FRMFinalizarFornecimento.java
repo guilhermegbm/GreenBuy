@@ -220,6 +220,7 @@ public class FRMFinalizarFornecimento extends javax.swing.JFrame {
 
         jLabel10.setText("Nome:");
 
+        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/logout.png"))); // NOI18N
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -305,7 +306,8 @@ public class FRMFinalizarFornecimento extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(tfTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(tfTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(16, 16, 16)))))
                         .addGap(75, 75, 75))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -623,6 +625,7 @@ public class FRMFinalizarFornecimento extends javax.swing.JFrame {
 
     void pegaFornecimento(Fornecimento f) {
         this.fornecimento = f;
+        this.calculaValorTotal();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

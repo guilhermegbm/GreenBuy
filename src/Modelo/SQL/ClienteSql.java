@@ -13,6 +13,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
+import java.sql.Connection;
+import JasperSoft.ConnectionFactory;
+import com.sun.xml.internal.ws.api.pipe.ClientPipeAssemblerContext;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -202,5 +210,151 @@ public class ClienteSql {
         } finally {
             manager.close();
         }
+    }
+
+    public static List<Cliente> listarTodosAtivosJDBC() {
+        Connection conn = ConnectionFactory.getConnection();
+        List<Cliente> c = new ArrayList<>();
+        
+        try {
+            
+            PreparedStatement stmt = conn.prepareStatement("select * from Cliente where cliSituacao = 'ATIVO';");
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()){
+                Cliente cli = new Cliente();
+                
+                cli.setCodigo(rs.getInt(1));
+                cli.setCpf(rs.getString(2));
+                cli.setEmail(rs.getString(3));
+                cli.setLogin(rs.getString(4));
+                cli.setNome(rs.getString(5));
+                cli.setSenha(rs.getString(6));
+                
+                if (rs.getString(7).equals("ATIVO")){
+                    cli.setSituacaoCli(Cliente.SituacaoCli.ATIVO);
+                } else {
+                    cli.setSituacaoCli(Cliente.SituacaoCli.DESLIGADO);
+                }
+                
+                cli.setTelefone(rs.getString(8));
+                
+                c.add(cli);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Deu ruim: " + ex);
+        }
+        return c;
+    }
+
+    public static List<Cliente> listarTodosDesligadosJDBC() {
+        Connection conn = ConnectionFactory.getConnection();
+        List<Cliente> c = new ArrayList<>();
+        
+        try {
+            
+            PreparedStatement stmt = conn.prepareStatement("select * from Cliente where cliSituacao = 'DESLIGADO';");
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()){
+                Cliente cli = new Cliente();
+                
+                cli.setCodigo(rs.getInt(1));
+                cli.setCpf(rs.getString(2));
+                cli.setEmail(rs.getString(3));
+                cli.setLogin(rs.getString(4));
+                cli.setNome(rs.getString(5));
+                cli.setSenha(rs.getString(6));
+                
+                if (rs.getString(7).equals("ATIVO")){
+                    cli.setSituacaoCli(Cliente.SituacaoCli.ATIVO);
+                } else {
+                    cli.setSituacaoCli(Cliente.SituacaoCli.DESLIGADO);
+                }
+                
+                cli.setTelefone(rs.getString(8));
+                
+                c.add(cli);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Deu ruim: " + ex);
+        }
+        return c;
+    }
+
+    public static List<Cliente> listarTudoTodosOuPorCodigoJDBC(int codigo) {
+        Connection conn = ConnectionFactory.getConnection();
+        List<Cliente> c = new ArrayList<>();
+        
+        try {
+            
+            PreparedStatement stmt = conn.prepareStatement("select * from Cliente where cliCodigo = ?;");
+            stmt.setInt(1, codigo);
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()){
+                Cliente cli = new Cliente();
+                
+                cli.setCodigo(rs.getInt(1));
+                cli.setCpf(rs.getString(2));
+                cli.setEmail(rs.getString(3));
+                cli.setLogin(rs.getString(4));
+                cli.setNome(rs.getString(5));
+                cli.setSenha(rs.getString(6));
+                
+                if (rs.getString(7).equals("ATIVO")){
+                    cli.setSituacaoCli(Cliente.SituacaoCli.ATIVO);
+                } else {
+                    cli.setSituacaoCli(Cliente.SituacaoCli.DESLIGADO);
+                }
+                
+                cli.setTelefone(rs.getString(8));
+                
+                c.add(cli);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Deu ruim: " + ex);
+        }
+        return c;
+    }
+
+    public static List<Cliente> listarPorNomeJDBC(String nome) throws SQLException {
+        Connection conn = ConnectionFactory.getConnection();
+        List<Cliente> c = new ArrayList<>();
+        
+        try {
+            System.out.println("");
+            PreparedStatement stmt = conn.prepareStatement("select * from Cliente where cliNome like '%" + nome + "%';");
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()){
+                Cliente cli = new Cliente();
+                
+                cli.setCodigo(rs.getInt(1));
+                cli.setCpf(rs.getString(2));
+                cli.setEmail(rs.getString(3));
+                cli.setLogin(rs.getString(4));
+                cli.setNome(rs.getString(5));
+                cli.setSenha(rs.getString(6));
+                
+                if (rs.getString(7).equals("ATIVO")){
+                    cli.setSituacaoCli(Cliente.SituacaoCli.ATIVO);
+                } else {
+                    cli.setSituacaoCli(Cliente.SituacaoCli.DESLIGADO);
+                }
+                
+                cli.setTelefone(rs.getString(8));
+                
+                c.add(cli);
+            }
+        } catch (SQLException ex) {
+            //System.out.println("Deu ruim: " + ex);
+            throw new SQLException(ex);
+        }
+        return c;
     }
 }

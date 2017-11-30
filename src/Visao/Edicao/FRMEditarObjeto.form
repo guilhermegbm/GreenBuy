@@ -333,6 +333,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnReativar">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Visao.icon/bringback.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Reativar"/>
               </Properties>
               <Events>
@@ -341,6 +344,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnDeletar">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Visao.icon/del.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Deletar"/>
               </Properties>
               <Events>

@@ -57,4 +57,8 @@ public class ControleVenda {
     public static List<Venda> listarPorDataFim(Date dataFim) throws RuntimeException{
         return VendaSql.listarPorDataFim(dataFim);
     }
+
+    public static void confirmaPagamento(Venda v) throws RuntimeException{
+        VendaSql.confirmaPagamento(v);
+    }
 }

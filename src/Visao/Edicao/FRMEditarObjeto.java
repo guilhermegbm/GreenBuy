@@ -156,6 +156,7 @@ public class FRMEditarObjeto extends javax.swing.JFrame {
             }
         });
 
+        btnReativar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/bringback.png"))); // NOI18N
         btnReativar.setText("Reativar");
         btnReativar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -163,6 +164,7 @@ public class FRMEditarObjeto extends javax.swing.JFrame {
             }
         });
 
+        btnDeletar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/del.png"))); // NOI18N
         btnDeletar.setText("Deletar");
         btnDeletar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

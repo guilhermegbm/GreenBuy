@@ -96,19 +96,17 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                       <Component id="btnRelatórios" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="btnFornecedor" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnCliente" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnFuncionario" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnSair" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnObjeto" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnVenda" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnFornecimento" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnSaidaEstoque" max="32767" attributes="0"/>
-                          <Component id="btnCargo" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnGrupo" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnSubGrupo" alignment="0" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="btnFornecedor" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnCliente" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnFuncionario" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnSair" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnObjeto" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnVenda" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnFornecimento" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnSaidaEstoque" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnCargo" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnGrupo" alignment="0" max="32767" attributes="0"/>
+                      <Component id="btnSubGrupo" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace pref="25" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -303,6 +301,9 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Visao.icon/cargo.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Gerenciar Cargos"/>
           </Properties>
           <Events>
@@ -313,6 +314,9 @@
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Visao.icon/grupo.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Gerenciar Grupos"/>
           </Properties>
@@ -325,6 +329,9 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Visao.icon/subgrupo.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Gerenciar Sub-Grupos"/>
           </Properties>
           <Events>
@@ -335,6 +342,9 @@
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/Visao.icon/relatorio.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Relat&#xf3;rios"/>
           </Properties>

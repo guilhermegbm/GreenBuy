@@ -200,7 +200,7 @@
                     <StringItem index="0" value="Todos os Ativos"/>
                     <StringItem index="1" value="C&#xf3;digo"/>
                     <StringItem index="2" value="Nome"/>
-                    <StringItem index="3" value="Mostrar Desligados"/>
+                    <StringItem index="3" value="Todos os inativos"/>
                   </StringArray>
                 </Property>
               </Properties>

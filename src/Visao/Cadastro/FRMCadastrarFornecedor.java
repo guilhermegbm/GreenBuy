@@ -128,6 +128,7 @@ public class FRMCadastrarFornecedor extends javax.swing.JFrame {
 
         lblTel.setText("Telefone:");
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/clienteAdd.png"))); // NOI18N
         jButton1.setText("Cadastrar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,6 +136,7 @@ public class FRMCadastrarFornecedor extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/logout.png"))); // NOI18N
         jButton2.setText("Voltar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -5,8 +5,13 @@
  */
 package Modelo.SQL;
 
+import JasperSoft.ConnectionFactory;
 import Jpa.JpaUtil;
 import Modelo.BEAN.Venda;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -50,7 +55,6 @@ public class VendaSql {
         } finally {
             manager.close();
         }
-
     }
 
     public static void deletaVenda(Venda v) throws RuntimeException {
@@ -113,9 +117,9 @@ public class VendaSql {
             if (cod == 0) {
                 TypedQuery<Venda> query = manager.createQuery(""
                         + "select distinct v from Venda v left join fetch v.funcionario left join v.cliente c", Venda.class);
-                
+
                 return query.getResultList();
-                
+
             } else {
                 TypedQuery<Venda> tq = manager.createQuery("select distinct v from Venda v left join fetch v.funcionario left join v.cliente c where v.codigo = :cod", Venda.class);
                 tq.setParameter("cod", cod);
@@ -128,7 +132,7 @@ public class VendaSql {
 
     public static List<Venda> listarPorDataInicioFim(Date dataInicio, Date dataFim) throws RuntimeException {
         EntityManager manager = JpaUtil.getEntityManager();
-        
+
         try {
             TypedQuery tq = manager.createQuery("select distinct v from Venda v left join fetch v.funcionario left join v.cliente c where v.dataHora >= :dataInicio and v.dataHora <= :dataFim", Venda.class);
             tq.setParameter("dataInicio", dataInicio);
@@ -141,7 +145,7 @@ public class VendaSql {
 
     public static List<Venda> listarPorDataInicio(Date dataInicio) throws RuntimeException {
         EntityManager manager = JpaUtil.getEntityManager();
-        
+
         try {
             TypedQuery tq = manager.createQuery("select distinct v from Venda v left join fetch v.funcionario left join v.cliente c where v.dataHora >= :dataInicio", Venda.class);
             tq.setParameter("dataInicio", dataInicio);
@@ -153,13 +157,51 @@ public class VendaSql {
 
     public static List<Venda> listarPorDataFim(Date dataFim) throws RuntimeException {
         EntityManager manager = JpaUtil.getEntityManager();
-        
+
         try {
             TypedQuery tq = manager.createQuery("select distinct v from Venda v left join fetch v.funcionario left join v.cliente c where v.dataHora <= :dataFim", Venda.class);
             tq.setParameter("dataFim", dataFim);
             return tq.getResultList();
         } finally {
             manager.close();
+        }
+    }
+
+    public static void confirmaPagamento(Venda v) throws RuntimeException {
+        /*EntityManager manager = JpaUtil.getEntityManager();
+        EntityTransaction tx = manager.getTransaction();
+
+        try {
+            tx.begin();
+            
+            v.setSituacao(Venda.Situacao.PAGO);
+            v.setDataPagamento(new Date());
+            v.setFormaPagamento(Venda.FormasDePagamento.DINHEIRO);
+            
+            manager.merge(v);
+            
+            tx.commit();
+        } finally {
+            manager.close();
+        }*/
+        
+        Connection conn = ConnectionFactory.getConnection();
+        
+        try {
+            Date d = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String data = sdf.format(d);
+            
+            PreparedStatement stmt = conn.prepareStatement("update venda set venDataPagamento = ?, venFormaPagamento = ?, venSituacao = ? where venCodigo = ?;");
+            stmt.setString(1, data);
+            stmt.setString(2, "DINHEIRO");
+            stmt.setInt(3, 1);
+            stmt.setInt(4, v.getCodigo());
+            
+            stmt.executeUpdate();
+            
+        } catch (SQLException e) {
+            System.out.println(e);
         }
     }
 

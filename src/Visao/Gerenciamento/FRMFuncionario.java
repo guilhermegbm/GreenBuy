@@ -37,11 +37,6 @@ public class FRMFuncionario extends javax.swing.JFrame {
         } catch (RuntimeException e) {
             JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
         }
-        
-        Funcionario f = new Funcionario();
-        f.setCodigo(1);
-        f.setAdministrador(true);
-        ControleFuncionario.setFuncionarioLogado(f);
     }
 
     /**

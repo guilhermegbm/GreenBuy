@@ -64,4 +64,20 @@ public class ControleCliente {
     public static List<Cliente> listarPorNomeEAtivo(String nome) throws RuntimeException {
         return ClienteSql.listarPorNomeEAtivo(nome);
     }
+
+    public static List<Cliente> listarTodosAtivosJDBC() {
+        return ClienteSql.listarTodosAtivosJDBC();
+    }
+
+    public static List<Cliente> listarTodosDesligadosJDBC() {
+        return ClienteSql.listarTodosDesligadosJDBC();
+    }
+
+    public static List<Cliente> listarTudoTodosOuPorCodigoJDBC(int codigo) {
+        return ClienteSql.listarTudoTodosOuPorCodigoJDBC(codigo);
+    }
+
+    public static List<Cliente> listarPorNomeJDBC(String nome) {
+        return ClienteSql.listarPorNomeJDBC(nome);
+    }
 }

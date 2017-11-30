@@ -530,11 +530,6 @@ public class FRMVenda extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Insira ao menos um item.");
 
         } else {
-
-            Funcionario f = new Funcionario();
-            f.setCodigo(2);
-            ControleFuncionario.setFuncionarioLogado(f);
-
             FRMFinalizarVenda fim = new FRMFinalizarVenda();
 
             venda.setItensDaVenda(itensNaVenda);

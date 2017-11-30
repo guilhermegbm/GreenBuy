@@ -87,7 +87,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="btnLocaliza" max="32767" attributes="0"/>
-                          <Component id="btnCadastra" pref="90" max="32767" attributes="0"/>
+                          <Component id="btnCadastra" max="32767" attributes="0"/>
                           <Component id="btnEdita" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnDeleta" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnVoltar" alignment="0" max="32767" attributes="0"/>
@@ -159,6 +159,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnLocaliza">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Visao.icon/prodLoc.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Localizar"/>
               </Properties>
               <Events>
@@ -218,6 +221,9 @@
             </Container>
             <Component class="javax.swing.JButton" name="btnCadastra">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Visao.icon/prodAdd.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Cadastrar"/>
               </Properties>
               <Events>
@@ -226,6 +232,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnEdita">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Visao.icon/prodEditar.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Editar"/>
               </Properties>
               <Events>
@@ -234,6 +243,9 @@
             </Component>
             <Component class="javax.swing.JButton" name="btnDeleta">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/Visao.icon/prodDel.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Deletar"/>
               </Properties>
               <Events>

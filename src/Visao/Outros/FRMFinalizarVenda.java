@@ -223,6 +223,7 @@ public class FRMFinalizarVenda extends javax.swing.JFrame {
 
         jLabel10.setText("Nome:");
 
+        btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/logout.png"))); // NOI18N
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

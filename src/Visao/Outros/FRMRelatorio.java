@@ -20,6 +20,7 @@ import Modelo.BEAN.Objeto;
 import Modelo.BEAN.Saida;
 import java.util.Date;
 import Modelo.BEAN.Venda;
+import Modelo.SQL.VendaSql;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -46,10 +47,10 @@ public class FRMRelatorio extends javax.swing.JFrame {
         try {
             dadosVenda = ControleVenda.listarTodos();
             this.preencheTabelaVenda();
-            
+
             dadosFornecimento = ControleFornecimento.listarTodos();
             this.preencheTabelaFornecimento();
-            
+
             dadosSaida = ControleSaida.listarTodos();
             this.preencheTabelaSaida();
         } catch (RuntimeException e) {
@@ -121,7 +122,7 @@ public class FRMRelatorio extends javax.swing.JFrame {
         jPanel17 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         lblTotalSaida = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Relatórios");
@@ -149,6 +150,11 @@ public class FRMRelatorio extends javax.swing.JFrame {
 
             }
         ));
+        tableVenda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableVendaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tableVenda);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
@@ -164,8 +170,8 @@ public class FRMRelatorio extends javax.swing.JFrame {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35))
         );
 
         jPanel10.setBackground(new java.awt.Color(204, 255, 204));
@@ -242,6 +248,7 @@ public class FRMRelatorio extends javax.swing.JFrame {
             }
         });
 
+        btnPesquisaVenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/magnifying-glass.png"))); // NOI18N
         btnPesquisaVenda.setText("Localizar");
         btnPesquisaVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -359,6 +366,7 @@ public class FRMRelatorio extends javax.swing.JFrame {
             }
         });
 
+        btnPesquisaFornecimento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/magnifying-glass.png"))); // NOI18N
         btnPesquisaFornecimento.setText("Localizar");
         btnPesquisaFornecimento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -558,6 +566,7 @@ public class FRMRelatorio extends javax.swing.JFrame {
             }
         });
 
+        btnPesquisaSaida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Visao.icon/magnifying-glass.png"))); // NOI18N
         btnPesquisaSaida.setText("Localizar");
         btnPesquisaSaida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -728,10 +737,10 @@ public class FRMRelatorio extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Saidas", jToolBar3);
 
-        jButton1.setText("Voltar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnVoltarActionPerformed(evt);
             }
         });
 
@@ -745,7 +754,7 @@ public class FRMRelatorio extends javax.swing.JFrame {
                     .addComponent(jTabbedPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(btnVoltar)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -754,7 +763,7 @@ public class FRMRelatorio extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnVoltar)
                 .addContainerGap())
         );
 
@@ -1005,11 +1014,29 @@ public class FRMRelatorio extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnPesquisarPeriodoSaidaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         FRMPrincipal p = new FRMPrincipal();
         p.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void tableVendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableVendaMouseClicked
+        Venda v = dadosVenda.get(tableVenda.getSelectedRow());
+
+        if (v.getSituacao().equals(Venda.Situacao.NAOPAGO)) {
+            int opc = JOptionPane.showConfirmDialog(null, "Gostaria de confirmar o pagamento da venda de código " + v.getCodigo() + "?");
+
+            if (opc == 0) {
+                try {
+                    ControleVenda.confirmaPagamento(v);
+                    dadosVenda = ControleVenda.listarTodos();
+                    this.preencheTabelaVenda();
+                } catch (RuntimeException e) {
+                    JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
+                }
+            }
+        }
+    }//GEN-LAST:event_tableVendaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1053,6 +1080,7 @@ public class FRMRelatorio extends javax.swing.JFrame {
     private javax.swing.JButton btnPesquisarPeriodoFornecimento;
     private javax.swing.JButton btnPesquisarPeriodoSaida;
     private javax.swing.JButton btnPesquisarPeriodoVenda;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JComboBox<String> cbOpcFornecimento;
     private javax.swing.JComboBox<String> cbOpcSaida;
     private javax.swing.JComboBox<String> cbOpcVenda;
@@ -1062,7 +1090,6 @@ public class FRMRelatorio extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser dcDataInicioFornecimento;
     private com.toedter.calendar.JDateChooser dcDataInicioSaida;
     private com.toedter.calendar.JDateChooser dcDataInicioVenda;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1265,10 +1292,10 @@ public class FRMRelatorio extends javax.swing.JFrame {
             }
         }
     }
-    
+
     private void preencheTabelaSaida() {
         DefaultTableModel dtm = this.criaTabelaSaida();
-        
+
         dtm.addColumn("Código");
         dtm.addColumn("Data");
         dtm.addColumn("Valor total");
@@ -1277,10 +1304,10 @@ public class FRMRelatorio extends javax.swing.JFrame {
         for (Saida dado : dadosSaida) {
             SimpleDateFormat sdf = new SimpleDateFormat("HH:mm - dd/MM/yyyy");
             String dataHora = sdf.format(dado.getDataHora());
-            
+
             String tipo = "";
-            
-            if (dado.getTipoSaida().equals(Saida.TipoSaida.SAIDAMANUAL)){
+
+            if (dado.getTipoSaida().equals(Saida.TipoSaida.SAIDAMANUAL)) {
                 tipo = "Manual";
             } else {
                 tipo = "Pela venda";
@@ -1314,13 +1341,12 @@ public class FRMRelatorio extends javax.swing.JFrame {
 
     private void calculaTotalSaida() {
         float valorTotal = 0;
-        
+
         for (Saida saida : dadosSaida) {
             valorTotal += saida.getValorTotal();
         }
-        
+
         lblTotalSaida.setText(valorTotal + "");
     }
-    
-    
+
 }
