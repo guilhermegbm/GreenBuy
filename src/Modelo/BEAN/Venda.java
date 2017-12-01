@@ -209,7 +209,7 @@ public class Venda implements Serializable {
             s.setTipoSaida(Saida.TipoSaida.SAIDAPELAVENDA);
             
             try {
-                ControleSaida.insereSaidaEItens(s);
+                //ControleSaida.insereSaidaEItens(s);
             } catch (RuntimeException e) {
                 JOptionPane.showMessageDialog(null, "Deu ruim: " + e);
             }

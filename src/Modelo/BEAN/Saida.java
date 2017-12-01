@@ -132,7 +132,7 @@ public class Saida implements Serializable {
         }
         
         try {
-            ControleObjeto.alteraQtdNoEstoque(objetosRetirados);
+            //ControleObjeto.alteraQtdNoEstoque(objetosRetirados);
         } catch (RuntimeException e){
             System.err.print("Deu ruim");
             e.printStackTrace();

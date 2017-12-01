@@ -139,7 +139,7 @@ public class Fornecimento implements Serializable {
         }
         
         try {
-            ControleObjeto.alteraQtdNoEstoque(objetosAdicionados);
+            //ControleObjeto.alteraQtdNoEstoque(objetosAdicionados);
         } catch (RuntimeException e){
             System.out.println("Deu ruim:");
             e.printStackTrace();
