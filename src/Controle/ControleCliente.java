@@ -7,6 +7,7 @@ package Controle;
 
 import Modelo.BEAN.Cliente;
 import Modelo.SQL.ClienteSql;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.PersistenceException;
@@ -77,7 +78,7 @@ public class ControleCliente {
         return ClienteSql.listarTudoTodosOuPorCodigoJDBC(codigo);
     }
 
-    public static List<Cliente> listarPorNomeJDBC(String nome) {
+    public static List<Cliente> listarPorNomeJDBC(String nome) throws RuntimeException, SQLException{
         return ClienteSql.listarPorNomeJDBC(nome);
     }
 }

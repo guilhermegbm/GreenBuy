@@ -97,12 +97,6 @@ public class SubGrupo implements Serializable {
         if (this.codigo != other.codigo) {
             return false;
         }
-        if (!Objects.equals(this.nome, other.nome)) {
-            return false;
-        }
-        if (!Objects.equals(this.grupo, other.grupo)) {
-            return false;
-        }
         
         return true;
     }

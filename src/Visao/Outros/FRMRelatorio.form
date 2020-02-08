@@ -239,15 +239,14 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
+                              <Group type="102" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="dcDataFimVenda" max="32767" attributes="0"/>
                                       <Group type="102" alignment="1" attributes="0">
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          <EmptySpace min="0" pref="51" max="32767" attributes="0"/>
                                           <Component id="btnPesquisarPeriodoVenda" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="dcDataInicioVenda" max="32767" attributes="0"/>
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -255,6 +254,7 @@
                                           </Group>
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
+                                      <Component id="dcDataInicioVenda" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
@@ -265,13 +265,13 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                                   <Component id="dcDataInicioVenda" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="dcDataFimVenda" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                                   <Component id="btnPesquisarPeriodoVenda" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace pref="20" max="32767" attributes="0"/>
                               </Group>
@@ -279,8 +279,6 @@
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="com.toedter.calendar.JDateChooser" name="dcDataInicioVenda">
-                        </Component>
                         <Component class="javax.swing.JLabel" name="jLabel1">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Data de in&#xed;cio:"/>
@@ -291,8 +289,6 @@
                             <Property name="text" type="java.lang.String" value="Data de fim:"/>
                           </Properties>
                         </Component>
-                        <Component class="com.toedter.calendar.JDateChooser" name="dcDataFimVenda">
-                        </Component>
                         <Component class="javax.swing.JButton" name="btnPesquisarPeriodoVenda">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Pesquisar"/>
@@ -300,6 +296,10 @@
                           <Events>
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPesquisarPeriodoVendaActionPerformed"/>
                           </Events>
+                        </Component>
+                        <Component class="com.toedter.calendar.JDateChooser" name="dcDataFimVenda">
+                        </Component>
+                        <Component class="com.toedter.calendar.JDateChooser" name="dcDataInicioVenda">
                         </Component>
                       </SubComponents>
                     </Container>
@@ -558,13 +558,13 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="dcDataFimFornecimento" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="dcDataFimFornecimento" max="32767" attributes="0"/>
+                                      <Component id="dcDataInicioFornecimento" max="32767" attributes="0"/>
                                       <Group type="102" alignment="1" attributes="0">
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          <EmptySpace min="0" pref="51" max="32767" attributes="0"/>
                                           <Component id="btnPesquisarPeriodoFornecimento" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="dcDataInicioFornecimento" alignment="0" max="32767" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -583,11 +583,11 @@
                                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="dcDataInicioFornecimento" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                                   <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="dcDataFimFornecimento" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                                   <Component id="btnPesquisarPeriodoFornecimento" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace pref="20" max="32767" attributes="0"/>
                               </Group>
@@ -595,8 +595,6 @@
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="com.toedter.calendar.JDateChooser" name="dcDataInicioFornecimento">
-                        </Component>
                         <Component class="javax.swing.JLabel" name="jLabel5">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Data de in&#xed;cio:"/>
@@ -607,8 +605,6 @@
                             <Property name="text" type="java.lang.String" value="Data de fim:"/>
                           </Properties>
                         </Component>
-                        <Component class="com.toedter.calendar.JDateChooser" name="dcDataFimFornecimento">
-                        </Component>
                         <Component class="javax.swing.JButton" name="btnPesquisarPeriodoFornecimento">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Pesquisar"/>
@@ -616,6 +612,10 @@
                           <Events>
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPesquisarPeriodoFornecimentoActionPerformed"/>
                           </Events>
+                        </Component>
+                        <Component class="com.toedter.calendar.JDateChooser" name="dcDataInicioFornecimento">
+                        </Component>
+                        <Component class="com.toedter.calendar.JDateChooser" name="dcDataFimFornecimento">
                         </Component>
                       </SubComponents>
                     </Container>
@@ -937,13 +937,13 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="dcDataFimSaida" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="dcDataFimSaida" max="32767" attributes="0"/>
+                                      <Component id="dcDataInicioSaida" max="32767" attributes="0"/>
                                       <Group type="102" alignment="1" attributes="0">
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          <EmptySpace min="0" pref="51" max="32767" attributes="0"/>
                                           <Component id="btnPesquisarPeriodoSaida" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="dcDataInicioSaida" alignment="0" max="32767" attributes="0"/>
-                                      <Group type="102" alignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -962,11 +962,11 @@
                                   <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="dcDataInicioSaida" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                                   <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="dcDataFimSaida" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                                   <Component id="btnPesquisarPeriodoSaida" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace pref="20" max="32767" attributes="0"/>
                               </Group>
@@ -974,8 +974,6 @@
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="com.toedter.calendar.JDateChooser" name="dcDataInicioSaida">
-                        </Component>
                         <Component class="javax.swing.JLabel" name="jLabel10">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Data de in&#xed;cio:"/>
@@ -986,8 +984,6 @@
                             <Property name="text" type="java.lang.String" value="Data de fim:"/>
                           </Properties>
                         </Component>
-                        <Component class="com.toedter.calendar.JDateChooser" name="dcDataFimSaida">
-                        </Component>
                         <Component class="javax.swing.JButton" name="btnPesquisarPeriodoSaida">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Pesquisar"/>
@@ -995,6 +991,10 @@
                           <Events>
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPesquisarPeriodoSaidaActionPerformed"/>
                           </Events>
+                        </Component>
+                        <Component class="com.toedter.calendar.JDateChooser" name="dcDataInicioSaida">
+                        </Component>
+                        <Component class="com.toedter.calendar.JDateChooser" name="dcDataFimSaida">
                         </Component>
                       </SubComponents>
                     </Container>

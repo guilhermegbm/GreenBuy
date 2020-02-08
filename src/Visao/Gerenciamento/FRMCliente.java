@@ -12,6 +12,7 @@ import Controle.ControleFuncionario;
 import Modelo.BEAN.Cliente;
 import Visao.Outros.FRMPrincipal;
 import java.awt.Color;
+import java.sql.SQLException;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -453,7 +454,7 @@ public class FRMCliente extends javax.swing.JFrame {
                 try {
                     dados = ControleCliente.listarPorNomeJDBC(tfDado.getText());
                     this.preencheTabela();
-                } catch (RuntimeException e) {
+                } catch (SQLException e) {
                     JOptionPane.showMessageDialog(null, "Deu ruim");
                     throw new RuntimeException(e);
                 }
